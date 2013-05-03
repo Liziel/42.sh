@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 19:53:38 2013 vincent colliot
-** Last update Mon Apr 29 20:27:57 2013 vincent colliot
+** Last update Fri May  3 17:15:04 2013 vincent colliot
 */
 
 #include "string.h"
@@ -30,7 +30,17 @@ size_t  my_strilen(const char *s, char c)
   return (i);
 }
 
-size_t  my_strslen(const char *s, const char *c)
+size_t my_strslen(const char *s, const char *c)
+{
+  size_t	i;
+
+  i = 0;
+  while (s[i] && !NMATCH(c, s + i))
+    i++;
+  return (i);
+}
+
+size_t  my_sstrlen(const char *s, const char *c)
 {
   size_t	i;
 
@@ -46,16 +56,6 @@ size_t lenmatch(const char *s, const char *c)
 
   i = 0;
   while (s[i] && IN(s[i], c))
-    i++;
-  return (i);
-}
-
-size_t my_sstrlen(const char *s, const char *c)
-{
-  size_t	i;
-
-  i = 0;
-  while (s[i] && !NMATCH(c, s + i))
     i++;
   return (i);
 }

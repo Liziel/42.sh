@@ -5,8 +5,10 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 20:15:24 2013 vincent colliot
-** Last update Mon Apr 29 20:23:38 2013 vincent colliot
+** Last update Fri May  3 16:57:13 2013 vincent colliot
 */
+
+#include "string.h"
 
 BOOL	empty(const char *s)
 {

@@ -5,11 +5,12 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 21:20:47 2013 vincent colliot
-** Last update Mon Apr 29 22:58:00 2013 vincent colliot
+** Last update Thu May  2 19:37:21 2013 vincent colliot
 */
 
 #include "string.h"
 #include "xmalloc.h"
+#include "get.h"
 
 static size_t redir_lenth(char *s)
 {
@@ -28,19 +29,17 @@ static size_t redir_lenth(char *s)
 
 static size_t subdiv(char *s)
 {
-  size_t	i;
-
-  if (NMATCH(s, "||") || NMATCH(s, "&&") || NMATCH(s, "<<") || NMATCH(s, ">>"))
+  if (NMATCH("||", s) || NMATCH("&&", s) || NMATCH("<<", s) || NMATCH(">>", s))
     return (2);
-  if (my_sstrlen(s, "<>") < my_sstrlen(s, " |;") &&
+  if (my_sstrlen(s, "<>") < my_sstrlen(s, " \t|&;()`") &&
       (my_sstrlen(s, "<>") == 1 || !my_sstrlen(s, "<>")))
     return (redir_lenth(s));
-  if (IN(s[0], ";|&<>"))
+  if (IN(s[0], ";|&<>()`"))
     return (1);
-  if (NMATCH(s + my_strilen(s, "&"), "&&") && my_strilen(s, "&")
-      < my_sstrlen(s, " \t|;<>"))
-    return (my_strilen(s, "&"));
-  return (my_sstrlen(s, " \t|&;<>"));
+  if (NMATCH(s + my_strilen(s, '&'), "&&") && my_strilen(s, '&')
+      < my_sstrlen(s, " \t|;<>()`"))
+    return (my_strilen(s, '&'));
+  return (my_sstrlen(s, " \t|&;<>()`"));
 }
 
 t_get	*subdivide(char *s, t_get *prev)
@@ -53,7 +52,8 @@ t_get	*subdivide(char *s, t_get *prev)
     return (prev);
   if ((link = xmalloc(sizeof(*prev))) == NULL)
     return (NULL);
-  link->word = my_strndup(s, my_strslen(s, " \t"));
+  s += hempty(s);
+  link->word = my_strndup(s, subdiv(s));
   link->next = NULL;
   link->prev = prev;
   if (prev)

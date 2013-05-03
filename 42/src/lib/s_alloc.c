@@ -5,8 +5,10 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 19:47:25 2013 vincent colliot
-** Last update Mon Apr 29 20:29:03 2013 vincent colliot
+** Last update Tue Apr 30 15:58:44 2013 vincent colliot
 */
+
+#include "string.h"
 
 char	*my_strdup(const char *s)
 {

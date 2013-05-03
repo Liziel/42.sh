@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Mon Apr 29 20:46:01 2013 vincent colliot
+## Last update Fri May  3 17:12:31 2013 vincent colliot
 ##
 
 NAME    = 42.sh
@@ -13,7 +13,7 @@ RM      = rm -f
 
 FO	=./
 
-SRCF	=$(FO)/src/
+SRCF	=$(FO)src/
 
 ########################
 
@@ -25,12 +25,20 @@ LIB	=$(LIBF)s_alloc.c\
 	$(LIBF)s_match.c\
 	$(LIBF)s_comp.c\
 	$(LIBF)s_lenth.c\
+	$(LIBF)s_print.c\
+	$(LIBF)match.c\
+
+XMALLOC=$(LIBF)xmalloc.c\
+
+PARSF	=$(SRCF)parsing/
+PARS	=$(PARSF)subdiv.c\
 
 ########################
 
 SRC     =$(MAIN)\
 	$(LIB)\
-
+	$(PARS)\
+	$(XMALLOC)\
 ########################
 
 INC	=-I $(FO)include/
