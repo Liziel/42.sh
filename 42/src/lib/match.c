@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May  3 16:56:48 2013 vincent colliot
-** Last update Fri May  3 17:25:10 2013 vincent colliot
+** Last update Fri May  3 17:38:30 2013 vincent colliot
 */
 
 #include "string.h"
@@ -15,7 +15,7 @@ size_t	my_strnslen(const char *s, const char *c, size_t n)
   size_t	i;
 
   i = 0;
-  while (s[i] && my_strncmp(c, s, n))
+  while (s[i] && my_strncmp(c, s + i, n))
     i++;
   return (i);
 }

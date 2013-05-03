@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 20:25:19 2013 vincent colliot
-** Last update Fri May  3 17:14:59 2013 vincent colliot
+** Last update Fri May  3 17:35:27 2013 vincent colliot
 */
 
 #ifndef STRING_H_
@@ -16,7 +16,7 @@
 # include "bool.h"
 
 # define IN(c, s) (s[my_strilen(s, c)] != 0)
-# define S_IN(c, s) (s[my_sstrlen(s, c)] != 0)
+# define S_IN(c, s) (s[my_strslen(s, c)] != 0)
 # define LS_IN(c, s, n) (s[my_strnslen(s, c, n)] != 0)
 # define MATCH(s, c) ((s && c) ? (!my_strcmp(s, c)) : (0))
 # define NMATCH(s, c) (((s) && (c)) ? \
