@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  2 19:45:44 2013 vincent colliot
-** Last update Thu May  2 22:26:10 2013 vincent colliot
+** Last update Fri May  3 18:56:11 2013 vincent colliot
 */
 
 #ifndef LEXEC_H_
@@ -19,9 +19,7 @@ struct s_exec;
 # define REF 0b01
 # define WORD 0b10
 typedef struct s_words{
-  FLAG type;
   char *word;
-  struct s_exec *ref;
   struct s_words *next;
 }		t_words;
 
@@ -38,7 +36,6 @@ typedef struct s_redir{
 # define PARENTS 0b01
 # define WORDS	0b10
 typedef struct s_cmd{
-  FLAG	job;
   struct s_redir *redir;
   FLAG	type;
   struct s_word *params;
