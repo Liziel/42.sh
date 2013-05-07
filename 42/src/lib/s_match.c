@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 20:15:24 2013 vincent colliot
-** Last update Fri May  3 16:57:13 2013 vincent colliot
+** Last update Mon May  6 21:14:57 2013 vincent colliot
 */
 
 #include "string.h"
@@ -14,6 +14,8 @@ BOOL	empty(const char *s)
 {
   size_t	i;
 
+  if (!s)
+    return (0);
   i = 0;
   while (s[i] == ' ' || s[i] == 9)
     i++;

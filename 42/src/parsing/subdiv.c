@@ -5,13 +5,14 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 21:20:47 2013 vincent colliot
-** Last update Sat May  4 13:11:24 2013 vincent colliot
+** Last update Tue May  7 05:45:01 2013 vincent colliot
 */
 
 #include "string.h"
 #include "xmalloc.h"
 #include "get.h"
 #include "error.h"
+#include "subdivide.h"
 
 static size_t work_on_quote(char *s, char **bad_sintax)
 {
@@ -44,7 +45,7 @@ static size_t subdiv(char *s, char **bad_sintax)
 {
   if (NMATCH("||", s) || NMATCH("&&", s) || NMATCH("<<", s) || NMATCH(">>", s))
     return (2);
-  if (my_sstrlen(s, "<>") < my_sstrlen(s, " \t\"'|&;()`") &&
+  if (my_sstrlen(s, "<>") < my_sstrlen(s, " \\\t\"'|&;()`") &&
       (my_sstrlen(s, "<>") == 1 || !my_sstrlen(s, "<>")))
     return (redir_lenth(s));
   if (s[0] == '"' || s[0] == '\'')
@@ -52,22 +53,47 @@ static size_t subdiv(char *s, char **bad_sintax)
   if (IN(s[0], ";|&<>()`"))
     return (1);
   if (NMATCH(s + my_strilen(s, '&'), "&&") && my_strilen(s, '&')
-      < my_sstrlen(s, " \t\"'|;<>()`"))
+      < my_sstrlen(s, " \\\t\"'|;<>()`"))
     return (my_strilen(s, '&'));
-  return (my_sstrlen(s, " \t\"'|&;<>()`"));
+  return (my_sstrlen(s, " \\\t\"'|&;<>()`"));
 }
 
-static void	*nullify_link(t_get *link)
+static void	*nullify_link(t_get *link, BOOL l, BOOL f)
 {
+  if (!f)
+    return (NULL);
+  if (l)
+    free(link->word);
   free(link);
   return (NULL);
 }
 
-static void	*nullify(t_get *link)
+static t_get *echappment(char *s, t_get *link, char **bad_sintax, BOOL freud)
 {
-  free(link->word);
-  free(link);
-  return (NULL);
+  char	*word;
+
+  while (s[0] == '\\' && s[1])
+    {
+      word = link->word;
+      s += 1;
+      if ((link->word = my_strncat(word, s, subdiv(s + 1, bad_sintax)
+				   * (!IN(s[1], " \\\t\"'|;<>()`")) + 1))
+	  == NULL)
+	return (nullify_link(link, (link->word) != NULL, freud));
+      if (!IN(s[1], " \\\t\"'|;<>()`"))
+	  *bad_sintax = NULL;
+      if (word)
+	free(word);
+      s += 1 + subdiv(s + 1, bad_sintax) * (!IN(s[1], " \\\t\"'|;<>()`"));
+    }
+  if (!s[1] && s[0] == '\\')
+    {
+      *bad_sintax = my_strdup(ERROR_AFTER_ECHAP_CHAR);
+      return (nullify_link(link, (link->word) != NULL, freud));
+    }
+  if (subdivide(s, link, bad_sintax) == NULL)
+    return (nullify_link(link, 1, freud));
+  return (link);
 }
 
 t_get	*subdivide(char *s, t_get *prev, char **bad_sintax)
@@ -75,25 +101,27 @@ t_get	*subdivide(char *s, t_get *prev, char **bad_sintax)
   size_t l;
   t_get *link;
 
-  if (!s)
+  if (empty(s))
     return (prev);
-  if (!s[0])
-    return (prev);
+  if (s[0] == '\\' && prev)
+    return (echappment(s, prev, bad_sintax, 0));
   if ((link = xmalloc(sizeof(*prev))) == NULL)
-    return (NULL);
-  s += hempty(s);
-  l = subdiv(s, bad_sintax);
-  if (*bad_sintax)
-    return (nullify_link(link));
-  if ((link->word = my_strndup(s, l)) == NULL)
     return (NULL);
   link->next = NULL;
   link->prev = prev;
   if (prev)
     prev->next = link;
-  if (subdivide(s + my_strlen(link->word) + hempty(s + my_strlen(link->word)),
-		link, bad_sintax) == NULL)
-    return (nullify(link));
+  link->word = NULL;
+  s += hempty(s);
+  if (s[0] == '\\')
+    return (echappment(s, link, bad_sintax, 1));
+  l = subdiv(s, bad_sintax);
+  if (*bad_sintax)
+    return (nullify_link(link, 0, 1));
+  if ((link->word = my_strndup(s, l)) == NULL)
+    return (nullify_link(link, 0, 1));
+  if (subdivide(s + my_strlen(link->word), link, bad_sintax) == NULL)
+    return (nullify_link(link, 1, 1));
   return (link);
 }
 

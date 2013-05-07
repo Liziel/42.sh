@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  2 19:45:44 2013 vincent colliot
-** Last update Fri May  3 18:56:11 2013 vincent colliot
+** Last update Mon May  6 16:51:08 2013 vincent colliot
 */
 
 #ifndef LEXEC_H_
@@ -23,9 +23,17 @@ typedef struct s_words{
   struct s_words *next;
 }		t_words;
 
+/* redir_type */
+# define LEFT	0b0001
+# define RIGHT	0b0010
+# define DLEFT	0b0100
+# define DRIGHT	0b1000
+
+/* where type */
 # define ON_CANAL 0b01
 # define ON_FILE 0b10
 typedef struct s_redir{
+  FLAG redir;
   FLAG type;
   FD in;
   FD out;

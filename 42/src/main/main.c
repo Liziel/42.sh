@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Sat May  4 13:12:45 2013 vincent colliot
+** Last update Tue May  7 05:45:13 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -17,7 +17,7 @@ int main(void)
   t_get *g;
 
   bad_sintax = NULL;
-  g = subdivide("   \t  ls  toto>tata  | (slaut     \"1>     1>&1eh\" ba non  ) &&       caca;plop>no&& noo || lol||n\"", NULL, &bad_sintax);
+  g = subdivide("   \t  ls\\  toto>tata  \\|\\ (slaut     \"1>     1>&1eh\" ba non  ) &&       caca;plop>no&& noo || lol||n\\\"", NULL, &bad_sintax);
   if (bad_sintax)
     print_err(bad_sintax);
   printf("%d\n", match("toto.c", "*"));

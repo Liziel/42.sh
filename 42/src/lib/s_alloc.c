@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 19:47:25 2013 vincent colliot
-** Last update Sat May  4 13:08:02 2013 vincent colliot
+** Last update Mon May  6 22:35:14 2013 vincent colliot
 */
 
 #include "string.h"
@@ -29,6 +29,7 @@ char	*my_strdup(const char *s)
       r[i] = s[i];
       i++;
     }
+  r[i] = 0;
   return (r);
 }
 
@@ -67,11 +68,40 @@ char	*my_strcat(const char *s, const char *c)
     return (NULL);
   r[si + ci] = 0;
   i = 0;
-  while (i < si)
+  if (s)
+    while (i < si)
+      {
+	r[i] = s[i];
+	i++;
+      }
+  while (i < si + ci)
     {
-      r[i] = s[i];
+      r[i] = c[i - si];
       i++;
     }
+  return (r);
+}
+
+char	*my_strncat(const char *s, const char *c, size_t n)
+{
+  size_t i;
+  size_t si;
+  size_t ci;
+  char	*r;
+
+  si = my_strlen(s);
+  if ((ci = my_strlen(c)) > n)
+    ci = n;
+  if ((r = xmalloc(sizeof(char) * (si + ci + 1))) == NULL)
+    return (NULL);
+  r[si + ci] = 0;
+  i = 0;
+  if (s)
+    while (i < si)
+      {
+	r[i] = s[i];
+	i++;
+      }
   while (i < si + ci)
     {
       r[i] = c[i - si];

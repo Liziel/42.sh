@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May  3 18:33:37 2013 vincent colliot
-** Last update Fri May  3 19:11:32 2013 vincent colliot
+** Last update Mon May  6 20:13:42 2013 vincent colliot
 */
 
 #include "lexec.h"
@@ -26,12 +26,12 @@ static t_words	*nullify_link(t_words *link, t_words *prev)
 
 static t_words	*list_cmd(t_get *word, t_get **words, t_words *prev, char **bad_sintax)
 {
-  t_get *link;
-  t_get *last;
+  t_words *link;
+  t_words *last;
 
   if (!words)
     return (prev);
-  if (IN('>', word->word) || IN('<', word->word))
+  if ((IN('>', word->word) || IN('<', word->word)) && !IN(word->word[0], "'\""))
     return (prev);
   if (!prev)
     if ((link = interpret_cmd(word, words, bad_sintax, &last)) == NULL)
