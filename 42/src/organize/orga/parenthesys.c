@@ -5,8 +5,13 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May  3 01:01:26 2013 vincent colliot
-** Last update Fri May  3 18:44:24 2013 vincent colliot
+** Last update Thu May  9 00:50:47 2013 vincent colliot
 */
+
+#include "get.h"
+#include "bool.h"
+#include "string.h"
+#include "error.h"
 
 BOOL	lvl_parents(t_get **words, char **bad_sintax)
 {
@@ -17,13 +22,13 @@ BOOL	lvl_parents(t_get **words, char **bad_sintax)
   if (!(blevel = MATCH("(", (*words)->word))
       && (plevel = !MATCH("`", (*words)->word)))
     return (TRUE);
-  link = words->next;
+  link = (*words)->next;
   while (link && (plevel || blevel))
     {
       blevel = blevel + MATCH("(", (link)->word) - MATCH(")", (link)->word);
       if (MATCH("`", (link)->word))
 	plevel = !plevel;
-      link = link->next
+      link = link->next;
     }
   if (plevel)
     *bad_sintax = my_strdup(UNMATCHED_PARENTS);

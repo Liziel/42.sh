@@ -5,12 +5,13 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  2 19:45:44 2013 vincent colliot
-** Last update Mon May  6 16:51:08 2013 vincent colliot
+** Last update Thu May  9 00:49:01 2013 vincent colliot
 */
 
 #ifndef LEXEC_H_
 # define LEXEC_H_
 
+#include "fd.h"
 #include "flag.h"
 #include "get.h"
 
@@ -46,9 +47,9 @@ typedef struct s_redir{
 typedef struct s_cmd{
   struct s_redir *redir;
   FLAG	type;
-  struct s_word *params;
+  struct s_words *params;
   /* or */
-  struct s_exec *parents;
+  struct s_jobs *parents;
 }		t_cmd;
 
 typedef struct s_pipes{
@@ -63,7 +64,7 @@ typedef struct s_pipes{
 typedef struct s_exec{
   FLAG	type;
   struct s_exec *next;
-  struct s_pipe *pipes;
+  struct s_pipes *pipes;
   struct s_get  *tmp;
 }		t_exec;
 

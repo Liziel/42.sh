@@ -5,10 +5,14 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  2 22:05:00 2013 vincent colliot
-** Last update Fri May  3 18:36:22 2013 vincent colliot
+** Last update Wed May  8 23:31:39 2013 vincent colliot
 */
 
-
+#include "orga.h"
+#include "lexec.h"
+#include "bool.h"
+#include "string.h"
+#include "xmalloc.h"
 
 static t_cmd	*nullify_link(t_cmd *cmd)
 {
@@ -31,13 +35,13 @@ static t_cmd	*make_cmd(t_get *words, char **bad_sintax)
   is_redir = 0;
   if (!cmd_part(words, &words, link, bad_sintax))
     return (nullify_link(link));
-  if ((cmd->redir = redir_part(words, NULL, bad_sintax, &is_redir)) == NULL)
-    if (is_redir)
-      return (nullify_link(link));
+  /* if ((link->redir = redir_part(words, NULL, bad_sintax, &is_redir)) == NULL) */
+  /*   if (is_redir) */
+  /*     return (nullify_link(link)); */
   return (link);
 }
 
-BOOL	get_cmd(t_pipe *pipe, char **bad_sintax)
+BOOL	get_cmd(t_pipes *pipe, char **bad_sintax)
 {
   if (!pipe)
     return (TRUE);

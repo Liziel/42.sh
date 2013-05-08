@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 19:47:25 2013 vincent colliot
-** Last update Wed May  8 17:03:59 2013 vincent colliot
+** Last update Thu May  9 00:13:37 2013 vincent colliot
 */
 
 #include "string.h"
@@ -39,7 +39,7 @@ void	*my_strndup(const void	*s, size_t n)
   size_t	i;
 
   i = 0;
-  if (!s)
+  if (!s || !n)
     return (NULL);
   if ((r = malloc(n + 1)) == NULL)
     {
@@ -62,6 +62,8 @@ char	*my_strcat(const char *s, const char *c)
   size_t ci;
   char	*r;
 
+  if (!s)
+    return (my_strdup(c));
   si = my_strlen(s);
   ci = my_strlen(c);
   if ((r = xmalloc(sizeof(char) * (si + ci + 1))) == NULL)

@@ -5,8 +5,12 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May  5 12:30:49 2013 vincent colliot
-** Last update Sun May  5 12:36:24 2013 vincent colliot
+** Last update Thu May  9 01:02:34 2013 vincent colliot
 */
+
+#include "string.h"
+#include "bool.h"
+#include "env.h"
 
 char	*get_env(char *s)
 {

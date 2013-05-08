@@ -5,10 +5,17 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  2 20:20:16 2013 vincent colliot
-** Last update Fri May  3 01:13:43 2013 vincent colliot
+** Last update Thu May  9 01:02:12 2013 vincent colliot
 */
 
-static FLAG match_them(char *word)
+#include "orga.h"
+#include "lexec.h"
+#include "bool.h"
+#include "string.h"
+#include "xmalloc.h"
+#include "error.h"
+
+static FLAG match_these(char *word)
 {
   if (MATCH("||", word))
     return (OR);
@@ -23,16 +30,16 @@ static FLAG	match_end(t_get **words, char **bad_sintax)
   t_get *link;
 
   link = *words;
-  if (match_them(word))
+  if (match_these(link->word))
     {
-      bad_sintax = my_strcat(WRONG_SEP_TOKEN, word);
+      *bad_sintax = my_strcat(WRONG_SEP_TOKEN, (*words)->word);
       return (FALSE);
     }
   while (link)
     {
       if (lvl_parents(&link, bad_sintax) == FALSE)
 	return (FALSE);
-      if ((r = match_them(link->word)))
+      if ((r = match_these(link->word)))
 	return (r);
       link = link->next;
       *words = link;
@@ -40,11 +47,12 @@ static FLAG	match_end(t_get **words, char **bad_sintax)
   return (NEXT);
 }
 
-static void     *word_nullify(t_get *words)
+static void     *word_nullify(t_get *word)
 {
   t_get *next;
 
-  while (word)
+  next = word;
+  while (next)
     {
       next = word->next;
       free(word);
@@ -53,7 +61,7 @@ static void     *word_nullify(t_get *words)
   return (NULL);
 }
 
-static void	*nullify(t_pipes *link)
+static void	*nullify(t_exec *link)
 {
   t_get *next;
   t_get	*word;
@@ -91,7 +99,7 @@ t_exec *get_exec(t_get *words, t_exec *prev, char **bad_sintax)
   link->next = NULL;
   if (!words)
     return (link);
-  if (get_exec(words->next, link) == NULL)
+  if (get_exec(words->next, link, bad_sintax) == NULL)
     return (nullify(link));
   free(words);
   return (link);
