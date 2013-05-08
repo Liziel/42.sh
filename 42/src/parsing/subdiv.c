@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 21:20:47 2013 vincent colliot
-** Last update Tue May  7 05:45:01 2013 vincent colliot
+** Last update Wed May  8 01:17:52 2013 vincent colliot
 */
 
 #include "string.h"
@@ -72,6 +72,7 @@ static t_get *echappment(char *s, t_get *link, char **bad_sintax, BOOL freud)
 {
   char	*word;
 
+  link->inter = 1;
   while (s[0] == '\\' && s[1])
     {
       word = link->word;
@@ -104,7 +105,8 @@ t_get	*subdivide(char *s, t_get *prev, char **bad_sintax)
   if (empty(s))
     return (prev);
   if (s[0] == '\\' && prev)
-    return (echappment(s, prev, bad_sintax, 0));
+    if ((!S_IN(prev->word, "\"'|;<>()`")))
+      return (echappment(s, prev, bad_sintax, 0));
   if ((link = xmalloc(sizeof(*prev))) == NULL)
     return (NULL);
   link->next = NULL;
@@ -113,7 +115,7 @@ t_get	*subdivide(char *s, t_get *prev, char **bad_sintax)
     prev->next = link;
   link->word = NULL;
   s += hempty(s);
-  if (s[0] == '\\')
+  if (s[(link->inter = 0)] == '\\')
     return (echappment(s, link, bad_sintax, 1));
   l = subdiv(s, bad_sintax);
   if (*bad_sintax)

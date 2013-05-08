@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 20:25:19 2013 vincent colliot
-** Last update Mon May  6 21:47:41 2013 vincent colliot
+** Last update Wed May  8 03:04:44 2013 vincent colliot
 */
 
 #ifndef STRING_H_
@@ -36,6 +36,7 @@ char	*my_strdup(const char*);
 void	*my_strndup(const void*, size_t);
 char	*my_strcat(const char*, const char*);
 char	*my_strncat(const char*, const char*, size_t);
+char	*my_stricat(const char*, const char*, char);
 
 	/* s_match */
 BOOL	empty(const char*);
@@ -49,6 +50,7 @@ int	my_strncmp(const char*, const char*, size_t);
 	/* match */
 size_t	my_strnslen(const char*, const char*, size_t);
 BOOL	match(const char*, const char*);
+BOOL	nmatch(const char*, const char*, size_t);
 
 	/* s_print */
 size_t	print_err(const char*);

@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May  5 13:18:32 2013 vincent colliot
-** Last update Sun May  5 13:28:46 2013 vincent colliot
+** Last update Wed May  8 02:38:40 2013 vincent colliot
 */
 
 
@@ -14,7 +14,7 @@ BOOL	in_directory(char *dir, char *word)
   struct dirent	*fchr;
   DIR		*dir;
 
-  if ((dir = opendir()) == NULL)
+  if ((dir = opendir(dir)) == NULL)
     return (FALSE);
   while ((fchr = readdir(dir)) != NULL)
     if (MATCH(fchr->d_name, word))

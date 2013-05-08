@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 19:47:25 2013 vincent colliot
-** Last update Mon May  6 22:35:14 2013 vincent colliot
+** Last update Wed May  8 03:04:20 2013 vincent colliot
 */
 
 #include "string.h"
@@ -107,5 +107,19 @@ char	*my_strncat(const char *s, const char *c, size_t n)
       r[i] = c[i - si];
       i++;
     }
+  return (r);
+}
+
+char	*my_stricat(const char *s, const char *c, char k)
+{
+  char	*pr;
+  char	*r;
+  char	sk[2];
+
+  s[0] = k;
+  s[1] = 0;
+  pr = my_strcat(s, sk);
+  r = my_strcat(pr, c);
+  free(pr);
   return (r);
 }
