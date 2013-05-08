@@ -5,15 +5,24 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Wed May  8 01:48:11 2013 vincent colliot
-** Last update Wed May  8 03:17:28 2013 vincent colliot
+** Last update Wed May  8 17:02:32 2013 vincent colliot
 */
 
-static void	add(char *name, t_words **last, int *no_match)
+static BOOL	add(char *name, t_words **last, BOOL *no_match)
 {
-  *no_match = 1;
+  if (!name)
+    return (FALSE);
+  *no_match = FALSE;
+  if ((link = xmalloc(sizeof(*link))) == NULL)
+    return (FALSE);
+  link->word = name;
+  link->next = NULL;
+  (*last)->next = link;
+  *last = link;
+  return (TRUE);
 }
 
-static t_words  *add_and_last(char *m, char *dp, t_words **last, int *no_match)
+static BOOL  add_and_last(char *m, char *dp, t_words **last, BOOL *no_match)
 {
   char	*s;
 
@@ -21,11 +30,12 @@ static t_words  *add_and_last(char *m, char *dp, t_words **last, int *no_match)
     s = my_stricat(dp, m, '/');
   else
     s = dp;
-  add(s, last, no_match);
+  if (add(s, last, no_match) == FALSE)
+    return (FALSE);
   free(dp);
   if (m[0])
     free(s);
-  return (*last);
+  return (TRUE);
 }
 
 static BOOL	is_dir(char *dp)
@@ -39,8 +49,7 @@ static BOOL	is_dir(char *dp)
   return (FALSE);
 }
 
-/*h*h*/
-t_words	*match_them(char *m, char *dp, t_words **last, int *no_match)
+BOOL	match_them(char *m, char *dp, t_words **last, BOOL *no_match)
 {
   char		*f_dp;
   struct dirent	*fchr;
@@ -56,14 +65,14 @@ t_words	*match_them(char *m, char *dp, t_words **last, int *no_match)
     if (((fchr->d_name)[0] == '.' && m[0] == '.') || (fchr->d_name)[0] != '.')
       if (nmatch(fchr->d_name, m, my_strilen(m, '/')))
 	if ((f_dp = my_stricat(dp, fchr->d_name, '/')) == NULL)
-	  return (NULL);
+	  return (FALSE);
 	else if ((IN('/', m) && is_dir(f_dp)) || !IN('/', m))
-	  if (match_them(m + my_strilen(m, '/') + (IN('/', m)), f_dp, last,
-			 no_match) == NULL)
-	    return (NULL);
+	  if (match_them(m + my_strilen(m, '/') + (IN('/', m)), f_dp, last,0
+			 no_match) == FALSE)
+	    return (FALSE);
   closedir(dir);
   free(dp);
   if (!(*no_match))
-    return (NULL);
-  return (*last);
+    return (FALSE);
+  return (TRUE);
 }
