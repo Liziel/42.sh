@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  2 19:45:44 2013 vincent colliot
-** Last update Thu May  9 00:49:01 2013 vincent colliot
+** Last update Thu May  9 14:50:49 2013 thomas lecorre
 */
 
 #ifndef LEXEC_H_
@@ -19,7 +19,8 @@ struct s_exec;
 
 # define REF 0b01
 # define WORD 0b10
-typedef struct s_words{
+typedef struct s_words
+{
   char *word;
   struct s_words *next;
 }		t_words;
