@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May  3 18:33:37 2013 vincent colliot
-** Last update Wed May  8 23:53:59 2013 vincent colliot
+** Last update Thu May  9 22:57:42 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -31,11 +31,12 @@ static t_words	*list_cmd(t_get *word, t_get **words, t_words *prev, char **bad_s
   t_words *link;
   t_words *last;
 
-  if (!words)
+  if (!word)
     return (prev);
   if ((IN('>', word->word) || IN('<', word->word)) && !IN(word->word[0], "'\"")
       && !word->inter)
     return (prev);
+  last = prev;
   if (!prev)
     if ((link = interpret_cmd(word, words, bad_sintax, &last)) == NULL)
       return (NULL);
@@ -62,16 +63,17 @@ static BOOL	parents(t_get *word, t_get **words, t_cmd *link, char **bad_sintax)
   BOOL		no_word;
   t_get	*organize;
 
-  if (lvl_parents(words, bad_sintax) == FALSE)
+  if (match_parents(words, bad_sintax) == FALSE)
     return (FALSE);
   if ((organize = word->next))
     word->next->prev = NULL;
-  free(word);
+  rm_words(word);
   if ((word = *words) == NULL)
     return (FALSE);
   if (word->prev)
-    if(word->prev->prev)
-      word->prev->prev->next = NULL;
+    word->prev->next = NULL;
+  *words = word->next;
+  rm_words(word);
   if ((link->parents = orga(organize, bad_sintax, &no_word)) == NULL)
     return (check_sintax(bad_sintax, no_word));
   return (TRUE);

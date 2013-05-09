@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Wed May  8 01:48:11 2013 vincent colliot
-** Last update Thu May  9 01:03:01 2013 vincent colliot
+** Last update Thu May  9 20:58:35 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -28,7 +28,7 @@ static BOOL	add(char *name, t_words **last, BOOL *no_match)
   *no_match = FALSE;
   if ((link = xmalloc(sizeof(*link))) == NULL)
     return (FALSE);
-  link->word = name;
+  link->word = my_strdup(name);
   link->next = NULL;
   (*last)->next = link;
   *last = link;
@@ -39,13 +39,16 @@ static BOOL  add_and_last(char *m, char *dp, t_words **last, BOOL *no_match)
 {
   char	*s;
 
-  if (m[0])
+  if (m[0] && (dp) != NULL)
     s = my_stricat(dp, m, '/');
-  else
+  else if (dp != NULL)
     s = dp;
+  else
+    s = my_strdup(m);
   if (add(s, last, no_match) == FALSE)
     return (FALSE);
-  free(dp);
+  if (dp)
+    free(dp);
   if (m[0])
     free(s);
   return (TRUE);

@@ -5,21 +5,25 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Wed May  8 03:01:18 2013 vincent colliot
+** Last update Fri May 10 00:04:03 2013 vincent colliot
 */
 
 #include <stdlib.h>
 #include "get.h"
+#include "orga.h"
 
 int main(void)
 {
+  BOOL	null;
   char  *bad_sintax;
   t_get *g;
+  t_jobs	*j;
 
   bad_sintax = NULL;
-  g = subdivide("   \t  ls\\  1\\<2& toto>tata  |\\ (slaut     \"1>     1>&1eh\" ba non  ) &&       caca;plop>no&& noo || lol||n\\\"", NULL, &bad_sintax);
+  g = subdivide("ls -l -a -R < tata || cat; (ls -r | (cat -e) && no|ls) | cat -e & ls", NULL, &bad_sintax);
   if (bad_sintax)
     print_err(bad_sintax);
+  j = orga(g, &bad_sintax, &null);
   printf("%d\n", match("toto.c", "*c"));
   printf("%d\n", nmatch("toto.c", "t*/", my_strilen("t*/", '/')));
   printf("%d\n", match("toto.c", "*.c"));

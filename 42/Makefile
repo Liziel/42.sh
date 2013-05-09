@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Thu May  9 01:01:01 2013 vincent colliot
+## Last update Thu May  9 22:06:14 2013 vincent colliot
 ##
 
 NAME    = 42.sh
@@ -55,9 +55,12 @@ JEXE	=$(JEXEF)exec.c\
 	$(JEXEF)match_them.c
 
 ORJF	=$(ORGAF)orga/
-ORJ	=$(ORJF)nullify.c\
-	$(ORJF)orga.c\
+ORJ	=$(ORJF)orga.c\
 	$(ORJF)parenthesys.c\
+
+NULLF	=$(ORGAF)nullify/
+NULL	=$(NULLF)null1.c\
+	$(NULLF)null2.c\
 
 PIPEF	=$(ORGAF)pipe/
 PIPE	=$(PIPEF)pipes.c\
@@ -76,6 +79,7 @@ SRC     =$(MAIN)\
 	$(ORGA)\
 	$(ENV)\
 	$(DIR)\
+	$(NULL)\
 
 ########################
 

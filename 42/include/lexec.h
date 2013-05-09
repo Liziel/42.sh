@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  2 19:45:44 2013 vincent colliot
-** Last update Thu May  9 00:49:01 2013 vincent colliot
+** Last update Thu May  9 19:51:45 2013 vincent colliot
 */
 
 #ifndef LEXEC_H_
@@ -68,8 +68,8 @@ typedef struct s_exec{
   struct s_get  *tmp;
 }		t_exec;
 
-# define NONE 0b0
-# define JOBS 0b1
+# define NONE 0b01
+# define JOBS 0b10
 typedef struct s_jobs{
   FLAG type;
   struct s_jobs *next;
