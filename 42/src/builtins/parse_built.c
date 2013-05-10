@@ -5,24 +5,45 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May  3 17:56:18 2013 thomas lecorre
-** Last update Thu May  9 12:23:21 2013 thomas lecorre
+** Last update Fri May 10 15:38:00 2013 thomas lecorre
 */
 
 #include "built.h"
 
-void	init_built(t_call *built)
+void	init_built(t_call built[5])
 {
-  built[0]->name = my_strdup("cd");
-  built[1]->name = my_strdup("echo");
-  built[2]->name = my_strdup("exit");
-  built[3]->name = my_strdup("setenv");
-  built[4]->name = my_strdup("unsetenv");
+  (built[0]).name = my_strdup("cd");
+  (built[0]).ptr = &cd;
+  (built[1]).name = my_strdup("echo");
+  (built[1]).ptr = &echo;
+  (built[2]).name = my_strdup("exit");
+  (built[2]).ptr = &exit;
+  (built[3]).name = my_strdup("setenv");
+  (built[3]).ptr = &setenv;
+  (built[4]).name = my_strdup("unsetenv");
+  (built[4]).ptr = &unsetenv;
+  (built[5]).name = my_strdup("alias");
+  (built[5]).ptr = &alias;
+  (built[6]).name = NULL;
+  (built[6]).ptr = NULL;
 }
 
-int	builtins()
+void	*stock_tab(t_call *built)
 {
-  t_call	built[5];
+  static t_call	*tab;
 
+  if (built)
+    tab = bult;
+  return (tab);
+}
+
+int	builtins(t_words *cmd, void *alias)
+{
+  t_call	*built;
+
+  if ((built = xmalloc(sizeof(t_call) * 7)) == NULL)
+    return (-1);
   init_built(&built);
+  stock_tab(&built);
   return (0);
 }
