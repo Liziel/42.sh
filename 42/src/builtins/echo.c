@@ -5,25 +5,34 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May  6 20:49:09 2013 vincent colliot
-** Last update Mon May  6 20:53:59 2013 vincent colliot
+** Last update Fri May 10 18:58:21 2013 thomas lecorre
 */
 
-static void interpret()
+#include <stdlib.h>
+#include "string.h"
+#include "env.h"
+#include "built.h"
 
-int	echo_print(char *s, FLAG flag)
+int	echo(t_words *cmd, void *alias)
 {
-  size_t	i;
-
-  if (s[0])
-    return ;
- i = 1;
-  if (s[0] == '\\')
-    intepret(/*truc qui print*/, flag, &i);
+  if (cmd->next == NULL)
+    {
+      my_putstr('\n');
+      return (EXIT_SUCCES);
+    }
   else
-    my_putchar(s[0]);
-  echo_print(s + i, flag);
+    {
+      while (cmd != NULL)
+	{
+	  if (cmd->word)
+	    {
+	      my_putstr(cmd->word);
+	      if (cmd->next != NULL)
+		my_putstr(" ");
+	    }
+	  cmd = cmd->next;
+	}
+      my_putchar('\n');
+    }
+  return (EXIT_SUCCES);
 }
-
-/*
-**ici t'as un truc qui v a init tes flags il va aussi t'envoyer chaque chaine
-*/

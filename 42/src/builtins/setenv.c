@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 15:05:03 2013 thomas lecorre
-** Last update Fri May 10 17:45:49 2013 thomas lecorre
+** Last update Fri May 10 18:19:38 2013 thomas lecorre
 */
 
 #include <stdlib.h>
@@ -22,7 +22,7 @@ int	setenv(t_words *cmd, void *alias);
   if (cmd->next == NULL)
     env(cmd, alias);
   cmd = cmd->next;
-  else if (cd->next)
+  else if (cmd->next)
     line = my_stricat(cmd->word, cmd->next->word, '=');
   else
     line = my_strcat(cmd->word, "=");
