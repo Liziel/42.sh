@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 21:20:47 2013 vincent colliot
-** Last update Wed May  8 01:17:52 2013 vincent colliot
+** Last update Fri May 10 13:30:21 2013 vincent colliot
 */
 
 #include "string.h"
@@ -32,8 +32,8 @@ static size_t redir_lenth(char *s)
 
   n = IN(s[0], "012");
   n += 1;
-  if (s[n] != '&')
-    return (n);
+  if (s[n] != '&' || s[n - 1] == '<')
+    return (n + IN(s[n], "<>"));
   n += 1;
   if (IN(s[n], "012"))
     if (IN(s[n + 1], " \t"))

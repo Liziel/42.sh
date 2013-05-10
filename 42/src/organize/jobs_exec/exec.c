@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  2 20:20:16 2013 vincent colliot
-** Last update Thu May  9 01:02:12 2013 vincent colliot
+** Last update Fri May 10 13:07:20 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -39,7 +39,10 @@ static FLAG	match_end(t_get **words, char **bad_sintax)
     {
       if (lvl_parents(&link, bad_sintax) == FALSE)
 	return (FALSE);
-      if ((r = match_these(link->word)))
+      *words = link;
+      if (!link)
+	return (NEXT);
+      if ((r = (match_these(link->word) && !link->inter)))
 	return (r);
       link = link->next;
       *words = link;
@@ -55,6 +58,7 @@ static void     *word_nullify(t_get *word)
   while (next)
     {
       next = word->next;
+      free(word->word);
       free(word);
       word = next;
     }
@@ -70,6 +74,7 @@ static void	*nullify(t_exec *link)
   while (word)
     {
       next = word->next;
+      free(word->word);
       free(word);
       word = next;
     }
@@ -101,6 +106,6 @@ t_exec *get_exec(t_get *words, t_exec *prev, char **bad_sintax)
     return (link);
   if (get_exec(words->next, link, bad_sintax) == NULL)
     return (nullify(link));
-  free(words);
+  rm_words(words);
   return (link);
 }

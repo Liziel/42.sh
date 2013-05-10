@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May  6 20:09:42 2013 vincent colliot
-** Last update Thu May  9 00:43:29 2013 vincent colliot
+** Last update Thu May  9 21:07:23 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -28,18 +28,19 @@ t_words		*interpret_params(t_get *word, t_get **words, char **bad_sintax,
   if (match_them(word->word,
 		 my_strndup(word->word, last_occur(word->word, '/', '*')), last,
 		 &no_match) == FALSE)
-    if (no_match)
+    if (no_match == FALSE)
       return (NULL);
   *words = word->next;
   if (no_match == TRUE)
     {
       if ((params = xmalloc(sizeof(*params))) == NULL)
 	return (NULL);
-      params->word = word->word;
+      params->word = my_strdup(word->word);
       params->next = NULL;
       (*last)->next = params;
       *last = params;
     }
+  free(word->word);
   free(word);
   return (*last);
 }

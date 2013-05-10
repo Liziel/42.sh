@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  2 20:52:53 2013 vincent colliot
-** Last update Thu May  9 01:04:58 2013 vincent colliot
+** Last update Thu May  9 22:57:14 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -30,6 +30,9 @@ static BOOL	match_end(t_get **words, char **bad_sintax)
     {
       if (lvl_parents(&link, bad_sintax) == FALSE)
 	return (FALSE);
+      *words = link;
+      if (!link)
+	return (TRUE);
       if (MATCH("|", link->word))
 	return (TRUE);
       link = link->next;
@@ -46,6 +49,7 @@ static void     *word_nullify(t_get *word)
   while (next)
     {
       next = word->next;
+      free(word->word);
       free(word);
       word = next;
     }
@@ -61,6 +65,7 @@ static void	*nullify(t_pipes *link)
   while (word)
     {
       next = word->next;
+      free(word->word);
       free(word);
       word = next;
     }
@@ -77,6 +82,7 @@ static t_pipes	*assoc_pipes(t_get *words, t_pipes *prev, char **bad_sintax)
   if ((link = xmalloc(sizeof(*link))) == NULL)
     return (word_nullify(words));
   link->tmp = words;
+  link->cmd = NULL;
   if (match_end(&words, bad_sintax) == FALSE)
     return (word_nullify(words));
   if (words)
@@ -92,7 +98,7 @@ static t_pipes	*assoc_pipes(t_get *words, t_pipes *prev, char **bad_sintax)
     return (link);
   if (assoc_pipes(words->next, link, bad_sintax) == NULL)
     return (nullify(link));
-  free(words);
+  rm_words(words);
   return (link);
 }
 

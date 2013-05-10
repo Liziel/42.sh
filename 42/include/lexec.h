@@ -5,7 +5,11 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  2 19:45:44 2013 vincent colliot
+<<<<<<< HEAD
+** Last update Fri May 10 13:05:34 2013 vincent colliot
+=======
 ** Last update Thu May  9 14:50:49 2013 thomas lecorre
+>>>>>>> dcf51d0022527e0cb17c3773071553b5b76de7e7
 */
 
 #ifndef LEXEC_H_
@@ -40,6 +44,7 @@ typedef struct s_redir{
   FD in;
   FD out;
   char *file;
+  struct s_redir *next;
 }		t_redir;
 
 	/* type */
@@ -69,8 +74,8 @@ typedef struct s_exec{
   struct s_get  *tmp;
 }		t_exec;
 
-# define NONE 0b0
-# define JOBS 0b1
+# define NONE 0b01
+# define JOBS 0b10
 typedef struct s_jobs{
   FLAG type;
   struct s_jobs *next;

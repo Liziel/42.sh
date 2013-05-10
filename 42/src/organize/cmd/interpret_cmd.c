@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May  4 16:34:47 2013 vincent colliot
-** Last update Thu May  9 00:52:35 2013 vincent colliot
+** Last update Thu May  9 22:40:17 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -16,21 +16,28 @@
 #include "error.h"
 #include "env.h"
 
-static char	*seek(char *path, char *cmd)
+static char	*seek(char *path, char *cmd, char **bad_sintax)
 {
   char		*dir;
 
   if (!path)
     return (NULL);
   if (!path[0])
+    {
+      *bad_sintax = my_strcat(UNKNOW_CMD, cmd);
+      return (NULL);
+    }
+  if ((dir = my_strndup(path, my_strilen(path, ':'))) == NULL)
     return (NULL);
-  dir = my_strndup(path, my_strilen(path, ';'));
   if (in_directory(dir, cmd))
     return (dir);
   free(dir);
-  if (!IN(';', path))
-    return (NULL);
-  return (seek(path + my_strilen(path, ';') + 1, cmd));
+  if (!IN(':', path))
+    {
+      *bad_sintax = my_strcat(UNKNOW_CMD, cmd);
+      return (NULL);
+    }
+  return (seek(path + my_strilen(path, ':') + IN(':', path), cmd, bad_sintax));
 }
 
 static char	*verify(char *cmd, char **bad_sintax)
@@ -54,11 +61,9 @@ static char	*seek_cmd(char *cmd, char **bad_sintax)
 
   if ((path = get_env("PATH")) == NULL)
     *bad_sintax = my_strcat(UNKNOW_CMD, cmd);
-  if ((wh = seek(path, cmd)) == NULL)
-    *bad_sintax = my_strcat(UNKNOW_CMD, cmd);
-  if (!wh)
+  if ((wh = seek(path, cmd, bad_sintax)) == NULL)
     return (NULL);
-  r = my_strcat(wh, cmd);
+  r = my_stricat(wh, cmd, '/');
   free(wh);
   return (r);
 }
@@ -91,11 +96,11 @@ t_words		*interpret_cmd(t_get *word, t_get **words, char **bad_sintax,
     cmd = word->word;
   if ((*last = (link = xmalloc(sizeof(*link)))) == NULL)
     return (NULL);
-  if (cmd[0] == '.')
+  if (cmd[0] == '.' || IN('/', cmd))
     if ((link->word = verify(cmd, bad_sintax)) == NULL)
       return (nullify_link(link));
   if (cmd[0] != '.' && not_a_built_in(cmd))
-    if ((link->word = seek_cmd(cmd, bad_sintax)))
+    if ((link->word = seek_cmd(cmd, bad_sintax)) == NULL)
       return (nullify_link(link));
   free(cmd);
   *words = word->next;
