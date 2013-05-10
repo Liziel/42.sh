@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  9 21:50:54 2013 vincent colliot
-** Last update Thu May  9 22:56:23 2013 vincent colliot
+** Last update Fri May 10 13:44:46 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -53,6 +53,19 @@ void nullify_cmd_words(t_words *s)
   nullify_cmd_words(n);
 }
 
+BOOL nullify_redir(t_redir *r)
+{
+  t_redir *n;
+
+  if (!r)
+    return (FALSE);
+  n = r->next;
+  if (r->file)
+    free(r->file);
+  free(r);
+  nullify_redir(n);
+}
+
 BOOL nullify_cmd(t_cmd *cmd)
 {
   if (!cmd)
@@ -61,6 +74,8 @@ BOOL nullify_cmd(t_cmd *cmd)
     nullify_cmd_words(cmd->params);
   else if (cmd->parents)
     nullify_all_jobs(cmd->parents);
+  if (cmd->redir)
+    nullify_redir(cmd->redir);
   free(cmd);
   return (FALSE);
 }

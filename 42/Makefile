@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Thu May  9 22:06:14 2013 vincent colliot
+## Last update Fri May 10 13:00:24 2013 vincent colliot
 ##
 
 NAME    = 42.sh
@@ -47,7 +47,8 @@ CMDF	=$(ORGAF)cmd/
 CMD	=$(CMDF)cmd.c\
 	$(CMDF)cmd_part.c\
 	$(CMDF)interpret_cmd.c\
-	$(CMDF)interpret_params.c
+	$(CMDF)interpret_params.c\
+	$(CMDF)redir.c
 
 JEXEF	=$(ORGAF)jobs_exec/
 JEXE	=$(JEXEF)exec.c\

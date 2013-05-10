@@ -6,7 +6,7 @@
 **
 ** Started on  Thu May  2 19:45:44 2013 vincent colliot
 <<<<<<< HEAD
-** Last update Thu May  9 19:51:45 2013 vincent colliot
+** Last update Fri May 10 13:05:34 2013 vincent colliot
 =======
 ** Last update Thu May  9 14:50:49 2013 thomas lecorre
 >>>>>>> dcf51d0022527e0cb17c3773071553b5b76de7e7
@@ -44,6 +44,7 @@ typedef struct s_redir{
   FD in;
   FD out;
   char *file;
+  struct s_redir *next;
 }		t_redir;
 
 	/* type */
