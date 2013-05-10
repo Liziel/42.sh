@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  2 20:20:16 2013 vincent colliot
-** Last update Thu May  9 22:55:44 2013 vincent colliot
+** Last update Fri May 10 13:07:20 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -42,7 +42,7 @@ static FLAG	match_end(t_get **words, char **bad_sintax)
       *words = link;
       if (!link)
 	return (NEXT);
-      if ((r = match_these(link->word)))
+      if ((r = (match_these(link->word) && !link->inter)))
 	return (r);
       link = link->next;
       *words = link;

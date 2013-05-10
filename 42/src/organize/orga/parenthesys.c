@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May  3 01:01:26 2013 vincent colliot
-** Last update Thu May  9 21:17:10 2013 vincent colliot
+** Last update Fri May 10 13:08:09 2013 vincent colliot
 */
 
 #include "get.h"
@@ -20,13 +20,14 @@ BOOL	lvl_parents(t_get **words, char **bad_sintax)
   int   blevel;
 
   plevel = 0;
-  if (!(blevel = MATCH("(", (*words)->word))
-      && !(plevel = MATCH("`", (*words)->word)))
+  if ((!(blevel = MATCH("(", (*words)->word))
+       && !(plevel = MATCH("`", (*words)->word))) || (*words)->inter)
     return (TRUE);
   link = (*words)->next;
   while (link && (plevel || blevel))
     {
-      blevel = blevel + MATCH("(", (link)->word) - MATCH(")", (link)->word);
+      blevel = blevel + !(link->inter) * (MATCH("(", (link)->word)
+					  - MATCH(")", (link)->word));
       if (MATCH("`", (link)->word))
 	plevel = !plevel;
       link = link->next;

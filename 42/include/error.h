@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May  4 12:44:30 2013 vincent colliot
-** Last update Thu May  9 00:51:26 2013 vincent colliot
+** Last update Fri May 10 13:04:26 2013 vincent colliot
 */
 
 #ifndef ERROR_H_
@@ -17,5 +17,6 @@
 # define UNMATCHED_BACKMACHIN "(sh): syntax error near unexpected token ``'"
 # define UNKNOW_CMD "(sh): command not found : "
 # define WRONG_SEP_TOKEN "(sh): sintax error neat unexpected token `"
+# define WRONG_REDIR "(sh): wrong redirection"
 
 #endif
