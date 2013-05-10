@@ -1,19 +1,26 @@
 /*
-** exec.c for  in /home/collio_v/rendu_svn/42.sh/42
+** jobs.c for  in /home/collio_v/rendu_svn/42.sh/42
 **
 ** Made by vincent colliot
 ** Login   <collio_v@epitech.net>
 **
-** Started on  Thu May  2 20:20:16 2013 vincent colliot
-** Last update Fri May  3 01:13:43 2013 vincent colliot
+** Started on  Thu May  2 22:25:44 2013 vincent colliot
+** Last update Thu May  9 22:57:01 2013 vincent colliot
 */
 
-static FLAG match_them(char *word)
+#include "orga.h"
+#include "lexec.h"
+#include "bool.h"
+#include "string.h"
+#include "xmalloc.h"
+#include "error.h"
+
+static FLAG match_these(char *word)
 {
-  if (MATCH("||", word))
-    return (OR);
-  if (MATCH("&&", word))
-    return (AND);
+  if (MATCH(";", word))
+    return (NONE);
+  if (MATCH("&", word))
+    return (JOBS);
   return (0);
 }
 
@@ -23,37 +30,42 @@ static FLAG	match_end(t_get **words, char **bad_sintax)
   t_get *link;
 
   link = *words;
-  if (match_them(word))
+  if (match_these(link->word))
     {
-      bad_sintax = my_strcat(WRONG_SEP_TOKEN, word);
+      *bad_sintax = my_strcat(WRONG_SEP_TOKEN, link->word);
       return (FALSE);
     }
   while (link)
     {
       if (lvl_parents(&link, bad_sintax) == FALSE)
 	return (FALSE);
-      if ((r = match_them(link->word)))
+      *words = link;
+      if (!link)
+	return (NONE);
+      if ((r = match_these(link->word)))
 	return (r);
       link = link->next;
       *words = link;
     }
-  return (NEXT);
+  return (NONE);
 }
 
-static void     *word_nullify(t_get *words)
+static void     *word_nullify(t_get *word)
 {
   t_get *next;
 
-  while (word)
+  next = word;
+  while (next)
     {
       next = word->next;
+      free(word->word);
       free(word);
       word = next;
     }
   return (NULL);
 }
 
-static void	*nullify(t_pipes *link)
+static void	*nullify(t_jobs *link)
 {
   t_get *next;
   t_get	*word;
@@ -62,6 +74,7 @@ static void	*nullify(t_pipes *link)
   while (word)
     {
       next = word->next;
+      free(word->word);
       free(word);
       word = next;
     }
@@ -69,9 +82,9 @@ static void	*nullify(t_pipes *link)
   return (NULL);
 }
 
-t_exec *get_exec(t_get *words, t_exec *prev, char **bad_sintax)
+t_jobs *get_jobs(t_get *words, t_jobs *prev, char **bad_sintax)
 {
-  t_exec *link;
+  t_jobs *link;
 
   if (!words)
     return (prev);
@@ -91,8 +104,8 @@ t_exec *get_exec(t_get *words, t_exec *prev, char **bad_sintax)
   link->next = NULL;
   if (!words)
     return (link);
-  if (get_exec(words->next, link) == NULL)
+  if (get_jobs(words->next, link, bad_sintax) == NULL)
     return (nullify(link));
-  free(words);
+  rm_words(words);
   return (link);
 }

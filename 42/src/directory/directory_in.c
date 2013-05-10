@@ -5,42 +5,28 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May  5 13:18:32 2013 vincent colliot
-** Last update Wed May  8 02:38:40 2013 vincent colliot
+** Last update Thu May  9 01:03:18 2013 vincent colliot
 */
 
 
-BOOL	in_directory(char *dir, char *word)
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <dirent.h>
+#include "string.h"
+#include "bool.h"
+#include "env.h"
+
+BOOL	in_directory(char *ndir, char *word)
 {
   struct dirent	*fchr;
   DIR		*dir;
 
-  if ((dir = opendir(dir)) == NULL)
+  if ((dir = opendir(ndir)) == NULL)
     return (FALSE);
   while ((fchr = readdir(dir)) != NULL)
     if (MATCH(fchr->d_name, word))
       {
-	closedir(dir);
-	return (TRUE);
-      }
-  closedir(dir);
-  return (FALSE);
-}
-
-/*
-**ça match que le premier mais bon je vais en faire un mieux après
-*/
-BOOL	match_directory(char *dir, char *word, char **true_word)
-{
-  struct dirent	*fchr;
-  DIR		*dir;
-
-  if ((dir = opendir()) == NULL)
-    return (FALSE);
-  while ((fchr = readdir(dir)) != NULL)
-    if (match(fchr->d_name, word))
-      {
-	if (true_word)
-	  *true_word = my_strndup(fchr->d_name);
 	closedir(dir);
 	return (TRUE);
       }
