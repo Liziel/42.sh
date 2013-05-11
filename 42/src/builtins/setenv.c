@@ -5,42 +5,44 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 15:05:03 2013 thomas lecorre
-** Last update Fri May 10 18:19:38 2013 thomas lecorre
+** Last update Sun May 12 00:59:29 2013 vincent colliot
 */
 
 #include <stdlib.h>
+#include "bool.h"
 #include "string.h"
 #include "env.h"
 #include "built.h"
 
-int	setenv(t_words *cmd, void *alias);
+int	setenv(t_words *cmd, void *bool);
 {
   char	*line;
   char	**tab;
   int	i;
 
   if (cmd->next == NULL)
-    env(cmd, alias);
+    env(cmd, alias);//env_cmd non?
   cmd = cmd->next;
-  else if (cmd->next)
+  if (cmd->next)
     line = my_stricat(cmd->word, cmd->next->word, '=');
   else
     line = my_strcat(cmd->word, "=");
   i = -1;
-  while (environ[++i] != NULL)
+  while (environ[++i] != NULL)//awww je suis pas super fan..suffit que leur compilo soit diff de notre gcc et c'est mal interpéter == segfault
     if ((NMATCH(cmd->word, environ[i])) == 1)
       {
 	free(environ[i]);
 	environ[i] = line;
 	return (EXIT_SUCCES);
       }
-  if ((tab = malloc(sizeof(char *) * (i + 2))) == NULL)
-    return (EXIT_FAILURE);
+  if ((tab = xmalloc(sizeof(char *) * (i + 2))) == NULL)
+    return (EXIT_FAILURE + ((BOOL)(*bool) = SYS_FAIL));
   tab[i + 1] = NULL;
   i = -1;
   while (environ[++i] != NULL)
     tab[i] = environ[i];
   tab[i] = line;
+  free(environ); //maintenant tu peut car c'es toi qui l'as créé!
   environ = tab;
   return (EXIT_SUCCES);
 }

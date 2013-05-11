@@ -5,11 +5,13 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May  3 17:56:18 2013 thomas lecorre
-** Last update Fri May 10 15:38:00 2013 thomas lecorre
+** Last update Sun May 12 00:50:17 2013 vincent colliot
 */
 
 #include "built.h"
-
+/*
+**niquel! euh par contre et pour env_cmd?
+**/
 void	init_built(t_call built[5])
 {
   (built[0]).name = my_strdup("cd");

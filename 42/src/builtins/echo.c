@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May  6 20:49:09 2013 vincent colliot
-** Last update Fri May 10 18:58:21 2013 thomas lecorre
+** Last update Sun May 12 01:04:49 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -13,6 +13,9 @@
 #include "env.h"
 #include "built.h"
 
+/*
+**compte tu utilisé malloc dans les modif' prochaine de ton echo?
+*/
 int	echo(t_words *cmd, void *alias)
 {
   if (cmd->next == NULL)
