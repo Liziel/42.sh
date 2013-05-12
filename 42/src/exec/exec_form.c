@@ -1,14 +1,81 @@
+/*
+** exec_form.c for  in /home/collio_v/rendu_svn/42.sh/42
+**
+** Made by vincent colliot
+** Login   <collio_v@epitech.net>
+**
+** Started on  Sun May 12 01:40:28 2013 vincent colliot
+** Last update Sun May 12 18:34:39 2013 vincent colliot
+*/
+
 #include	<stdlib.h>
 #include	"lexec.h"
 
-int		exec_form(t_words *list, char *av[])
+static size_t	size_list(t_words *list)
+{
+  size_t	i;
+
+  i = 0;
+  while (list)
+    {
+      i++;
+      list = list->next;
+    }
+  return (i);
+}
+
+static char	**to_tab(t_words *list, BOOL *sys_fail)
 {
   char		**tab;
+  t_words	*p;
+  size_t	i;
 
-  tab = xmalloc(sizeof(char *) * 2);
-  tab[0] = list->word;
-  tab[1] = NULL;
-  if (execve(tab[0], av, environ) == -1)
-    return (1);
-  return (0);
+  i = len_list(list);
+  if ((tab = xmalloc(sizeof(*tab) * (i + 1))) == NULL)
+    return (EXIT_FAILURE + ((*sys_fail) = FALSE));
+  i = 0;
+  while (list)
+    {
+      tab[i] = list->word;
+      list = list->next;
+    }
+  return (tab):
+}
+
+static void	clean_signal(STATUS signal)
+{
+  if (signal == SIGILL)
+    my_putstr("Illegal instruction\n");
+  else if (signal == SIGABRT)
+    my_putstr("Aborted\n");
+  else if (signal == SIGFPE)
+    my_putstr("Floating exeception\n");
+  else if (signal == SIGSEGV)
+    my_putstr("Segmentation fault\n");
+  else if (signal == SIGPIPE)
+    my_putstr("Broken Pipe\n");
+  else if (signal == SIGTERM)
+    my_putstr("Terminated\n");
+  else if (signal == SIGINT)
+    my_putchar('\n');
+}
+
+STATUS		exec_form(t_words *list, BOOL *sys_fail)
+{
+  STATUS	st;
+  pid_t		pid;
+  char		**tab;
+
+  if ((tab = to_tab(list, sys_fail)) == NULL)
+    return (EXIT_FAILURE + ((*sys_fail) = FALSE));
+  if ((pid = fork()) == -1)
+    return (EXIT_FAILURE + ((*sys_fail) = FALSE));
+  if (pid)
+    waitpid(pid, &st, 0);
+  else
+  if (execve(tab[0], tab, environ) == -1)
+    return (EXIT_FAILURE + ((*sys_fail) = FALSE));
+  clean_signal(st);
+  free(tab);
+  return (st);
 }

@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 15:05:03 2013 thomas lecorre
-** Last update Sun May 12 00:59:29 2013 vincent colliot
+** Last update Sun May 12 01:11:55 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -27,20 +27,20 @@ int	setenv(t_words *cmd, void *bool);
     line = my_stricat(cmd->word, cmd->next->word, '=');
   else
     line = my_strcat(cmd->word, "=");
-  i = -1;
-  while (environ[++i] != NULL)//awww je suis pas super fan..suffit que leur compilo soit diff de notre gcc et c'est mal interpéter == segfault
-    if ((NMATCH(cmd->word, environ[i])) == 1)
-      {
-	free(environ[i]);
-	environ[i] = line;
-	return (EXIT_SUCCES);
-      }
+  if ((i = -(environ != NULL)))
+    while (environ[++i] != NULL)//awww je suis pas super fan..suffit que leur compilo soit diff de notre gcc et c'est mal interpéter == segfault
+      if ((NMATCH(cmd->word, environ[i])) == 1)
+	{
+	  free(environ[i]);
+	  environ[i] = line;
+	  return (EXIT_SUCCES);
+	}
   if ((tab = xmalloc(sizeof(char *) * (i + 2))) == NULL)
-    return (EXIT_FAILURE + ((BOOL)(*bool) = SYS_FAIL));
+    return (EXIT_FAILURE);
   tab[i + 1] = NULL;
-  i = -1;
-  while (environ[++i] != NULL)
-    tab[i] = environ[i];
+  if ((i = -(environ != NULL)))
+    while (environ[++i] != NULL)
+      tab[i] = environ[i];
   tab[i] = line;
   free(environ); //maintenant tu peut car c'es toi qui l'as créé!
   environ = tab;

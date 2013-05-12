@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May  4 12:44:30 2013 vincent colliot
-** Last update Fri May 10 13:04:26 2013 vincent colliot
+** Last update Sun May 12 19:52:44 2013 vincent colliot
 */
 
 #ifndef ERROR_H_
@@ -18,5 +18,9 @@
 # define UNKNOW_CMD "(sh): command not found : "
 # define WRONG_SEP_TOKEN "(sh): sintax error neat unexpected token `"
 # define WRONG_REDIR "(sh): wrong redirection"
+# define ERROR_IN_REDIR "(sh): unexpected EOS after redirection"
+# define FILE_ERROR "(sh): no such file: "
+# define IS_DIR_ERROR1 "(sh):error : "
+# define IS_DIR_ERROR2 " : is a directory"
 
 #endif

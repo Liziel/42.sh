@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Wed May  8 01:48:11 2013 vincent colliot
-** Last update Thu May  9 20:58:35 2013 vincent colliot
+** Last update Sun May 12 21:42:03 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -65,6 +65,15 @@ static BOOL	is_dir(char *dp)
   return (FALSE);
 }
 
+static BOOL	cond(struct dirent *fchr, char *m)
+{
+  if (nmatch(fchr->d_name, m, my_strilen(m, '/'))
+      && (!(MATCH(fchr->d_name, ".") || MATCH(fchr->d_name, ".."))
+	  || !IN('/', m)))
+    return (TRUE);
+  return (FALSE);
+}
+
 BOOL	match_them(char *m, char *dp, t_words **last, BOOL *no_match)
 {
   char		*f_dp;
@@ -78,10 +87,11 @@ BOOL	match_them(char *m, char *dp, t_words **last, BOOL *no_match)
   else
     dir = opendir(".");
   while ((fchr = readdir(dir)) != NULL)
-    if (((fchr->d_name)[0] == '.' && m[0] == '.') || (fchr->d_name)[0] != '.')
-      if (nmatch(fchr->d_name, m, my_strilen(m, '/')))
+    if (((fchr->d_name)[0] == '.' && m[0] == '.') || ((fchr->d_name)[0] != '.'
+						      && m[0] != '.'))
+      if (cond(fchr, m))
 	{
-	  if ((f_dp = my_stricat(dp, fchr->d_name, '/')) == NULL)
+	  if ((f_dp = my_stricat(dp, fchr->d_name, '/' * (dp != NULL))) == NULL)
 	    return (FALSE);
 	  else if ((IN('/', m) && is_dir(f_dp)) || !IN('/', m))
 	    if (match_them(m + my_strilen(m, '/') + (IN('/', m)), f_dp, last,

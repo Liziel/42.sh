@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 17:03:04 2013 thomas lecorre
-** Last update Fri May 10 17:45:46 2013 thomas lecorre
+** Last update Sun May 12 01:27:42 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -15,6 +15,7 @@
 
 int	unsetenv(t_words *cmd, void *alias)
 {
+  int	lexit;
   int	i;
   int	n;
   char	**tab;
@@ -25,27 +26,40 @@ int	unsetenv(t_words *cmd, void *alias)
       my_putstr("unsetenv: Too few arguments.\n");
       return (EXIT_FAILURE);
     }
+  if (environ == NULL)
+    return (EXIT_FAILURE);
+  lexit = EXIT_SUCCESS;
   cmd = cmd->next;
   while (cmd != NULL)
     {
-      i = -1;
-      while (environ[++i] != NULL)
+      i = 0;
+      while (environ[i] != NULL)
 	{
-	  if (cmd->word && (NMATCH(cmd->word, environ[i])) == 1)
-	    {
-	      free(environ[i]);
-	      n++;
-	    }
+	  if (cmd->word && NMATCH(cmd->word, environ[i]))
+	    if ((environ[i])[my_strlen(cmd->word)] == '=')
+	      {
+		free(environ[i]);
+		environ[i] = NULL;
+		n++;
+	      }
+	  i++;
 	}
-      cmd = cmd->next;
+      if (environ == NULL)
+	lexit = EXIT_FAILURE;
+	cmd = cmd->next;
     }
   if ((tab = malloc(sizeof(char *) * (i - n + 1))) == NULL)
     return (EXIT_FAILURE);
   tab[i - n] = NULL;
-  i = -1;
-  while (environ[++i] != NULL)
-    if (environ[i])
-      tab[i] = environ[i];
+  n = (i = 0);
+  while (environ[i] != NULL)
+    {
+      if (environ[i])
+	tab[n++] = environ[i];
+      i++;
+    }
+  tab[n] = NULL;
+  free(environ);
   environ = tab;
   return (EXIT_SUCCES);
 }

@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:58:16 2013 vincent colliot
-** Last update Fri May 10 16:24:26 2013 vincent colliot
+** Last update Sun May 12 01:38:11 2013 vincent colliot
 */
 
 static void	init_pipe(FD w[2], FD pi[3], FD h)
@@ -17,7 +17,7 @@ static void	init_pipe(FD w[2], FD pi[3], FD h)
 /*
 **bon elle est pas tellement a la norme...mais ce sera vrai sous peu
 */
-static BOOL	exec_pipes(t_pipes *p, int *st, BOOL son, FD pi[3])
+static BOOL	exec_pipes(t_pipes *p, t_info *info, BOOL son, FD pi[3])
 {
   int	status_quo;
   pid_t pid;
@@ -34,17 +34,19 @@ static BOOL	exec_pipes(t_pipes *p, int *st, BOOL son, FD pi[3])
   if (!pid)
     {
       init_pipe(w, pi, W_IN);
-      exec_pipes(p->next, st, TRUE, pi);
+      exec_pipes(p->next, info, TRUE, pi);
       return (FALSE);
     }
   if (p->next)
     init_pipe(w, pi, W_OUT);
-  if (exec_cmd(p->cmd, st, son, pi) == FALSE)
+  if (exec_cmd(p->cmd, info, son, pi))
     return (FALSE);
-  if (*st == EXIT_FAILURE || pid < 0)
-    return (*st);
+  if (pid < 0)
+    return (exit->sys_fail == FALSE);
   waitpid(pid, &status_quo, 0);
-  return ((*st = WEXITSTATUS(status_quo)));
+  if (WEXITSTATUS(status_quo) == EXIT_FAILURE)
+    info->st = EXIT_FAILURE;
+  return (exit->sys_fail == FALSE);
 }
 
 static void to_fd(FD w[3])
@@ -61,7 +63,7 @@ static void fd_to(FD w[3])
   dup2(w[W_ERR], W_OUT);
 }
 
-static BOOL	and_or(t_exec *e, int *st)
+static BOOL	and_or(t_exec *e, t_info *info)
 {
   FD	p[3];
   FD	w[3];
@@ -72,20 +74,24 @@ static BOOL	and_or(t_exec *e, int *st)
   p[W_IN] = W_IN;
   p[W_OUT] = W_OUT;
   p[W_ERR] = W_ERR;
-  if (exec_pipes(e->pipes, st, FALSE, p) == FALSE)
+  if (exec_pipes(e->pipes, info, FALSE, p) == FALSE)
     return (FALSE);
   fd_to(w);
-  if (e->type = OR && *st == EXIT_FAILURE)
-    return (and_or(e->next, st));
-  if (e->type = AND && *st == EXIT_SUCCESS)
-    return (and_or(e->next, st));
+  if (e->type = OR && info->st == EXIT_FAILURE)
+    return (and_or(e->next, info));
+  if (e->type = AND && info->st == EXIT_SUCCESS)
+    return (and_or(e->next, info));
 }
 
-BOOL	pré_exec(t_jobs *j, int *st)
+BOOL	pré_exec(t_jobs *j, t_info *info)
 {
+  t_jobs *next;
+
   if (!j)
     return (TRUE);
   if (and_or(j->exec) == FALSE)
     return (FALSE);
+  next = j->next;
+  nullify_jobs(j, 0);
   return (pré_exec(j->next, st));
 }
