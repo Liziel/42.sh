@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Fri Apr 26 14:36:25 2013 pierre-yves thomas
-** Last update Mon May 13 14:00:28 2013 pierre-yves thomas
+** Last update Mon May 13 14:02:15 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
@@ -50,18 +50,18 @@ char		*usr_cmd(int fd, t_options options)
   int		history_pl;
 
   if (init_values(&history_pl, &reverse_case, &str, &cmd) == -1)
-    return (free_str_edit_lines(s1, s2, reverse_case));
+    return (free_str_edit_lines(str, cmd, reverse_case));
   reverse_case[1] = fd
   show_cmd(str[0], cmd, reverse_case, options);
   while (str[0] != 10 || str[1] != 0 || str[2] != 0)
     {
       str = memset(str, 0, 5);
       if (read(fd, str, 4) <= 0 || str[0] == 4)
-	return (free_str_edit_lines(s1, s2, reverse_case));
+	return (free_str_edit_lines(cmd, str, reverse_case));
       modif_cmd(&cmd, str, &reverse_case[0], options);
       show_cmd(str[0], cmd, reverse_case, options);
     }
   my_putstr(1, "\n");
-  free_str_edit_lines(s1, s2, reverse_case);
+  free_str_edit_lines(str, NULL, reverse_case);
   return (cmd);
 }
