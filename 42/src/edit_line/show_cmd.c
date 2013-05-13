@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Mon May  6 17:57:14 2013 pierre-yves thomas
-** Last update Mon May 13 13:41:01 2013 pierre-yves thomas
+** Last update Mon May 13 13:56:27 2013 pierre-yves thomas
 */
 
 #include <unistd.h>
@@ -27,7 +27,7 @@ void	show_cmd(char key, char *cmd, int *rev_c, t_options options)
   int	i;
 
   i = -1;
-  my_putstr(1, "\r");
+  my_putstr(1, "\r>");
   if (key != 10)
     my_putstr(rev_c[1], options.clean_end);
   while (cmd[++i] != '\0')

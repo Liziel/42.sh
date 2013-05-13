@@ -5,13 +5,24 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Fri Apr 26 14:36:25 2013 pierre-yves thomas
-** Last update Mon May 13 13:36:48 2013 pierre-yves thomas
+** Last update Mon May 13 14:00:28 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include "edit_line.h"
+
+static char     *free_str_edit_lines(char *s1, char *s2, int *rev_c)
+{
+  if (s1 != NULL)
+    free(s1);
+  if (s2 != NULL)
+    free(s2);
+  if (rev_c != NULL)
+    free(rev_c);
+  return (NULL);
+}
 
 int		init_values(int *history_pl, int **rev_c,
 			    char **str, char **cmd)
@@ -39,18 +50,18 @@ char		*usr_cmd(int fd, t_options options)
   int		history_pl;
 
   if (init_values(&history_pl, &reverse_case, &str, &cmd) == -1)
-    return (NULL);
+    return (free_str_edit_lines(s1, s2, reverse_case));
   reverse_case[1] = fd
   show_cmd(str[0], cmd, reverse_case, options);
   while (str[0] != 10 || str[1] != 0 || str[2] != 0)
     {
       str = memset(str, 0, 5);
       if (read(fd, str, 4) <= 0 || str[0] == 4)
-	return (NULL);
+	return (free_str_edit_lines(s1, s2, reverse_case));
       modif_cmd(&cmd, str, &reverse_case[0], options);
       show_cmd(str[0], cmd, reverse_case, options);
     }
   my_putstr(1, "\n");
-  free(str);
+  free_str_edit_lines(s1, s2, reverse_case);
   return (cmd);
 }
