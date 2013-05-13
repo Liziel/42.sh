@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 16:04:18 2013 vincent colliot
-** Last update Mon May 13 13:13:56 2013 vincent colliot
+** Last update Mon May 13 14:39:16 2013 vincent colliot
 */
 
 static BOOL	set_redir(t_redir *r, FD w[3], t_info *info)
@@ -16,6 +16,12 @@ static BOOL	set_redir(t_redir *r, FD w[3], t_info *info)
   dup2(W[W_OUT], W_OUT);
   dup2(W[W_ERR], W_ERR);
   return (TRUE);
+}
+
+static BOOL	exec_built_in(t_cmd *cmd, t_info *info)
+{
+  return (FALSE);
+  //sera changé losque les builts-in seront finies
 }
 
 BOOL		exec_cmd(t_cmd *cmd, t_info *info, BOOL son, FD w[3])
