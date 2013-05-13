@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 15:05:03 2013 thomas lecorre
-** Last update Sun May 12 01:11:55 2013 vincent colliot
+** Last update Mon May 13 15:49:05 2013 thomas lecorre
 */
 
 #include <stdlib.h>
@@ -21,7 +21,7 @@ int	setenv(t_words *cmd, void *bool);
   int	i;
 
   if (cmd->next == NULL)
-    env(cmd, alias);//env_cmd non?
+    env_cmd(cmd, alias);//env_cmd non?
   cmd = cmd->next;
   if (cmd->next)
     line = my_stricat(cmd->word, cmd->next->word, '=');
