@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 22:15:18 2013 vincent colliot
-** Last update Mon May 13 00:39:03 2013 vincent colliot
+** Last update Mon May 13 13:14:21 2013 vincent colliot
 */
 
 void	rleft(t_redir *w, FD w[3])
@@ -41,7 +41,7 @@ static void	rdright(t_redir *w, FD w[3])
 		 | S_IRGRP | S_IROTH);
 }
 
-BOOL	calque_redir(t_redir *r, FD w[3])
+BOOL	calque_redir(t_redir *r, FD w[3], t_info *info)
 {
   if (!r)
     return ;
@@ -49,7 +49,7 @@ BOOL	calque_redir(t_redir *r, FD w[3])
     rleft(r, w);
   else if (r->redir == DLEFT)
     {
-      if (rdleft(r, w) == FALSE)
+      if (rdleft(r, w, info) == FALSE)
 	return (FALSE);
     }
   else if (r->redir == RIGHT)

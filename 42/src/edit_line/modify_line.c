@@ -5,13 +5,12 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Mon May  6 17:44:08 2013 pierre-yves thomas
-** Last update Wed May  8 16:23:52 2013 pierre-yves thomas
+** Last update Mon May 13 13:20:05 2013 pierre-yves thomas
 */
 
 #include <string.h>
 #include <stdlib.h>
-#include "lib.h"
-#include "shell.h"
+#include "edit_line.h"
 
 void    move_reverse_case(char value, int *reverse_case, char *cmd)
 {
@@ -66,11 +65,6 @@ void            modif_cmd(char **cmd, char *str,
     move_reverse_case(str[2], reverse_case, *cmd);
   else if (str[0] == 127 && str[1] == 0)
     del_letter_in_str(reverse_case, cmd);
-  else if (str[0] == 12)
-    {
-      my_putstr(1, options.clear);
-      show_prompt();
-    }
   else if (str[0] == 1)
     (*reverse_case) = 0;
   else if (str[0] == 5)

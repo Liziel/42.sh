@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Fri May 10 13:00:24 2013 vincent colliot
+## Last update Mon May 13 13:44:32 2013 pierre-yves thomas
 ##
 
 NAME    = 42.sh
@@ -38,6 +38,12 @@ ENV	=$(ENVF)get_env.c\
 
 DIRF	=$(SRCF)directory/
 DIR	=$(DIRF)directory_in.c
+
+EDITF	=$(SRCF)edit_line/
+EDIT	=$(EDITF)edit_line.c\
+	$(EDITF)load_term_settings.c\
+	$(EDITF)modify_line.c\
+	$(EDITF)show_cmd.c\
 
 ###### Parsing #########
 
@@ -79,6 +85,7 @@ SRC     =$(MAIN)\
 	$(XMALLOC)\
 	$(ORGA)\
 	$(ENV)\
+	$(EDIT)\
 	$(DIR)\
 	$(NULL)\
 

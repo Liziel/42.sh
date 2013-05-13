@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:58:16 2013 vincent colliot
-** Last update Sun May 12 22:11:19 2013 vincent colliot
+** Last update Mon May 13 02:23:31 2013 vincent colliot
 */
 
 static void	init_pipe(FD w[2], FD pi[3], FD h)
@@ -26,7 +26,7 @@ static BOOL	exec_pipes(t_pipes *p, t_info *info, BOOL son, FD pi[3])
   pid = -1;
   if (p->next)
     {
-      if ((pid = fork()) < 0)
+      if ((pid = xfork()) < 0)
 	return (FALSE);
       if (pipe(w) == -1)
 	return (FALSE);

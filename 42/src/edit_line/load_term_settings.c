@@ -5,12 +5,11 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Fri Apr 26 14:32:24 2013 pierre-yves thomas
-** Last update Tue May  7 11:15:32 2013 pierre-yves thomas
+** Last update Mon May 13 13:42:03 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
-#include "termcap.h"
-#include "lib.h"
+#include "edit_line.h"
 
 void    attribute_options(t_options *options)
 {
@@ -21,8 +20,6 @@ void    attribute_options(t_options *options)
   options->cursor = tgetstr("cm", NULL);
   options->invi_cursor = tgetstr("vi", NULL);
   options->visi_cursor = tgetstr("ve", NULL);
-  options->save_pos_cursor = tgetstr("sc", NULL);
-  options->restore_to_pos_cursor = tgetstr("rc", NULL);
 }
 
 int     modify_terminal(struct termios *opt)

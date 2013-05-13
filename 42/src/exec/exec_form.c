@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 01:40:28 2013 vincent colliot
-** Last update Sun May 12 18:34:39 2013 vincent colliot
+** Last update Mon May 13 14:28:26 2013 vincent colliot
 */
 
 #include	<stdlib.h>
@@ -67,14 +67,14 @@ STATUS		exec_form(t_words *list, BOOL *sys_fail)
   char		**tab;
 
   if ((tab = to_tab(list, sys_fail)) == NULL)
-    return (EXIT_FAILURE + ((*sys_fail) = FALSE));
+    return (EXIT_FAILURE + !((*sys_fail) = TRUE));
   if ((pid = fork()) == -1)
-    return (EXIT_FAILURE + ((*sys_fail) = FALSE));
+    return (EXIT_FAILURE + !((*sys_fail) = TRUE));
   if (pid)
     waitpid(pid, &st, 0);
   else
   if (execve(tab[0], tab, environ) == -1)
-    return (EXIT_FAILURE + ((*sys_fail) = FALSE));
+    return (EXIT_FAILURE + !((*sys_fail) = TRUE));
   clean_signal(st);
   free(tab);
   return (st);
