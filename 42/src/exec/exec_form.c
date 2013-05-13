@@ -5,15 +5,19 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 01:40:28 2013 vincent colliot
-** Last update Mon May 13 15:44:06 2013 vincent colliot
+** Last update Tue May 14 01:02:57 2013 vincent colliot
 */
 
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <signal.h>
 #include <stdlib.h>
 #include "lexec.h"
 #include "xmalloc.h"
 #include "status.h"
 #include "string.h"
+#include "env.h"
 
 static size_t	size_list(t_words *list)
 {
@@ -31,37 +35,39 @@ static size_t	size_list(t_words *list)
 static char	**to_tab(t_words *list, BOOL *sys_fail)
 {
   char		**tab;
-  t_words	*p;
   size_t	i;
 
   i = size_list(list);
   if ((tab = xmalloc(sizeof(*tab) * (i + 1))) == NULL)
-    return (EXIT_FAILURE + ((*sys_fail) = FALSE));
+    {
+      (*sys_fail) = TRUE;
+      return (NULL);
+    }
   i = 0;
   while (list)
     {
       tab[i] = list->word;
       list = list->next;
     }
-  return (tab):
+  return (tab);
 }
 
 static void	clean_signal(STATUS signal)
 {
   if (signal == SIGILL)
-    my_putstr("Illegal instruction\n");
+    my_putstr("Illegal instruction\n", 2);
   else if (signal == SIGABRT)
-    my_putstr("Aborted\n");
+    my_putstr("Aborted\n", 2);
   else if (signal == SIGFPE)
-    my_putstr("Floating exeception\n");
+    my_putstr("Floating exeception\n", 2);
   else if (signal == SIGSEGV)
-    my_putstr("Segmentation fault\n");
+    my_putstr("Segmentation fault\n", 2);
   else if (signal == SIGPIPE)
-    my_putstr("Broken Pipe\n");
+    my_putstr("Broken Pipe\n", 2);
   else if (signal == SIGTERM)
-    my_putstr("Terminated\n");
+    my_putstr("Terminated\n", 2);
   else if (signal == SIGINT)
-    my_putchar('\n');
+    my_putstr("\n", 2);
 }
 
 STATUS		exec_form(t_words *list, BOOL *sys_fail)

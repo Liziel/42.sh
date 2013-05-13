@@ -1,15 +1,16 @@
 /*
 ** load_term_settings.c for 42 in /home/thomas_1//Projets/42sh
-** 
+**
 ** Made by pierre-yves thomas
 ** Login   <thomas_1@epitech.net>
-** 
+**
 ** Started on  Fri Apr 26 14:32:24 2013 pierre-yves thomas
-** Last update Mon May 13 13:42:03 2013 pierre-yves thomas
+** Last update Tue May 14 01:14:27 2013 vincent colliot
 */
 
 #include <stdlib.h>
 #include "edit_line.h"
+#include "string.h"
 
 void    attribute_options(t_options *options)
 {
@@ -35,12 +36,12 @@ int	load_tgets_funcs(struct termios *opt)
 {
   if (tcgetattr(0, opt) == -1)
     {
-      my_putstr(2, "Fail on tcgetattr");
+      print_err("Fail on tcgetattr");
       return (-1);
     }
   if (tgetent(NULL, NULL) != 1)
     {
-      my_putstr(2, "Fail on tgetent");
+      print_err("Fail on tgetent");
       return (-1);
     }
   return (0);

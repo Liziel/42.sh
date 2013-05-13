@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  2 22:05:00 2013 vincent colliot
-** Last update Mon May 13 01:44:02 2013 vincent colliot
+** Last update Tue May 14 01:06:09 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -22,7 +22,6 @@ static t_cmd	*nullify_link(t_cmd *cmd)
 
 static t_cmd	*make_cmd(t_get *words, char **bad_sintax)
 {
-  BOOL		is_redir;
   t_cmd		*link;
 
   if (!words)
@@ -32,15 +31,11 @@ static t_cmd	*make_cmd(t_get *words, char **bad_sintax)
   link->redir = NULL;
   link->params = NULL;
   link->parents = NULL;
-  is_redir = FALSE;
   if (!cmd_part(words, &words, link, bad_sintax))
     {
       nullify_redir(link->redir);
       return (nullify_link(link));
     }
-  /* if ((link->redir = redir_part(words, NULL, bad_sintax, &is_redir)) == NULL) */
-  /*   if (is_redir) */
-  /*     return (nullify_link(link, words, 0)); */
   return (link);
 }
 

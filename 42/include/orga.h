@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Wed May  8 23:28:36 2013 vincent colliot
-** Last update Mon May 13 15:45:53 2013 vincent colliot
+** Last update Tue May 14 01:05:43 2013 vincent colliot
 */
 
 #ifndef ORGA_H_
@@ -31,6 +31,9 @@ BOOL	cmd_part(t_get*, t_get**, t_cmd*, char**);
 t_words	*interpret_cmd(t_get*, t_get**, char**, t_words**);
 t_words	*interpret_params(t_get*, t_get**, char**, t_words**);
 
+/* redir */
+t_redir	*redir_part(t_get*, t_get**, char**);
+
 /* help */
 BOOL    lvl_parents(t_get**, char**);
 BOOL	match_parents(t_get**, char**);
@@ -40,12 +43,13 @@ BOOL	match_them(char*, char*, t_words**, BOOL*);
 BOOL    nullify_cmd(t_cmd *);
 BOOL	nullify_exec(t_exec*);
 BOOL	nullify_pipes(t_pipes*);
-BOOL    nullify_words(t_get *);
-BOOL    nullify_jobs(t_jobs *, BOOL);
-BOOL	nullify_all_pipes(t_pipes *);
+BOOL    nullify_words(t_get*);
+BOOL nullify_redir(t_redir*);
+BOOL    nullify_jobs(t_jobs*, BOOL);
+BOOL	nullify_all_pipes(t_pipes*);
 BOOL	nullify_all_in_pipes(t_pipes*);
-BOOL	nullify_all_exec(t_exec *);
-void	*nullify_all_jobs(t_jobs *);
+BOOL	nullify_all_exec(t_exec*);
+void	*nullify_all_jobs(t_jobs*);
 void	rm_words(t_get*);
 
 #endif

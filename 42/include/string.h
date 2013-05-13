@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 20:25:19 2013 vincent colliot
-** Last update Mon May 13 15:45:10 2013 vincent colliot
+** Last update Tue May 14 01:23:49 2013 vincent colliot
 */
 
 #ifndef STRING_H_
@@ -56,7 +56,11 @@ size_t	last_occur(const char*, char, char);
 
 	/* s_print */
 size_t	print_err(const char*);
-size_t	my_putpath(const char *s, FD out);
-size_t	my_putstr(const char *s, const char *out);
+size_t	my_putstr(const char *s, FD out);
+size_t	my_putpath(const char *s, const char *out);
+
+	/* s_memset */
+void	*my_memset(void*, int, size_t);
+void	*my_realloc(void*, size_t, size_t);
 
 #endif

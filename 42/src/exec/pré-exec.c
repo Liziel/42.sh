@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:58:16 2013 vincent colliot
-** Last update Mon May 13 02:23:31 2013 vincent colliot
+** Last update Tue May 14 00:52:50 2013 vincent colliot
 */
 
 static void	init_pipe(FD w[2], FD pi[3], FD h)
@@ -83,7 +83,7 @@ static BOOL	and_or(t_exec *e, t_info *info)
     return (and_or(e->next, info));
 }
 
-BOOL	pré_exec(t_jobs *j, t_info *info)
+BOOL	pre_exec(t_jobs *j, t_info *info)
 {
   t_jobs *next;
 

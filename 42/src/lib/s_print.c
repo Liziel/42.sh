@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Tue Apr 30 15:59:03 2013 vincent colliot
-** Last update Mon May 13 14:47:07 2013 vincent colliot
+** Last update Tue May 14 00:57:34 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -15,7 +15,7 @@
 #include "string.h"
 #include "fd.h"
 
-size_t	my_putpath(const char *s, FD out)
+size_t	my_putstr(const char *s, FD out)
 {
   size_t	i;
 
@@ -26,7 +26,7 @@ size_t	my_putpath(const char *s, FD out)
   return (i);
 }
 
-size_t	my_putstr(const char *s, const char *out)
+size_t	my_putpath(const char *s, const char *out)
 {
   FD		f;
   size_t	i;
