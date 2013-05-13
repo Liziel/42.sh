@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:58:16 2013 vincent colliot
-** Last update Sun May 12 01:38:11 2013 vincent colliot
+** Last update Sun May 12 22:11:19 2013 vincent colliot
 */
 
 static void	init_pipe(FD w[2], FD pi[3], FD h)
@@ -15,13 +15,13 @@ static void	init_pipe(FD w[2], FD pi[3], FD h)
 }
 
 /*
-**bon elle est pas tellement a la norme...mais ce sera vrai sous peu
+**bon elle est pas tellement a la norme...mais ce sera vrai sous peu FAUX
 */
 static BOOL	exec_pipes(t_pipes *p, t_info *info, BOOL son, FD pi[3])
 {
-  int	status_quo;
-  pid_t pid;
-  FD	w[2];
+  STATUS	status_quo;
+  pid_t		pid;
+  FD		w[2];
 
   pid = -1;
   if (p->next)

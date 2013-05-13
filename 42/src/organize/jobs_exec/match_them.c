@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Wed May  8 01:48:11 2013 vincent colliot
-** Last update Sun May 12 21:42:03 2013 vincent colliot
+** Last update Sun May 12 23:07:53 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -74,13 +74,21 @@ static BOOL	cond(struct dirent *fchr, char *m)
   return (FALSE);
 }
 
+static BOOL	cond2(char *m, char *f_dp)
+{
+  if ((IN('/', m) && is_dir(f_dp)) || !IN('/', m))
+    return (TRUE);
+  free(f_dp);
+  return (FALSE);
+}
+
 BOOL	match_them(char *m, char *dp, t_words **last, BOOL *no_match)
 {
   char		*f_dp;
   struct dirent	*fchr;
   DIR	*dir;
 
-  if (!m[0] || !(IN('*', m)))
+  if (!m[0] || (!(IN('*', m)) && !dp))
     return (add_and_last(m, dp, last, no_match));
   if (dp)
     dir = opendir(dp);
@@ -93,7 +101,7 @@ BOOL	match_them(char *m, char *dp, t_words **last, BOOL *no_match)
 	{
 	  if ((f_dp = my_stricat(dp, fchr->d_name, '/' * (dp != NULL))) == NULL)
 	    return (FALSE);
-	  else if ((IN('/', m) && is_dir(f_dp)) || !IN('/', m))
+	  else if (cond2(m, f_dp))
 	    if (match_them(m + my_strilen(m, '/') + (IN('/', m)), f_dp, last,
 			   no_match) == FALSE)
 	      return (FALSE);
@@ -101,5 +109,5 @@ BOOL	match_them(char *m, char *dp, t_words **last, BOOL *no_match)
   closedir(dir);
   if (dp)
     free(dp);
-  return (!(*no_match));
+  return (TRUE);
 }

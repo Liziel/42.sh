@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 12:08:51 2013 vincent colliot
-** Last update Sun May 12 21:09:30 2013 vincent colliot
+** Last update Mon May 13 00:58:28 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -57,7 +57,7 @@ static BOOL	get_file_part(t_get **words, t_get *word, t_redir *link, char **bad_
   *words = word->next;
   link->file = word->word;
   free(word);
-  if (link->type != DLEFT)
+  if (link->redir != DLEFT)
     if (test_file_redir(link->file, bad_sintax, link->redir) == FALSE)
       return (FALSE);
   return (TRUE);
@@ -66,7 +66,7 @@ static BOOL	link_redir(t_get *word, t_get **words, t_redir *link, char **bad_sin
 {
   size_t	i;
 
-  i = (!((word->word)[0] == '<') || !((word->word)[0] == '>'));
+  i = (!((word->word)[0] == '<') && !((word->word)[0] == '>'));
   if ((!IN('<', word->word) && !IN('>', word->word)) || word->inter == TRUE)
     {
       *bad_sintax = my_strdup(WRONG_REDIR);
@@ -96,21 +96,16 @@ static void *nullify(t_redir *r)
   return (NULL);
 }
 
-t_redir	*redir_part(t_get *words, t_redir *prev, char **bad_sintax,
-		    BOOL *is_redir)
+t_redir	*redir_part(t_get *words, t_get **word, char **bad_sintax)
 {
   t_redir	*link;
 
-  if (!words)
-    return (prev);
   if ((link = xmalloc(sizeof(*link))) == NULL)
     return ((void*)(long)nullify_words(words));
-  *is_redir = TRUE;
   link->next = NULL;
   link->file = NULL;
   link->type = 0;
-  if (prev)
-    prev->next = link;
+  link->in = IN('>', words->word);
   if (link_redir(words, &words, link, bad_sintax) == FALSE)
     {
       nullify_words(words);
@@ -118,8 +113,7 @@ t_redir	*redir_part(t_get *words, t_redir *prev, char **bad_sintax,
     }
   if (link->type != ON_CANAL)
     link->type = ON_FILE;
-  if (redir_part(words, link, bad_sintax, is_redir) == NULL)
-    return (nullify(link));
+  *word = words;
   return (link);
 }
 

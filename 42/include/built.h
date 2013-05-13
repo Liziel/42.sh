@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May  3 17:56:39 2013 thomas lecorre
-** Last update Fri May 10 15:07:34 2013 thomas lecorre
+** Last update Sun May 12 22:13:01 2013 vincent colliot
 */
 
 #ifndef	BUILT_H__
@@ -17,7 +17,6 @@ typedef struct s_call
 {
   char	*name;
   int	(*ptr)(t_words *, void *);
-
 } t_call;
 
 char	*my_strdup(char *);

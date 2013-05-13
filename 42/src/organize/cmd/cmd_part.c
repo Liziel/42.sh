@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May  3 18:33:37 2013 vincent colliot
-** Last update Thu May  9 22:57:42 2013 vincent colliot
+** Last update Mon May 13 01:49:46 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -26,26 +26,47 @@ static t_words	*nullify_link(t_words *link)
   return (nullify_link(next));
 }
 
-static t_words	*list_cmd(t_get *word, t_get **words, t_words *prev, char **bad_sintax)
+static BOOL	add_redir(t_get *word, t_get **words, char **bad_sintax, t_cmd *link)
 {
-  t_words *link;
-  t_words *last;
+  t_redir *prev;
+
+  prev = link->redir;
+  if (prev)
+    while (prev->next)
+      prev = prev->next;
+  if (prev)
+    if ((prev->next = redir_part(word, words, bad_sintax)) == NULL)
+      return (FALSE);
+  if (!prev)
+    if ((link->redir = redir_part(word, words, bad_sintax)) == NULL)
+      return (FALSE);
+  return (TRUE);
+}
+
+static t_words	*list_cmd(t_get *word, t_cmd *clink, t_words *prev, char **bad_sintax)
+{
+  t_redir	*prev_r;
+  t_words	*link;
 
   if (!word)
     return (prev);
-  if ((IN('>', word->word) || IN('<', word->word)) && !IN(word->word[0], "'\"")
-      && !word->inter)
-    return (prev);
-  last = prev;
-  if (!prev)
-    if ((link = interpret_cmd(word, words, bad_sintax, &last)) == NULL)
-      return (NULL);
-  if (prev)
-    if ((link = interpret_params(word, words, bad_sintax, &last)) == NULL)
-      return (NULL);
-  if (list_cmd(*words, words, last, bad_sintax) == NULL)
+  prev_r = clink->redir;
+  link = prev;
+  if (!((IN('>', word->word) || IN('<', word->word)) && !word->inter))
     {
-      last->next = NULL;
+      if (prev)
+	if ((link = interpret_params(word, &word, bad_sintax, &prev)) == NULL)
+	  return ((void*)(long)nullify_words(word));
+      if (!prev)
+	if ((link = interpret_cmd(word, &word, bad_sintax, &prev)) == NULL)
+	  return ((void*)(long)nullify_words(word));
+    }
+  else
+    if (add_redir(word, &word, bad_sintax, clink) == FALSE)
+      return (NULL);
+  if (list_cmd(word, clink, prev, bad_sintax) == NULL)
+    {
+      prev->next = NULL;
       return (nullify_link(link));
     }
   return (link);
@@ -81,12 +102,13 @@ static BOOL	parents(t_get *word, t_get **words, t_cmd *link, char **bad_sintax)
 
 BOOL	cmd_part(t_get *word, t_get **words, t_cmd *link, char **bad_sintax)
 {
+  word->prev = NULL;
   link->type = PARENTS;
   if (MATCH(word->word, "("))
     return (parents(word, words, link, bad_sintax));
   link->type = WORDS;
-  if ((link->params = list_cmd(word, words, NULL, bad_sintax)) == NULL)
-    if (!(IN('>', word->word) || IN('<', word->word)))
-      return (FALSE);
+  link->redir = NULL;
+  if ((link->params = list_cmd(word, link, NULL, bad_sintax)) == NULL)
+    return (FALSE);
   return (TRUE);
 }
