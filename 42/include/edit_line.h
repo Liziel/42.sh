@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Mon May 13 13:04:25 2013 pierre-yves thomas
-** Last update Mon May 13 13:42:10 2013 pierre-yves thomas
+** Last update Mon May 13 14:49:56 2013 pierre-yves thomas
 */
 
 #ifndef	EDIT_LINE_H
@@ -29,7 +29,7 @@ typedef struct	s_options
 ** edit_line.c
 */
 char            *usr_cmd(int, t_options);
-int             init_values(int *, int *, char **, char **);
+int             init_values(int *, int **, char **, char **);
 
 /*
 ** load_term_settings.c
