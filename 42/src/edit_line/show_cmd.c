@@ -1,18 +1,18 @@
 /*
 ** show_cmd.c for 42 in /home/thomas_1//Projets/42sh
-** 
+**
 ** Made by pierre-yves thomas
 ** Login   <thomas_1@epitech.net>
-** 
+**
 ** Started on  Mon May  6 17:57:14 2013 pierre-yves thomas
-** Last update Mon May 13 13:56:27 2013 pierre-yves thomas
+** Last update Mon May 13 14:53:05 2013 vincent colliot
 */
 
 #include <unistd.h>
 #include <string.h>
 #include "edit_line.h"
 
-static void	my_putstr(int fd, char a)
+static void	my_putchar(int fd, char a)
 {
   write(fd, &a, 1);
 }

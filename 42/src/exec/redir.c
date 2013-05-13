@@ -5,8 +5,11 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 22:15:18 2013 vincent colliot
-** Last update Mon May 13 13:14:21 2013 vincent colliot
+** Last update Mon May 13 15:09:58 2013 vincent colliot
 */
+
+#include <unistd.h>
+#include "orga.h"
 
 void	rleft(t_redir *w, FD w[3])
 {

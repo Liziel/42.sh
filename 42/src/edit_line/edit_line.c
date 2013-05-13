@@ -1,11 +1,11 @@
 /*
 ** edit_line.c for 42 in /home/thomas_1//Projets/42sh
-** 
+**
 ** Made by pierre-yves thomas
 ** Login   <thomas_1@epitech.net>
-** 
+**
 ** Started on  Fri Apr 26 14:36:25 2013 pierre-yves thomas
-** Last update Mon May 13 14:02:15 2013 pierre-yves thomas
+** Last update Mon May 13 14:52:28 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -30,7 +30,7 @@ int		init_values(int *history_pl, int **rev_c,
   *history_pl = 0;
   if (((*str) = malloc(sizeof(**str) * 5)) == NULL ||
       ((*cmd) = malloc(sizeof(**cmd) * 2)) == NULL ||
-      ((*rev_c) = malloc(sizeof(**rev_c) * 2)) == NULL ||)
+      ((*rev_c) = malloc(sizeof(**rev_c) * 2)) == NULL)
     {
       if ((*str) != NULL)
 	free(*str);
@@ -51,7 +51,7 @@ char		*usr_cmd(int fd, t_options options)
 
   if (init_values(&history_pl, &reverse_case, &str, &cmd) == -1)
     return (free_str_edit_lines(str, cmd, reverse_case));
-  reverse_case[1] = fd
+  reverse_case[1] = fd;
   show_cmd(str[0], cmd, reverse_case, options);
   while (str[0] != 10 || str[1] != 0 || str[2] != 0)
     {

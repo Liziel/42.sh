@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Mon May 13 13:44:32 2013 pierre-yves thomas
+## Last update Mon May 13 15:11:27 2013 vincent colliot
 ##
 
 NAME    = 42.sh
@@ -17,8 +17,26 @@ SRCF	=$(FO)src/
 
 ########################
 
-MAINF	=$(SRCF)main/
-MAIN	=$(MAINF)main.c\
+DIRF	=$(SRCF)directory/
+DIR	=$(DIRF)directory_in.c
+
+EDITF	=$(SRCF)edit_line/
+EDIT	=$(EDITF)edit_line.c\
+	$(EDITF)load_term_settings.c\
+	$(EDITF)modify_line.c\
+	$(EDITF)show_cmd.c\
+
+EXECF	=$(SRCF)exec/
+EXEC	=$(EXECF)exec.c\
+	$(EXECF)exec_form.c\
+	$(EXECF)pré-exec.c\
+	$(EXECF)redir.c\
+	$(EXECF)redir_d_left.c
+
+ENVF	=$(SRCF)env/
+ENV	=$(ENVF)get_env.c
+
+XMALLOC=$(LIBF)xmalloc.c\
 
 LIBF	=$(SRCF)lib/
 LIB	=$(LIBF)s_alloc.c\
@@ -28,22 +46,11 @@ LIB	=$(LIBF)s_alloc.c\
 	$(LIBF)s_print.c\
 	$(LIBF)match.c\
 
-XMALLOC=$(LIBF)xmalloc.c\
+MAINF	=$(SRCF)main/
+MAIN	=$(MAINF)main.c\
 
 PARSF	=$(SRCF)parsing/
 PARS	=$(PARSF)subdiv.c\
-
-ENVF	=$(SRCF)env/
-ENV	=$(ENVF)get_env.c\
-
-DIRF	=$(SRCF)directory/
-DIR	=$(DIRF)directory_in.c
-
-EDITF	=$(SRCF)edit_line/
-EDIT	=$(EDITF)edit_line.c\
-	$(EDITF)load_term_settings.c\
-	$(EDITF)modify_line.c\
-	$(EDITF)show_cmd.c\
 
 ###### Parsing #########
 
@@ -84,14 +91,15 @@ SRC     =$(MAIN)\
 	$(PARS)\
 	$(XMALLOC)\
 	$(ORGA)\
+	$(NULL)\
 	$(ENV)\
 	$(EDIT)\
 	$(DIR)\
-	$(NULL)\
+	$(EXEC)\
 
 ########################
 
-INC	=-I $(FO)include/
+INC	=-I $(FO)include/ -lncurses
 
 CFLAGS	= -Wall -Wextra $(INC)
 

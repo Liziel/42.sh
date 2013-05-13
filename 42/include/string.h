@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 20:25:19 2013 vincent colliot
-** Last update Thu May  9 00:14:42 2013 vincent colliot
+** Last update Mon May 13 15:45:10 2013 vincent colliot
 */
 
 #ifndef STRING_H_
@@ -14,6 +14,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include "bool.h"
+# include "fd.h"
 
 # define IN(c, s) ((s)[my_strilen(s, c)] != 0)
 # define S_IN(c, s) ((s)[my_strslen(s, c)] != 0)
@@ -52,7 +53,10 @@ size_t	my_strnslen(const char*, const char*, size_t);
 BOOL	match(const char*, const char*);
 BOOL	nmatch(const char*, const char*, size_t);
 size_t	last_occur(const char*, char, char);
+
 	/* s_print */
 size_t	print_err(const char*);
+size_t	my_putpath(const char *s, FD out);
+size_t	my_putstr(const char *s, const char *out);
 
 #endif

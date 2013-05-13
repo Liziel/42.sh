@@ -5,14 +5,17 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Tue Apr 30 15:59:03 2013 vincent colliot
-** Last update Mon May 13 14:25:03 2013 vincent colliot
+** Last update Mon May 13 14:47:07 2013 vincent colliot
 */
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <unistd.h>
 #include "string.h"
 #include "fd.h"
 
-size_t	my_putstr(const char *s, FD out)
+size_t	my_putpath(const char *s, FD out)
 {
   size_t	i;
 

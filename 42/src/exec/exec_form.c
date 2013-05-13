@@ -5,11 +5,15 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 01:40:28 2013 vincent colliot
-** Last update Mon May 13 14:28:26 2013 vincent colliot
+** Last update Mon May 13 15:44:06 2013 vincent colliot
 */
 
-#include	<stdlib.h>
-#include	"lexec.h"
+#include <signal.h>
+#include <stdlib.h>
+#include "lexec.h"
+#include "xmalloc.h"
+#include "status.h"
+#include "string.h"
 
 static size_t	size_list(t_words *list)
 {
@@ -30,7 +34,7 @@ static char	**to_tab(t_words *list, BOOL *sys_fail)
   t_words	*p;
   size_t	i;
 
-  i = len_list(list);
+  i = size_list(list);
   if ((tab = xmalloc(sizeof(*tab) * (i + 1))) == NULL)
     return (EXIT_FAILURE + ((*sys_fail) = FALSE));
   i = 0;

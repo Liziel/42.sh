@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  9 21:50:54 2013 vincent colliot
-** Last update Fri May 10 13:44:46 2013 vincent colliot
+** Last update Mon May 13 15:11:02 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -64,6 +64,7 @@ BOOL nullify_redir(t_redir *r)
     free(r->file);
   free(r);
   nullify_redir(n);
+  return (FALSE);
 }
 
 BOOL nullify_cmd(t_cmd *cmd)

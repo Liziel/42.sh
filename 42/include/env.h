@@ -5,14 +5,14 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Wed May  8 23:54:49 2013 vincent colliot
-** Last update Fri May 10 14:56:49 2013 thomas lecorre
+** Last update Mon May 13 15:45:24 2013 vincent colliot
 */
 
 #ifndef ENV_H_
 # define ENV_H_
 
-#include <unistd.h>
-#include "bool.h"
+# include <unistd.h>
+# include "bool.h"
 
 extern char **environ;
 

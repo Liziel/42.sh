@@ -1,17 +1,17 @@
 /*
 ** edit_line.h for 42 in /home/thomas_1//Projets/42.sh/42/include
-** 
+**
 ** Made by pierre-yves thomas
 ** Login   <thomas_1@epitech.net>
-** 
+**
 ** Started on  Mon May 13 13:04:25 2013 pierre-yves thomas
-** Last update Mon May 13 14:49:56 2013 pierre-yves thomas
+** Last update Mon May 13 15:45:19 2013 vincent colliot
 */
 
 #ifndef	EDIT_LINE_H
 # define EDIT_LINE_H
 
-#include <term.h>
+# include <term.h>
 
 typedef struct	s_options
 {
