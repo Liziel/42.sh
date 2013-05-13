@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May  6 20:49:09 2013 vincent colliot
-** Last update Sun May 12 01:04:49 2013 vincent colliot
+** Last update Mon May 13 15:44:06 2013 thomas lecorre
 */
 
 #include <stdlib.h>
@@ -16,6 +16,32 @@
 /*
 **compte tu utilisé malloc dans les modif' prochaine de ton echo?
 */
+
+int	echo_n(t_words *cmd)
+{
+  while (cmd != NULL)
+    {
+      if (cmd->word)
+	{
+	  my_putstr(cmd->word);
+	  if (cmd->next != NULL)
+	    my_putstr(" ");
+	}
+      cmd = cmd->next;
+    }
+}
+
+int	echo_options(t_words *cmd)
+{
+      cmd = cmd->next;
+      if (cmd->word[1] == 'n')
+	echo_n(cmd);
+      if (cmd->word[1] == 'e')
+	echo_e(cmd);
+      if (cmd->word[1] == 'E')
+	echo_E(cmd);
+}
+
 int	echo(t_words *cmd, void *alias)
 {
   if (cmd->next == NULL)
@@ -23,7 +49,7 @@ int	echo(t_words *cmd, void *alias)
       my_putstr('\n');
       return (EXIT_SUCCES);
     }
-  else
+  else if (cmd->next->word[0] != '-')
     {
       while (cmd != NULL)
 	{
@@ -37,5 +63,7 @@ int	echo(t_words *cmd, void *alias)
 	}
       my_putchar('\n');
     }
+  else
+    echo_options(cmd);
   return (EXIT_SUCCES);
 }

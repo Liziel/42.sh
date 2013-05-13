@@ -5,15 +5,13 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 14:24:55 2013 thomas lecorre
-** Last update Sun May 12 00:51:26 2013 vincent colliot
+** Last update Mon May 13 12:26:45 2013 thomas lecorre
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "env.h"
 #include "built.h"
-
-extern char **environ; //--> déja dans env.h == double déclaration!!!
 
 char	**env_copy()
 {
