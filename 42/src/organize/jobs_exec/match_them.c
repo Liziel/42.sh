@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Wed May  8 01:48:11 2013 vincent colliot
-** Last update Sun May 12 23:07:53 2013 vincent colliot
+** Last update Tue May 14 17:20:08 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -94,7 +94,7 @@ BOOL	match_them(char *m, char *dp, t_words **last, BOOL *no_match)
     dir = opendir(dp);
   else
     dir = opendir(".");
-  while ((fchr = readdir(dir)) != NULL)
+  while (dir && (fchr = readdir(dir)) != NULL)
     if (((fchr->d_name)[0] == '.' && m[0] == '.') || ((fchr->d_name)[0] != '.'
 						      && m[0] != '.'))
       if (cond(fchr, m))

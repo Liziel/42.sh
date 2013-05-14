@@ -5,7 +5,7 @@
 ** Login   <cloare_q@epitech.net>
 **
 ** Started on  Mon May 13 11:58:06 2013 quentin cloarec
-** Last update Mon May 13 15:56:42 2013 thomas lecorre
+** Last update Wed May 15 00:21:58 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -75,3 +75,19 @@ int	cd(t_words *cmd, void *alias)
       add_env(str);
     }
 }
+/*
+**ERREUR::
+**    -ligne 57
+**	le - se trouveras sur le t_words *cmd->next
+**    -ligne 25
+**	le retour ne devrai-t-il pas plutôt être NULL? et ensuite faire suivre l'erreur dans cd en renvoyant EXIT_FAILURE
+**    -ligne 59
+**	tu demandes le "TMP" mais n'ajoute jamais le PWD a l'env...peut -être qu'un call a setnv en fin de ta fonction serai pas mal
+**REMARQUE:
+**    -norme
+**    -+ de define (sur HOME par exemple)
+**    -préfère le OLD_PWD de bash que TMP.. les aers sont trop pointilleux
+**SEGFAULT:
+**    -ligne 59
+**	chdir segfault sur un NULL
+*/

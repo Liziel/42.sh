@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May  6 20:49:09 2013 vincent colliot
-** Last update Tue May 14 18:09:34 2013 thomas lecorre
+** Last update Wed May 15 00:27:13 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -138,3 +138,8 @@ int	my_echo(t_words *cmd, void *alias)
     echo_options(cmd);
   return (EXIT_SUCCES);
 }
+/*
+**ERREUR:
+**    in echo_options:
+**	cheque la chaine en entier..plusieurs flag peuvent être set sur une même chaine
+*/

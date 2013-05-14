@@ -5,12 +5,13 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:50:23 2013 vincent colliot
-** Last update Fri May 10 14:56:48 2013 vincent colliot
+** Last update Tue May 14 17:08:51 2013 vincent colliot
 */
 
 #include "get.h"
 #include "xmalloc.h"
 #include "bool.h"
+#include "string.h"
 
 static BOOL nullify_next(t_get *w)
 {
@@ -30,16 +31,18 @@ BOOL	comment(t_get *w)
 
   if (!w)
     return (TRUE);
-  if ((w->word)[0] != '"')
-    comment(w->next);
-  if ((s = my_strndup(w->word + 1, my_strilen(w->word + 1, '"'))) == NULL)
+  if (((w->word)[0] == '"' && !w->inter))
     {
-      nullify_next(w->next);
-      free(w);
-      return (FALSE);
+      if ((s = my_strndup(w->word + 1, my_strilen(w->word + 1, '"'))) == NULL)
+	{
+	  nullify_next(w->next);
+	  free(w);
+	  return (FALSE);
+	}
+      free(w->word);
+      w->word = s;
+      w->inter = TRUE;
     }
-  free(w->word);
-  w->word = s;
   if (comment(w->next) == FALSE)
     {
       free(w->word);

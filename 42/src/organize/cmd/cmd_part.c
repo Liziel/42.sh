@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May  3 18:33:37 2013 vincent colliot
-** Last update Tue May 14 02:19:16 2013 vincent colliot
+** Last update Tue May 14 21:22:34 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -15,15 +15,15 @@
 #include "xmalloc.h"
 #include "error.h"
 
-static t_words	*nullify_link(t_words *link)
+static t_words	*nullify_link(t_words *link, BOOL f)
 {
   t_words *next;
 
-  if (!link)
+  if (!link || f)
     return (NULL);
   next = link->next;
   free(link);
-  return (nullify_link(next));
+  return (nullify_link(next, f));
 }
 
 static BOOL	add_redir(t_get *word, t_get **words, char **bad_sintax, t_cmd *link)
@@ -45,8 +45,10 @@ static BOOL	add_redir(t_get *word, t_get **words, char **bad_sintax, t_cmd *link
 
 static t_words	*list_cmd(t_get *word, t_cmd *clink, t_words *prev, char **bad_sintax)
 {
+  BOOL		f;
   t_words	*link;
 
+  f = FALSE;
   if (!word)
     return (prev);
   link = prev;
@@ -60,12 +62,12 @@ static t_words	*list_cmd(t_get *word, t_cmd *clink, t_words *prev, char **bad_si
 	  return ((void*)(long)nullify_words(word));
     }
   else
-    if (add_redir(word, &word, bad_sintax, clink) == FALSE)
+    if ((f = add_redir(word, &word, bad_sintax, clink)) == FALSE)
       return (NULL);
   if (list_cmd(word, clink, prev, bad_sintax) == NULL)
     {
       prev->next = NULL;
-      return (nullify_link(link));
+      return (nullify_link(link, f));
     }
   return (link);
 }

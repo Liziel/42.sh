@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:58:16 2013 vincent colliot
-** Last update Tue May 14 01:42:03 2013 vincent colliot
+** Last update Tue May 14 20:27:05 2013 vincent colliot
 */
 
 #include <sys/wait.h>
@@ -14,9 +14,11 @@
 #include "orga.h"
 #include "exec.h"
 #include "xlib.h"
+#include "father.h"
 
 static void	init_pipe(FD w[2], FD pi[3], FD h)
 {
+  close(pi[h]);
   pi[h] = w[h];
   close(w[!h]);
 }
@@ -24,7 +26,18 @@ static void	init_pipe(FD w[2], FD pi[3], FD h)
 /*
 **bon elle est pas tellement a la norme...mais ce sera vrai sous peu FAUX
 */
-static BOOL	exec_pipes(t_pipes *p, t_info *info, BOOL son, FD pi[3])
+
+static void	my_wait(pid_t son, STATUS *st)
+{
+  STATUS stat;
+  pid_t	pid;
+
+  while ((pid = waitpid(-1, &stat, 0)) != -1)
+    if (pid == son)
+      *st = stat;
+}
+
+static BOOL	exec_pipes(t_pipes *p, t_info *info, FLAG son, FD pi[3])
 {
   STATUS	status_quo;
   pid_t		pid;
@@ -33,25 +46,25 @@ static BOOL	exec_pipes(t_pipes *p, t_info *info, BOOL son, FD pi[3])
   pid = -1;
   if (p->next)
     {
-      if ((pid = xfork()) < 0)
-	return (FALSE);
       if (pipe(w) == -1)
+	return (FALSE);
+      if ((pid = xfork()) < 0)
 	return (FALSE);
     }
   if (!pid)
     {
       init_pipe(w, pi, W_IN);
-      exec_pipes(p->next, info, TRUE, pi);
+      exec_pipes(p->next, info, SON, pi);
       return (FALSE);
     }
   if (p->next)
     init_pipe(w, pi, W_OUT);
-  if (exec_cmd(p->cmd, info, son, pi) == FALSE)
+  if (exec_cmd(p->cmd, info, son | (FATHER * (pid > 0)), pi) == FALSE)
     return (FALSE);
   if (pid < 0)
     return (TRUE);
-  waitpid(pid, &status_quo, 0);
-  if (WEXITSTATUS(status_quo) == EXIT_FAILURE)
+  my_wait(pid, &status_quo);
+  if ((WEXITSTATUS(status_quo)))
     info->st = EXIT_FAILURE;
   return (TRUE);
 }
@@ -81,7 +94,7 @@ static BOOL	and_or(t_exec *e, t_info *info)
   p[W_IN] = W_IN;
   p[W_OUT] = W_OUT;
   p[W_ERR] = W_ERR;
-  if (exec_pipes(e->pipes, info, FALSE, p) == FALSE)
+  if (exec_pipes(e->pipes, info, 0, p) == FALSE)
     return (FALSE);
   fd_to(w);
   if (e->type == OR && info->st == EXIT_FAILURE)
