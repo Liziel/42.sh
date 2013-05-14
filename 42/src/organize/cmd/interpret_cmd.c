@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May  4 16:34:47 2013 vincent colliot
-** Last update Thu May  9 22:40:17 2013 vincent colliot
+** Last update Wed May 15 00:49:19 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -76,6 +76,7 @@ static void	*nullify_link(t_words *link)
 
 static BOOL	not_a_built_in(char *word)
 {
+  (void)word;
   return (TRUE);
 }
 

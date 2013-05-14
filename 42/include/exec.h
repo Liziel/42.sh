@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 13 14:54:51 2013 vincent colliot
-** Last update Tue May 14 19:17:00 2013 vincent colliot
+** Last update Wed May 15 01:17:25 2013 vincent colliot
 */
 
 #ifndef EXEC_H_
@@ -24,7 +24,7 @@ typedef struct s_info{
 BOOL	exec_cmd(t_cmd*, t_info*, FLAG, FD[3]);
 
 	/* redir.c */
-BOOL	calque_redir(t_redir*, FD[3], t_info*);
+BOOL	calque_redir(t_redir*, FD[3], FD[3], t_info*);
 BOOL	rdleft(t_redir*, FD[3], t_info*);
 
 	/* exec_form */

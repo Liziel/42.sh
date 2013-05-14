@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 16:04:18 2013 vincent colliot
-** Last update Tue May 14 22:01:09 2013 vincent colliot
+** Last update Wed May 15 01:44:41 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -17,14 +17,26 @@
 #include "exec.h"
 #include "father.h"
 
-static BOOL	set_redir(t_redir *r, FD w[3], t_info *info)
+static BOOL	set_redir(t_redir *r, FD w[3], t_info *info, FLAG son)
 {
+  FD		pi[3];
+  FD		in;
+
+  in = 0;
+  while (in < 3)
+    pi[in++] = -1;
   if (r)
-    if (calque_redir(r, w, info) == FALSE)
+    if (calque_redir(r, pi, w, info) == FALSE)
       return (FALSE);
-  dup2(w[W_ERR], W_ERR);
-  dup2(w[W_OUT], W_OUT);
-  dup2(w[W_IN], W_IN);
+  in = 0;
+  while (in < 3)
+    {
+      if (pi[in] >= 0)
+	dup2(pi[in], in);
+      if ((in == W_IN && (son & SON)) || (in == W_OUT && (son & FATHER)))
+	dup2(w[in], in);
+      in++;
+    }
   return (TRUE);
 }
 
@@ -40,7 +52,7 @@ BOOL		exec_cmd(t_cmd *cmd, t_info *info, FLAG son, FD w[3])
   STATUS	dleft;
 
   sys_fail = FALSE;
-  if (set_redir(cmd->redir, w, info) == FALSE)
+  if (set_redir(cmd->redir, w, info, son) == FALSE)
     return (FALSE);
   if (cmd->type == WORDS)
     if (!exec_built_in(cmd, info))
@@ -50,7 +62,12 @@ BOOL		exec_cmd(t_cmd *cmd, t_info *info, FLAG son, FD w[3])
   cmd->parents = NULL;
   if (son & FATHER)
     close(w[W_OUT]);
-  close(W_OUT);
+  if ((son & SON) || w[W_IN] != W_IN)
+    close(W_IN);
+  if ((son & FATHER) || w[W_OUT] != W_OUT)
+    close(W_OUT);
+  if (w[W_ERR] != W_ERR)
+    close(W_ERR);
   if (sys_fail == TRUE)
     return (FALSE);
   return ((son & SON) == FALSE);

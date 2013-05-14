@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 13 00:38:40 2013 vincent colliot
-** Last update Tue May 14 02:15:26 2013 vincent colliot
+** Last update Wed May 15 00:59:10 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -26,11 +26,12 @@ static t_words	*get_alls(FD rw, t_options termcaps, t_words *prev, char *m)
 
   if ((line = usr_cmd(rw, termcaps)) == NULL)
     {
-      my_putstr("(sh):error while matching for", rw);
+      my_putstr("(sh):error while matching for ", rw);
       my_putstr(m, rw);
       my_putstr("\n", rw);
       return (prev);
     }
+  my_putstr(line, rw);
   if (MATCH(m, line))
     return (prev);
   if ((link = xmalloc(sizeof(*link))) == NULL)
@@ -69,14 +70,7 @@ BOOL	rdleft(t_redir *r, FD w[3], t_info *info)
   l = get_alls(p[0], info->termcaps, NULL, r->file);
   close(p[0]);
   pipe(p);
-  if ((pid = xfork()) == -1)
-    return (FALSE);
-  if (!pid)
-    {
-      close(p[W_IN]);
-      return (put_lines(l, w[W_OUT]));
-    }
-  close(p[W_OUT]);
+  put_lines(l, w[W_OUT]);
   w[r->in] = p[W_IN];
   nullify_cmd_words(l);
   return (TRUE);

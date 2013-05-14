@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May  3 18:33:37 2013 vincent colliot
-** Last update Tue May 14 21:22:34 2013 vincent colliot
+** Last update Wed May 15 01:54:19 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -66,7 +66,7 @@ static t_words	*list_cmd(t_get *word, t_cmd *clink, t_words *prev, char **bad_si
       return (NULL);
   if (list_cmd(word, clink, prev, bad_sintax) == NULL)
     {
-      prev->next = NULL;
+	prev->next = NULL;
       return (nullify_link(link, f));
     }
   return (link);

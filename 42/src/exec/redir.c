@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 22:15:18 2013 vincent colliot
-** Last update Tue May 14 21:06:26 2013 vincent colliot
+** Last update Wed May 15 01:18:41 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -25,7 +25,7 @@ void	rleft(t_redir *r, FD w[3])
   w[in] = open(r->file, O_RDONLY);
 }
 
-void	rright(t_redir *r, FD w[3])
+void	rright(t_redir *r, FD w[3], FD l[3])
 {
   FD	file;
   FD	in;
@@ -36,7 +36,7 @@ void	rright(t_redir *r, FD w[3])
     w[in] = open(r->file, O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR
 		| S_IRGRP | S_IROTH);
   if (r->type == ON_CANAL)
-    w[in] = dup(w[r->out]);
+    w[in] = dup(l[r->out]);
 }
 
 static void	rdright(t_redir *r, FD w[3])
@@ -50,7 +50,7 @@ static void	rdright(t_redir *r, FD w[3])
 		 | S_IRGRP | S_IROTH);
 }
 
-BOOL	calque_redir(t_redir *r, FD w[3], t_info *info)
+BOOL	calque_redir(t_redir *r, FD w[3], FD l[3], t_info *info)
 {
   if (!r)
     return (TRUE);
@@ -62,8 +62,8 @@ BOOL	calque_redir(t_redir *r, FD w[3], t_info *info)
 	return (FALSE);
     }
   else if (r->redir == RIGHT)
-    rright(r, w);
+    rright(r, w, l);
   else if (r->redir == DRIGHT)
     rdright(r, w);
-  return (calque_redir(r->next, w, info));
+  return (calque_redir(r->next, w, l, info));
 }

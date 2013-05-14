@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Tue May 14 01:09:10 2013 vincent colliot
-** Last update Tue May 14 02:12:41 2013 vincent colliot
+** Last update Wed May 15 00:42:00 2013 vincent colliot
 */
 
 #include "string.h"
@@ -17,7 +17,10 @@ void	*my_memset(void *s, int k, size_t n)
 
   i = 0;
   while (i < n)
-    *(unsigned char *)(s + i) = k;
+    {
+      *(unsigned char *)(s + i) = k;
+      i++;
+    }
   return (s);
 }
 

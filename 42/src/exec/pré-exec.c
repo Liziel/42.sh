@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:58:16 2013 vincent colliot
-** Last update Tue May 14 20:27:05 2013 vincent colliot
+** Last update Wed May 15 01:35:51 2013 vincent colliot
 */
 
 #include <sys/wait.h>
@@ -78,9 +78,12 @@ static void to_fd(FD w[3])
 
 static void fd_to(FD w[3])
 {
-  dup2(w[W_IN], W_IN);
   dup2(w[W_OUT], W_OUT);
+  close(w[W_OUT]);
+  dup2(w[W_IN], W_IN);
+  close(w[W_IN]);
   dup2(w[W_ERR], W_OUT);
+  close(w[W_ERR]);
 }
 
 static BOOL	and_or(t_exec *e, t_info *info)
