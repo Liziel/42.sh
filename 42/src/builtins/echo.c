@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May  6 20:49:09 2013 vincent colliot
-** Last update Tue May 14 15:58:57 2013 thomas lecorre
+** Last update Tue May 14 17:50:29 2013 thomas lecorre
 */
 
 #include <stdlib.h>
@@ -41,6 +41,11 @@ void	my_print_echo(char *str)
 	{
 	  my_putchar('\\');
 	  my_putchar('b');
+	}
+      if (*str == '\a')
+	{
+	  my_putchar('\\');
+	  my_putchar('a');
 	}
       else
 	my_putchar(*str);
@@ -85,7 +90,12 @@ int	echo_e(t_words *cmd)
     {
       if (cmd->word)
 	{
-	  my_putstr(cmd->word);
+	  while (*cmd->word)
+	    {
+	      if (*cmd->word == '\\' && *cmd->word + 1 == 'c')
+		return (EXIT_SUCCES);
+	      my_putchar(*cmd->word);
+	    }
 	  if (cmd->next != NULL)
 	    my_putstr(" ");
 	}
@@ -116,19 +126,7 @@ int	echo(t_words *cmd, void *alias)
   else if (cmd->next->word && (((MATCH(cmd->next->word, "-n")) != 1) ||
 			       ((MATCH(cmd->next->word, "-e")) != 1) ||
 			       ((MATCH(cmd->next->word, "-E")) != 1)))
-    {
-      while (cmd != NULL)
-	{
-	  if (cmd->word)
-	    {
-	      my_print_echo(cmd->word);
-	      if (cmd->next != NULL)
-		my_putchar(' ');
-	    }
-	  cmd = cmd->next;
-	}
-      my_putchar('\n');
-    }
+    echo_E(cmd->next);
   else
     echo_options(cmd);
   return (EXIT_SUCCES);
