@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May  6 20:49:09 2013 vincent colliot
-** Last update Tue May 14 17:53:03 2013 thomas lecorre
+** Last update Tue May 14 18:09:34 2013 thomas lecorre
 */
 
 #include <stdlib.h>
@@ -118,6 +118,13 @@ int	echo_options(t_words *cmd)
 
 int	my_echo(t_words *cmd, void *alias)
 {
+  int	flag_n;
+  int	flag_e;
+  int	flag_E;
+
+  flag_n = 0;
+  flag_e = 0;
+  flag_E = 0;
   if (cmd->next == NULL)
     {
       my_putstr('\n');
