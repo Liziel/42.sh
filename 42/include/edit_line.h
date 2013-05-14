@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May 13 13:04:25 2013 pierre-yves thomas
-** Last update Mon May 13 15:45:19 2013 vincent colliot
+** Last update Tue May 14 02:09:20 2013 vincent colliot
 */
 
 #ifndef	EDIT_LINE_H
@@ -13,8 +13,7 @@
 
 # include <term.h>
 
-typedef struct	s_options
-{
+typedef struct	s_options{
   char		*clear;
   char		*clean_end;
   char		*reverse;

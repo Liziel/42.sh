@@ -5,15 +5,26 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 13 00:38:40 2013 vincent colliot
-** Last update Mon May 13 14:13:58 2013 vincent colliot
+** Last update Tue May 14 02:15:26 2013 vincent colliot
 */
 
-t_words	*get_alls(FD rw, t_options termcaps, t_words *prev, char *m)
+#include <unistd.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include "orga.h"
+#include "exec.h"
+#include "edit_line.h"
+#include "string.h"
+#include "xlib.h"
+
+static t_words	*get_alls(FD rw, t_options termcaps, t_words *prev, char *m)
 {
   char		*line;
   t_words	*link;
 
-  if ((line = edit_line(rw, termcaps)) == NULL)
+  if ((line = usr_cmd(rw, termcaps)) == NULL)
     {
       my_putstr("(sh):error while matching for", rw);
       my_putstr(m, rw);
@@ -27,45 +38,46 @@ t_words	*get_alls(FD rw, t_options termcaps, t_words *prev, char *m)
   link->word = line;
   if (prev)
     prev->next = link;
-  get_alls(rw, termcaps, t_words *link, m);
+  get_alls(rw, termcaps, link, m);
   if (!prev)
     close(rw);
   return (link);
 }
 
-static BOOL	put_lines(t_words *lines, FD wr)
+static BOOL	put_lines(t_words *l, FD wr)
 {
-  if (!lines)
+  if (!l)
     return (FALSE);
-  my_putstr(lines, wr);
-  put_lines(lines, wr);
-  free(lines);
+  my_putstr(l->word, wr);
+  put_lines(l->next, wr);
+  free(l->word);
+  free(l);
   return (FALSE);
 }
 
 BOOL	rdleft(t_redir *r, FD w[3], t_info *info)
 {
-  t_words	*lines;
+  t_words	*l;
   pid_t	pid;
   FD	p[2];
 
   if ((p[0] = open("/dev/tty", O_RDWR)) == -1)
     {
-      put_err("(sh): can't open tty\n");
+      print_err("(sh): can't open tty\n");
       return (TRUE);
     }
-  lines = get_alls(p[0], info->termcaps, NULL, r->file);
+  l = get_alls(p[0], info->termcaps, NULL, r->file);
   close(p[0]);
-  pipes(p);
+  pipe(p);
   if ((pid = xfork()) == -1)
     return (FALSE);
   if (!pid)
     {
       close(p[W_IN]);
-      return (put_lines(lines, w[P_OUT]));
+      return (put_lines(l, w[W_OUT]));
     }
   close(p[W_OUT]);
   w[r->in] = p[W_IN];
-  nullify_cmd_words(lines);
+  nullify_cmd_words(l);
   return (TRUE);
 }

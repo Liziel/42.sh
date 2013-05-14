@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May  3 18:33:37 2013 vincent colliot
-** Last update Mon May 13 01:49:46 2013 vincent colliot
+** Last update Tue May 14 02:19:16 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -45,17 +45,15 @@ static BOOL	add_redir(t_get *word, t_get **words, char **bad_sintax, t_cmd *link
 
 static t_words	*list_cmd(t_get *word, t_cmd *clink, t_words *prev, char **bad_sintax)
 {
-  t_redir	*prev_r;
   t_words	*link;
 
   if (!word)
     return (prev);
-  prev_r = clink->redir;
   link = prev;
   if (!((IN('>', word->word) || IN('<', word->word)) && !word->inter))
     {
       if (prev)
-	if ((link = interpret_params(word, &word, bad_sintax, &prev)) == NULL)
+	if ((link = interpret_params(word, &word, &prev)) == NULL)
 	  return ((void*)(long)nullify_words(word));
       if (!prev)
 	if ((link = interpret_cmd(word, &word, bad_sintax, &prev)) == NULL)

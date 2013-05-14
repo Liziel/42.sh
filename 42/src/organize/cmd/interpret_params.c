@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May  6 20:09:42 2013 vincent colliot
-** Last update Sun May 12 22:45:06 2013 vincent colliot
+** Last update Tue May 14 02:17:00 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -14,10 +14,7 @@
 #include "string.h"
 #include "xmalloc.h"
 
-  /* if (NMATCH("`", word->word)) */
-  /*   if ((params = back_quote(word, words, bad_sintax)) == NULL) */
-  /*     return (NULL); */
-t_words		*interpret_params(t_get *word, t_get **words, char **bad_sintax,
+t_words		*interpret_params(t_get *word, t_get **words,
 				  t_words **last)
 {
   BOOL		no_match;

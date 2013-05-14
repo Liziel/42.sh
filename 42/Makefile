@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Mon May 13 15:11:27 2013 vincent colliot
+## Last update Tue May 14 02:13:44 2013 vincent colliot
 ##
 
 NAME    = 42.sh
@@ -45,6 +45,10 @@ LIB	=$(LIBF)s_alloc.c\
 	$(LIBF)s_lenth.c\
 	$(LIBF)s_print.c\
 	$(LIBF)match.c\
+	$(LIBF)s_memset.c\
+
+XLIBF	=$(SRCF)xlib/
+XLIB	=$(XLIBF)xfork.c\
 
 MAINF	=$(SRCF)main/
 MAIN	=$(MAINF)main.c\
@@ -95,6 +99,7 @@ SRC     =$(MAIN)\
 	$(ENV)\
 	$(EDIT)\
 	$(DIR)\
+	$(XLIB)\
 	$(EXEC)\
 
 ########################

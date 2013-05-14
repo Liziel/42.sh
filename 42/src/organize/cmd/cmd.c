@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  2 22:05:00 2013 vincent colliot
-** Last update Tue May 14 01:06:09 2013 vincent colliot
+** Last update Tue May 14 02:20:24 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -49,7 +49,7 @@ BOOL	get_cmd(t_pipes *pipe, char **bad_sintax)
       free(pipe);
       return (FALSE);
     }
-  if (get_cmd(pipe->next, bad_sintax) == NULL)
+  if (get_cmd(pipe->next, bad_sintax) == FALSE)
     return (nullify_all_in_pipes(pipe));
   return (TRUE);
 }

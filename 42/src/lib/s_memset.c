@@ -5,10 +5,11 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Tue May 14 01:09:10 2013 vincent colliot
-** Last update Tue May 14 01:23:29 2013 vincent colliot
+** Last update Tue May 14 02:12:41 2013 vincent colliot
 */
 
 #include "string.h"
+#include "xmalloc.h"
 
 void	*my_memset(void *s, int k, size_t n)
 {
@@ -26,15 +27,16 @@ void	*my_realloc(void  *ptr, size_t pre, size_t new)
   void		*r;
 
   i = 0;
-  r = xmalloc(n);
+  if ((r = xmalloc(new)) == NULL)
+    return (NULL);
   while (i < new)
     {
       if (i < pre)
-	r[i] = ptr[i];
+	*(unsigned char*)(r + i) = *(unsigned char*)(ptr + i);
       else
-	r[i] = 0;
+	*(unsigned char*)(r + i) = 0;
       i++;
     }
   free(ptr);
-  return (i);
+  return (r);
 }

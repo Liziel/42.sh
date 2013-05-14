@@ -5,8 +5,15 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:58:16 2013 vincent colliot
-** Last update Tue May 14 00:52:50 2013 vincent colliot
+** Last update Tue May 14 01:42:03 2013 vincent colliot
 */
+
+#include <sys/wait.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "orga.h"
+#include "exec.h"
+#include "xlib.h"
 
 static void	init_pipe(FD w[2], FD pi[3], FD h)
 {
@@ -39,14 +46,14 @@ static BOOL	exec_pipes(t_pipes *p, t_info *info, BOOL son, FD pi[3])
     }
   if (p->next)
     init_pipe(w, pi, W_OUT);
-  if (exec_cmd(p->cmd, info, son, pi))
+  if (exec_cmd(p->cmd, info, son, pi) == FALSE)
     return (FALSE);
   if (pid < 0)
-    return (exit->sys_fail == FALSE);
+    return (TRUE);
   waitpid(pid, &status_quo, 0);
   if (WEXITSTATUS(status_quo) == EXIT_FAILURE)
     info->st = EXIT_FAILURE;
-  return (exit->sys_fail == FALSE);
+  return (TRUE);
 }
 
 static void to_fd(FD w[3])
@@ -77,10 +84,11 @@ static BOOL	and_or(t_exec *e, t_info *info)
   if (exec_pipes(e->pipes, info, FALSE, p) == FALSE)
     return (FALSE);
   fd_to(w);
-  if (e->type = OR && info->st == EXIT_FAILURE)
+  if (e->type == OR && info->st == EXIT_FAILURE)
     return (and_or(e->next, info));
-  if (e->type = AND && info->st == EXIT_SUCCESS)
+  if (e->type == AND && info->st == EXIT_SUCCESS)
     return (and_or(e->next, info));
+  return (TRUE);
 }
 
 BOOL	pre_exec(t_jobs *j, t_info *info)
@@ -89,9 +97,9 @@ BOOL	pre_exec(t_jobs *j, t_info *info)
 
   if (!j)
     return (TRUE);
-  if (and_or(j->exec) == FALSE)
+  if (and_or(j->exec, info) == FALSE)
     return (FALSE);
   next = j->next;
   nullify_jobs(j, 0);
-  return (pré_exec(j->next, st));
+  return (pre_exec(next, info));
 }

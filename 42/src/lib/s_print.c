@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Tue Apr 30 15:59:03 2013 vincent colliot
-** Last update Tue May 14 00:57:34 2013 vincent colliot
+** Last update Tue May 14 02:11:04 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -35,7 +35,7 @@ size_t	my_putpath(const char *s, const char *out)
   while (s[i])
     i++;
   if ((f = open(out, O_RDONLY)) != -1)
-    write(out, s, i);
+    write(f, s, i);
   if (f != -1)
     close(f);
   return (i);

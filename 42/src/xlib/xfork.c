@@ -5,10 +5,11 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 13 14:19:39 2013 vincent colliot
-** Last update Mon May 13 14:26:23 2013 vincent colliot
+** Last update Tue May 14 02:15:53 2013 vincent colliot
 */
 
 #include <unistd.h>
+#include "string.h"
 
 pid_t	xfork(void)
 {
