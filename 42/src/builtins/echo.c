@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May  6 20:49:09 2013 vincent colliot
-** Last update Tue May 14 17:50:29 2013 thomas lecorre
+** Last update Tue May 14 17:53:03 2013 thomas lecorre
 */
 
 #include <stdlib.h>
@@ -116,7 +116,7 @@ int	echo_options(t_words *cmd)
     echo_E(cmd);
 }
 
-int	echo(t_words *cmd, void *alias)
+int	my_echo(t_words *cmd, void *alias)
 {
   if (cmd->next == NULL)
     {

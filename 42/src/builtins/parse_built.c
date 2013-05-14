@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May  3 17:56:18 2013 thomas lecorre
-** Last update Mon May 13 16:02:21 2013 thomas lecorre
+** Last update Tue May 14 17:53:21 2013 thomas lecorre
 */
 
 #include "built.h"
@@ -15,7 +15,7 @@ void	init_built(t_call built[5])
   (built[0]).name = my_strdup("cd");
   (built[0]).ptr = &cd;
   (built[1]).name = my_strdup("echo");
-  (built[1]).ptr = &echo;
+  (built[1]).ptr = &my_echo;
   (built[2]).name = my_strdup("exit");
   (built[2]).ptr = &exit;
   (built[3]).name = my_strdup("setenv");
