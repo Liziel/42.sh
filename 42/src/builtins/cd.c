@@ -1,11 +1,11 @@
 /*
 ** cd.c for cd in /home/cloare_q//42.sh/42/src/builtins
-** 
+**
 ** Made by quentin cloarec
 ** Login   <cloare_q@epitech.net>
-** 
+**
 ** Started on  Mon May 13 11:58:06 2013 quentin cloarec
-** Last update Mon May 13 15:15:58 2013 quentin cloarec
+** Last update Mon May 13 15:56:42 2013 thomas lecorre
 */
 
 #include <unistd.h>
@@ -44,7 +44,7 @@ int	just_cd(t_words *cmd)
 
 int	cd(t_words *cmd, void *alias)
 {
-  int	i;  
+  int	i;
   char	*str;
 
   cmd = cmd->next;

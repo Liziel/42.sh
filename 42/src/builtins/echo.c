@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May  6 20:49:09 2013 vincent colliot
-** Last update Mon May 13 15:44:06 2013 thomas lecorre
+** Last update Tue May 14 15:58:57 2013 thomas lecorre
 */
 
 #include <stdlib.h>
@@ -13,11 +13,73 @@
 #include "env.h"
 #include "built.h"
 
-/*
-**compte tu utilisé malloc dans les modif' prochaine de ton echo?
-*/
+void	my_print_echo(char *str)
+{
+  while (*str)
+    {
+      if (*str == '\n')
+	{
+	  my_putchar('\\');
+	  my_putchar('n');
+	}
+      if (*str == '\t')
+	{
+	  my_putchar('\\');
+	  my_putchar('t');
+	}
+      if (*str == '\v' || *str == '\f')
+	{
+	  my_putchar('\\');
+	  my_putchar('v');
+	}
+      if (*str == '\t')
+	{
+	  my_putchar('\\');
+	  my_putchar('t');
+	}
+      if (*str == '\b')
+	{
+	  my_putchar('\\');
+	  my_putchar('b');
+	}
+      else
+	my_putchar(*str);
+      *str++;
+    }
+}
 
 int	echo_n(t_words *cmd)
+{
+  while (cmd != NULL)
+    {
+      if (cmd->word)
+	{
+	  my_print_echo(cmd->word);
+	  if (cmd->next != NULL)
+	    my_putstr(" ");
+	}
+      cmd = cmd->next;
+    }
+  return (EXIT_SUCCES);
+}
+
+int	echo_E(t_words *cmd)
+{
+  while (cmd != NULL)
+    {
+      if (cmd->word)
+	{
+	  my_print_echo(cmd->word);
+	  if (cmd->next != NULL)
+	    my_putstr(" ");
+	}
+      cmd = cmd->next;
+    }
+  my_putchar('\n');
+  return (EXIT_SUCCES);
+}
+
+int	echo_e(t_words *cmd)
 {
   while (cmd != NULL)
     {
@@ -29,17 +91,19 @@ int	echo_n(t_words *cmd)
 	}
       cmd = cmd->next;
     }
+  my_putchar('\n');
+  return (EXIT_SUCCES);
 }
 
 int	echo_options(t_words *cmd)
 {
-      cmd = cmd->next;
-      if (cmd->word[1] == 'n')
-	echo_n(cmd);
-      if (cmd->word[1] == 'e')
-	echo_e(cmd);
-      if (cmd->word[1] == 'E')
-	echo_E(cmd);
+  cmd = cmd->next;
+  if (cmd->word[1] == 'n')
+    echo_n(cmd);
+  if (cmd->word[1] == 'e')
+    echo_e(cmd);
+  if (cmd->word[1] == 'E')
+    echo_E(cmd);
 }
 
 int	echo(t_words *cmd, void *alias)
@@ -49,15 +113,17 @@ int	echo(t_words *cmd, void *alias)
       my_putstr('\n');
       return (EXIT_SUCCES);
     }
-  else if (cmd->next->word[0] != '-')
+  else if (cmd->next->word && (((MATCH(cmd->next->word, "-n")) != 1) ||
+			       ((MATCH(cmd->next->word, "-e")) != 1) ||
+			       ((MATCH(cmd->next->word, "-E")) != 1)))
     {
       while (cmd != NULL)
 	{
 	  if (cmd->word)
 	    {
-	      my_putstr(cmd->word);
+	      my_print_echo(cmd->word);
 	      if (cmd->next != NULL)
-		my_putstr(" ");
+		my_putchar(' ');
 	    }
 	  cmd = cmd->next;
 	}

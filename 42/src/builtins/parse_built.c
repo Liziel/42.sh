@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May  3 17:56:18 2013 thomas lecorre
-** Last update Mon May 13 15:50:39 2013 thomas lecorre
+** Last update Mon May 13 16:02:21 2013 thomas lecorre
 */
 
 #include "built.h"
@@ -24,6 +24,8 @@ void	init_built(t_call built[5])
   (built[4]).ptr = &unsetenv;
   (built[5]).name = my_strdup("alias");
   (built[5]).ptr = &alias;
+  (built[5]).name = my_strdup("unalias");
+  (built[5]).ptr = &unalias;
   (built[6]).name = NULL;
   (built[6]).ptr = NULL;
 }

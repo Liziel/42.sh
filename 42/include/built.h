@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May  3 17:56:39 2013 thomas lecorre
-** Last update Mon May 13 15:45:15 2013 vincent colliot
+** Last update Tue May 14 14:18:02 2013 thomas lecorre
 */
 
 #ifndef	BUILT_H__
@@ -23,6 +23,18 @@ char	*my_strdup(char *);
 
 int	echo(t_words *, void *);
 int	setenv(t_words *, void *);
-
+int	unsetenv(t_words *, void *);
+int	echo_n(t_words *);
+int	echo_e(t_words *);
+int	echo_E(t_words *);
+int	env_cmd(t_words *, void *);
+char	**env_copy();
+int	my_exit(t_words *, void *);
+char	*put_pwd(char *);
+int	just_cd(t_words *);
+int	cd(t_words *, void *);
+void	init_built(t_call *);
+void	*stock_tab(t_call *);
+int	builtins(t_words *, void *);
 
 #endif
