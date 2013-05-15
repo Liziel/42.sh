@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Tue May 14 21:35:09 2013 vincent colliot
+## Last update Wed May 15 18:37:55 2013 pierre-yves thomas
 ##
 
 NAME    = 42.sh
@@ -21,10 +21,19 @@ DIRF	=$(SRCF)directory/
 DIR	=$(DIRF)directory_in.c
 
 EDITF	=$(SRCF)edit_line/
-EDIT	=$(EDITF)edit_line.c\
+EDIT	=$(EDITF)read_cmds.c\
 	$(EDITF)load_term_settings.c\
+	$(EDITF)aff_prompt.c\
+	$(EDITF)change_reverse_place.c\
+	$(EDITF)clean_screen.c\
+	$(EDITF)configure_signals.c\
+	$(EDITF)move_to_word_fct.c\
+	$(EDITF)save_and_copy_part_str.c\
+	$(EDITF)swap_chars_on_cmd.c\
+	$(EDITF)take_cmd_from_history.c\
 	$(EDITF)modify_line.c\
 	$(EDITF)show_cmd.c\
+	$(EDITF)edit_line.c\
 
 EXECF	=$(SRCF)exec/
 EXEC	=$(EXECF)exec.c\
@@ -45,6 +54,7 @@ LIB	=$(LIBF)s_alloc.c\
 	$(LIBF)s_lenth.c\
 	$(LIBF)s_print.c\
 	$(LIBF)match.c\
+	$(LIBF)s_history.c\
 	$(LIBF)s_memset.c\
 
 XLIBF	=$(SRCF)xlib/

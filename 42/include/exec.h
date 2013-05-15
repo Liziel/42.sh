@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 13 14:54:51 2013 vincent colliot
-** Last update Wed May 15 01:17:25 2013 vincent colliot
+** Last update Wed May 15 18:32:03 2013 pierre-yves thomas
 */
 
 #ifndef EXEC_H_
@@ -14,11 +14,12 @@
 # include "edit_line.h"
 # include "status.h"
 
-typedef struct s_info{
-  //FD		tty?
-  t_options	termcaps;
-  STATUS	st;
-}		t_info;
+typedef struct s_info
+{
+  //FD			tty?
+  struct s_options	termcaps;
+  STATUS		st;
+}			t_info;
 
 	/* exec.c */
 BOOL	exec_cmd(t_cmd*, t_info*, FLAG, FD[3]);
