@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:58:16 2013 vincent colliot
-** Last update Wed May 15 01:35:51 2013 vincent colliot
+** Last update Wed May 15 13:49:57 2013 quentin cloarec
 */
 
 #include <sys/wait.h>
@@ -32,7 +32,7 @@ static void	my_wait(pid_t son, STATUS *st)
   STATUS stat;
   pid_t	pid;
 
-  while ((pid = waitpid(-1, &stat, 0)) != -1)
+  while ((pid = waitpid(0, &stat, 0)) != -1)
     if (pid == son)
       *st = stat;
 }
