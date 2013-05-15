@@ -5,7 +5,7 @@
 ** Login   <cloare_q@epitech.net>
 **
 ** Started on  Mon May 13 11:58:06 2013 quentin cloarec
-** Last update Wed May 15 00:21:58 2013 vincent colliot
+** Last update Wed May 15 15:11:54 2013 quentin cloarec
 */
 
 #include <unistd.h>
@@ -22,12 +22,16 @@ char	*put_pwd(char *s)
 
   j = 0;
   if ((pwd = xmalloc(sizeof(char) * (my_strlen(s) + 5))) == NULL)
-    return (EXIT_FAILURE);
-  pwd[0] = 'T';
-  pwd[1] = 'M';
-  pwd[2] = 'P';
-  pwd[3] = ' ';
-  i = 4;
+    return (NULL);
+  pwd[0] = 'O';
+  pwd[1] = 'L';
+  pwd[2] = 'D';
+  pwd[3] = '_';
+  pwd[4] = 'P';
+  pwd[5] = 'W';
+  pwd[6] = 'D';
+  pwd[7] = ' ';
+  i = 8;
   while (s[j])
     pwd[i++] = s[j++];
   return (pwd);
@@ -42,52 +46,79 @@ int	just_cd(t_words *cmd)
     }
 }
 
+int	len_chain(t_words *cmd)
+{
+  t_words *tmp;
+  int	i;
+
+  i = 0;
+  while (tmp != NULL)
+    {
+      i++;
+      tmp = tmp->next;
+    }
+  return (i);
+}
+
+void	add_old_env(t_words *cmd, char *pwd)
+{
+  cmd->word = "setenv";
+  cmd->next->word = "OLD_PWD";
+  cmd->next->next->word = pwd;
+  cmd->next->next->next = NULL;
+  setenv(cmd);
+}
+
+void	add_new_env(t_words *cmd, char *pwd)
+{
+  cmd->word = "setenv";
+  cmd->next->word = "PWD";
+  cmd->next->next->word = pwd;
+  cmd->next->next->next = NULL;
+  setenv(cmd);
+}
+
 int	cd(t_words *cmd, void *alias)
 {
   int	i;
-  char	*str;
+  char	*pwd;
 
   cmd = cmd->next;
-  if (MATCH(cmd->word, "cd") == 1)
+  if ((MATCH(cmd->word, "cd") == 1) && (len_chain(cmd) == 1))
     {
       just_cd(cmd);
-      str = put_pwd(get_env("HOME"));
-      add_env(str);
+      pwd = get_env("HOME");
+      add_old_env(pwd);
+      add_new_env(pwd)
     }
-  else if (MATCH(cmd->word, "cd -") == 1)
+  else if (MATCH(cmd->word, "cd") == 1 && (len_chain(cmd) == 2))
     {
-      if ((chdir(get_env("TMP"))) == -1)
+      cmd = cmd->next;
+      if (MATCH(cmd->word, "-") == 1)
 	{
-	  print_err("CHDIR ERROR\n");
-	  return (EXIT_FAILURE);
+	  if((get_env("OLD_PWD")) != NULL)
+	    {
+	      if ((chdir(get_env("OLD_PWD"))) == -1)
+		{
+		  print_err("CHDIR ERROR\n");
+		  return (EXIT_FAILURE);
+		}
+	      pwd = get_env("PWD");
+	      add_new_env(pwd);
+	      add_old_env(pwd);
+	    }
 	}
-      str = put_pwd(get_env("PWD"));
-      add_env(str);
-    }
-  else
-    {
-      if ((chdir(cmd->word)) == -1)
+      else
 	{
-          print_err("CHDIR ERROR\n");
-          return (EXIT_FAILURE);
-        }
-      str = put_pwd(cmd->word);
-      add_env(str);
+	  cmd = cmd->next;
+	  if ((chdir(cmd->word)) == -1)
+	    {
+	      print_err("CHDIR ERROR\n");
+	      return (EXIT_FAILURE);
+	    }
+	  pwd = cmd->word;
+	  add_new_env(pwd);
+	  add_old_env(pwd);
+	}
     }
 }
-/*
-**ERREUR::
-**    -ligne 57
-**	le - se trouveras sur le t_words *cmd->next
-**    -ligne 25
-**	le retour ne devrai-t-il pas plutôt être NULL? et ensuite faire suivre l'erreur dans cd en renvoyant EXIT_FAILURE
-**    -ligne 59
-**	tu demandes le "TMP" mais n'ajoute jamais le PWD a l'env...peut -être qu'un call a setnv en fin de ta fonction serai pas mal
-**REMARQUE:
-**    -norme
-**    -+ de define (sur HOME par exemple)
-**    -préfère le OLD_PWD de bash que TMP.. les aers sont trop pointilleux
-**SEGFAULT:
-**    -ligne 59
-**	chdir segfault sur un NULL
-*/
