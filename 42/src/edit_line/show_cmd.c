@@ -1,42 +1,46 @@
 /*
 ** show_cmd.c for 42 in /home/thomas_1//Projets/42sh
-**
+** 
 ** Made by pierre-yves thomas
 ** Login   <thomas_1@epitech.net>
-**
+** 
 ** Started on  Mon May  6 17:57:14 2013 pierre-yves thomas
-** Last update Tue May 14 01:01:49 2013 vincent colliot
+** Last update Wed May 15 16:34:59 2013 pierre-yves thomas
 */
 
-#include <unistd.h>
-#include <string.h>
-#include "edit_line.h"
+#include <sys/ioctl.h>
+#include "lib.h"
+#include "struct.h"
 
-static void	my_putchar(int fd, char a)
+void			show_cmd(char key, char *cmd,
+				 int reverse_case, t_options options)
 {
-  write(fd, &a, 1);
-}
+  int			i;
+  int			count;
+  struct winsize	ws;
 
-void	show_cmd(char key, char *cmd, int *rev_c, t_options options)
-{
-  int	i;
-
+  ioctl(0, TIOCGWINSZ, &ws);
   i = -1;
-  my_putstr("\r>", 1);
+  count = 0;
   if (key != 10)
-    my_putstr(options.clean_end, rev_c[1]);
+    my_putstr(1, options.clean_end);
   while (cmd[++i] != '\0')
     {
-      if (key != 10 && i == rev_c[0] && cmd[i] != '\t')
-        my_putstr(options.reverse, rev_c[1]);
-      my_putchar(cmd[i], rev_c[1]);
-      my_putstr(options.forward, rev_c[1]);
+      if (key != 10 && i == reverse_case && cmd[i] != '\t')
+        my_putstr(1, options.reverse);
+      my_putchar(1, cmd[i]);
+      my_putstr(1, options.forward);
+      if (i != 0 && i % (ws.ws_col) == 0)
+	count++;
     }
-  if (i == rev_c[0])
-    {
-      if (key != 10)
-        my_putstr(options.reverse, rev_c[1]);
-      my_putchar(rev_c[1], ' ');
-      my_putstr(options.forward, rev_c[1]);
-    }
+  if (i == reverse_case && key != 10)
+    my_putstr(1, options.reverse);
+  if (i != 0 && i % (ws.ws_col) == 0)
+    count++;
+  my_putchar(1, ' ');
+  my_putstr(1, options.forward);
+  while ((--count) / 2 >= 0)
+    my_putstr(1, options.up_cursor);
+  my_putstr(1, options.down_cursor);
+  my_putstr(1, "\r");
 }

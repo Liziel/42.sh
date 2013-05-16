@@ -5,7 +5,11 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:58:16 2013 vincent colliot
+<<<<<<< HEAD
 ** Last update Wed May 15 14:49:08 2013 vincent colliot
+=======
+** Last update Wed May 15 13:49:57 2013 quentin cloarec
+>>>>>>> 17eee20bcf22af4a3d760ac1186819eec227d729
 */
 
 #include <sys/wait.h>
