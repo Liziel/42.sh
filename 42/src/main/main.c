@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Wed May 15 01:46:24 2013 vincent colliot
+** Last update Wed May 15 02:38:42 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -29,24 +29,36 @@ int main(void)
   my_putstr("test>", 1);
   while (test = get_next_line(0))
     {
+      if (bad_sintax)
+	free(bad_sintax);
       bad_sintax = NULL;
-      g = subdivide(test, NULL, &bad_sintax);
-      comment(g);
-      if (bad_sintax)
+      if ((g = subdivide(test, NULL, &bad_sintax)) == NULL)
 	{
-	  print_err(bad_sintax);
-	  print_err("\n");
+	  if (bad_sintax)
+	    {
+	      print_err(bad_sintax);
+	      print_err("\n");
+	    }
 	}
-      j = orga(g, &bad_sintax, &null);
-      if (bad_sintax)
+      else
 	{
-	  print_err(bad_sintax);
-	  print_err("\n");
+	  if (comment(g) == FALSE)
+	    return (-1);
+	  if ((j = orga(g, &bad_sintax, &null)) == NULL)
+	    {
+	      if (bad_sintax)
+		{
+		  print_err(bad_sintax);
+		  print_err("\n");
+		}
+	    }
+	  else
+	    {
+	      info.st = EXIT_SUCCESS;
+	      if (pre_exec(j, &info) == FALSE)
+		return (-41);
+	    }
 	}
-      info.st = EXIT_SUCCESS;
-      if (!bad_sintax)
-	if (pre_exec(j, &info) == FALSE)
-	  return (-41);
       free(test);
       my_putstr("test>", 1);
     }

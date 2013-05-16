@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  2 20:20:16 2013 vincent colliot
-** Last update Fri May 10 13:07:20 2013 vincent colliot
+** Last update Wed May 15 02:18:19 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -91,6 +91,7 @@ t_exec *get_exec(t_get *words, t_exec *prev, char **bad_sintax)
   if ((link = xmalloc(sizeof(*link))) == NULL)
     return (word_nullify(words));
   link->tmp = words;
+  link->pipes = NULL;
   if (!(link->type = match_end(&words, bad_sintax)))
     return (word_nullify(words));
   if (words)

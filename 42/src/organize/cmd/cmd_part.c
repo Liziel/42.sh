@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May  3 18:33:37 2013 vincent colliot
-** Last update Wed May 15 01:54:19 2013 vincent colliot
+** Last update Wed May 15 02:13:32 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -15,15 +15,15 @@
 #include "xmalloc.h"
 #include "error.h"
 
-static t_words	*nullify_link(t_words *link, BOOL f)
+static t_words	*nullify_link(t_words *link, BOOL f, void *last)
 {
   t_words *next;
 
-  if (!link || f)
+  if (!link || f || link == last)
     return (NULL);
   next = link->next;
   free(link);
-  return (nullify_link(next, f));
+  return (nullify_link(next, f, last));
 }
 
 static BOOL	add_redir(t_get *word, t_get **words, char **bad_sintax, t_cmd *link)
@@ -48,27 +48,27 @@ static t_words	*list_cmd(t_get *word, t_cmd *clink, t_words *prev, char **bad_si
   BOOL		f;
   t_words	*link;
 
-  f = FALSE;
   if (!word)
     return (prev);
   link = prev;
   if (!((IN('>', word->word) || IN('<', word->word)) && !word->inter))
     {
-      if (prev)
+      if ((clink->type = WORDS) && prev)
 	if ((link = interpret_params(word, &word, &prev)) == NULL)
 	  return ((void*)(long)nullify_words(word));
-      if (!prev)
+      if ((clink->type = WORDS) && !prev)
 	if ((link = interpret_cmd(word, &word, bad_sintax, &prev)) == NULL)
 	  return ((void*)(long)nullify_words(word));
     }
   else
-    if ((f = add_redir(word, &word, bad_sintax, clink)) == FALSE)
-      return (NULL);
-  if (list_cmd(word, clink, prev, bad_sintax) == NULL)
     {
-	prev->next = NULL;
-      return (nullify_link(link, f));
+      if ((f = add_redir(word, &word, bad_sintax, clink)) == FALSE)
+	return (NULL);
+      else
+	return (list_cmd(word, clink, prev, bad_sintax));
     }
+  if (list_cmd(word, clink, prev, bad_sintax) == NULL)
+    return (nullify_link(link, f, (prev->next = NULL)));
   return (link);
 }
 
@@ -106,9 +106,10 @@ BOOL	cmd_part(t_get *word, t_get **words, t_cmd *link, char **bad_sintax)
   link->type = PARENTS;
   if (MATCH(word->word, "("))
     return (parents(word, words, link, bad_sintax));
-  link->type = WORDS;
+  link->type = OREDIR;
   link->redir = NULL;
   if ((link->params = list_cmd(word, link, NULL, bad_sintax)) == NULL)
-    return (FALSE);
+    if (link->type != OREDIR)
+      return (FALSE);
   return (TRUE);
 }

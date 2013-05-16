@@ -6,7 +6,7 @@
 **
 ** Started on  Thu May  2 19:45:44 2013 vincent colliot
 <<<<<<< HEAD
-** Last update Tue May 14 01:55:59 2013 vincent colliot
+** Last update Wed May 15 02:01:47 2013 vincent colliot
 =======
 ** Last update Thu May  9 14:50:49 2013 thomas lecorre
 >>>>>>> dcf51d0022527e0cb17c3773071553b5b76de7e7
@@ -48,6 +48,7 @@ typedef struct s_redir{
 }		t_redir;
 
 	/* type */
+# define OREDIR 0b100
 # define PARENTS 0b01
 # define WORDS	0b10
 typedef struct s_cmd{

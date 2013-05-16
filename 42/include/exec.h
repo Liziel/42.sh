@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 13 14:54:51 2013 vincent colliot
-** Last update Wed May 15 01:17:25 2013 vincent colliot
+** Last update Thu May 16 21:25:50 2013 vincent colliot
 */
 
 #ifndef EXEC_H_
@@ -13,6 +13,7 @@
 
 # include "edit_line.h"
 # include "status.h"
+# include "bool.h"
 
 typedef struct s_info{
   //FD		tty?
