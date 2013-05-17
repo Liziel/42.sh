@@ -5,42 +5,60 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Mon May  6 17:57:14 2013 pierre-yves thomas
-** Last update Wed May 15 16:34:59 2013 pierre-yves thomas
+** Last update Fri May 17 19:51:36 2013 pierre-yves thomas
 */
 
 #include <sys/ioctl.h>
-#include "lib.h"
-#include "struct.h"
+#include "string.h"
+#include "edit_line.h"
 
-void			show_cmd(char key, char *cmd,
-				 int reverse_case, t_options options)
+void                    go_up_of_cmd_high(char *cmd, t_options opt)
 {
-  int			i;
-  int			count;
-  struct winsize	ws;
+  int                   high;
+  struct winsize        ws;
 
   ioctl(0, TIOCGWINSZ, &ws);
+  high = my_strlen(cmd) / ws.ws_col;
+  while (--high >= 0)
+    my_putstr(opt.up_cursor, 1);
+}
+
+static void		aff_str_cmd(int fd, char *str)
+{
+  if (fd == 0)
+    my_putstr(str, 1);
+  else
+    my_putstr(str, fd);
+}
+
+static void		aff_char_cmd(int fd, char chr)
+{
+  if (fd == 0)
+    my_putchar(chr, 1);
+  else
+    my_putchar(chr, fd);
+}
+
+void			show_cmd(char key, int fd, char *cmd, int reverse_case)
+{
+  int			i;
+  t_options		options;
+
   i = -1;
-  count = 0;
-  if (key != 10)
-    my_putstr(1, options.clean_end);
+  retain_struct_options(2, &options);
   while (cmd[++i] != '\0')
     {
       if (key != 10 && i == reverse_case && cmd[i] != '\t')
-        my_putstr(1, options.reverse);
-      my_putchar(1, cmd[i]);
-      my_putstr(1, options.forward);
-      if (i != 0 && i % (ws.ws_col) == 0)
-	count++;
+	aff_str_cmd(fd, options.reverse);
+      aff_char_cmd(fd, cmd[i]);
+      aff_str_cmd(fd, options.forward);
     }
-  if (i == reverse_case && key != 10)
-    my_putstr(1, options.reverse);
-  if (i != 0 && i % (ws.ws_col) == 0)
-    count++;
-  my_putchar(1, ' ');
-  my_putstr(1, options.forward);
-  while ((--count) / 2 >= 0)
-    my_putstr(1, options.up_cursor);
-  my_putstr(1, options.down_cursor);
-  my_putstr(1, "\r");
+  if (key != 10 && i == reverse_case)
+    aff_str_cmd(fd, options.reverse);
+  aff_char_cmd(fd, ' ');
+  aff_str_cmd(fd, options.forward);
+  if (key != 10)
+    aff_str_cmd(fd, options.clean_end);
+  go_up_of_cmd_high(cmd, options);
+  aff_str_cmd(fd, "\r");
 }

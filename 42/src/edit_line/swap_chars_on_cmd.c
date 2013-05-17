@@ -5,11 +5,11 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Fri May 10 19:29:30 2013 pierre-yves thomas
-** Last update Mon May 13 10:50:51 2013 pierre-yves thomas
+** Last update Fri May 17 18:01:03 2013 pierre-yves thomas
 */
 
-#include <string.h>
-#include "struct.h"
+#include "string.h"
+#include "edit_line.h"
 
 void    swap_chars_on_cmd(char value, int *reverse_case, char **cmd)
 {
@@ -19,7 +19,7 @@ void    swap_chars_on_cmd(char value, int *reverse_case, char **cmd)
 
   (void)value;
   i = 0;
-  len = strlen(*cmd);
+  len = my_strlen(*cmd);
   if (*reverse_case == len)
     i--;
   if (*reverse_case > 0)

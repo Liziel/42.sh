@@ -5,24 +5,14 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Fri Apr 26 18:01:08 2013 pierre-yves thomas
-** Last update Wed May 15 16:55:29 2013 pierre-yves thomas
+** Last update Fri May 17 19:52:28 2013 pierre-yves thomas
 */
 
 #include <signal.h>
 #include <sys/ioctl.h>
 #include <string.h>
-#include "shell.h"
-#include "lib.h"
-
-void		retain_cmd(int opt, char **cmd)
-{
-  static char  	*save = NULL;
-
-  if (opt == 1)
-    save = (*cmd);
-  else if (opt == 2)
-    (*cmd) = save;
-}
+#include "edit_line.h"
+#include "string.h"
 
 void			go_down_of_cmd_high(char *cmd, t_options opt)
 {
@@ -30,24 +20,31 @@ void			go_down_of_cmd_high(char *cmd, t_options opt)
   struct winsize	ws;
 
   ioctl(0, TIOCGWINSZ, &ws);
-  high = strlen(cmd) / ws.ws_col;
+  high = my_strlen(cmd) / ws.ws_col;
   while (--high >= 0)
-    my_putstr(1, opt.down_cursor);
+    my_putstr(opt.down_cursor, 1);
 }
 
 void	catch_signal(int num)
 {
   char		*save_cmd;
   t_options	tmp;
+  int		rev_c;
 
   retain_struct_options(2, &tmp);
   retain_cmd(2, &save_cmd);
   if (num == SIGINT)
     {
-      my_putstr(1, "\n");
+      rev_c = 0;
+      show_cmd(10, 0, save_cmd, rev_c);
+      my_putstr("\n", 1);
       go_down_of_cmd_high(save_cmd, tmp);
-      show_prompt();
-      save_cmd = memset(save_cmd, 0, strlen(save_cmd));
+      /* le prompt sera la */
+      //show_prompt();
+      my_putstr("Prompt test\n", 1);
+      save_cmd = my_memset(save_cmd, 0, my_strlen(save_cmd));
+      retain_reverse_case(1, &rev_c);
+      show_cmd(0, 10, save_cmd, rev_c);
     }
 }
 

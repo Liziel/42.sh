@@ -5,13 +5,13 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Thu May  9 11:30:50 2013 pierre-yves thomas
-** Last update Mon May 13 16:53:00 2013 pierre-yves thomas
+** Last update Fri May 17 17:36:43 2013 pierre-yves thomas
 */
 
 #include <string.h>
 #include <stdlib.h>
-#include "shell.h"
-#include "lib.h"
+#include "string.h"
+#include "edit_line.h"
 
 void	delete_first_word_met(int *rev_c, char **cmd)
 {
@@ -20,7 +20,7 @@ void	delete_first_word_met(int *rev_c, char **cmd)
   int	save_rev_c;
   int	len;
 
-  len = strlen(*cmd) - 1;
+  len = my_strlen(*cmd) - 1;
   i = (*rev_c);
   while (i < len && ((*cmd)[i] == ' ' || (*cmd)[i] == '\t'))
     i++;
@@ -50,11 +50,11 @@ void            reverse_to_begin(char value, int *reverse_case, char **cmd)
 void            reverse_to_end(char value, int *reverse_case, char **cmd)
 {
   (void)value;
-  (*reverse_case) = strlen(*cmd);
+  (*reverse_case) = my_strlen(*cmd);
 }
 
 static	int	fill_fct_ptr(void (***options)(int *, char **))
-{  
+{
   int           nb;
 
   nb = -1;
@@ -80,7 +80,7 @@ void		move_reverse_case(char value, int *rev_c, char **cmd)
   int		i;
 
   i = -1;
-  len = strlen(*cmd);
+  len = my_strlen(*cmd);
   if (fill_fct_ptr(&options) == -1)
     return ;
   while (++i < 6 && opt[i] != value);

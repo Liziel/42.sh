@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Wed May 15 18:37:55 2013 pierre-yves thomas
+## Last update Fri May 17 18:51:17 2013 pierre-yves thomas
 ##
 
 NAME    = 42.sh
@@ -23,13 +23,14 @@ DIR	=$(DIRF)directory_in.c
 EDITF	=$(SRCF)edit_line/
 EDIT	=$(EDITF)read_cmds.c\
 	$(EDITF)load_term_settings.c\
-	$(EDITF)aff_prompt.c\
 	$(EDITF)change_reverse_place.c\
 	$(EDITF)clean_screen.c\
 	$(EDITF)configure_signals.c\
 	$(EDITF)move_to_word_fct.c\
+	$(EDITF)remain_datas.c\
 	$(EDITF)save_and_copy_part_str.c\
 	$(EDITF)swap_chars_on_cmd.c\
+	$(EDITF)upper_lower_case_letters.c\
 	$(EDITF)take_cmd_from_history.c\
 	$(EDITF)modify_line.c\
 	$(EDITF)show_cmd.c\

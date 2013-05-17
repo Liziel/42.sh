@@ -5,33 +5,48 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
-** Last update Wed May 15 18:35:18 2013 pierre-yves thomas
+** Last update Fri May 17 19:50:29 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
 #include "edit_line.h"
 #include "string.h"
 
-int	read_cmds(t_info info)
+
+static t_history *ctrlcget(t_info **info, t_history *history)
+{
+  static t_info *inf_save = NULL;
+  static t_history *hist_save = NULL;
+
+  if (*info)
+   inf_save = *info;
+  else
+    *info = inf_save;
+  if (history)
+    hist_save = history;
+  return (history);
+}
+
+int	read_cmds(t_info *info)
 {
   char			*str;
   t_history		*history;
   struct termios        opt;
   
-  history = NULL;
+  history = ctrlcget(&info, NULL);
   if (load_tgets_funcs(&opt) == -1)
     return (-1);
   modify_terminal(&opt);
-  my_putstr(info.termcaps.invi_cursor, 1);
+  my_putstr(info->termcaps.invi_cursor, 1);
   configure_signals();
-  while ((str = usr_cmd(history, info.termcaps)))
+  while ((str = usr_cmd(0, history, info->termcaps)))
     {
       my_put_in_history(&history, str);
-      retain_history(1, &history);
+      history = ctrlcget(&info, history);
       /* fonction de parseur d'exec toussa² ici*/
       free(str);
     }
   free_history(history);
-  my_putstr(info.termcaps.visi_cursor, 1);
+  my_putstr(info->termcaps.visi_cursor, 1);
   return (0);
 }

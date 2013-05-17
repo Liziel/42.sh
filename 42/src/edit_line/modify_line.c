@@ -5,27 +5,26 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Mon May  6 17:44:08 2013 pierre-yves thomas
-** Last update Mon May 13 15:20:02 2013 pierre-yves thomas
+** Last update Fri May 17 18:26:34 2013 pierre-yves thomas
 */
 
-#include <string.h>
 #include <stdlib.h>
-#include "lib.h"
-#include "shell.h"
+#include "string.h"
+#include "edit_line.h"
 
-void    add_letter_in_str(char value, char **cmd, int *reverse_case)
+void    add_letter_in_str(char value, int *reverse_case, char **cmd)
 {
   int   len;
 
-  len = strlen(*cmd) + 1;
+  len = my_strlen(*cmd) + 1;
   while (--len > (*reverse_case))
     (*cmd)[len + 1] = (*cmd)[len];
-  if (strlen(*cmd) + 1 > 1)
+  if (my_strlen(*cmd) + 1 > 1)
     (*cmd)[len + 1] = (*cmd)[len];
   (*cmd)[len] = value;
   (*reverse_case)++;
-  if (((*cmd) = realloc(*cmd, strlen(*cmd) + 2)) != NULL)
-    (*cmd)[strlen(*cmd) + 1] = '\0';
+  if (((*cmd) = realloc(*cmd, my_strlen(*cmd) + 2)) != NULL)
+    (*cmd)[my_strlen(*cmd) + 1] = '\0';
 }
 
 void    del_letter_in_str(char value, int *reverse_case, char **cmd)
@@ -41,7 +40,7 @@ void    del_letter_in_str(char value, int *reverse_case, char **cmd)
           (*cmd)[suppr] = (*cmd)[suppr + 1];
           suppr++;
         }
-      my_putstr(1, "\r");
+      my_putstr("\r", 1);
       (*reverse_case)--;
     }
 }
@@ -97,8 +96,8 @@ void            modif_cmd(char **cmd, char *str, int *reverse_case)
   else
     {
       i = -1;
-      while (++i < 4 && str[i] != 0 && str[i] != 10 && str[i] != 27)
-	add_letter_in_str(str[i], cmd, reverse_case);
+      while (++i < 4 && str[i] >= ' ')
+	add_letter_in_str(str[i], reverse_case, cmd);
     }
   free(options);
 }

@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 20:25:19 2013 vincent colliot
-** Last update Tue May 14 01:23:49 2013 vincent colliot
+** Last update Fri May 17 18:37:30 2013 pierre-yves thomas
 */
 
 #ifndef STRING_H_
@@ -55,6 +55,7 @@ BOOL	nmatch(const char*, const char*, size_t);
 size_t	last_occur(const char*, char, char);
 
 	/* s_print */
+size_t	my_putchar(char, FD out);
 size_t	print_err(const char*);
 size_t	my_putstr(const char *s, FD out);
 size_t	my_putpath(const char *s, const char *out);

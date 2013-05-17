@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Mon Apr 22 14:22:14 2013 pierre-yves thomas
-** Last update Mon May 13 11:16:00 2013 pierre-yves thomas
+** Last update Fri May 17 18:49:29 2013 pierre-yves thomas
 */
 
 #include <stdio.h>
@@ -35,6 +35,7 @@ int			main(int ac, char **av, char **environement)
   show_prompt();
   while ((str = usr_cmd(history, options)) != NULL)
     {
+      go_down_of_cmd_high(str, options);
       show_prompt();
       my_put_in_list(&history, str);
       retain_list(1, &history);

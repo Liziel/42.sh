@@ -5,22 +5,12 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Fri Apr 26 14:32:24 2013 pierre-yves thomas
-** Last update Wed May 15 12:00:33 2013 pierre-yves thomas
+** Last update Fri May 17 17:18:26 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
-#include "termcap.h"
-#include "lib.h"
-
-void			retain_struct_options(int opt, t_options *options)
-{
-  static t_options	save_opt;
-
-  if (opt == 1)
-    save_opt = (*options);
-  else
-    (*options) = save_opt;
-}
+#include "edit_line.h"
+#include "string.h"
 
 void    attribute_options(t_options *options)
 {
@@ -49,12 +39,12 @@ int	load_tgets_funcs(struct termios *opt)
 {
   if (tcgetattr(0, opt) == -1)
     {
-      my_putstr(2, "Fail on tcgetattr");
+      my_putstr("Fail on tcgetattr", 2);
       return (-1);
     }
   if (tgetent(NULL, NULL) != 1)
     {
-      my_putstr(2, "Fail on tgetent");
+      my_putstr("Fail on tgetent", 2);
       return (-1);
     }
   return (0);
