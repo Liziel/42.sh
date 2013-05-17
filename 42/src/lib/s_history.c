@@ -5,13 +5,13 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Wed May 15 18:36:34 2013 pierre-yves thomas
-** Last update Wed May 15 18:41:37 2013 pierre-yves thomas
+** Last update Fri May 17 17:37:25 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
-#include <string.h>
 #include <stdio.h>
 #include "history.h"
+#include "string.h"
 
 void			retain_history(int opt, t_history **list)
 {
@@ -30,7 +30,7 @@ void            my_put_in_history(t_history **list, char *str)
   tmp = malloc(sizeof(*tmp));
   if (tmp != NULL)
     {
-      tmp->str = strdup(str);
+      tmp->str = my_strdup(str);
       tmp->next = (*list);
       if (*list != NULL)
         (*list)->prev = tmp;
