@@ -5,14 +5,14 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May 13 13:04:25 2013 pierre-yves thomas
-** Last update Wed May 15 18:46:29 2013 pierre-yves thomas
+** Last update Thu May 16 21:30:21 2013 vincent colliot
 */
 
 #ifndef	EDIT_LINE_H
 # define EDIT_LINE_H
 
 # include <term.h>
-# include "exec.h"
+# include "flag.h"
 # include "history.h"
 
 typedef struct	s_options
@@ -26,6 +26,9 @@ typedef struct	s_options
   char		*invi_cursor;
   char		*visi_cursor;
 }		t_options;
+
+# include "lexec.h"
+# include "exec.h"
 
 /*
 ** configure_signals.c
