@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 17:59:47 2013 thomas lecorre
-** Last update Sat May 18 12:48:09 2013 thomas lecorre
+** Last update Sat May 18 13:20:28 2013 thomas lecorre
 */
 
 #include <stdlib.h>
@@ -69,7 +69,31 @@ BOOL	env_u(t_words *cmd)
 
 BOOL	env_s(t_words *cmd)
 {
+  char	*line;
+  int	i;
+  char	**tab;
 
+  if (!cmd->next)
+    return (FALSE);
+  line = my_stricat(cmd->word, cmd->next->word, '=');
+  if ((i = -(environ != NULL)))
+    while (environ[++i])
+      if ((NMATCH(cmd->word, environ[i])) == 1)
+	{
+	  free(environ[i]);
+	  environ[i] = line;
+	  return (TRUE);
+	}
+  if ((tab = xmalloc(sizeof(char *) * (i + 2))) == NULL)
+    return (FALSE);
+  tab[i + 1] = NULL;
+  if ((i = -(environ != NULL)))
+    while (environ[++i] != NULL)
+      tab[i] = environ[i];
+  tab[i] = line;
+  free(environ);
+  environ = tab;
+  return (TRUE);
 }
 
 int	env_cmd(t_words *cmd, void *bool)
