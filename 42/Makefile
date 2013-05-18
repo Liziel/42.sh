@@ -4,10 +4,10 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Sat May 18 16:52:41 2013 vincent colliot
+## Last update Sat May 18 17:50:06 2013 thomas lecorre
 ##
 
-NAME    = 42.sh
+NAME    = Sla.sh
 
 RM      = rm -f
 
