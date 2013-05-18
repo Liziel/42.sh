@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Wed May 15 02:38:42 2013 vincent colliot
+** Last update Sat May 18 02:48:42 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -42,7 +42,7 @@ int main(void)
 	}
       else
 	{
-	  if (comment(g) == FALSE)
+	  if ((g = comment(g, NULL)) == NULL)
 	    return (-1);
 	  if ((j = orga(g, &bad_sintax, &null)) == NULL)
 	    {
