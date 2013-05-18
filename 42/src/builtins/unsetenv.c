@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 17:03:04 2013 thomas lecorre
-** Last update Mon May 13 15:20:14 2013 thomas lecorre
+** Last update Sat May 18 12:42:29 2013 thomas lecorre
 */
 
 #include <stdlib.h>
@@ -15,7 +15,6 @@
 
 int	unsetenv(t_words *cmd, void *alias)
 {
-  int	lexit;
   int	i;
   int	n;
   char	**tab;
@@ -28,7 +27,6 @@ int	unsetenv(t_words *cmd, void *alias)
     }
   if (environ == NULL)
     return (EXIT_FAILURE);
-  lexit = EXIT_SUCCESS;
   cmd = cmd->next;
   while (cmd != NULL)
     {
@@ -36,7 +34,7 @@ int	unsetenv(t_words *cmd, void *alias)
       while (environ[i] != NULL)
 	{
 	  if (cmd->word && NMATCH(cmd->word, environ[i]))
-	    if ((environ[i])[my_strlen(cmd->word)] == '=')
+	    if (environ[i][my_strlen(cmd->word)] == '=')
 	      {
 		free(environ[i]);
 		environ[i] = NULL;
@@ -44,14 +42,11 @@ int	unsetenv(t_words *cmd, void *alias)
 	      }
 	  i++;
 	}
-      if (environ == NULL)
-	lexit = EXIT_FAILURE;
-	cmd = cmd->next;
+      cmd = cmd->next;
     }
   if ((tab = malloc(sizeof(char *) * (i - n + 1))) == NULL)
     return (EXIT_FAILURE);
-  tab[i - n] = NULL;
-  n = (i = 0);
+  n = 0;
   while (environ[i] != NULL)
     {
       if (environ[i])
