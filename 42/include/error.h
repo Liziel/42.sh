@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May  4 12:44:30 2013 vincent colliot
-** Last update Sun May 12 19:52:44 2013 vincent colliot
+** Last update Fri May 17 18:37:37 2013 vincent colliot
 */
 
 #ifndef ERROR_H_
@@ -20,6 +20,7 @@
 # define WRONG_REDIR "(sh): wrong redirection"
 # define ERROR_IN_REDIR "(sh): unexpected EOS after redirection"
 # define FILE_ERROR "(sh): no such file: "
+# define DIR_ERROR "(sh): no such direcotry: "
 # define IS_DIR_ERROR1 "(sh):error : "
 # define IS_DIR_ERROR2 " : is a directory"
 

@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 13 00:38:40 2013 vincent colliot
-** Last update Wed May 15 00:59:10 2013 vincent colliot
+** Last update Sat May 18 01:23:37 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -24,7 +24,7 @@ static t_words	*get_alls(FD rw, t_options termcaps, t_words *prev, char *m)
   char		*line;
   t_words	*link;
 
-  if ((line = usr_cmd(rw, termcaps)) == NULL)
+  if ((line = usr_cmd(rw, NULL, termcaps)) == NULL)
     {
       my_putstr("(sh):error while matching for ", rw);
       my_putstr(m, rw);

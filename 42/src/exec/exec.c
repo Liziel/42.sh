@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 16:04:18 2013 vincent colliot
-** Last update Wed May 15 01:44:41 2013 vincent colliot
+** Last update Sat May 18 01:25:40 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -49,7 +49,6 @@ static BOOL	exec_built_in(t_cmd *cmd, t_info *info)
 BOOL		exec_cmd(t_cmd *cmd, t_info *info, FLAG son, FD w[3])
 {
   BOOL		sys_fail;
-  STATUS	dleft;
 
   sys_fail = FALSE;
   if (set_redir(cmd->redir, w, info, son) == FALSE)

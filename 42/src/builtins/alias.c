@@ -1,11 +1,11 @@
 /*
 ** alias.c for alias.c in /home/cloare_q//test/42.sh/42/src/builtins
-** 
+**
 ** Made by quentin cloarec
 ** Login   <cloare_q@epitech.net>
-** 
+**
 ** Started on  Mon May 13 15:24:37 2013 quentin cloarec
-** Last update Mon May 13 15:45:29 2013 quentin cloarec
+** Last update Sat May 18 01:16:49 2013 vincent colliot
 */
 
 #include "alias.h"
@@ -65,7 +65,7 @@ int	my_alias(t_words *cmd, t_alias **alias)
   int	nb;
 
   nb = 0;
-  verif_alias_loop(alias);
+  //  verif_alias_loop(alias); no need anymore
   cmd = cmd->next;
   if ((nb = nb_alias(cmd)) == 1)
     show_list(alias);
