@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May 18 01:19:45 2013 vincent colliot
-** Last update Sat May 18 03:45:54 2013 vincent colliot
+** Last update Sat May 18 03:53:50 2013 vincent colliot
 */
 
 static int p_one(t_alias *alias)
@@ -24,9 +24,9 @@ static BOOL valid_str(char *s)
 {
   if (s[my_sstrlen(s, " \\\t\"'|;<>()`")] != 0)
     {
-
-
-
+      print_err(INVALID_ALIAS);
+      print_err(s);
+      print_err("\n");
       return (FALSE);
     }
   return (TRUE);

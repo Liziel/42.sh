@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Sat May 18 03:50:06 2013 vincent colliot
+## Last update Sat May 18 13:11:08 2013 vincent colliot
 ##
 
 NAME    = 42.sh
@@ -68,6 +68,7 @@ PARSF	=$(SRCF)parsing/
 PARS	=$(PARSF)subdiv.c\
 	$(PARSF)comment.c\
 	$(PARSF)get_next_line.c\
+	$(PARSF)alias.c\
 
 ###### Parsing #########
 
