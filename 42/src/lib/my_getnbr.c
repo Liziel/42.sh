@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri Oct 26 14:50:00 2012 thomas lecorre
-** Last update Wed May 15 00:28:43 2013 vincent colliot
+** Last update Sat May 18 11:18:26 2013 thomas lecorre
 */
 
 #include "built.h"
@@ -35,7 +35,3 @@ int	my_getnbr(char *str)
     }
   return (nb * signe * -1);
 }
-/*
-**REMARQUE:
-**	pense a le move dans src/lib/
-*/
