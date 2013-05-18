@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May 13 13:04:25 2013 pierre-yves thomas
-** Last update Sat May 18 18:35:40 2013 pierre-yves thomas
+** Last update Sat May 18 18:48:28 2013 pierre-yves thomas
 */
 
 #ifndef	EDIT_LINE_H
@@ -65,7 +65,7 @@ int	init_values(int *, int *, char **, char **);
 */
 void    attribute_options(t_options *);
 int     modify_terminal(struct termios *);
-int     load_tgets_funcs(struct termios *);
+int     load_tgets_funcs();
 int     init_termios(struct termios *, struct termios *);
 char    *unset_termios(struct termios *);
 
