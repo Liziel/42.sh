@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Tue Apr 30 15:59:03 2013 vincent colliot
-** Last update Fri May 17 18:58:09 2013 pierre-yves thomas
+** Last update Sat May 18 22:58:45 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -18,7 +18,7 @@
 size_t	my_putchar(char c, FD out)
 {
   write(out, &c, 1);
-  return (0);
+  return (1);
 }
 
 size_t	my_putstr(const char *s, FD out)

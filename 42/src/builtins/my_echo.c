@@ -5,16 +5,64 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Tue May 14 18:25:48 2013 thomas lecorre
-** Last update Sat May 18 11:15:33 2013 thomas lecorre
+** Last update Sat May 18 23:56:36 2013 vincent colliot
 */
 
 #include "built.h"
+#include "flag.h"
+
+static void print(FLAG echo, t_words *link)
+{
+  BOOL		end;
+  size_t	i;
+
+  if (!link)
+    return ;
+  end = FALSE;
+  i = 0;
+  while ((link->word)[i] && !end)
+    i += print_seq(link->word + i, echo, &end);
+  if (end)
+    return ;
+  if (link->next)
+    my_putchar(' ', 1);
+  print(echo, link->next);
+}
+
+static void move_flag(t_words *link, t_words **move, FLAG *echo)
+{
+  *move = link;
+  if (!link)
+    return ;
+  if (MATCH("-e", link->word))
+    *echo |= ECHO_E;
+  else if (MATCH("-E", link->word))
+    *echo &= ~ECHO_E;
+  else if (MATCH("-n", link->word))
+    *echo |= ECHO_N;
+  else
+    return ;
+  move_flag(link->next, move, echo);
+}
+
+int	my_echo(t_words *cmd, void *null)
+{
+  FLAG  echo;
+
+  echo = 0;
+  move_flag(cmd, &cmd, &echo);
+  print(echo, cmd);
+  if (echo & ECHO_N)
+    my_putstr("\n");
+}
+
+/* -- -- -- -- -- -- -- -- -- */
 
 void	my_print_echo(char *str)
 {
   while (*str)
     {
-      if (*str == '\n')
+      if (MATCH(str, "\\n"))
 	{
 	  my_putchar('\\');
 	  my_putchar('n');
@@ -75,7 +123,7 @@ int	echo_e(t_words *cmd)
   return (EXIT_SUCCES);
 }
 
-int	echo_E(t_words *cmd)
+int	echo_E(t_words *cmd) echo -> -e -> "ls \\n"
 {
   while (cmd != NULL)
     {
