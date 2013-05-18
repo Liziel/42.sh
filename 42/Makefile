@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Sat May 18 13:11:08 2013 vincent colliot
+## Last update Sat May 18 16:52:41 2013 vincent colliot
 ##
 
 NAME    = 42.sh
@@ -19,22 +19,6 @@ SRCF	=$(FO)src/
 
 DIRF	=$(SRCF)directory/
 DIR	=$(DIRF)directory_in.c
-
-EDITF	=$(SRCF)edit_line/
-EDIT	=$(EDITF)read_cmds.c\
-	$(EDITF)load_term_settings.c\
-	$(EDITF)change_reverse_place.c\
-	$(EDITF)clean_screen.c\
-	$(EDITF)configure_signals.c\
-	$(EDITF)move_to_word_fct.c\
-	$(EDITF)remain_datas.c\
-	$(EDITF)save_and_copy_part_str.c\
-	$(EDITF)swap_chars_on_cmd.c\
-	$(EDITF)upper_lower_case_letters.c\
-	$(EDITF)take_cmd_from_history.c\
-	$(EDITF)modify_line.c\
-	$(EDITF)show_cmd.c\
-	$(EDITF)edit_line.c\
 
 EXECF	=$(SRCF)exec/
 EXEC	=$(EXECF)exec.c\
@@ -101,6 +85,42 @@ ORGA	=$(CMD)\
 	$(JEXE)\
 	$(ORJ)\
 	$(PIPE)\
+####### EDIT-LINE ######
+
+EDITF	=$(SRCF)edit_line/
+
+FED_AFF	=$(EDITF)aff_cmd/
+ED_AFF	=$(FED_AFF)show_cmd.c\
+
+FED_GET	=$(EDITF)get_cmd/
+ED_GET	=$(FED_GET)read_cmds.c\
+
+FED_HIST=$(EDITF)history/
+ED_HIST	=$(FED_HIST)take_cmd_from_history.c\
+
+FED_MOD	=$(EDITF)modif_cmd/
+ED_MOD	=$(FED_MOD)change_reverse_place.c\
+	$(FED_MOD)clean_screen.c\
+	$(FED_MOD)edit_line.c\
+	$(FED_MOD)load_term_settings.c\
+	$(FED_MOD)modify_line.c\
+	$(FED_MOD)move_to_word_fct.c\
+	$(FED_MOD)save_and_copy_part_str.c\
+        $(FED_MOD)swap_chars_on_cmd.c\
+        $(FED_MOD)upper_lower_case_letters.c\
+
+FED_SAVE=$(EDITF)save_datas/
+ED_SAVE	=$(FED_SAVE)remain_datas.c\
+
+FED_SIG	=$(EDITF)signals/
+ED_SIG	=$(FED_SIG)configure_signals.c\
+
+EDIT	=$(ED_AFF)\
+	$(ED_GET)\
+	$(ED_HIST)\
+	$(ED_MOD)\
+	$(ED_SAVE)\
+	$(ED_SIG)\
 
 ########################
 
