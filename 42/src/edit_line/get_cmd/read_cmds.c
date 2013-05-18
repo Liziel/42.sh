@@ -6,7 +6,7 @@
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
 <<<<<<< HEAD
-** Last update Sat May 18 17:19:39 2013 vincent colliot
+** Last update Sat May 18 19:10:59 2013 vincent colliot
 =======
 ** Last update Sat May 18 18:43:48 2013 pierre-yves thomas
 >>>>>>> 3f022d32e872c96b53fe7128d49e8c677f4d5f0b
@@ -35,12 +35,8 @@ int	read_cmds(t_info *info)
 {
   char			*str;
   t_history		*history;
-<<<<<<< HEAD
   struct termios        opt;
 
-=======
-  
->>>>>>> 3f022d32e872c96b53fe7128d49e8c677f4d5f0b
   history = ctrlcget(&info, NULL);
   my_putstr(info->termcaps.invi_cursor, 1);
   configure_signals();
