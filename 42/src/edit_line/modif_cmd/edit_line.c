@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Fri Apr 26 14:36:25 2013 pierre-yves thomas
-** Last update Sat May 18 18:37:57 2013 pierre-yves thomas
+** Last update Sat May 18 18:56:56 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
@@ -56,7 +56,7 @@ void		use_history(int *hs_pl, int *rev_c,
 static int     	read_cmd(int fd, char **str, char **cmd, int *reverse_case)
 {
   retain_cmd(1, cmd);
-  str = my_memset((*str), 0, 5);
+  (*str) = my_memset((*str), 0, 5);
   retain_reverse_case(1, reverse_case);
   if (read(fd, (*str), 4) <= 0 || (*str)[0] == 4)
     {
@@ -67,7 +67,7 @@ static int     	read_cmd(int fd, char **str, char **cmd, int *reverse_case)
   return (0);
 }
 
-char		*usr_cmd(int fd, t_history *history, t_options options)
+char			*usr_cmd(int fd, t_history *history, t_options options)
 {
   struct termios	set;
   struct termios	unset;

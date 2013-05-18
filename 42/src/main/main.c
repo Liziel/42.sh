@@ -5,19 +5,29 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Sat May 18 13:18:35 2013 vincent colliot
+** Last update Sat May 18 19:06:08 2013 pierre-yves thomas
 */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include "get.h"
 #include "orga.h"
-#include "exec.h"
+#include "edit_line.h"
 #include "string.h"
 #include "alias.h"
 
 int main(void)
 {
+  /*
+  t_info        info;
+
+  ** stockage simple de l'environ?
+  load_tgets_funcs();
+  attribute_options(&(info.termcaps));
+  retain_struct_options(1, &(info.termcaps));
+  read_cmds(&info);
+  return (0);
+  */
   char *test;
   BOOL	null;
   char  *bad_sintax;

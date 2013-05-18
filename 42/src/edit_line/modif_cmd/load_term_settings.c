@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Fri Apr 26 14:32:24 2013 pierre-yves thomas
-** Last update Sat May 18 18:34:28 2013 pierre-yves thomas
+** Last update Sat May 18 18:47:53 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
@@ -54,7 +54,7 @@ char	*unset_termios(struct termios *unset)
   return (NULL);
 }
 
-int	load_tgets_funcs(struct termios *opt)
+int	load_tgets_funcs()
 {
   if (tgetent(NULL, NULL) != 1)
     {
