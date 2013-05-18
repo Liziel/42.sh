@@ -5,37 +5,8 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May 18 01:19:45 2013 vincent colliot
-** Last update Sat May 18 02:19:44 2013 vincent colliot
+** Last update Sat May 18 03:45:54 2013 vincent colliot
 */
-
-int mod_alias(char *a, char *f, t_alias **alias)
-{
-  t_alias *put;
-  t_alias *link;
-
-  if ((link = xmalloc(sizeof(*link))) == NULL)
-    return (EXIT_FAILURE);
-  if ((link->name = my_strdup(a)) == NULL)
-    return (EXIT_FAILURE);
-  if ((link->fill = my_strdup(f)) == NULL)
-    return (EXIT_FAILURE);
-  if (my_strcmp((*alias)->name, a) > 0)
-    {
-      link->next = *alias;
-      *alias = link;
-      return (EXIT_SUCCESS);
-    }
-  put = *alias;
-  while (put)
-    {
-      if (!put->next)
-	return (add_after(put, link));
-      else if (my_strcmp(put->next->name, a) > 0)
-	return (add_after(put, link));
-      put = put->next;
-    }
-  return (EXIT_SUCCESS);
-}
 
 static int p_one(t_alias *alias)
 {
@@ -47,6 +18,18 @@ static int p_one(t_alias *alias)
   my_putstr(alias->fill);
   my_putstr("\"\n");
   return (EXIT_SUCCESS);
+}
+
+static BOOL valid_str(char *s)
+{
+  if (s[my_sstrlen(s, " \\\t\"'|;<>()`")] != 0)
+    {
+
+
+
+      return (FALSE);
+    }
+  return (TRUE);
 }
 
 static int get_n(t_words *cmd, t_alias *alias, t_alias **mod)
@@ -61,7 +44,9 @@ static int get_n(t_words *cmd, t_alias *alias, t_alias **mod)
       alias = alias->next;
     }
   if (!cmd->next)
-    return (p_one(alias));
+    return (p_one(pnew));
+  if (valid_str(cmd->word) == FALSE)
+    return (EXIT_FAILURE);
   if (!pnew)
     return (mod_alias(cmd->word, cmd->next->word, mod));
   free(pnew->fill);

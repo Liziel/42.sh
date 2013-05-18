@@ -5,30 +5,27 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May 18 02:19:51 2013 vincent colliot
-** Last update Sat May 18 02:21:00 2013 vincent colliot
+** Last update Sat May 18 03:36:12 2013 vincent colliot
 */
 
 static add_after(t_alias *put, t_alias *link)
 {
   link->next = put->next;
-  put->next = link;
+  if (link->next)
+    link->next->prev = link;
+  link->prev = put;
+  link->prev->next = link;
   return (EXIT_SUCCESS);
 }
 
-int mod_alias(char *a, char *f, t_alias **alias)
+static int add_link(t_alias *link, char *a, t_alias **alias)
 {
   t_alias *put;
-  t_alias *link;
 
-  if ((link = xmalloc(sizeof(*link))) == NULL)
-    return (EXIT_FAILURE);
-  if ((link->name = my_strdup(a)) == NULL)
-    return (EXIT_FAILURE);
-  if ((link->fill = my_strdup(f)) == NULL)
-    return (EXIT_FAILURE);
   if (my_strcmp((*alias)->name, a) > 0)
     {
       link->next = *alias;
+      (*alias)->prev = link
       *alias = link;
       return (EXIT_SUCCESS);
     }
@@ -42,5 +39,21 @@ int mod_alias(char *a, char *f, t_alias **alias)
       put = put->next;
     }
   return (EXIT_SUCCESS);
+}
+
+int mod_alias(char *a, char *f, t_alias **alias)
+{
+  t_alias *link;
+
+  if ((link = xmalloc(sizeof(*link))) == NULL)
+    return (EXIT_FAILURE);
+  if ((link->name = my_strdup(a)) == NULL)
+    return (EXIT_FAILURE);
+  if ((link->fill = my_strdup(f)) == NULL)
+    return (EXIT_FAILURE);
+  link->prev = NULL;
+  link->next = NULL;
+  if (*alias)
+    return (add_link(link, a, alias));
 }
 
