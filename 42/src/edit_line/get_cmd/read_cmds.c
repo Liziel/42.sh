@@ -1,11 +1,11 @@
 /*
 ** read_cmds.c for 42 in /home/thomas_1//Projets/42.sh/42/src/edit_line
-** 
+**
 ** Made by pierre-yves thomas
 ** Login   <thomas_1@epitech.net>
-** 
+**
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
-** Last update Sat May 18 15:37:53 2013 pierre-yves thomas
+** Last update Sat May 18 17:19:39 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -32,7 +32,7 @@ int	read_cmds(t_info *info)
   char			*str;
   t_history		*history;
   struct termios        opt;
-  
+
   history = ctrlcget(&info, NULL);
   if (load_tgets_funcs(&opt) == -1)
     return (-1);

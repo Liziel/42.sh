@@ -5,11 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:58:16 2013 vincent colliot
-<<<<<<< HEAD
-** Last update Sat May 18 14:10:27 2013 vincent colliot
-=======
-** Last update Wed May 15 13:49:57 2013 quentin cloarec
->>>>>>> 17eee20bcf22af4a3d760ac1186819eec227d729
+** Last update Sat May 18 18:44:31 2013 vincent colliot
 */
 
 #include <sys/wait.h>
@@ -36,9 +32,11 @@ static void	my_wait(pid_t son, STATUS *st)
   STATUS stat;
   pid_t	pid;
 
-  while ((pid = waitpid(0, &stat, 0)) != -1)
-    if (pid == son)
-      *st = stat;
+  while ((pid = waitpid(-1, &stat, WNOHANG)) >= 0)
+    {
+      if (pid == son)
+  	*st = stat;
+    }
 }
 
 static BOOL	exec_pipes(t_pipes *p, t_info *info, FLAG son, FD pi[3])
@@ -65,9 +63,9 @@ static BOOL	exec_pipes(t_pipes *p, t_info *info, FLAG son, FD pi[3])
     init_pipe(w, pi, W_OUT);
   if (exec_cmd(p->cmd, info, son | (FATHER * (pid > 0)), pi) == FALSE)
     return (FALSE);
+  my_wait(pid, &status_quo);
   if (pid < 0)
     return (TRUE);
-  my_wait(pid, &status_quo);
   if ((WEXITSTATUS(status_quo)))
     info->st = EXIT_FAILURE;
   return (TRUE);
@@ -102,7 +100,10 @@ static BOOL	and_or(t_exec *e, t_info *info)
   p[W_OUT] = W_OUT;
   p[W_ERR] = W_ERR;
   if (exec_pipes(e->pipes, info, 0, p) == FALSE)
-    return (FALSE);
+    {
+      while (waitpid(-1, NULL, WNOHANG) >= 0);
+      return (FALSE);
+    }
   fd_to(w);
   if (e->type == OR && info->st == EXIT_FAILURE)
     return (and_or(e->next, info));

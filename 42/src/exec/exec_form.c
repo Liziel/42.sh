@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 01:40:28 2013 vincent colliot
-** Last update Sat May 18 13:36:58 2013 vincent colliot
+** Last update Sat May 18 18:33:04 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -77,6 +77,7 @@ STATUS		exec_form(t_words *list, BOOL *sys_fail, BOOL son)
   pid_t		pid;
   char		**tab;
 
+  pid = 0;
   if ((tab = to_tab(list, sys_fail)) == NULL)
     return (EXIT_FAILURE + !((*sys_fail) = TRUE));
   if ((pid = fork()) == -1)

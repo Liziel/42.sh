@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May  4 12:44:30 2013 vincent colliot
-** Last update Sat May 18 03:53:21 2013 vincent colliot
+** Last update Sat May 18 17:19:16 2013 vincent colliot
 */
 
 #ifndef ERROR_H_
@@ -16,7 +16,7 @@
 # define UNMATCHED_PARENTS "(sh): syntax error near unexpected token `)'"
 # define UNMATCHED_BACKMACHIN "(sh): syntax error near unexpected token ``'"
 # define UNKNOW_CMD "(sh): command not found : "
-# define WRONG_SEP_TOKEN "(sh): sintax error neat unexpected token `"
+# define WRONG_SEP_TOKEN "(sh): syntax error near unexpected token `"
 # define WRONG_REDIR "(sh): wrong redirection"
 # define ERROR_IN_REDIR "(sh): unexpected EOS after redirection"
 # define FILE_ERROR "(sh): no such file: "

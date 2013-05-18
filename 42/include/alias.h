@@ -5,11 +5,13 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May 18 01:17:38 2013 vincent colliot
-** Last update Sat May 18 03:30:58 2013 vincent colliot
+** Last update Sat May 18 17:21:17 2013 vincent colliot
 */
 
 #ifndef ALIAS_H_
 # define ALIAS_H_
+
+#include <stdlib.h>
 
 typedef struct s_alias{
   char	*name;
