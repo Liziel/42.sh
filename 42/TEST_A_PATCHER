@@ -1,0 +1,1 @@
+cat /etc/passwd | tr : # | tr -s abcdefghiuijklmnopqrstuvwxyz | cut -c 2 | grep -e a -e b -e c -e d -e e -e f|sort|uniq -c

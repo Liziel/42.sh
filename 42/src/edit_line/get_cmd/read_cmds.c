@@ -5,7 +5,11 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
+<<<<<<< HEAD
 ** Last update Sat May 18 17:19:39 2013 vincent colliot
+=======
+** Last update Sat May 18 18:43:48 2013 pierre-yves thomas
+>>>>>>> 3f022d32e872c96b53fe7128d49e8c677f4d5f0b
 */
 
 #include <stdlib.h>
@@ -31,12 +35,13 @@ int	read_cmds(t_info *info)
 {
   char			*str;
   t_history		*history;
+<<<<<<< HEAD
   struct termios        opt;
 
+=======
+  
+>>>>>>> 3f022d32e872c96b53fe7128d49e8c677f4d5f0b
   history = ctrlcget(&info, NULL);
-  if (load_tgets_funcs(&opt) == -1)
-    return (-1);
-  modify_terminal(&opt);
   my_putstr(info->termcaps.invi_cursor, 1);
   configure_signals();
   while ((str = usr_cmd(0, history, info->termcaps)))
