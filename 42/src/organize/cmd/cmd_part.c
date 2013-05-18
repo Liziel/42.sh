@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May  3 18:33:37 2013 vincent colliot
-** Last update Wed May 15 02:13:32 2013 vincent colliot
+** Last update Sat May 18 21:26:36 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -53,8 +53,9 @@ static t_words	*list_cmd(t_get *word, t_cmd *clink, t_words *prev, char **bad_si
   link = prev;
   if (!((IN('>', word->word) || IN('<', word->word)) && !word->inter))
     {
+      clink->type = WORDS;
       if ((clink->type = WORDS) && prev)
-	if ((link = interpret_params(word, &word, &prev)) == NULL)
+	if ((link = interpret_params(word, &word, &prev, bad_sintax)) == NULL)
 	  return ((void*)(long)nullify_words(word));
       if ((clink->type = WORDS) && !prev)
 	if ((link = interpret_cmd(word, &word, bad_sintax, &prev)) == NULL)
@@ -89,14 +90,16 @@ static BOOL	parents(t_get *word, t_get **words, t_cmd *link, char **bad_sintax)
   if ((organize = word->next))
     word->next->prev = NULL;
   rm_words(word);
-  if ((word = *words) == NULL)
+  if ((word = (*words)->prev) == NULL)
     return (FALSE);
-  if (word->prev)
-    word->prev->next = NULL;
-  *words = word->next;
-  rm_words(word);
+  word->next = NULL;
+  word = (*words)->next;
+  rm_words(*words);
   if ((link->parents = orga(organize, bad_sintax, &no_word)) == NULL)
     return (check_sintax(bad_sintax, no_word));
+  while (word)
+    if (!add_redir(word, &word, bad_sintax, link))
+      return (FALSE);
   return (TRUE);
 }
 
@@ -109,7 +112,7 @@ BOOL	cmd_part(t_get *word, t_get **words, t_cmd *link, char **bad_sintax)
   link->type = OREDIR;
   link->redir = NULL;
   if ((link->params = list_cmd(word, link, NULL, bad_sintax)) == NULL)
-    if (link->type != OREDIR)
+    if (link->type != OREDIR || *bad_sintax)
       return (FALSE);
   return (TRUE);
 }

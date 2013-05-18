@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 17:59:47 2013 thomas lecorre
-** Last update Sat May 18 13:35:37 2013 thomas lecorre
+** Last update Sat May 18 20:31:00 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -32,36 +32,32 @@ void	env_i(void)
 
 BOOL	env_u(t_words *cmd)
 {
-  int	i;
-  int	n;
   char	**tab;
+  size_t i;
+  size_t n;
 
-  i = 0;
   if (!cmd)
+    return (!(BOOL)print_err("env: option requires an argument -- 'u'"));
+  n = (i = 0);
+  while (environ[i])
+    if (MATCH(environ[i++], cmd->word))
+      n = 1;
+  if (!n)
+    return (TRUE);
+  if ((tab = xmalloc(sizeof(char*) * (i))) == NULL)
     return (FALSE);
+  n = (i = 0);
   while (environ[i])
     {
-      if (cmd->word && NMATCH(cmd->word, environ[i]))
-	if (environ[i][my_strlen(cmd->word)] == '=')
-	  {
-	    free(environ[i]);
-	    environ[i] = NULL;
-	  }
+      if (!(MATCH(environ[i], cmd->word)))
+	tab[n++] = environ[i];
+      else
+	free(environ[i]);
       i++;
     }
-  if ((tab = malloc(sizeof(char *) * (i))) == NULL)
-    return (EXIT_FAILURE);
-  tab[i - 1] = NULL;
-  n = i;
-  i = -1;
-  while (++i < n)
-    if (environ[i])
-      tab[n++] = environ[i];
-  tab[n] = NULL;
   free(environ);
   environ = tab;
   return (TRUE);
-
 }
 
 BOOL	env_s(t_words *cmd)
@@ -70,8 +66,8 @@ BOOL	env_s(t_words *cmd)
   int	i;
   char	**tab;
 
-  if (!cmd->next)
-    return (FALSE);
+  if (!cmd || !cmd->next)
+    return (!(BOOL)print_err("env: option requires two argument -- 'u'"));
   line = my_stricat(cmd->word, cmd->next->word, '=');
   if ((i = -(environ != NULL)))
     while (environ[++i])
@@ -93,11 +89,39 @@ BOOL	env_s(t_words *cmd)
   return (TRUE);
 }
 
+BOOL get_opt(t_word *opt, t_word **call)
+{
+  *call = opt;
+  if (!opt)
+    return (TRUE);
+  if (MATCH(opt->word, "-i"))
+    {
+      env_i();
+      return (get_opt(opt->next, call));
+    }
+  if (MATCH(opt->word, "-u"))
+    {
+      if (env_u(opt->next))
+	return (FALSE);
+      return (get_opt(opt->next->next, call));
+    }
+  if (MATCH(opt->word, "-s"))
+    {
+      if (env_s(opt->next))
+	return (FALSE);
+      return (get_opt(opt->next->next->next, call));
+    }
+  if (MATCH(opt->word, "--help"))
+    return (print_help());
+  return (TRUE);
+}
+
 int	env_cmd(t_words *cmd, void *bool)
 {
   size_t	i;
   char		**save;
 
+  (void)bool;
   i = 0;
   save = env_copy();
   if (get_opt(cmd, &cmd) == FALSE)

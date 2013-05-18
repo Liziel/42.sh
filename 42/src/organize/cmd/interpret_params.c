@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May  6 20:09:42 2013 vincent colliot
-** Last update Tue May 14 02:17:00 2013 vincent colliot
+** Last update Sat May 18 21:11:39 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -13,13 +13,22 @@
 #include "bool.h"
 #include "string.h"
 #include "xmalloc.h"
+#include "error.h"
+
+static void	*sintax_error(char **bad_sintax)
+{
+  *bad_sintax = my_strcat(ERROR_NEAR_TOKEN, "(");
+  return (NULL);
+}
 
 t_words		*interpret_params(t_get *word, t_get **words,
-				  t_words **last)
+				  t_words **last, char **bad_sintax)
 {
   BOOL		no_match;
   t_words	*params;
 
+  if (MATCH("(", word->word))
+    return (sintax_error(bad_sintax));
   no_match = TRUE;
   if (!word->inter && (IN('*', word->word)))
     if (match_them(word->word + last_occur(word->word, '/', '*') + IN('/', word->word),

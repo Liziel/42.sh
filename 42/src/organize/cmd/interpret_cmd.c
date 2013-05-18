@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May  4 16:34:47 2013 vincent colliot
-** Last update Sat May 18 20:06:59 2013 vincent colliot
+** Last update Sat May 18 21:11:04 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -89,12 +89,12 @@ t_words		*interpret_cmd(t_get *word, t_get **words, char **bad_sintax,
   t_words	*link;
   char		*cmd;
 
-  cmd = NULL;
-  /* if (NMATCH("`", word->word)) */
-  /*   if ((cmd = back_quote(word, words, bad_sintax)) == NULL) */
-  /*     return (NULL); */
-  if (!cmd)
-    cmd = word->word;
+  if (MATCH("(", word->word))
+    {
+      *bad_sintax = my_strcat(ERROR_NEAR_TOKEN, "(");
+      return (NULL);
+    }
+  cmd = word->word;
   if ((*last = (link = xmalloc(sizeof(*link)))) == NULL)
     return (NULL);
   if (cmd[0] == '.' || IN('/', cmd))
