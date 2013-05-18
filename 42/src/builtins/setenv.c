@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 15:05:03 2013 thomas lecorre
-** Last update Mon May 13 15:49:05 2013 thomas lecorre
+** Last update Sat May 18 12:18:04 2013 thomas lecorre
 */
 
 #include <stdlib.h>
@@ -21,8 +21,13 @@ int	setenv(t_words *cmd, void *bool);
   int	i;
 
   if (cmd->next == NULL)
-    env_cmd(cmd, alias);//env_cmd non?
+    env_cmd(cmd, alias);
   cmd = cmd->next;
+  if (cmd->next->next->next)
+    {
+      my_putstr("setenv : Too many arguments.\n");
+      return (EXIT_FAILURE);
+    }
   if (cmd->next)
     line = my_stricat(cmd->word, cmd->next->word, '=');
   else
@@ -42,7 +47,7 @@ int	setenv(t_words *cmd, void *bool);
     while (environ[++i] != NULL)
       tab[i] = environ[i];
   tab[i] = line;
-  free(environ); //maintenant tu peut car c'es toi qui l'as créé!
+  free(environ);
   environ = tab;
   return (EXIT_SUCCES);
 }
