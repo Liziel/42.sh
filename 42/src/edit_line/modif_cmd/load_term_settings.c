@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Fri Apr 26 14:32:24 2013 pierre-yves thomas
-** Last update Fri May 17 17:18:26 2013 pierre-yves thomas
+** Last update Sat May 18 18:34:28 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
@@ -35,13 +35,27 @@ int     modify_terminal(struct termios *opt)
   return (0);
 }
 
-int	load_tgets_funcs(struct termios *opt)
+int	init_termios(struct termios *set, struct termios *unset)
 {
-  if (tcgetattr(0, opt) == -1)
+  if (tcgetattr(0, set) == -1 ||
+      tcgetattr(0, unset) == -1)
     {
       my_putstr("Fail on tcgetattr", 2);
       return (-1);
     }
+  if (modify_terminal(set) == -1)
+    return (-1);
+  return (0);
+}
+
+char	*unset_termios(struct termios *unset)
+{
+  tcsetattr(0, TCSANOW, unset);
+  return (NULL);
+}
+
+int	load_tgets_funcs(struct termios *opt)
+{
   if (tgetent(NULL, NULL) != 1)
     {
       my_putstr("Fail on tgetent", 2);
