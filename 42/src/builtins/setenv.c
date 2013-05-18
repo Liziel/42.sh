@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 15:05:03 2013 thomas lecorre
-** Last update Mon May 13 15:49:05 2013 thomas lecorre
+** Last update Sat May 18 12:35:39 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -14,7 +14,7 @@
 #include "env.h"
 #include "built.h"
 
-int	setenv(t_words *cmd, void *bool);
+int	setenv(t_words *cmd, void *bool)
 {
   char	*line;
   char	**tab;

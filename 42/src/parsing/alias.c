@@ -5,16 +5,19 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:25:12 2013 vincent colliot
-** Last update Sat May 18 03:41:50 2013 vincent colliot
+** Last update Sat May 18 14:56:03 2013 vincent colliot
 */
+
+#include "string.h"
+#include "alias.h"
 
 static void	extend(t_alias *link, size_t n, size_t ext)
 {
   while (link->prev)
-    link = link->prev
+    link = link->prev;
   while (link)
     {
-      if (link->w < n && link->w + link->n > n)
+      if (link->w <= n && link->w + link->n > n)
 	link->n += ext;
       link = link->next;
     }
@@ -27,42 +30,45 @@ static int	push_alias(char *s, t_alias *alias, char **mod, size_t n)
 
   if (!alias)
     return (0);
-  if (!(my_strlen(alias->name) == my_sstrlen(s, "\t ") &&
+  if (!((my_strlen(alias->name) == my_sstrlen(s, " \\\t\"'|&;()`") ||
+	 my_strlen(alias->name) == my_strlen(s))&&
 	NMATCH(alias->name, s)))
-    return (push_alias(s, alias->next));
+    return (push_alias(s, alias->next, mod, n));
   if (alias->w <= n && alias->w + alias->n > n)
-    return (push_alias(s, alias->next));
-  extend(beg, n, my_strlen(alias->fill));
-  if ((r = my_strndup(s, n)) == NULL && n != 0)
+    return (push_alias(s, alias->next, mod, n));
+  extend(alias, n, my_strlen(alias->fill) - my_strlen(alias->name));
+  if ((r = my_strndup(*mod, n)) == NULL && n != 0)
     return (-1);
   if ((r2 = my_strcat(r, alias->fill)) == NULL)
     return (-1);
   free(r);
-  *mod = my_strcat(r2, s + my_strlen(alias->fill));
+  s = *mod;
+  *mod = my_strcat(r2, s + my_strlen(alias->name));
   free(r2);
   free(s);
-  return (push_alias(s, alias->next, mod, n));
+  alias->w = n;
+  alias->n = my_strlen(alias->fill);
+  return (1);
 }
 
 static int	grow_alias(char *s, t_alias *alias, size_t n, char **mod)
 {
-  t_alias	*fill;
   int		r;
 
   if (!s[0])
     return (0);
   if ((r = push_alias(s, alias, mod, n)))
     return (r);
-  return (grow_alias(s + my_sstrlen(s, "\"'|;<>()`")
-		     + (s[my_sstrlen(s, "\"'|;<>()`")] != 0)
-		     + hempty(s + my_sstrlen(s, "\"'|;<>()`")
-			      + (s[my_sstrlen(s, "\"'|;<>()`")] != 0))
-		     , alias,
-		     n + my_sstrlen(s, "\"'|;<>()`")
-		     + (s[my_sstrlen(s, "\"'|;<>()`")] != 0)
-		     + hempty(s + my_sstrlen(s, "\"'|;<>()`")
-			      + (s[my_sstrlen(s, "\"'|;<>()`")] != 0)),
-		     mod));
+  return (grow_alias(s + (my_sstrlen(s, "&|;(`")
+			  + (s[my_sstrlen(s, "&|;(`")] != 0)
+			  + hempty(s + my_sstrlen(s, "&|;(`")
+				   + (s[my_sstrlen(s, "&|;(`")] != 0)))
+		     , alias
+		     , n + (my_sstrlen(s, "&|;(`")
+			    + (s[my_sstrlen(s, "&|;(`")] != 0)
+			    + hempty(s + my_sstrlen(s, "&|;(`")
+				     + (s[my_sstrlen(s, "&|;(`")] != 0)))
+		     , mod));
 }
 
 BOOL	seed_alias(char *s, t_alias *alias)
@@ -79,7 +85,7 @@ BOOL	seed_alias(char *s, t_alias *alias)
     }
   r = 0;
   if (alias)
-    while ((r = grow_alias(s + hempty(s), alias, hempty(s))) > 0);
+    while ((r = grow_alias(s + hempty(s), alias, hempty(s), &s)) > 0);
   if (!r)
     return (TRUE);
   return (FALSE);

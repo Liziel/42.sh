@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Sat May 18 02:48:42 2013 vincent colliot
+** Last update Sat May 18 13:18:35 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -14,6 +14,7 @@
 #include "orga.h"
 #include "exec.h"
 #include "string.h"
+#include "alias.h"
 
 int main(void)
 {
@@ -23,7 +24,9 @@ int main(void)
   t_info	info;
   t_get *g;
   t_jobs	*j;
+  t_alias	*a;
 
+  a = NULL;
   attribute_options(&(info.termcaps));
   bad_sintax = NULL;
   my_putstr("test>", 1);

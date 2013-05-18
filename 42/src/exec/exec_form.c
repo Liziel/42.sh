@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 01:40:28 2013 vincent colliot
-** Last update Tue May 14 21:32:47 2013 vincent colliot
+** Last update Sat May 18 13:36:58 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -88,5 +88,5 @@ STATUS		exec_form(t_words *list, BOOL *sys_fail, BOOL son)
       return (EXIT_FAILURE + !((*sys_fail) = TRUE));
   clean_signal(st);
   free(tab);
-  return (!(WEXITSTATUS(st)));
+  return (0 != (WEXITSTATUS(st)));
 }

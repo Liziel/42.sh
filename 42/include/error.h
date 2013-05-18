@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May  4 12:44:30 2013 vincent colliot
-** Last update Fri May 17 18:37:37 2013 vincent colliot
+** Last update Sat May 18 03:53:21 2013 vincent colliot
 */
 
 #ifndef ERROR_H_
@@ -23,5 +23,6 @@
 # define DIR_ERROR "(sh): no such direcotry: "
 # define IS_DIR_ERROR1 "(sh):error : "
 # define IS_DIR_ERROR2 " : is a directory"
+# define INVALID_ALIAS "(sh): alias error: invalid character in sentence: "
 
 #endif
