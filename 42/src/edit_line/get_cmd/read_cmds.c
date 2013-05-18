@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
-** Last update Fri May 17 19:50:29 2013 pierre-yves thomas
+** Last update Sat May 18 15:37:53 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
@@ -44,7 +44,6 @@ int	read_cmds(t_info *info)
       my_put_in_history(&history, str);
       history = ctrlcget(&info, history);
       /* fonction de parseur d'exec toussa² ici*/
-      free(str);
     }
   free_history(history);
   my_putstr(info->termcaps.visi_cursor, 1);
