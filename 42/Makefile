@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Sun May 19 05:35:50 2013 vincent colliot
+## Last update Sun May 19 07:51:54 2013 vincent colliot
 ##
 
 NAME    = Sla.sh
@@ -146,11 +146,19 @@ B_ENV	=$(FENV)env_cmd.c\
 FEXIT	=$(BUILTF)exit/
 EXIT	=$(FEXIT)exit.c
 
+FSET	=$(BUILTF)setenv/
+BSET	=$(FSET)setenv.c\
+
+FUSET	=$(BUILTF)unsetenv/
+BUSET	=$(FUSET)unsetenv.c\
+
 BUILT_IN=$(ALIAS)\
 	$(ECHO)\
 	$(CD)\
 	$(B_ENV)\
 	$(EXIT)\
+	$(BSET)\
+	$(BUSET)\
 
 ########################
 

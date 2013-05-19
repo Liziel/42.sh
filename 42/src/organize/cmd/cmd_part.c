@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May  3 18:33:37 2013 vincent colliot
-** Last update Sat May 18 21:26:36 2013 vincent colliot
+** Last update Sun May 19 07:17:45 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -73,10 +73,10 @@ static t_words	*list_cmd(t_get *word, t_cmd *clink, t_words *prev, char **bad_si
   return (link);
 }
 
-static BOOL	check_sintax(char **bad_sintax, BOOL null)
+static BOOL	check_sintax(char **bad_sintax, BOOL null, char *s)
 {
   if (null)
-    *bad_sintax = my_strdup(UNMATCHED_PARENTS);
+    *bad_sintax = my_strdup(s);
   return (FALSE);
 }
 
@@ -85,18 +85,20 @@ static BOOL	parents(t_get *word, t_get **words, t_cmd *link, char **bad_sintax)
   BOOL		no_word;
   t_get	*organize;
 
-  if (match_parents(words, bad_sintax) == FALSE)
+  if (lvl_parents(words, bad_sintax) == FALSE)
     return (FALSE);
   if ((organize = word->next))
     word->next->prev = NULL;
   rm_words(word);
   if ((word = (*words)->prev) == NULL)
-    return (FALSE);
+    return (check_sintax(bad_sintax, 1, ERROR_NEAR_PARENTS));
+  if (MATCH(word->word, "("))
+    return (check_sintax(bad_sintax, 1, ERROR_NEAR_PARENTS));
   word->next = NULL;
   word = (*words)->next;
   rm_words(*words);
   if ((link->parents = orga(organize, bad_sintax, &no_word)) == NULL)
-    return (check_sintax(bad_sintax, no_word));
+    return (check_sintax(bad_sintax, no_word, UNMATCHED_PARENTS));
   while (word)
     if (!add_redir(word, &word, bad_sintax, link))
       return (FALSE);

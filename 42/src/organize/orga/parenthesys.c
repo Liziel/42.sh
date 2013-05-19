@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May  3 01:01:26 2013 vincent colliot
-** Last update Fri May 10 13:08:09 2013 vincent colliot
+** Last update Sun May 19 07:18:46 2013 vincent colliot
 */
 
 #include "get.h"
@@ -30,6 +30,7 @@ BOOL	lvl_parents(t_get **words, char **bad_sintax)
 					  - MATCH(")", (link)->word));
       if (MATCH("`", (link)->word))
 	plevel = !plevel;
+      *words = link;
       link = link->next;
     }
   if (plevel)
@@ -38,7 +39,6 @@ BOOL	lvl_parents(t_get **words, char **bad_sintax)
     *bad_sintax = my_strdup(UNMATCHED_BACKMACHIN);
   if (plevel || blevel)
     return (FALSE);
-  *words = link;
   return (TRUE);
 }
 

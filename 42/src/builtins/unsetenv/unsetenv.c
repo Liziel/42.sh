@@ -5,13 +5,14 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 17:03:04 2013 thomas lecorre
-** Last update Sun May 19 06:45:18 2013 vincent colliot
+** Last update Sun May 19 07:55:57 2013 vincent colliot
 */
 
 #include <stdlib.h>
 #include "string.h"
 #include "env.h"
 #include "built.h"
+#include "xlib.h"
 
 static int  switch_env(char **tab)
 {
@@ -30,14 +31,15 @@ static BOOL deset(t_words *cmd, char *env)
   return (deset(cmd->next, env));
 }
 
-int	built_setenv(t_words *cmd, void *alias)
+int	built_unsetenv(t_words *cmd, void *null)
 {
   char		**tab;
   size_t	i;
   size_t	n;
 
+  (void)null;
   if (!cmd->next)
-    return (my_putstr("(sh): unsetenv: Too few arguments.\n") != 0);
+    return (my_putstr("(sh): unsetenv: Too few arguments.\n", 2) != 0);
   i = (n = 0);
   if (environ)
     while (environ[i])

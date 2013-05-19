@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 15:05:03 2013 thomas lecorre
-** Last update Sun May 19 06:35:52 2013 vincent colliot
+** Last update Sun May 19 07:53:44 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -13,6 +13,7 @@
 #include "string.h"
 #include "env.h"
 #include "built.h"
+#include "xlib.h"
 
 static int fill_env(char **tab, t_words *cmd, char *s)
 {
@@ -49,18 +50,18 @@ int	built_setenv(t_words *cmd, void *bool)
 
   (void)bool;
   if (cmd->next == ((void*)(n = (i = 0))))
-    return (env_cmd(cmd, bool));
+    return (built_env(cmd, bool));
   cmd = cmd->next;
   if (cmd->next)
     if (cmd->next->next)
-      return (my_putstr("(sh): setenv : Too many arguments.\n") != 0);
+      return (my_putstr("(sh): setenv : Too many arguments.\n", 2) != 0);
   if (environ)
     while (environ[i])
       if (NMATCH(environ[i], cmd->word)
 	  && environ[i][my_strlen(cmd->word)] == '"')
 	n = 1;
   if ((tab = xmalloc(sizeof(char *) * (i + !n + 1))) == NULL)
-    return (NULL);
+    return (EXIT_FAILURE);
   if (cmd->next)
     return (fill_env(tab, cmd, cmd->next->word));
   return (fill_env(tab, cmd, NULL));
