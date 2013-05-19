@@ -5,10 +5,17 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 17 17:17:12 2013 vincent colliot
-** Last update Fri May 17 19:17:43 2013 vincent colliot
+** Last update Sun May 19 04:46:33 2013 vincent colliot
 */
 
-static BOOL	old_new(char **def, char *env)
+#include "env.h"
+#include "unistd.h"
+#include "built.h"
+#include "string.h"
+#include "xlib.h"
+#include "error.h"
+
+static int	old_new(char **def, char *env)
 {
   char	*apwd;
 
@@ -17,6 +24,7 @@ static BOOL	old_new(char **def, char *env)
   free(*def);
   *def = my_stricat(env, apwd, '"');
   free(apwd);
+  return (EXIT_SUCCESS);
 }
 
 static BOOL	set_old(char *env)
@@ -46,9 +54,9 @@ static BOOL	set_old(char *env)
 static char	*new_pwd(t_words *wpwd)
 {
   if (!wpwd)
-    return (get_env(HOME));
+    return (get_env("HOME"));
   if (MATCH(wpwd->word, "-"))
-    return (get_env(OLD_PWD)));
+    return (get_env("OLD_PWD"));
   return (wpwd->word);
 }
 
@@ -57,25 +65,26 @@ static BOOL	set_new(char *new)
   if (chdir(new) == -1)
     {
       print_err(DIR_ERROR);
-      print_err(cmd);
+      print_err(new);
       return (EXIT_FAILURE);
     }
   return (set_old("PWD"));
 }
 
-int	cd(t_words *cmd, void *bool)
+int	built_cd(t_words *cmd, void *null)
 {
   char	*new;
 
+  (void)null;
   if ((new = new_pwd(cmd->next)) == NULL)
     {
       print_err(DIR_ERROR);
-      print_err(cmd);
+      print_err(cmd->word);
       return (EXIT_FAILURE);
     }
-  if ((*(BOOL*)bool) = set_old("OLD_PWD") == FALSE)
+  if (set_old("OLD_PWD") == FALSE)
     return (EXIT_FAILURE);
-  if (set_new(new_pwd) == FALSE)
+  if (set_new(new) == FALSE)
     return (EXIT_FAILURE);
   return (EXIT_SUCCESS);
 }

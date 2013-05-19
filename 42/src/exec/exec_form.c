@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 01:40:28 2013 vincent colliot
-** Last update Sat May 18 18:33:04 2013 vincent colliot
+** Last update Sun May 19 05:11:38 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -71,7 +71,7 @@ static void	clean_signal(STATUS signal)
     my_putstr("\n", 2);
 }
 
-STATUS		exec_form(t_words *list, BOOL *sys_fail, BOOL son)
+STATUS		exec_form(t_words *list, BOOL *sys_fail)
 {
   STATUS	st;
   pid_t		pid;

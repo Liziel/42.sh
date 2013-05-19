@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May  4 16:34:47 2013 vincent colliot
-** Last update Sat May 18 21:11:04 2013 vincent colliot
+** Last update Sun May 19 04:45:05 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -53,7 +53,7 @@ static char	*verify(char *cmd, char **bad_sintax)
   return (r);
 }
 
-static char	*seek_cmd(char *cmd, char **bad_sintax)
+char	*seek_cmd(char *cmd, char **bad_sintax)
 {
   char *r;
   char *wh;

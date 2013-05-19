@@ -1,8 +1,0 @@
-ENV:
-
-->copie environ dans save
-->bosser sur environ selon les options :
-	-i -> deset all
-	-u -> deset var
-	-s -> setenv [name] [content
-->free environ

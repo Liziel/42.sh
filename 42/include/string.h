@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 20:25:19 2013 vincent colliot
-** Last update Fri May 17 18:37:30 2013 pierre-yves thomas
+** Last update Sun May 19 05:36:25 2013 vincent colliot
 */
 
 #ifndef STRING_H_
@@ -63,5 +63,8 @@ size_t	my_putpath(const char *s, const char *out);
 	/* s_memset */
 void	*my_memset(void*, int, size_t);
 void	*my_realloc(void*, size_t, size_t);
+
+	/* my_atoi */
+int	my_getnbr(const char *str);
 
 #endif

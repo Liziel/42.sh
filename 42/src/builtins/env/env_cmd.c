@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 17:59:47 2013 thomas lecorre
-** Last update Sat May 18 20:31:00 2013 vincent colliot
+** Last update Sun May 19 05:21:49 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -13,8 +13,9 @@
 #include "env.h"
 #include "built.h"
 #include "bool.h"
+#include "xmalloc.h"
 
-void	env_i(void)
+static void	env_i(void)
 {
   int	i;
 
@@ -30,7 +31,7 @@ void	env_i(void)
   environ = NULL;
 }
 
-BOOL	env_u(t_words *cmd)
+static BOOL	env_u(t_words *cmd)
 {
   char	**tab;
   size_t i;
@@ -45,7 +46,7 @@ BOOL	env_u(t_words *cmd)
   if (!n)
     return (TRUE);
   if ((tab = xmalloc(sizeof(char*) * (i))) == NULL)
-    return (FALSE);
+    return ((long)(environ = NULL));
   n = (i = 0);
   while (environ[i])
     {
@@ -60,7 +61,7 @@ BOOL	env_u(t_words *cmd)
   return (TRUE);
 }
 
-BOOL	env_s(t_words *cmd)
+static BOOL	env_s(t_words *cmd)
 {
   char	*line;
   int	i;
@@ -89,7 +90,7 @@ BOOL	env_s(t_words *cmd)
   return (TRUE);
 }
 
-BOOL get_opt(t_word *opt, t_word **call)
+static BOOL get_opt(t_words *opt, t_words **call)
 {
   *call = opt;
   if (!opt)
@@ -116,16 +117,17 @@ BOOL get_opt(t_word *opt, t_word **call)
   return (TRUE);
 }
 
-int	env_cmd(t_words *cmd, void *bool)
+int	built_env(t_words *cmd, void *bool)
 {
-  size_t	i;
+  int		r;
   char		**save;
 
   (void)bool;
-  i = 0;
   save = env_copy();
   if (get_opt(cmd, &cmd) == FALSE)
     return (EXIT_FAILURE);
+  r = exec_env(cmd);
+  destroy_env();
   environ = save;
-  return (EXIT_SUCCES);
+  return (r);
 }

@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 16:04:18 2013 vincent colliot
-** Last update Sat May 18 18:16:26 2013 vincent colliot
+** Last update Sun May 19 05:11:51 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -55,7 +55,7 @@ BOOL		exec_cmd(t_cmd *cmd, t_info *info, FLAG son, FD w[3])
     return (FALSE);
   if (cmd->type == WORDS)
     if (!exec_built_in(cmd, info))
-      info->st = exec_form(cmd->params, &sys_fail, son);
+      info->st = exec_form(cmd->params, &sys_fail);
   if (cmd->type == PARENTS)
     pre_exec(cmd->parents, info);
   cmd->parents = NULL;

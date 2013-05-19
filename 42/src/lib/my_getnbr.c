@@ -5,12 +5,12 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri Oct 26 14:50:00 2012 thomas lecorre
-** Last update Sat May 18 11:18:26 2013 thomas lecorre
+** Last update Sun May 19 05:36:01 2013 vincent colliot
 */
 
 #include "built.h"
 
-int	my_getnbr(char *str)
+int	my_getnbr(const char *str)
 {
   int	signe;
   int	pos;

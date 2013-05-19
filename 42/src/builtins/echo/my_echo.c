@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Tue May 14 18:25:48 2013 thomas lecorre
-** Last update Sun May 19 04:06:15 2013 vincent colliot
+** Last update Sun May 19 04:46:24 2013 vincent colliot
 */
 
 #include "built.h"
@@ -46,7 +46,7 @@ static void move_flag(t_words *link, t_words **move, FLAG *echo)
   move_flag(link->next, move, echo);
 }
 
-int	my_echo(t_words *cmd, void *null)
+int	built_echo(t_words *cmd, void *null)
 {
   FLAG  echo;
 

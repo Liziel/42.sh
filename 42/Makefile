@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Sun May 19 04:06:31 2013 vincent colliot
+## Last update Sun May 19 05:35:50 2013 vincent colliot
 ##
 
 NAME    = Sla.sh
@@ -34,6 +34,7 @@ XMALLOC=$(LIBF)xmalloc.c\
 
 LIBF	=$(SRCF)lib/
 LIB	=$(LIBF)s_alloc.c\
+	$(LIBF)my_getnbr.c\
 	$(LIBF)s_match.c\
 	$(LIBF)s_comp.c\
 	$(LIBF)s_lenth.c\
@@ -134,9 +135,22 @@ FECHO	=$(BUILTF)echo/
 ECHO	=$(FECHO)my_echo.c\
 	$(FECHO)seq.c\
 
+FCD	=$(BUILTF)cd/
+CD	=$(FCD)cd.c\
+
+FENV	=$(BUILTF)env/
+B_ENV	=$(FENV)env_cmd.c\
+	$(FENV)env_exec.c\
+	$(FENV)env_copy.c\
+
+FEXIT	=$(BUILTF)exit/
+EXIT	=$(FEXIT)exit.c
 
 BUILT_IN=$(ALIAS)\
-	$(ECHO)
+	$(ECHO)\
+	$(CD)\
+	$(B_ENV)\
+	$(EXIT)\
 
 ########################
 

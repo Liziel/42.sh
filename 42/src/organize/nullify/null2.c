@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  9 21:50:54 2013 vincent colliot
-** Last update Tue May 14 02:20:36 2013 vincent colliot
+** Last update Sun May 19 05:06:02 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -48,7 +48,8 @@ void nullify_cmd_words(t_words *s)
   if (!s)
     return ;
   n = s->next;
-  free(s->word);
+  if (s->word)
+    free(s->word);
   free(s);
   nullify_cmd_words(n);
 }

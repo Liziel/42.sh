@@ -5,13 +5,14 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 14:24:55 2013 thomas lecorre
-** Last update Mon May 13 12:26:45 2013 thomas lecorre
+** Last update Sun May 19 05:24:11 2013 vincent colliot
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "env.h"
 #include "built.h"
+#include "string.h"
 
 char	**env_copy()
 {
