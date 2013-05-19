@@ -5,18 +5,24 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May 18 01:19:45 2013 vincent colliot
-** Last update Sat May 18 03:53:50 2013 vincent colliot
+** Last update Sun May 19 03:40:18 2013 vincent colliot
 */
+
+#include "alias.h"
+#include "string.h"
+#include "orga.h"
+#include "built.h"
+#include "error.h"
 
 static int p_one(t_alias *alias)
 {
   if (!alias)
     return (EXIT_FAILURE);
-  my_putstr("alias ");
-  my_putstr(alias->name);
-  my_pustr("=\"");
-  my_putstr(alias->fill);
-  my_putstr("\"\n");
+  my_putstr("alias ", 1);
+  my_putstr(alias->name, 1);
+  my_putstr("=\"", 1);
+  my_putstr(alias->fill, 1);
+  my_putstr("\"\n", 1);
   return (EXIT_SUCCESS);
 }
 
@@ -55,7 +61,7 @@ static int get_n(t_words *cmd, t_alias *alias, t_alias **mod)
   return (EXIT_SUCCESS);
 }
 
-static int print(t_alias *deb)
+static int print(t_alias *alias)
 {
   if (!alias)
     return (EXIT_SUCCESS);
@@ -63,7 +69,7 @@ static int print(t_alias *deb)
   return (print(alias->next));
 }
 
-int	alias(t_words *cmd, t_alias **alias)
+int	built_alias(t_words *cmd, t_alias **alias)
 {
   if (!cmd->next)
     return (print(*alias));

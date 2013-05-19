@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May 18 22:56:01 2013 vincent colliot
-** Last update Sun May 19 00:03:47 2013 vincent colliot
+** Last update Sun May 19 04:11:57 2013 vincent colliot
 */
 
 #include "built.h"
@@ -33,11 +33,11 @@ static size_t plus_seq(char *seq, int mult, size_t l)
       else
 	n = n * mult + seq[i++] - 'a' + 10;
   if (i)
-    my_putchar((unsigned char)n);
+    my_putchar((unsigned char)n, 1);
   return (i);
 }
 
-static size_t print_seq2(char *seq, FLAG echo, BOOL *end)
+static size_t print_seq2(char *seq)
 {
   if (NMATCH(seq, "\\n"))
     return (1 + my_putchar('\n', 1));
@@ -47,13 +47,13 @@ static size_t print_seq2(char *seq, FLAG echo, BOOL *end)
     return (1 + my_putchar('\t', 1));
   else if (NMATCH(seq, "\\v"))
     return (1 + my_putchar('\v', 1));
-  return (my_putchar(*seq));
+  return (my_putchar(*seq, 1));
 }
 
 size_t print_seq(char *seq, FLAG echo, BOOL *end)
 {
   if (!(echo & ECHO_E))
-    return (my_putchar(*seq));
+    return (my_putchar(*seq, 1));
   if (NMATCH("\\0", seq))
     return (2 + plus_seq(seq + 2, 8, 3));
   if (NMATCH("\\x", seq))
@@ -70,5 +70,5 @@ size_t print_seq(char *seq, FLAG echo, BOOL *end)
     return (1 + my_putchar('\e', 1));
   else if (NMATCH(seq, "\\f"))
     return (1 + my_putchar('\f', 1));
-  return (print_seq2(seq, echo, end));
+  return (print_seq2(seq));
 }

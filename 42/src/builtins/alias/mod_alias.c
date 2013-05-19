@@ -5,10 +5,14 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May 18 02:19:51 2013 vincent colliot
-** Last update Sat May 18 03:36:12 2013 vincent colliot
+** Last update Sun May 19 03:48:28 2013 vincent colliot
 */
 
-static add_after(t_alias *put, t_alias *link)
+#include "alias.h"
+#include "string.h"
+#include "xmalloc.h"
+
+static int add_after(t_alias *put, t_alias *link)
 {
   link->next = put->next;
   if (link->next)
@@ -25,7 +29,7 @@ static int add_link(t_alias *link, char *a, t_alias **alias)
   if (my_strcmp((*alias)->name, a) > 0)
     {
       link->next = *alias;
-      (*alias)->prev = link
+      (*alias)->prev = link;
       *alias = link;
       return (EXIT_SUCCESS);
     }
@@ -55,5 +59,7 @@ int mod_alias(char *a, char *f, t_alias **alias)
   link->next = NULL;
   if (*alias)
     return (add_link(link, a, alias));
+  *alias = link;
+  return (EXIT_SUCCESS);
 }
 

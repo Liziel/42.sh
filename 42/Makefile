@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Sat May 18 17:50:06 2013 thomas lecorre
+## Last update Sun May 19 04:06:31 2013 vincent colliot
 ##
 
 NAME    = Sla.sh
@@ -122,6 +122,22 @@ EDIT	=$(ED_AFF)\
 	$(ED_SAVE)\
 	$(ED_SIG)\
 
+###### BUILTS-IN #######
+
+BUILTF	=$(SRCF)builtins/
+
+FALIAS	=$(BUILTF)alias/
+ALIAS	=$(FALIAS)alias.c\
+	$(FALIAS)mod_alias.c\
+
+FECHO	=$(BUILTF)echo/
+ECHO	=$(FECHO)my_echo.c\
+	$(FECHO)seq.c\
+
+
+BUILT_IN=$(ALIAS)\
+	$(ECHO)
+
 ########################
 
 SRC     =$(MAIN)\
@@ -135,6 +151,7 @@ SRC     =$(MAIN)\
 	$(DIR)\
 	$(XLIB)\
 	$(EXEC)\
+	$(BUILT_IN)\
 
 ########################
 

@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 13 00:38:40 2013 vincent colliot
-** Last update Sat May 18 01:23:37 2013 vincent colliot
+** Last update Sun May 19 03:49:38 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -59,7 +59,6 @@ static BOOL	put_lines(t_words *l, FD wr)
 BOOL	rdleft(t_redir *r, FD w[3], t_info *info)
 {
   t_words	*l;
-  pid_t	pid;
   FD	p[2];
 
   if ((p[0] = open("/dev/tty", O_RDWR)) == -1)
