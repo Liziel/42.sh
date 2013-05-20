@@ -1,0 +1,11 @@
+ls | cat -e
+ls| cat -e
+ls |cat -e
+ls |
+| ls
+ls | | cat -e
+ls | cat -e | wc
+ls | cat -e | grep sh | wc -l
+ls | cat -e | | ls
+ls | ls
+cat -e | ls

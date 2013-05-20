@@ -1,0 +1,9 @@
+ls | cat -e > toto ; cat toto ; rm toto
+ls | cat -e | wc -l >> toto ; cat toto ; rm toto
+ls || pwd ; ls | cat -e && pwd && echo truc && ls > truc ; cat truc ; rm truc
+>toto ls && cat toto
+dflsdkf || ls > titi && cat titi ; rm titi
+ls |& cat test || truc
+ls ;;;; cat test_mix
+touch toto ;;;;; ls >>toto && cat toto
+
