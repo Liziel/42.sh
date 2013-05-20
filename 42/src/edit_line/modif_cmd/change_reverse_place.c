@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Thu May  9 11:30:50 2013 pierre-yves thomas
-** Last update Sat May 18 13:16:04 2013 pierre-yves thomas
+** Last update Mon May 20 23:28:18 2013 pierre-yves thomas
 */
 
 #include <string.h>
@@ -53,42 +53,41 @@ void            reverse_to_end(char value, int *reverse_case, char **cmd)
   (*reverse_case) = my_strlen(*cmd);
 }
 
-static	int	fill_fct_ptr(void (***options)(int *, char **))
+static void	fill_fct_ptr(void (*options[6])(int *, char **))
 {
-  int           nb;
+  options[0] = move_to_prev_word;
+  options[1] = delete_first_word_met;
+  options[2] = move_to_next_word;
+  options[3] = uppercase_first_letter_found;
+  options[4] = lowercase_letters_found;
+  options[5] = NULL;
+}
 
-  nb = -1;
-  if (((*options) = malloc(sizeof(*options) * 6)) == NULL)
-    return (-1);
-  while (++nb < 6)
-    if (((*options)[nb] = malloc(sizeof(**options))) == NULL)
-      return (-1);
-  (*options)[0] = move_to_prev_word;
-  (*options)[1] = delete_first_word_met;
-  (*options)[2] = move_to_next_word;
-  (*options)[3] = uppercase_first_letter_found;
-  (*options)[4] = lowercase_letters_found;
-  (*options)[5] = NULL;
-  return (0);
+static void	fill_tab(char opt[5])
+{
+  opt[0] = 98;
+  opt[1] = 100;
+  opt[2] = 102;
+  opt[3] = 99;
+  opt[4] = 108;
 }
 
 void		move_reverse_case(char value, int *rev_c, char **cmd)
 {
-  void		(**options)(int *, char **);
-  static char	opt[6] = {98, 100, 102, 99, 108};
+  void		(*options[6])(int *, char **);
+  char		opt[5];
   int		len;
   int		i;
 
   i = -1;
+  fill_tab(opt);
   len = my_strlen(*cmd);
-  if (fill_fct_ptr(&options) == -1)
-    return ;
-  while (++i < 6 && opt[i] != value);
-  if (i != 6)
+  fill_fct_ptr(options);
+  while (++i < 5 && opt[i] != value);
+  if (i != 5)
     options[i](rev_c, cmd);
   else if ((value == 68 || value == 2) && (*rev_c) > 0)
     (*rev_c)--;
   else if ((value == 67 || value == 6) && (*rev_c) < len)
     (*rev_c)++;
-  free(options);
 }

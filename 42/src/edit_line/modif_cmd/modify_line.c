@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May  6 17:44:08 2013 pierre-yves thomas
-** Last update Mon May 20 22:35:19 2013 vincent colliot
+** Last update Mon May 20 23:26:33 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
@@ -45,43 +45,50 @@ void    del_letter_in_str(char value, int *reverse_case, char **cmd)
     }
 }
 
-/*
-** 65 cmd + anciennes / 66 cmd + recentes (str[0] = 27, str[2])
-*/
-
-static int	fill_fct_ptr(void (***options)(char, int *, char **))
+static void	fill_fct_ptr(void (*options[13])(char, int *, char **))
 {
-  int		nb;
-
-  nb = -1;
-  if (((*options) = malloc(sizeof(*options) * 14)) == NULL)
-    return (-1);
-  (*options)[0] = move_reverse_case;
-  (*options)[1] = del_letter_in_str;
-  (*options)[2] = clean_screen;
-  (*options)[3] = reverse_to_begin;
-  (*options)[4] = reverse_to_end;
-  (*options)[5] = del_after_cursor;
-  (*options)[6] = copy_part_str;
-  (*options)[7] = clean_str;
-  (*options)[8] = move_reverse_case;
-  (*options)[9] = move_reverse_case;
-  (*options)[10] = del_before_cursor;
-  (*options)[11] = swap_chars_on_cmd;
-  (*options)[12] = del_letter_in_str;
-  (*options)[13] = NULL;
-  return (0);
+  (options)[0] = move_reverse_case;
+  (options)[1] = del_letter_in_str;
+  (options)[2] = clean_screen;
+  (options)[3] = reverse_to_begin;
+  (options)[4] = reverse_to_end;
+  (options)[5] = del_after_cursor;
+  (options)[6] = copy_part_str;
+  (options)[7] = clean_str;
+  (options)[8] = move_reverse_case;
+  (options)[9] = move_reverse_case;
+  (options)[10] = del_before_cursor;
+  (options)[11] = swap_chars_on_cmd;
+  (options)[12] = del_letter_in_str;
+  (options)[13] = NULL;
 }
+
+static void fill_tab(char opt[13])
+{
+  opt[0] = 27;
+  opt[1] = 127;
+  opt[2] = 12;
+  opt[3] = 1;
+  opt[4] = 5;
+  opt[5] = 11;
+  opt[6] = 25;
+  opt[7] = 21;
+  opt[8] = 2;
+  opt[9] = 6;
+  opt[10] = 23;
+  opt[11] = 20;
+  opt[12] = 8;
+}	
 
 void            modif_cmd(char **cmd, char *str, int *reverse_case)
 {
   int		i;
-  void		(**options)(char, int *, char **);
-  /* a envoyer a une fonction de remplissage */ char  	opt[13] = {27, 127, 12, 1, 5, 11, 25, 21, 2, 6, 23, 20, 8};
+  void		(*options[14])(char, int *, char **);
+  char		opt[13];
 
   i = -1;
-  if (fill_fct_ptr(&options) == -1)
-    return ;
+  fill_tab(opt);
+  fill_fct_ptr(options);
   while (++i < 13 && opt[i] != str[0]);
   if (i != 13)
     if (i == 0 && str[2] == 0)
@@ -96,5 +103,4 @@ void            modif_cmd(char **cmd, char *str, int *reverse_case)
       while (++i < 4 && str[i] >= ' ')
 	add_letter_in_str(str[i], reverse_case, cmd);
     }
-  free(options);
 }
