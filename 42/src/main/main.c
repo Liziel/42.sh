@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Sat May 18 19:06:08 2013 pierre-yves thomas
+** Last update Mon May 20 14:28:28 2013 thomas lecorre
 */
 
 #include <unistd.h>
@@ -39,7 +39,7 @@ int main(void)
   a = NULL;
   attribute_options(&(info.termcaps));
   bad_sintax = NULL;
-  my_putstr("test>", 1);
+  my_putstr("Sla.sh -> ", 1);
   while (test = get_next_line(0))
     {
       if (bad_sintax)
@@ -73,7 +73,7 @@ int main(void)
 	    }
 	}
       free(test);
-      my_putstr("test>", 1);
+      my_putstr("Sla.sh -> ", 1);
     }
   return (0);
 }
