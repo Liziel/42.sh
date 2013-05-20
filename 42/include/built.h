@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May  3 17:56:39 2013 thomas lecorre
-** Last update Sun May 19 05:21:31 2013 vincent colliot
+** Last update Mon May 20 16:43:50 2013 thomas lecorre
 */
 
 #ifndef	BUILT_H__
@@ -20,14 +20,15 @@ typedef struct s_call
   int	(*ptr)(t_words *, void *);
 } t_call;
 
-	/* echo */
-size_t	print_seq(char*, FLAG, BOOL*);
-int	built_echo(t_words *, void *);
 # define ECHO_N	0b001
 # define ECHO_E 0b010
 
+	/* echo */
+size_t	print_seq(char*, FLAG, BOOL*);
+int	built_echo(t_words *, void *);
+
 	/* alias */
-int	built_alias(t_words*, t_alias**);
+int	built_alias(t_words*, void *);
 int	mod_alias(char*, char*, t_alias**);
 
 	/* env */
@@ -44,7 +45,10 @@ int	built_setenv(t_words *, void *);
 	/* unsetenv */
 int	built_unsetenv(t_words *, void *);
 
-int	my_exit(t_words *, void *);
+	/* exit */
+int	built_exit(t_words *, void *);
+
+	/* cd */
 char	*put_pwd(char *);
 int	just_cd(t_words *);
 int	cd(t_words *, void *);

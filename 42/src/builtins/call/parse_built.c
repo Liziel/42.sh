@@ -5,9 +5,10 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May  3 17:56:18 2013 thomas lecorre
-** Last update Tue May 14 18:10:39 2013 thomas lecorre
+** Last update Mon May 20 16:41:16 2013 thomas lecorre
 */
 
+#include <stdlib.h>
 #include "built.h"
 
 void	init_built(t_call built[5])
@@ -39,13 +40,13 @@ void	*stock_tab(t_call *built)
   return (tab);
 }
 
-int	builtins(t_words *cmd, void *alias)
+t_call	*builtins(t_words *cmd, void *alias)
 {
   t_call	*built;
 
   if ((built = xmalloc(sizeof(t_call) * 7)) == NULL)
-    return (-1);
+    return (NULL);
   init_built(&built);
   stock_tab(&built);
-  return (0);
+  return (built);
 }
