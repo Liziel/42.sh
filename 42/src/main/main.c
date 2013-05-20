@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Mon May 20 22:18:12 2013 vincent colliot
+** Last update Mon May 20 22:54:16 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -22,6 +22,7 @@ int main(void)
   t_info        info;
 
   info.alias = NULL;
+  info.st = 0;
   load_tgets_funcs();
   attribute_options(&(info.termcaps));
   retain_struct_options(1, &(info.termcaps));
