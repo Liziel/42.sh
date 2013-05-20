@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May  3 17:56:39 2013 thomas lecorre
-** Last update Mon May 20 16:43:50 2013 thomas lecorre
+** Last update Mon May 20 17:02:15 2013 vincent colliot
 */
 
 #ifndef	BUILT_H__
@@ -34,10 +34,10 @@ int	mod_alias(char*, char*, t_alias**);
 	/* env */
 int	built_env(t_words*, void*);
 BOOL	print_help(void);
-void	destroy_env(void);
 int	exec_env(t_words*);
 char	*seek_cmd(char*, char**);
-char	**env_copy();
+void	destroy_env(void);
+char	**env_copy(void);
 
 	/* setenv */
 int	built_setenv(t_words *, void *);
@@ -49,11 +49,12 @@ int	built_unsetenv(t_words *, void *);
 int	built_exit(t_words *, void *);
 
 	/* cd */
-char	*put_pwd(char *);
-int	just_cd(t_words *);
-int	cd(t_words *, void *);
-void	init_built(t_call *);
-void	*stock_tab(t_call *);
-int	builtins(t_words *, void *);
+int	built_cd(t_words *, void *);
+
+	/* exit */
+int	built_exit(t_words *,void *);
+
+	/* unalias */
+int	built_unalias(t_words *,void *);
 
 #endif

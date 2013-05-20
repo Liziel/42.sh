@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May 18 01:17:38 2013 vincent colliot
-** Last update Sat May 18 17:21:17 2013 vincent colliot
+** Last update Mon May 20 17:00:48 2013 vincent colliot
 */
 
 #ifndef ALIAS_H_

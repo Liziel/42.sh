@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May 18 01:19:45 2013 vincent colliot
-** Last update Sun May 19 03:40:18 2013 vincent colliot
+** Last update Mon May 20 16:52:00 2013 vincent colliot
 */
 
 #include "alias.h"
@@ -69,9 +69,9 @@ static int print(t_alias *alias)
   return (print(alias->next));
 }
 
-int	built_alias(t_words *cmd, t_alias **alias)
+int	built_alias(t_words *cmd, void *alias)
 {
   if (!cmd->next)
-    return (print(*alias));
-  return (get_n(cmd->next, *alias, alias));
+    return (print(*(t_alias**)alias));
+  return (get_n(cmd->next, *(t_alias**)alias, alias));
 }
