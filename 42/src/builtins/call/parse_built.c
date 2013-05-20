@@ -5,12 +5,13 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May  3 17:56:18 2013 thomas lecorre
-** Last update Mon May 20 16:57:40 2013 vincent colliot
+** Last update Mon May 20 17:46:33 2013 vincent colliot
 ** Last update Mon May 20 16:41:16 2013 thomas lecorre
 */
 
 #include <stdlib.h>
 #include "built.h"
+#include "xmalloc.h"
 
 void	init_built(t_call built[9])
 {
@@ -39,17 +40,17 @@ void	*stock_tab(t_call *built)
   static t_call	*tab;
 
   if (built)
-    tab = bult;
+    tab = built;
   return (tab);
 }
 
-t_call	*builtins(t_words *cmd, void *alias)
+t_call	*builtins(void)
 {
   t_call	*built;
 
-  if ((built = xmalloc(sizeof(t_call) * 7)) == NULL)
+  if ((built = xmalloc(sizeof(t_call) * 9)) == NULL)
     return (NULL);
-  init_built(&built);
-  stock_tab(&built);
+  init_built(built);
+  stock_tab(built);
   return (built);
 }

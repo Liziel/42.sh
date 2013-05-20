@@ -5,18 +5,19 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Mon May 20 16:59:00 2013 thomas lecorre
-** Last update Mon May 20 17:36:55 2013 thomas lecorre
+** Last update Mon May 20 17:39:56 2013 vincent colliot
 */
 
+#include "string.h"
 #include "built.h"
 
 int	rm_alias(t_words *cmd, t_alias *link, t_alias **alias)
 {
   if (!cmd)
-    return ;
+    return (0);
   if (!link)
     return (rm_alias(cmd->next, *alias, alias));
-  if (!MATCH(cmd>word, link>name))
+  if (!MATCH(cmd->word, link->name))
     return (rm_alias(cmd, link->next, alias));
   if (link->prev)
     link->prev->next = link->next;

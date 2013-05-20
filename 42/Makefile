@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Mon May 20 16:49:05 2013 vincent colliot
+## Last update Mon May 20 22:25:17 2013 vincent colliot
 ##
 
 NAME    = Sla.sh
@@ -54,6 +54,9 @@ PARS	=$(PARSF)subdiv.c\
 	$(PARSF)comment.c\
 	$(PARSF)get_next_line.c\
 	$(PARSF)alias.c\
+
+PROMPTF	=$(SRCF)prompt/
+PROMPT	=$(PROMPTF)prompt.c\
 
 ###### Parsing #########
 
@@ -130,6 +133,7 @@ BUILTF	=$(SRCF)builtins/
 FALIAS	=$(BUILTF)alias/
 ALIAS	=$(FALIAS)alias.c\
 	$(FALIAS)mod_alias.c\
+	$(FALIAS)unalias.c\
 
 FECHO	=$(BUILTF)echo/
 ECHO	=$(FECHO)my_echo.c\
@@ -178,6 +182,7 @@ SRC     =$(MAIN)\
 	$(XLIB)\
 	$(EXEC)\
 	$(BUILT_IN)\
+	$(PROMPT)\
 
 ########################
 

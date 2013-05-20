@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 17 17:17:12 2013 vincent colliot
-** Last update Mon May 20 16:52:19 2013 vincent colliot
+** Last update Mon May 20 22:18:47 2013 vincent colliot
 */
 
 #include "env.h"
@@ -20,11 +20,12 @@ static int	old_new(char **def, char *env)
   char	*apwd;
 
   if ((apwd = getcwd(NULL, 0)) == NULL)
-    return (EXIT_FAILURE);
-  free(*def);
-  *def = my_stricat(env, apwd, '"');
+    return (FALSE);
+  if (*def)
+    free(*def);
+  *def = my_stricat(env, apwd, '=');
   free(apwd);
-  return (EXIT_SUCCESS);
+  return (TRUE);
 }
 
 static BOOL	set_old(char *env)
@@ -33,21 +34,25 @@ static BOOL	set_old(char *env)
   size_t	i;
 
   i = 0;
-  while (environ[i])
-    {
-      if (NMATCH(env, environ[i]))
-	return (old_new(&(environ[i]), env));
-      i++;
-    }
+  if (environ)
+    while (environ[i])
+      {
+	if (NMATCH(env, environ[i]))
+	  return (old_new(&(environ[i]), env));
+	i++;
+      }
   tab = environ;
   if ((environ = xmalloc(sizeof(char*) * (i + 2))) == NULL)
     return (FALSE);
+  environ[i] = NULL;
   i = (unsigned long)(environ[i + 1] = NULL);
-  while (tab[i])
-    {
-      environ[i] = tab[i];
-      i++;
-    }
+  if (tab)
+    while (tab[i])
+      {
+	environ[i] = tab[i];
+	i++;
+      }
+  free(tab);
   return (old_new(&(environ[i]), env));
 }
 
@@ -66,7 +71,8 @@ static BOOL	set_new(char *new)
     {
       print_err(DIR_ERROR);
       print_err(new);
-      return (EXIT_FAILURE);
+      print_err("\n");
+      return (FALSE);
     }
   return (set_old("PWD"));
 }
@@ -79,7 +85,11 @@ int	built_cd(t_words *cmd, void *null)
   if ((new = new_pwd(cmd->next)) == NULL)
     {
       print_err(DIR_ERROR);
-      print_err(cmd->word);
+      if (!cmd->next)
+	print_err("HOME");
+      else
+	print_err("prev");
+      print_err("\n");
       return (EXIT_FAILURE);
     }
   if (set_old("OLD_PWD") == FALSE)

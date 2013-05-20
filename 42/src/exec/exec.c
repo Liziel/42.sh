@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 16:04:18 2013 vincent colliot
-** Last update Sun May 19 07:32:18 2013 vincent colliot
+** Last update Mon May 20 20:26:04 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -16,6 +16,8 @@
 #include "bool.h"
 #include "exec.h"
 #include "father.h"
+#include "built.h"
+#include "string.h"
 
 static BOOL	set_redir(t_redir *r, FD w[3], t_info *info, FLAG son)
 {
@@ -32,7 +34,11 @@ static BOOL	set_redir(t_redir *r, FD w[3], t_info *info, FLAG son)
   while (in < 3)
     {
       if (pi[in] >= 0)
-	dup2(pi[in], in);
+	{
+	  close(w[in]);
+	  w[in] = pi[in];
+	  dup2(pi[in], in);
+	}
       else if ((in == W_IN && (son & SON)) || (in == W_OUT && (son & FATHER)))
 	dup2(w[in], in);
       in++;
@@ -42,22 +48,40 @@ static BOOL	set_redir(t_redir *r, FD w[3], t_info *info, FLAG son)
 
 static BOOL	exec_built_in(t_cmd *cmd, t_info *info)
 {
+  size_t	i;
+  t_call	*call;
+
+  i = 0;
+  call = builtins();
+  while ((call[i]).name)
+    {
+      if (MATCH((call[i]).name, cmd->params->word))
+	{
+	  info->st = ((call[i]).ptr)(cmd->params, (void*)&(info->alias));
+	  if (MATCH(cmd->params->word, "exit"))
+	    return (2);
+	  free(call);
+	  return (TRUE);
+	}
+      i++;
+    }
+  free(call);
   return (FALSE);
-  //sera changé losque les builts-in seront finies
 }
 
 BOOL		exec_cmd(t_cmd *cmd, t_info *info, FLAG son, FD w[3])
 {
+  int		r;
   BOOL		sys_fail;
 
-  sys_fail = FALSE;
+  sys_fail = FALSE + (r = 0);
   if (set_redir(cmd->redir, w, info, son) == FALSE)
     return (FALSE);
-  if (cmd->type == WORDS)
-    if (!exec_built_in(cmd, info))
-      info->st = exec_form(cmd->params, &sys_fail);
   if (cmd->type == PARENTS)
     pre_exec(cmd->parents, info);
+  if (cmd->type == WORDS)
+    if (!(r = exec_built_in(cmd, info)))
+      info->st = exec_form(cmd->params, &sys_fail);
   cmd->parents = NULL;
   if (son & FATHER)
     close(w[W_OUT]);
@@ -69,5 +93,5 @@ BOOL		exec_cmd(t_cmd *cmd, t_info *info, FLAG son, FD w[3])
     close(W_ERR);
   if (sys_fail == TRUE)
     return (FALSE);
-  return ((son & SON) == FALSE);
+  return (((son & SON) == FALSE) * (r != 2));
 }

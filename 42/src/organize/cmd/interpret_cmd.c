@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May  4 16:34:47 2013 vincent colliot
-** Last update Sun May 19 04:45:05 2013 vincent colliot
+** Last update Mon May 20 17:53:54 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -15,6 +15,7 @@
 #include "xmalloc.h"
 #include "error.h"
 #include "env.h"
+#include "built.h"
 
 static char	*seek(char *path, char *cmd, char **bad_sintax)
 {
@@ -76,7 +77,21 @@ static void	*nullify_link(t_words *link)
 
 static BOOL	not_a_built_in(char *word)
 {
-  (void)word;
+  t_call	*built_call;
+  size_t	i;
+
+  i = 0;
+  built_call = builtins();
+  while ((built_call[i]).name)
+    {
+      if (MATCH((built_call[i]).name, word))
+	{
+	  free(built_call);
+	  return (FALSE);
+	}
+      i++;
+    }
+  free(built_call);
   return (TRUE);
 }
 
@@ -102,6 +117,9 @@ t_words		*interpret_cmd(t_get *word, t_get **words, char **bad_sintax,
       return (nullify_link(link));
   if (cmd[0] != '.' && not_a_built_in(cmd))
     if ((link->word = seek_cmd(cmd, bad_sintax)) == NULL)
+      return (nullify_link(link));
+  if (!not_a_built_in(cmd))
+    if ((link->word = my_strdup(cmd)) == NULL)
       return (nullify_link(link));
   free(cmd);
   *words = word->next;

@@ -6,7 +6,7 @@
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
 <<<<<<< HEAD
-** Last update Sat May 18 19:10:59 2013 vincent colliot
+** Last update Mon May 20 22:22:19 2013 vincent colliot
 =======
 ** Last update Sat May 18 18:43:48 2013 pierre-yves thomas
 >>>>>>> 3f022d32e872c96b53fe7128d49e8c677f4d5f0b
@@ -28,7 +28,7 @@ static t_history *ctrlcget(t_info **info, t_history *history)
     *info = inf_save;
   if (history)
     hist_save = history;
-  return (history);
+  return (hist_save);
 }
 
 int	read_cmds(t_info *info)

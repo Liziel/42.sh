@@ -1,11 +1,11 @@
 /*
 ** modify_line.c for 42sh in /home/thomas_1//Projets/42sh/src
-** 
+**
 ** Made by pierre-yves thomas
 ** Login   <thomas_1@epitech.net>
-** 
+**
 ** Started on  Mon May  6 17:44:08 2013 pierre-yves thomas
-** Last update Fri May 17 18:26:34 2013 pierre-yves thomas
+** Last update Mon May 20 22:35:19 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -23,7 +23,7 @@ void    add_letter_in_str(char value, int *reverse_case, char **cmd)
     (*cmd)[len + 1] = (*cmd)[len];
   (*cmd)[len] = value;
   (*reverse_case)++;
-  if (((*cmd) = realloc(*cmd, my_strlen(*cmd) + 2)) != NULL)
+  if (((*cmd) = my_realloc(*cmd, my_strlen(*cmd), my_strlen(*cmd) + 2)) != NULL)
     (*cmd)[my_strlen(*cmd) + 1] = '\0';
 }
 
@@ -56,9 +56,6 @@ static int	fill_fct_ptr(void (***options)(char, int *, char **))
   nb = -1;
   if (((*options) = malloc(sizeof(*options) * 14)) == NULL)
     return (-1);
-  while (++nb < 13)
-    if (((*options)[nb] = malloc(sizeof(**options))) == NULL)
-      return (-1);
   (*options)[0] = move_reverse_case;
   (*options)[1] = del_letter_in_str;
   (*options)[2] = clean_screen;
@@ -80,7 +77,7 @@ void            modif_cmd(char **cmd, char *str, int *reverse_case)
 {
   int		i;
   void		(**options)(char, int *, char **);
-  static char  	opt[13] = {27, 127, 12, 1, 5, 11, 25, 21, 2, 6, 23, 20, 8};
+  /* a envoyer a une fonction de remplissage */ char  	opt[13] = {27, 127, 12, 1, 5, 11, 25, 21, 2, 6, 23, 20, 8};
 
   i = -1;
   if (fill_fct_ptr(&options) == -1)

@@ -1,11 +1,11 @@
 /*
 ** edit_line.c for 42 in /home/thomas_1//Projets/42sh
-** 
+**
 ** Made by pierre-yves thomas
 ** Login   <thomas_1@epitech.net>
-** 
+**
 ** Started on  Fri Apr 26 14:36:25 2013 pierre-yves thomas
-** Last update Sat May 18 18:56:56 2013 pierre-yves thomas
+** Last update Mon May 20 22:24:19 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -62,7 +62,7 @@ static int     	read_cmd(int fd, char **str, char **cmd, int *reverse_case)
     {
       free_str_edit_lines((*str), (*cmd));
       return (-1);
-    } 
+    }
   retain_reverse_case(2, reverse_case);
   return (0);
 }
@@ -76,6 +76,7 @@ char			*usr_cmd(int fd, t_history *history, t_options options)
   int			reverse_case;
   int			history_pl;
 
+  prompt();
   if (init_termios(&set, &unset) == -1 ||
       init_values(&history_pl, &reverse_case, &str, &cmd) == -1)
     return (unset_termios(&unset));

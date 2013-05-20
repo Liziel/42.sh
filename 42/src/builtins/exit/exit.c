@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Tue May 14 18:10:48 2013 thomas lecorre
-** Last update Sun May 19 05:34:32 2013 vincent colliot
+** Last update Mon May 20 18:00:29 2013 vincent colliot
 */
 
 #include "bool.h"
@@ -14,7 +14,7 @@
 
 int	built_exit(t_words *cmd, void *bool)
 {
-  *((BOOL*)bool) = TRUE;
+  (void)bool;
   if (cmd->next)
     if (cmd->next->word)
       return (my_getnbr(cmd->next->word));

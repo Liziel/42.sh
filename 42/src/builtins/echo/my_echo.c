@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Tue May 14 18:25:48 2013 thomas lecorre
-** Last update Sun May 19 04:46:24 2013 vincent colliot
+** Last update Mon May 20 18:20:28 2013 vincent colliot
 */
 
 #include "built.h"
@@ -22,9 +22,11 @@ static void print(FLAG echo, t_words *link)
   end = FALSE;
   i = 0;
   while ((link->word)[i] && !end)
-    i += print_seq(link->word + i, echo, &end);
-  if (end)
-    return ;
+    {
+      i += print_seq(link->word + i, echo, &end);
+      if (end)
+	return ;
+    }
   if (link->next)
     my_putchar(' ', 1);
   print(echo, link->next);
@@ -52,9 +54,9 @@ int	built_echo(t_words *cmd, void *null)
 
   echo = 0;
   (void)null;
-  move_flag(cmd, &cmd, &echo);
+  move_flag(cmd->next, &cmd, &echo);
   print(echo, cmd);
-  if (echo & ECHO_N)
+  if (!(echo & ECHO_N))
     my_putstr("\n", 1);
   return (EXIT_SUCCESS);
 }

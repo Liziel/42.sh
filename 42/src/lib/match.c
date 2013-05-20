@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May  3 16:56:48 2013 vincent colliot
-** Last update Thu May  9 00:14:23 2013 vincent colliot
+** Last update Mon May 20 21:51:13 2013 vincent colliot
 */
 
 #include "string.h"
@@ -76,6 +76,8 @@ BOOL	nmatch(const char *s, const char *c, size_t n)
 {
   if (!(s && c))
     return (FALSE);
+  if (n < my_strilen(c, '*') && FNMATCH(s, c, n))
+    return (TRUE);
   if (!FNMATCH(s, c, my_strilen(c, '*')))
     return (FALSE);
   return (recur_match(s + my_strilen(c, '*'), c + my_strilen(c, '*')

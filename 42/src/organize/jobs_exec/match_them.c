@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Wed May  8 01:48:11 2013 vincent colliot
-** Last update Tue May 14 17:20:08 2013 vincent colliot
+** Last update Mon May 20 21:59:46 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -68,8 +68,8 @@ static BOOL	is_dir(char *dp)
 static BOOL	cond(struct dirent *fchr, char *m)
 {
   if (nmatch(fchr->d_name, m, my_strilen(m, '/'))
-      && (!(MATCH(fchr->d_name, ".") || MATCH(fchr->d_name, ".."))
-	  || !IN('/', m)))
+      && ((!(MATCH(fchr->d_name, ".") || MATCH(fchr->d_name, ".."))
+	   || !IN('/', m) || NMATCH("..", m))))
     return (TRUE);
   return (FALSE);
 }

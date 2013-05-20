@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May  3 17:56:39 2013 thomas lecorre
-** Last update Mon May 20 17:02:15 2013 vincent colliot
+** Last update Mon May 20 17:10:09 2013 vincent colliot
 */
 
 #ifndef	BUILT_H__
@@ -22,6 +22,9 @@ typedef struct s_call
 
 # define ECHO_N	0b001
 # define ECHO_E 0b010
+
+	/* call */
+t_call	*builtins(void);
 
 	/* echo */
 size_t	print_seq(char*, FLAG, BOOL*);

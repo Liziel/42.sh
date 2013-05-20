@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 22:15:18 2013 vincent colliot
-** Last update Wed May 15 01:18:41 2013 vincent colliot
+** Last update Mon May 20 20:09:01 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -27,16 +27,19 @@ void	rleft(t_redir *r, FD w[3])
 
 void	rright(t_redir *r, FD w[3], FD l[3])
 {
-  FD	file;
   FD	in;
 
   in = r->in;
-  file = -1;
+  if (w[in] != -1)
+    close(w[in]);
   if (r->type != ON_CANAL)
     w[in] = open(r->file, O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR
 		| S_IRGRP | S_IROTH);
   if (r->type == ON_CANAL)
-    w[in] = dup(l[r->out]);
+    {
+      close(l[in]);
+      w[in] = dup(l[r->out]);
+    }
 }
 
 static void	rdright(t_redir *r, FD w[3])

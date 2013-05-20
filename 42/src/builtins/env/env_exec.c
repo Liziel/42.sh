@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 19 04:50:12 2013 vincent colliot
-** Last update Sun May 19 05:24:02 2013 vincent colliot
+** Last update Mon May 20 20:46:35 2013 vincent colliot
 */
 
 #include "string.h"
@@ -29,6 +29,8 @@ void	destroy_env(void)
   size_t	i;
 
   i = 0;
+  if (!environ)
+    return ;
   while (environ[i])
     free(environ[i++]);
   free(environ);

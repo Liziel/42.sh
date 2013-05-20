@@ -1,11 +1,11 @@
 /*
 ** configure_signals.c for 42 in /home/thomas_1//Projets/42sh/42sh-2017-cloare_q/src
-** 
+**
 ** Made by pierre-yves thomas
 ** Login   <thomas_1@epitech.net>
-** 
+**
 ** Started on  Fri Apr 26 18:01:08 2013 pierre-yves thomas
-** Last update Fri May 17 19:52:28 2013 pierre-yves thomas
+** Last update Mon May 20 22:23:34 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -40,8 +40,7 @@ void	catch_signal(int num)
       my_putstr("\n", 1);
       go_down_of_cmd_high(save_cmd, tmp);
       /* le prompt sera la */
-      //show_prompt();
-      my_putstr("Prompt test\n", 1);
+      prompt();
       save_cmd = my_memset(save_cmd, 0, my_strlen(save_cmd));
       retain_reverse_case(1, &rev_c);
       show_cmd(0, 10, save_cmd, rev_c);
