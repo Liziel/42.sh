@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 14:36:25 2013 pierre-yves thomas
-** Last update Mon May 20 22:24:19 2013 vincent colliot
+** Last update Mon May 20 22:48:31 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
@@ -41,18 +41,6 @@ int		init_values(int *history_pl, int *reverse_case,
   return (0);
 }
 
-void		use_history(int *hs_pl, int *rev_c,
-			    char *str, t_history *history)
-{
-  char		*cmd;
-
-  retain_cmd(2, &cmd);
-  if ((*hs_pl) < length_of_history(history) && str[0] == 27 && str[2] == 65)
-    take_cmd_from_history(++(*hs_pl), rev_c, &cmd, history);
-  else if ((*hs_pl) > 0 && str[0] == 27 && str[2] == 66)
-    take_cmd_from_history(--(*hs_pl), rev_c, &cmd, history);
-}
-
 static int     	read_cmd(int fd, char **str, char **cmd, int *reverse_case)
 {
   retain_cmd(1, cmd);
@@ -67,6 +55,14 @@ static int     	read_cmd(int fd, char **str, char **cmd, int *reverse_case)
   return (0);
 }
 
+char	*finish_usr_cmd(char *cmd, char *str, struct termios unset)
+{
+  my_putstr("\n", 1);
+  unset_termios(&unset);
+  free_str_edit_lines(str, NULL);
+  return (cmd);
+}
+
 char			*usr_cmd(int fd, t_history *history, t_options options)
 {
   struct termios	set;
@@ -74,11 +70,11 @@ char			*usr_cmd(int fd, t_history *history, t_options options)
   char			*str;
   char			*cmd;
   int			reverse_case;
-  int			history_pl;
+  int			histo_pl;
 
   prompt();
   if (init_termios(&set, &unset) == -1 ||
-      init_values(&history_pl, &reverse_case, &str, &cmd) == -1)
+      init_values(&histo_pl, &reverse_case, &str, &cmd) == -1)
     return (unset_termios(&unset));
   show_cmd(str[0], fd, cmd, reverse_case);
   while (str[0] != 10 || str[1] != 0 || str[2] != 0)
@@ -86,11 +82,11 @@ char			*usr_cmd(int fd, t_history *history, t_options options)
       if (read_cmd(fd, &str, &cmd, &reverse_case) == -1)
 	return (unset_termios(&unset));
       modif_cmd(&cmd, str, &reverse_case);
-      use_history(&history_pl, &reverse_case, str, history);
+      if (histo_pl < length_of_history(history) && str[0] == 27 && str[2] == 65)
+	take_cmd_from_history(++histo_pl, &reverse_case, &cmd, history);
+      else if (histo_pl > 0 && str[0] == 27 && str[2] == 66)
+	take_cmd_from_history(--histo_pl, &reverse_case, &cmd, history);
       show_cmd(str[0], fd, cmd, reverse_case);
     }
-  my_putstr("\n", 1);
-  unset_termios(&unset);
-  free_str_edit_lines(str, NULL);
-  return (cmd);
+  return (finish_usr_cmd(cmd, str, unset));
 }
