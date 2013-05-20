@@ -1,0 +1,145 @@
+## test basique
+
+ls
+pwd
+date
+echo plop
+cd
+exit
+env
+
+## test environment
+
+env
+env -0
+env --help
+env --version
+env -i ./42sh
+env -u PATH ./42sh
+setenv
+setenv PLOP
+setenv PLOP 42
+setenv PATH je_suis_un_path_tout_pourri
+setenv PLOP 42
+setenv PLOP $PLOP$PLOP
+
+unsetenv
+unsetenv plop
+unsetenv var_qui_nexiste_pas
+unsetenv PATH ; ./42sh
+
+## Blaaaah on enchaine l'env
+
+env
+setenv TRUC toto
+echo $TRUC
+setenv TRUC titi
+echo $truc
+unsetenv TRUC
+unsetenv UNKNOW
+unsetenv *
+env
+setenv POUET TRUC
+unsetenv TRUC
+
+## test cd
+
+cd .././ ; pwd ; cd - ; pwd
+cd ../../../../../../../../../../../../../../../../../ ; pwd ; cd -
+cd .. ; pwd ; cd -
+cd - ; pwd ; cd -
+cd ~ ; pwd ; cd -
+cd ~astek ; pwd ; cd -
+cd ./ ; pwd ; cd -
+cd / ; pwd ; cd -
+
+## test echo
+
+echo "guitte_a est le meilleur"
+echo "je suis ici --> $PWD"
+echo "un test avec un bidule "" vide"
+echo "un test avec un bidule \"" plus pourri"
+echo "un test avec un bidule "\"" plus pourri"
+echo "un test avec un bidule "\"" plus pourri"
+echo "un test avec un bidule ""\"" plus pourri"
+echo "un test avec un bidule """\"" plus pourri"
+echo "$USER est un gros soumis"
+echo '$USER est un gros soumis'
+echo $?
+echo *
+echo /*
+echo \*
+echo /*/*
+
+## test redi & pipes
+
+ls > test ; rm test
+test >> toto ; rm toto
+>> test ls ; rm test
+date >> test ; rm test
+>> test date ; rm test
+cat < test
+< test cat
+echo $USER > /tmp/readonlyfile
+/etc/hosts | od -c | grep # | wc >> /tmp/test -l
+ls -l /dev|more
+|   ;
+pwd | ls
+
+## commande fortin_j
+
+cat -e << `((((groups $USER | cut -d -f2) | sed -e 's/ //') | tr ' ' ',') | tr -d '\n') && echo -e coucou\les\copains; yes CHEVAL & ` > `(( cd | ls -lRA /home >.lol && cat.lol) | tr ':' '/' | grep $USER/ | head -n 1 > .tmp && echo -n "/FIST42SH" >> .tmp && (ls -Ra /dev > /dev/null) && setenv SIGSEV_file `cat.tmp | tr '\n' '.' ` echo $SIGSEV_file && rm .lol -f .tmp ) > .res && cat .res `;
+
+## gestion des && et || (en rajouter)
+
+echo "$USER" && echo "est" && echo "le" && echo "meilleur"
+echo "$USER" && echo "est" && echo "le" && echo "meilleur" || echo "dieu"
+ls /root && echo "blaaah" || echo "zboub" && echo "roche est un vieu con" && echo "marc aussi"
+
+
+## trash
+
+test || test || echo titi
+alias a b
+alias b c
+alias c a
+a
+echo echo ls | 42sh | 42sh
+ls /dev | grep tty | sort -r | rev > toto ; < toto cat | xrandr -o inverted | wc -l > titi
+set path=(/bin /usr/bin /usr/local/bin)
+echo $path
+set
+set ma_var =
+set ma_var = pouet
+unset ma_var
+set ma_var=\\toto # donne \toto
+set ma_var=\\\\\\\toto #donne \\\toto
+set
+#5 euros si tu veux ton ecran à l'endroit
+
+htop | ls
+
+#Gestion multi pipe
+echo ls > ls ; cat ls | wc | wc >> ls ; cat ls | more ; rm ls
+
+#Delete toutes les variables de l'env
+unsetenv GPG_TTY ; unsetenv LS_OPTIONS ; unsetenv LS_COLORS ; unsetenv XTERM_SHELL ; unsetenv XTERM_LOCALE ; unsetenv XTERM_VERSION ; unsetenv WINDOWID ; unsetenv JAVA_ROOT ; unsetenv COLORTERM ; unsetenv XAUTHORITY ; unsetenv G_BROKEN_FILENAMES ; unsetenv QT_IM_SWITCHER ; unsetenv PHONON_PULSEAUDIO_DISABLE ; unsetenv LESSCLOSE ; unsetenv XAUTHLOCALHOSTNAME ; unsetenv GTK_IM_MODULE ; unsetenv STARTUP ; unsetenv XDG_RUNTIME_DIR ; unsetenv DISPLAY ; unsetenv WINDOWPATH ; unsetenv LESSOPEN ; unsetenv XDG_DATA_DIRS ; unsetenv LC_CTYPE ; unsetenv DBUS_SESSION_BUS_ADDRESS ; unsetenv CVS_RSH ; unsetenv G_FILENAME_ENCODING ; unsetenv LESS ; unsetenv MACHTYPE ; unsetenv LOGNAME ; unsetenv VENDOR ; unsetenv WINDOWMANAGER ; unsetenv XCURSOR_THEME ; unsetenv LESS_ADVANCED_PREPROCESSOR ; unsetenv OSTYPE ; unsetenv QT_SYSTEM_DIR ; unsetenv JDK_HOME ; unsetenv SHLVL ; unsetenv XDG_SEAT ; unsetenv HOME ; unsetenv SSH_ASKPASS ; unsetenv KRB5CCNAME ; unsetenv GDMSESSION ; unsetenv SDK_HOME ; unsetenv PYTHONSTARTUP ; unsetenv GDM_LANG ; unsetenv LANG ; unsetenv EDITOR ; unsetenv GDM_KEYBOARD_LAYOUT ; unsetenv ; unsetenv JAVA_HOME ; unsetenv XMODIFIERS ; unsetenv INPUTRC ; unsetenv PWD ; unsetenv JAVA_BINDIR ; unsetenv QT_IM_MODULE ; unsetenv CPU ; unsetenv MAIL ; unsetenv PATH ; unsetenv DESKTOP_SESSION ; unsetenv MINICOM ; unsetenv NLSPATH ; unsetenv XDG_CONFIG_DIRS ; unsetenv CSHEDIT ; unsetenv PAGER ; unsetenv FROM_HEADER ; unsetenv USERNAME ; unsetenv HOSTTYPE ; unsetenv SSH_AUTH_SOCK ; unsetenv XNLSPATH ; unsetenv CSHRCREAD ; unsetenv LD_LIBRARY_PATH ; unsetenv JRE_HOME ; unsetenv GROUP ; unsetenv USER ; unsetenv XSESSION_IS_UP ; unsetenv MORE ; unsetenv TMPDIR ; unsetenv WINDOW_MANAGER ; unsetenv XDG_SESSION_COOKIE ; unsetenv HOST ; unsetenv SHELL ; unsetenv TERM ; unsetenv XKEYSYMDB ; unsetenv HOSTNAME ; unsetenv XDG_SESSION_ID ; unsetenv SSH_AGENT_PID ; unsetenv NNTPSERVER ; unsetenv MANPATH ; unsetenv LESSKEY ; unsetenv XDG_VTNR
+
+#Gestion des parenteses
+(ls ; ls ; ls) > toto ; cat toto | wc
+
+#Gestion des backcotes
+touch ...a ; echo "echo plop" > ...a ; `ls` ; rm ...a
+
+#Alias loop
+alias nb1 nb2 ; alias nb2 "nb1 ; echo plop" ; nb1
+
+#Gestion du globing
+ls *.c > toto ; ls *[a-z] ; ls *.?
+
+#parenteses imbriquees
+( ls ; ( ls ; ( ls ; ( ls ; ( ls ; ) ) ) ) ) > TOTO ; cat TOTO | more ; rm TOTO
+
+######################
+#Verifiez vos process#
+######################

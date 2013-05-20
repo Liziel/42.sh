@@ -1,0 +1,68 @@
+############
+#test_simple
+############
+ls
+     ls    
+	 ls -a
+   ls -a -l
+ls;
+;ls
+djkfsdmflds
+;  
+     ;     
+ls -a ; pwd
+kldjfkdsfklsdfl || ls
+||&&
+&&      ls
+ls &&
+ls && ls
+ls || ls
+&&     ls  || ls
+ls && ls || ls
+
+
+##########
+#test_pipe
+##########
+ls | cat -e
+ls| cat -e
+ls |cat -e
+ls |
+| ls
+ls | | cat -e
+ls | cat -e | wc
+ls | cat -e | grep sh | wc -l
+ls | cat -e | | ls
+ls | ls
+cat -e | ls
+
+
+###########
+#test_redir
+###########
+ls > toto ; cat toto ; rm toto
+ls>toto ; cat toto ; rm toto
+ls > toto ; cat toto ; ls >> toto ; cat toto ; rm toto
+>toto ls ; cat toto ; rm toto
+>toto ls ; cat toto ; >>toto ls ; cat toto ; rm toto
+ls > toto ; cat toto ; cat < toto > titi ; cat titi ; rm toto ; rm titi
+ls > toto ; <toto cat >titi ; cat titi ; rm titi ; rm toto
+ls >toto ; cat <toto > titi ; cat titi ; cat toto ; rm titi ; cat < toto >>titi ; cat titi ; cat toto ; rm titi ; rm toto
+ls >> toto ; cat toto ; pwd >toto ; ls <toto ; cat toto ; rm toto
+
+ls \> xd
+ls \\> xd
+$a  -> a="ls"
+cat "<$a"
+
+
+#########
+#test_mix
+#########
+ls | cat -e > toto ; cat toto ; rm toto
+ls | cat -e | wc -l >> toto ; cat toto ; rm toto
+ls || pwd ; ls | cat -e && pwd && echo truc && ls > truc ; cat truc ; rm truc
+>toto ls && cat toto
+dflsdkf || ls > titi && cat titi ; rm titi
+ls |& cat test || truc
+ls ;;;; cat test_mix
