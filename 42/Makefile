@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Sun May 19 07:51:54 2013 vincent colliot
+## Last update Mon May 20 16:49:05 2013 vincent colliot
 ##
 
 NAME    = Sla.sh
@@ -152,6 +152,9 @@ BSET	=$(FSET)setenv.c\
 FUSET	=$(BUILTF)unsetenv/
 BUSET	=$(FUSET)unsetenv.c\
 
+CALLF	=$(BUILTF)call/
+CALL	=$(CALLF)parse_built.c\
+
 BUILT_IN=$(ALIAS)\
 	$(ECHO)\
 	$(CD)\
@@ -159,6 +162,7 @@ BUILT_IN=$(ALIAS)\
 	$(EXIT)\
 	$(BSET)\
 	$(BUSET)\
+	$(CALL)
 
 ########################
 
