@@ -5,11 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May  6 17:44:08 2013 pierre-yves thomas
-<<<<<<< HEAD
-** Last update Tue May 21 16:18:58 2013 vincent colliot
-=======
-** Last update Tue May 21 12:04:47 2013 pierre-yves thomas
->>>>>>> 369baec8e332788a20b3031f22041115164a6687
+** Last update Tue May 21 17:19:32 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
@@ -22,6 +18,8 @@ int    add_letter_in_str(char value, int *reverse_case, char **cmd)
   int   len;
 
   len = my_strlen(*cmd) + 1;
+  if (len > 256)
+    return (0);
   while (--len > (*reverse_case))
     (*cmd)[len + 1] = (*cmd)[len];
   if (my_strlen(*cmd) + 1 > 1)
