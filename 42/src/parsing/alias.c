@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:25:12 2013 vincent colliot
-** Last update Sat May 18 14:56:03 2013 vincent colliot
+** Last update Tue May 21 03:38:13 2013 vincent colliot
 */
 
 #include "string.h"
@@ -71,11 +71,13 @@ static int	grow_alias(char *s, t_alias *alias, size_t n, char **mod)
 		     , mod));
 }
 
-BOOL	seed_alias(char *s, t_alias *alias)
+BOOL	seed_alias(char *s, t_alias *alias, char **mod_s)
 {
   t_alias *mod;
   int	r;
 
+  if (!alias)
+    return (TRUE);
   mod = alias;
   while (mod)
     {
@@ -86,6 +88,7 @@ BOOL	seed_alias(char *s, t_alias *alias)
   r = 0;
   if (alias)
     while ((r = grow_alias(s + hempty(s), alias, hempty(s), &s)) > 0);
+  *mod_s = s;
   if (!r)
     return (TRUE);
   return (FALSE);

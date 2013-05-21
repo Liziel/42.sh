@@ -1,16 +1,17 @@
 /*
 ** load_term_settings.c for 42 in /home/thomas_1//Projets/42sh
-** 
+**
 ** Made by pierre-yves thomas
 ** Login   <thomas_1@epitech.net>
-** 
+**
 ** Started on  Fri Apr 26 14:32:24 2013 pierre-yves thomas
-** Last update Sat May 18 18:47:53 2013 pierre-yves thomas
+** Last update Tue May 21 03:30:56 2013 vincent colliot
 */
 
 #include <stdlib.h>
 #include "edit_line.h"
 #include "string.h"
+#include "env.h"
 
 void    attribute_options(t_options *options)
 {
@@ -56,7 +57,7 @@ char	*unset_termios(struct termios *unset)
 
 int	load_tgets_funcs()
 {
-  if (tgetent(NULL, NULL) != 1)
+  if (tgetent(get_env("TERM"), NULL) != 1)
     {
       my_putstr("Fail on tgetent", 2);
       return (-1);

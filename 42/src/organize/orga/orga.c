@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  2 19:44:26 2013 vincent colliot
-** Last update Fri May 10 00:01:12 2013 vincent colliot
+** Last update Tue May 21 02:49:48 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -69,7 +69,10 @@ t_jobs	*orga(t_get *words, char **bad_sintax, BOOL *null)
 {
   t_jobs *exec;
 
-  if ((*null = (!words)))
+  if (null)
+    if ((*null = (!words)))
+      return (NULL);
+  if (!null && !words)
     return (NULL);
   if ((exec = get_jobs(words, NULL, bad_sintax)) == NULL)
     return (NULL);

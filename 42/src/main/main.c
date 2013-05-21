@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Mon May 20 22:54:16 2013 vincent colliot
+** Last update Tue May 21 03:59:23 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -23,10 +23,12 @@ int main(void)
 
   info.alias = NULL;
   info.st = 0;
+  environ = env_copy();
   load_tgets_funcs();
   attribute_options(&(info.termcaps));
   retain_struct_options(1, &(info.termcaps));
   read_cmds(&info);
+  destroy_env();
   return (info.st);
   /* char *test; */
   /* BOOL	null; */
@@ -36,9 +38,6 @@ int main(void)
   /* t_jobs	*j; */
   /* t_alias	*a; */
 
-  /* environ = env_copy(); */
-  /* info.alias = NULL; */
-  /* attribute_options(&(info.termcaps)); */
   /* bad_sintax = NULL; */
   /* my_putstr("Sla.sh -> ", 1); */
   /* while (test = get_next_line(0)) */

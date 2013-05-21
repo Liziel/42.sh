@@ -5,13 +5,14 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 14:36:25 2013 pierre-yves thomas
-** Last update Mon May 20 22:48:31 2013 pierre-yves thomas
+** Last update Tue May 21 04:01:09 2013 vincent colliot
 */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "edit_line.h"
 #include "string.h"
+#include "prompt.h"
 
 static char	*free_str_edit_lines(char *s1, char *s2)
 {
@@ -72,13 +73,14 @@ char			*usr_cmd(int fd, t_history *history, t_options options)
   int			reverse_case;
   int			histo_pl;
 
-  prompt();
+  prompt(TRUE);
   if (init_termios(&set, &unset) == -1 ||
       init_values(&histo_pl, &reverse_case, &str, &cmd) == -1)
     return (unset_termios(&unset));
   show_cmd(str[0], fd, cmd, reverse_case);
   while (str[0] != 10 || str[1] != 0 || str[2] != 0)
     {
+      prompt(FALSE);
       if (read_cmd(fd, &str, &cmd, &reverse_case) == -1)
 	return (unset_termios(&unset));
       modif_cmd(&cmd, str, &reverse_case);
