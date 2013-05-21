@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 18:01:08 2013 pierre-yves thomas
-** Last update Tue May 21 03:50:01 2013 vincent colliot
+** Last update Tue May 21 14:36:05 2013 pierre-yves thomas
 */
 
 #include <signal.h>
@@ -15,13 +15,14 @@
 #include "string.h"
 #include "prompt.h"
 
-void			go_down_of_cmd_high(char *cmd, t_options opt)
+void			go_down_of_cmd_high(char *cmd, char *prompt,
+					    t_options opt)
 {
   int			high;
   struct winsize	ws;
 
   ioctl(0, TIOCGWINSZ, &ws);
-  high = my_strlen(cmd) / ws.ws_col;
+  high = (my_strlen(cmd) + my_strlen(prompt)) / ws.ws_col;
   while (--high >= 0)
     my_putstr(opt.down_cursor, 1);
 }
@@ -39,7 +40,7 @@ void	catch_signal(int num)
       rev_c = 0;
       show_cmd(10, 0, save_cmd, rev_c);
       my_putstr("\n", 1);
-      go_down_of_cmd_high(save_cmd, tmp);
+      go_down_of_cmd_high(save_cmd, "->", tmp);
       prompt(TRUE);
       save_cmd = my_memset(save_cmd, 0, my_strlen(save_cmd));
       retain_reverse_case(1, &rev_c);

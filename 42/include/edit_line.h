@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May 13 13:04:25 2013 pierre-yves thomas
-** Last update Tue May 21 12:19:43 2013 pierre-yves thomas
+** Last update Tue May 21 15:15:23 2013 pierre-yves thomas
 */
 
 #ifndef	EDIT_LINE_H
@@ -48,6 +48,7 @@ void    clean_str(char, int *, char **);
 ** configure_signals.c
 */
 void    configure_signals();
+void	go_down_of_cmd_high(char *, char *, t_options);
 
 /*
 ** edit_line.c
@@ -84,6 +85,11 @@ void    move_to_next_word(int *, char **);
 void	retain_struct_options(int, t_options *);
 void	retain_cmd(int, char **);
 void	retain_reverse_case(int, int *);
+
+/*
+** read_cmds.c
+*/
+//int     read_cmds(t_info *);
 
 /*
 ** save_and_copy_part_str.c
