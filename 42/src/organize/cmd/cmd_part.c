@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May  3 18:33:37 2013 vincent colliot
-** Last update Sun May 19 07:17:45 2013 vincent colliot
+** Last update Tue May 21 17:55:27 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -51,6 +51,7 @@ static t_words	*list_cmd(t_get *word, t_cmd *clink, t_words *prev, char **bad_si
   if (!word)
     return (prev);
   link = prev;
+  f = TRUE;
   if (!((IN('>', word->word) || IN('<', word->word)) && !word->inter))
     {
       clink->type = WORDS;
@@ -62,12 +63,10 @@ static t_words	*list_cmd(t_get *word, t_cmd *clink, t_words *prev, char **bad_si
 	  return ((void*)(long)nullify_words(word));
     }
   else
-    {
-      if ((f = add_redir(word, &word, bad_sintax, clink)) == FALSE)
-	return (NULL);
-      else
-	return (list_cmd(word, clink, prev, bad_sintax));
-    }
+    if ((f = add_redir(word, &word, bad_sintax, clink)) == FALSE)
+      return (NULL);
+    else
+      return (list_cmd(word, clink, prev, bad_sintax));
   if (list_cmd(word, clink, prev, bad_sintax) == NULL)
     return (nullify_link(link, f, (prev->next = NULL)));
   return (link);

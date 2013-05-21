@@ -6,7 +6,7 @@
 **
 ** Started on  Mon May 13 14:54:51 2013 vincent colliot
 <<<<<<< HEAD
-** Last update Sun May 19 05:12:06 2013 vincent colliot
+** Last update Tue May 21 17:52:06 2013 vincent colliot
 =======
 ** Last update Wed May 15 18:32:03 2013 pierre-yves thomas
 >>>>>>> 17eee20bcf22af4a3d760ac1186819eec227d729
@@ -26,6 +26,8 @@ typedef struct s_info
   STATUS		st;
   t_alias		*alias;
 }			t_info;
+
+# define T_INFO_DEFINED
 
 	/* exec.c */
 BOOL	exec_cmd(t_cmd*, t_info*, FLAG, FD[3]);

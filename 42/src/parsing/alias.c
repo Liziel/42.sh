@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:25:12 2013 vincent colliot
-** Last update Tue May 21 15:38:58 2013 vincent colliot
+** Last update Tue May 21 18:32:32 2013 vincent colliot
 */
 
 #include "string.h"
@@ -34,7 +34,7 @@ static int	push_alias(char *s, t_alias *alias, char **mod, size_t n)
 	 my_strlen(alias->name) == my_strlen(s))&&
 	NMATCH(alias->name, s)))
     return (push_alias(s, alias->next, mod, n));
-  if (alias->w <= n && alias->w + alias->n > n)
+  if ((alias->w <= n && alias->w + alias->n > n) || alias->w > n)
     return (push_alias(s, alias->next, mod, n));
   extend(alias, n, my_strlen(alias->fill) - my_strlen(alias->name));
   if ((r = my_strndup(*mod, n)) == NULL && n != 0)

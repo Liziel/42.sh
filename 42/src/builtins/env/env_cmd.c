@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 17:59:47 2013 thomas lecorre
-** Last update Tue May 21 17:37:46 2013 vincent colliot
+** Last update Tue May 21 18:17:42 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -125,8 +125,6 @@ int	built_env(t_words *cmd, void *bool)
   save = env_copy();
   if (get_opt(cmd->next, &cmd) == FALSE)
     return (EXIT_FAILURE);
-  if (cmd)
-    printf(cmd->word);
   r = exec_env(cmd, save);
   destroy_env();
   environ = save;

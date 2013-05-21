@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Wed May  8 23:54:49 2013 vincent colliot
-** Last update Sun May 19 04:48:31 2013 vincent colliot
+** Last update Tue May 21 17:48:22 2013 vincent colliot
 */
 
 #ifndef ENV_H_
@@ -19,6 +19,7 @@ extern char **environ;
 /* env */
 char	*get_env(char*);
 char	**env_copy();
+void	destroy_env(void);
 
 /* folder env' */
 BOOL	in_directory(char*, char*);

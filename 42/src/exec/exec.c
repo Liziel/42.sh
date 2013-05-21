@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 16:04:18 2013 vincent colliot
-** Last update Mon May 20 20:26:04 2013 vincent colliot
+** Last update Tue May 21 18:27:17 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -30,8 +30,8 @@ static BOOL	set_redir(t_redir *r, FD w[3], t_info *info, FLAG son)
   if (r)
     if (calque_redir(r, pi, w, info) == FALSE)
       return (FALSE);
-  in = 0;
-  while (in < 3)
+  in = 2;
+  while (in >= 0)
     {
       if (pi[in] >= 0)
 	{
@@ -41,7 +41,7 @@ static BOOL	set_redir(t_redir *r, FD w[3], t_info *info, FLAG son)
 	}
       else if ((in == W_IN && (son & SON)) || (in == W_OUT && (son & FATHER)))
 	dup2(w[in], in);
-      in++;
+      in--;
     }
   return (TRUE);
 }

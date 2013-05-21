@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Tue May 14 18:25:48 2013 thomas lecorre
-** Last update Tue May 21 16:38:24 2013 vincent colliot
+** Last update Tue May 21 18:18:14 2013 vincent colliot
 */
 
 #include "built.h"
@@ -29,7 +29,7 @@ static BOOL print(FLAG echo, t_words *link)
     }
   if (link->next)
     my_putchar(' ', 1);
-  print(echo, link->next);
+  return (print(echo, link->next));
 }
 
 static void move_flag(t_words *link, t_words **move, FLAG *echo)
