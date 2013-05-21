@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Tue May 21 03:59:23 2013 vincent colliot
+** Last update Tue May 21 17:51:27 2013 pierre-yves thomas
 */
 
 #include <unistd.h>
@@ -24,7 +24,8 @@ int main(void)
   info.alias = NULL;
   info.st = 0;
   environ = env_copy();
-  load_tgets_funcs();
+  if (load_tgets_funcs() == -1)
+    return (EXIT_FAILURE);
   attribute_options(&(info.termcaps));
   retain_struct_options(1, &(info.termcaps));
   read_cmds(&info);
