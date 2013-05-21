@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 13 00:38:40 2013 vincent colliot
-** Last update Tue May 21 03:16:56 2013 vincent colliot
+** Last update Tue May 21 20:38:50 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -50,6 +50,7 @@ static BOOL	put_lines(t_words *l, FD wr)
   if (!l)
     return (FALSE);
   my_putstr(l->word, wr);
+  my_putstr("\n", wr);
   put_lines(l->next, wr);
   free(l->word);
   free(l);
@@ -73,6 +74,7 @@ BOOL	rdleft(t_redir *r, FD w[3], t_info *info)
   put_lines(l, p[W_OUT]);
   if (w[r->in] >= 0)
     close(w[r->in]);
+  close(p[W_OUT]);
   w[r->in] = p[W_IN];
   return (TRUE);
 }
