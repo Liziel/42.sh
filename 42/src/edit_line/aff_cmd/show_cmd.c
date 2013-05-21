@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May  6 17:57:14 2013 pierre-yves thomas
-** Last update Tue May 21 16:21:31 2013 vincent colliot
+** Last update Tue May 21 18:23:52 2013 pierre-yves thomas
 */
 
 #include <sys/ioctl.h>
@@ -13,13 +13,13 @@
 #include "edit_line.h"
 #include "prompt.h"
 
-void                    go_up_of_cmd_high(char *cmd, t_options opt)
+void                    go_up_of_cmd_high(char *cmd, int len, t_options opt)
 {
   int                   high;
   struct winsize        ws;
 
   ioctl(0, TIOCGWINSZ, &ws);
-  high = (my_strlen(cmd)) / ws.ws_col;
+  high = (my_strlen(cmd) + len) / ws.ws_col;
   while (--high >= 0)
     my_putstr(opt.up_cursor, 1);
 }
@@ -44,8 +44,10 @@ void			show_cmd(char key, int fd, char *cmd, int reverse_case)
 {
   int			i;
   t_options		options;
+  int			len;
 
   i = -1;
+  len = prompt(FALSE);
   retain_struct_options(2, &options);
   while (cmd[++i] != '\0')
     {
@@ -59,7 +61,9 @@ void			show_cmd(char key, int fd, char *cmd, int reverse_case)
   aff_char_cmd(fd, ' ');
   aff_str_cmd(fd, options.forward);
   if (key != 10)
-    aff_str_cmd(fd, options.clean_end);
-  go_up_of_cmd_high(cmd, options);
+    {
+      aff_str_cmd(fd, options.clean_end);
+      go_up_of_cmd_high(cmd, len, options);
+    }
   aff_str_cmd(fd, "\r");
 }
