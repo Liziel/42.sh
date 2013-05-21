@@ -5,9 +5,14 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 20 22:23:52 2013 vincent colliot
+<<<<<<< HEAD
 ** Last update Wed May 22 01:28:28 2013 vincent colliot
+=======
+** Last update Tue May 21 21:41:43 2013 pierre-yves thomas
+>>>>>>> e3b41e8fb7949bcd47afd51e3390f654cca96026
 */
 
+#include <unistd.h>
 #include "string.h"
 #include "prompt.h"
 #include "env.h"

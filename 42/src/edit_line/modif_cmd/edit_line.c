@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 14:36:25 2013 pierre-yves thomas
-** Last update Tue May 21 20:37:45 2013 pierre-yves thomas
+** Last update Tue May 21 22:13:38 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
@@ -39,6 +39,7 @@ int		init_values(int *history_pl, int *reverse_case,
     }
   (*str) = my_memset((*str), 0, 5);
   (*cmd) = my_memset((*cmd), 0, 2);
+  prompt(TRUE);
   return (0);
 }
 
@@ -64,31 +65,31 @@ char	*finish_usr_cmd(char *cmd, char *str, struct termios unset)
   return (cmd);
 }
 
-char			*usr_cmd(int fd, t_history *history, t_options options)
+char			*usr_cmd(int fd, t_history *histo, t_options options)
 {
   struct termios	set;
   struct termios	unset;
   char			*str;
   char			*cmd;
-  int			reverse_case;
+  int			rev_c;
   int			histo_pl;
 
-  prompt(TRUE);
+  (void)options;
   if (init_termios(&set, &unset) == -1 ||
-      init_values(&histo_pl, &reverse_case, &str, &cmd) == -1)
+      init_values(&histo_pl, &rev_c, &str, &cmd) == -1)
     return (unset_termios(&unset));
-  show_cmd(str[0], fd, cmd, reverse_case);
+  show_cmd(str[0], fd, cmd, rev_c);
   while (str[0] != 10 || str[1] != 0 || str[2] != 0)
     {
-      if (read_cmd(fd, &str, &cmd, &reverse_case) == -1)
+      if (read_cmd(fd, &str, &cmd, &rev_c) == -1)
 	return (unset_termios(&unset));
-      if (histo_pl < length_of_history(history) && str[0] == 27 && str[2] == 65)
-	if (take_cmd_from_history(++histo_pl, &reverse_case, &cmd, history) == -1)
+      if (histo_pl < length_of_history(histo) && str[0] == 27 && str[2] == 65)
+	if (take_cmd_from_history(++histo_pl, &rev_c, &cmd, histo) == -1)
 	  return (unset_termios(&unset));
       if (histo_pl > 0 && str[0] == 27 && str[2] == 66)
-	if (take_cmd_from_history(--histo_pl, &reverse_case, &cmd, history) == -1)
+	if (take_cmd_from_history(--histo_pl, &rev_c, &cmd, histo) == -1)
 	  return (unset_termios(&unset));
-      show_cmd(str[0], fd, cmd, reverse_case);
+      show_cmd(str[0], fd, cmd, rev_c);
     }
   return (finish_usr_cmd(cmd, str, unset));
 }
