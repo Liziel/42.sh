@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 17:03:04 2013 thomas lecorre
-** Last update Sun May 19 07:55:57 2013 vincent colliot
+** Last update Tue May 21 16:02:19 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -25,8 +25,8 @@ static BOOL deset(t_words *cmd, char *env)
 {
   if (!cmd)
     return (FALSE);
-  if (NMATCH(env, cmd->word)
-      && env[my_strlen(cmd->word)] == '"')
+  if (NMATCH(cmd->word, env)
+      && env[my_strlen(cmd->word)] == '=')
     return (TRUE);
   return (deset(cmd->next, env));
 }
@@ -59,49 +59,3 @@ int	built_unsetenv(t_words *cmd, void *null)
     }
   return (switch_env(tab));
 }
-
-/* int	unsetenv(t_words *cmd, void *alias) */
-/* { */
-/*   int	i; */
-/*   int	n; */
-/*   char	**tab; */
-
-/*   n = 0; */
-/*   if (cmd->next == NULL) */
-/*     { */
-/*       my_putstr("(sh): unsetenv: Too few arguments.\n"); */
-/*       return (EXIT_FAILURE); */
-/*     } */
-/*   if (environ == NULL) */
-/*     return (EXIT_FAILURE); */
-/*   cmd = cmd->next; */
-/*   while (cmd != NULL) */
-/*     { */
-/*       i = 0; */
-/*       while (environ[i] != NULL) */
-/* 	{ */
-/* 	  if (cmd->word && NMATCH(cmd->word, environ[i])) */
-/* 	    if (environ[i][my_strlen(cmd->word)] == '=') */
-/* 	      { */
-/* 		free(environ[i]); */
-/* 		environ[i] = NULL; */
-/* 		n++; */
-/* 	      } */
-/* 	  i++; */
-/* 	} */
-/*       cmd = cmd->next; */
-/*     } */
-/*   if ((tab = malloc(sizeof(char *) * (i - n + 1))) == NULL) */
-/*     return (EXIT_FAILURE); */
-/*   n = 0; */
-/*   while (environ[i] != NULL) */
-/*     { */
-/*       if (environ[i]) */
-/* 	tab[n++] = environ[i]; */
-/*       i++; */
-/*     } */
-/*   tab[n] = NULL; */
-/*   free(environ); */
-/*   environ = tab; */
-/*   return (EXIT_SUCCES); */
-/* } */

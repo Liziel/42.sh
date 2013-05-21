@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May  6 17:44:08 2013 pierre-yves thomas
-** Last update Mon May 20 23:26:33 2013 pierre-yves thomas
+** Last update Tue May 21 04:10:23 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -41,6 +41,7 @@ void    del_letter_in_str(char value, int *reverse_case, char **cmd)
           suppr++;
         }
       my_putstr("\r", 1);
+      prompt(FALSE);
       (*reverse_case)--;
     }
 }
@@ -78,7 +79,7 @@ static void fill_tab(char opt[13])
   opt[10] = 23;
   opt[11] = 20;
   opt[12] = 8;
-}	
+}
 
 void            modif_cmd(char **cmd, char *str, int *reverse_case)
 {

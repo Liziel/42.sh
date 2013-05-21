@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:25:12 2013 vincent colliot
-** Last update Tue May 21 03:38:13 2013 vincent colliot
+** Last update Tue May 21 15:38:58 2013 vincent colliot
 */
 
 #include "string.h"
@@ -41,7 +41,8 @@ static int	push_alias(char *s, t_alias *alias, char **mod, size_t n)
     return (-1);
   if ((r2 = my_strcat(r, alias->fill)) == NULL)
     return (-1);
-  free(r);
+  if (r)
+    free(r);
   s = *mod;
   *mod = my_strcat(r2, s + my_strlen(alias->name));
   free(r2);

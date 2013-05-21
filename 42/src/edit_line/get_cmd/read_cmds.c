@@ -6,7 +6,7 @@
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
 <<<<<<< HEAD
-** Last update Tue May 21 03:28:17 2013 vincent colliot
+** Last update Tue May 21 15:38:37 2013 vincent colliot
 =======
 ** Last update Sat May 18 18:43:48 2013 pierre-yves thomas
 >>>>>>> 3f022d32e872c96b53fe7128d49e8c677f4d5f0b
@@ -23,12 +23,13 @@
 #include "orga.h"
 #include "lexec.h"
 
-static void	*built(char *str, char **bad_sintax, t_info *info)
+static void	*built(char *str, char **bad_sintax, t_info *info, char **mod_s)
 {
   t_get	*sub;
 
   if (seed_alias(str, info->alias, &str) == FALSE)
     return (NULL);
+  *mod_s = str;
   if ((sub = subdivide(str, NULL, bad_sintax)) == NULL)
     return (NULL);
   if ((sub = comment(sub, NULL)) == NULL)
@@ -44,7 +45,7 @@ static BOOL	built_and_exec(char *str, t_info *info)
   exec = NULL;
   bad_sintax = NULL;
   if (!empty(str))
-    if ((exec = built(str, &bad_sintax, info)) == NULL)
+    if ((exec = built(str, &bad_sintax, info, &str)) == NULL)
       {
 	if (bad_sintax)
 	  fprintf(stderr, "%s\n", bad_sintax);

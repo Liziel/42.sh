@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 19:47:25 2013 vincent colliot
-** Last update Sun May 19 06:19:12 2013 vincent colliot
+** Last update Tue May 21 15:19:28 2013 vincent colliot
 */
 
 #include "string.h"
@@ -52,6 +52,7 @@ void	*my_strndup(const void	*s, size_t n)
       ((char*)r)[i] = ((char*)s)[i];
       i++;
     }
+  ((char*)r)[i] = 0;
   return (r);
 }
 
@@ -81,6 +82,7 @@ char	*my_strcat(const char *s, const char *c)
       r[i] = c[i - si];
       i++;
     }
+  r[i] = 0;
   return (r);
 }
 
@@ -109,6 +111,7 @@ char	*my_strncat(const char *s, const char *c, size_t n)
       r[i] = c[i - si];
       i++;
     }
+  r[i] = 0;
   return (r);
 }
 
