@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 20 22:23:52 2013 vincent colliot
-** Last update Tue May 21 16:22:12 2013 vincent colliot
+** Last update Tue May 21 16:24:14 2013 vincent colliot
 */
 
 #include "string.h"
@@ -16,7 +16,7 @@ void	prompt(BOOL b)
   char		*p;
   size_t	i;
 
-  p = "------>Prompt test\n[] ";
+  p = "------>Prompt test\n[Sla.sh] ";
   i = 0;
   if (!b)
     while (IN('\n', p + i))
