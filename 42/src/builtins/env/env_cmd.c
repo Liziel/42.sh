@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 17:59:47 2013 thomas lecorre
-** Last update Tue May 21 17:30:50 2013 vincent colliot
+** Last update Tue May 21 17:37:46 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -41,17 +41,17 @@ static BOOL	env_u(t_words *cmd)
     return (!(BOOL)print_err("env: option requires an argument -- 'u'\n"));
   if (environ == ((void*)(n = (i = 0))))
     return (TRUE);
-  while (environ[i])
-    if (MATCH(cmd->word, environ[i++]) && environ[i][my_strlen(cmd->word)]
-	== '"')
+  while (environ[i++])
+    if (NMATCH(cmd->word, environ[i - 1])
+	&& environ[i - 1][my_strlen(cmd->word)]	== '"')
       n = 1;
   if (i == n)
     return (!switch_env(NULL, TRUE));
-  if ((tab = xmalloc(sizeof(char*) * (i))) == NULL)
+  if ((tab = xmalloc(sizeof(char*) * (i - n + 1))) == NULL)
     return ((long)(environ = NULL));
   n = (i = 0);
   while (environ[i])
-    if (!(MATCH(cmd->word, environ[i]) && environ[i][my_strlen(cmd->word)]
+    if (!(NMATCH(cmd->word, environ[i]) && environ[i][my_strlen(cmd->word)]
 	  == '='))
       tab[n++] = environ[i++];
     else
