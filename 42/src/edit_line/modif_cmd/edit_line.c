@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 14:36:25 2013 pierre-yves thomas
-** Last update Mon May 20 22:48:31 2013 pierre-yves thomas
+** Last update Mon May 20 23:42:42 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
@@ -46,7 +46,7 @@ static int     	read_cmd(int fd, char **str, char **cmd, int *reverse_case)
   retain_cmd(1, cmd);
   (*str) = my_memset((*str), 0, 5);
   retain_reverse_case(1, reverse_case);
-  if (read(fd, (*str), 4) <= 0 || (*str)[0] == 4)
+  if ((read(fd, (*str), 4) <= 0 || (*str)[0] == 4) && my_strlen(*cmd) == 0)
     {
       free_str_edit_lines((*str), (*cmd));
       return (-1);
