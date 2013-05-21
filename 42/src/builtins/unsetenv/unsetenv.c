@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 17:03:04 2013 thomas lecorre
-** Last update Tue May 21 16:02:19 2013 vincent colliot
+** Last update Tue May 21 17:31:36 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -14,9 +14,13 @@
 #include "built.h"
 #include "xlib.h"
 
-static int  switch_env(char **tab)
+int  switch_env(char **tab, BOOL destroy)
 {
-  free(environ);
+  if (!destroy)
+    if (environ)
+      free(environ);
+  if (destroy && environ)
+    destroy_env();
   environ = tab;
   return (EXIT_SUCCESS);
 }
@@ -46,16 +50,16 @@ int	built_unsetenv(t_words *cmd, void *null)
       if (deset(cmd->next, environ[i++]))
 	n++;
   if (i == n)
-    return (switch_env(NULL));
+    return (switch_env(NULL, TRUE));
   if ((tab = xmalloc(sizeof(char*) * (i - n + 1))) == NULL)
     return (EXIT_FAILURE);
   tab[i - n] = NULL;
   i = (n = 0);
   while (environ[i])
-    {
-      if (!deset(cmd->next, environ[i]))
-	tab[n++] = environ[i];
-      i++;
-    }
-  return (switch_env(tab));
+    if (!deset(cmd->next, environ[i]))
+      tab[n++] = environ[i++];
+    else
+      free(environ[i++]);
+  tab[n] = NULL;
+  return (switch_env(tab, FALSE));
 }

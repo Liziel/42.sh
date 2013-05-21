@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May  3 17:56:39 2013 thomas lecorre
-** Last update Mon May 20 17:10:09 2013 vincent colliot
+** Last update Tue May 21 16:56:36 2013 vincent colliot
 */
 
 #ifndef	BUILT_H__
@@ -37,7 +37,7 @@ int	mod_alias(char*, char*, t_alias**);
 	/* env */
 int	built_env(t_words*, void*);
 BOOL	print_help(void);
-int	exec_env(t_words*);
+int	exec_env(t_words*, char**);
 char	*seek_cmd(char*, char**);
 void	destroy_env(void);
 char	**env_copy(void);

@@ -5,12 +5,12 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Tue May 21 03:47:13 2013 vincent colliot
-** Last update Tue May 21 03:48:39 2013 vincent colliot
+** Last update Tue May 21 17:14:14 2013 vincent colliot
 */
 
 #ifndef PROMPT_H_
 # define PROMPT_H_
 
-void	prompt(BOOL);
+size_t	prompt(BOOL);
 
 #endif
