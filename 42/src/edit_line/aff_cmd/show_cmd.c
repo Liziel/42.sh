@@ -1,25 +1,25 @@
 /*
 ** show_cmd.c for 42 in /home/thomas_1//Projets/42sh
-** 
+**
 ** Made by pierre-yves thomas
 ** Login   <thomas_1@epitech.net>
-** 
+**
 ** Started on  Mon May  6 17:57:14 2013 pierre-yves thomas
-** Last update Tue May 21 13:43:16 2013 pierre-yves thomas
+** Last update Tue May 21 16:21:31 2013 vincent colliot
 */
 
 #include <sys/ioctl.h>
 #include "string.h"
 #include "edit_line.h"
+#include "prompt.h"
 
-void                    go_up_of_cmd_high(char *cmd, char *prompt,
-					  t_options opt)
+void                    go_up_of_cmd_high(char *cmd, t_options opt)
 {
   int                   high;
   struct winsize        ws;
 
   ioctl(0, TIOCGWINSZ, &ws);
-  high = (my_strlen(cmd) + my_strlen(prompt)) / ws.ws_col;
+  high = (my_strlen(cmd)) / ws.ws_col;
   while (--high >= 0)
     my_putstr(opt.up_cursor, 1);
 }
@@ -46,7 +46,6 @@ void			show_cmd(char key, int fd, char *cmd, int reverse_case)
   t_options		options;
 
   i = -1;
-  prompt(FALSE);
   retain_struct_options(2, &options);
   while (cmd[++i] != '\0')
     {
@@ -61,6 +60,6 @@ void			show_cmd(char key, int fd, char *cmd, int reverse_case)
   aff_str_cmd(fd, options.forward);
   if (key != 10)
     aff_str_cmd(fd, options.clean_end);
-  go_up_of_cmd_high(cmd, "->", options);
+  go_up_of_cmd_high(cmd, options);
   aff_str_cmd(fd, "\r");
 }

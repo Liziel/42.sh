@@ -6,7 +6,7 @@
 **
 ** Started on  Mon May  6 17:44:08 2013 pierre-yves thomas
 <<<<<<< HEAD
-** Last update Tue May 21 04:10:23 2013 vincent colliot
+** Last update Tue May 21 16:18:58 2013 vincent colliot
 =======
 ** Last update Tue May 21 12:04:47 2013 pierre-yves thomas
 >>>>>>> 369baec8e332788a20b3031f22041115164a6687
@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include "string.h"
 #include "edit_line.h"
+#include "prompt.h"
 
 int    add_letter_in_str(char value, int *reverse_case, char **cmd)
 {
