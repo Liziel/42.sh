@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May  6 17:44:08 2013 pierre-yves thomas
-** Last update Tue May 21 18:18:39 2013 vincent colliot
+** Last update Tue May 21 20:38:04 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
@@ -46,7 +46,6 @@ void    del_letter_in_str(char value, int *reverse_case, char **cmd)
           suppr++;
         }
       my_putstr("\r", 1);
-      prompt(FALSE);
       (*reverse_case)--;
     }
 }

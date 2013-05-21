@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 14:36:25 2013 pierre-yves thomas
-** Last update Tue May 21 17:57:08 2013 vincent colliot
+** Last update Tue May 21 20:37:45 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
@@ -80,7 +80,6 @@ char			*usr_cmd(int fd, t_history *history, t_options options)
   show_cmd(str[0], fd, cmd, reverse_case);
   while (str[0] != 10 || str[1] != 0 || str[2] != 0)
     {
-      prompt(FALSE);
       if (read_cmd(fd, &str, &cmd, &reverse_case) == -1)
 	return (unset_termios(&unset));
       if (histo_pl < length_of_history(history) && str[0] == 27 && str[2] == 65)
