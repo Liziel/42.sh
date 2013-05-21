@@ -1,0 +1,16 @@
+#test_pas_ok#
+#test_redir#
+Sla.sh
+a.out
+all
+builtins_test
+main.c
+moulinette_42.py
+test42
+test_mix
+test_pas_ok
+test_pas_ok~
+test_pipe
+test_redir
+test_simple
+toto
