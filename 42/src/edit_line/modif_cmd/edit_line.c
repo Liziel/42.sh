@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 14:36:25 2013 pierre-yves thomas
-** Last update Tue May 21 20:55:04 2013 pierre-yves thomas
+** Last update Tue May 21 22:13:38 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
@@ -65,7 +65,7 @@ char	*finish_usr_cmd(char *cmd, char *str, struct termios unset)
   return (cmd);
 }
 
-char			*usr_cmd(int fd, t_history *history, t_options options)
+char			*usr_cmd(int fd, t_history *histo, t_options options)
 {
   struct termios	set;
   struct termios	unset;
@@ -83,11 +83,11 @@ char			*usr_cmd(int fd, t_history *history, t_options options)
     {
       if (read_cmd(fd, &str, &cmd, &rev_c) == -1)
 	return (unset_termios(&unset));
-      if (histo_pl < length_of_history(history) && str[0] == 27 && str[2] == 65)
-	if (take_cmd_from_history(++histo_pl, &rev_c, &cmd, history) == -1)
+      if (histo_pl < length_of_history(histo) && str[0] == 27 && str[2] == 65)
+	if (take_cmd_from_history(++histo_pl, &rev_c, &cmd, histo) == -1)
 	  return (unset_termios(&unset));
       if (histo_pl > 0 && str[0] == 27 && str[2] == 66)
-	if (take_cmd_from_history(--histo_pl, &rev_c, &cmd, history) == -1)
+	if (take_cmd_from_history(--histo_pl, &rev_c, &cmd, histo) == -1)
 	  return (unset_termios(&unset));
       show_cmd(str[0], fd, cmd, rev_c);
     }
