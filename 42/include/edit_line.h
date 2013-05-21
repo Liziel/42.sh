@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May 13 13:04:25 2013 pierre-yves thomas
-** Last update Sat May 18 18:48:28 2013 pierre-yves thomas
+** Last update Tue May 21 15:15:23 2013 pierre-yves thomas
 */
 
 #ifndef	EDIT_LINE_H
@@ -33,11 +33,6 @@ typedef struct	s_options
 # include "exec.h"
 
 /*
-** aff_prompt.c
-*/
-void	show_prompt();
-
-/*
 ** change_reverse_place.c
 */
 void            reverse_to_begin(char, int *, char **);
@@ -53,6 +48,7 @@ void    clean_str(char, int *, char **);
 ** configure_signals.c
 */
 void    configure_signals();
+void	go_down_of_cmd_high(char *, char *, t_options);
 
 /*
 ** edit_line.c
@@ -73,9 +69,9 @@ char    *unset_termios(struct termios *);
 ** modify_line.c
 */
 void    move_reverse_case(char, int *, char **);
-void    add_letter_in_str(char, int *, char **);
 void    del_letter_in_str(char, int *, char **);
-void	modif_cmd(char **, char *, int *);
+int	add_letter_in_str(char, int *, char **);
+int	modif_cmd(char **, char *, int *);
 
 /*
 ** move_to_word_fct.
@@ -84,16 +80,16 @@ void    move_to_prev_word(int *, char **);
 void    move_to_next_word(int *, char **);
 
 /*
-**
-*/
-//int	read_cmds(t_info info);
-
-/*
 ** remain_datas.c
 */
 void	retain_struct_options(int, t_options *);
 void	retain_cmd(int, char **);
 void	retain_reverse_case(int, int *);
+
+/*
+** read_cmds.c
+*/
+//int     read_cmds(t_info *);
 
 /*
 ** save_and_copy_part_str.c
@@ -116,7 +112,7 @@ void    swap_chars_on_cmd(char, int *, char **);
 /*
 ** take_cmd_from_history.c
 */
-void    take_cmd_from_history(int, int *, char **, t_history *);
+int	take_cmd_from_history(int, int *, char **, t_history *);
 
 /*
 ** upper_lower_case_letter.c

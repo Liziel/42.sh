@@ -1,0 +1,32 @@
+->alias toto ls
+->toto
+-> glibc
+
+->setenv toto (ou titi)
+->boucle infinie
+
+->ls | cat -e
+->curseur bizarre
+
+->echo -e "toto\ctiti"
+toto
+-> ca devrait faire "toto->" sans \n
+
+->weogiwjeg || ls 
+(sh): command not found : weogiwjeg
+bash :
+-> oiwjegoijweg || ls
+If 'oiwjegoijweg' is not a typo you can use command-not-found to lookup the package that contains it, like this:
+    cnf oiwjegoijweg
+Sla.sh  a.out  all  builtins_test  main.c  moulinette_42.py  test42  test_mix  test_pas_ok  test_pipe  test_redir  test_simple
+
+ls > toto ; cat toto ; ls >> toto ; cat toto ; rm toto
+
+ls > toto ; cat toto ; cat < toto > titi ; cat titi ; rm toto ; rm titi
+
+ls > toto ; <toto cat >titi ; cat titi ; rm titi ; rm toto
+
+ls >toto ; cat <toto > titi ; cat titi ; cat toto ; rm titi ; cat < toto >>titi ; cat titi ; cat toto ; rm titi ; rm toto
+
+$a  -> a="ls"
+
