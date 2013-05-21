@@ -5,11 +5,12 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Thu May  9 11:20:06 2013 pierre-yves thomas
-** Last update Fri May 17 18:51:56 2013 pierre-yves thomas
+** Last update Tue May 21 21:30:19 2013 pierre-yves thomas
 */
 
 #include "edit_line.h"
 #include "string.h"
+#include "prompt.h"
 
 void    clean_screen(char value, int *reverse_case, char **cmd)
 {
@@ -20,9 +21,7 @@ void    clean_screen(char value, int *reverse_case, char **cmd)
   (void)reverse_case;
   (void)cmd;
   my_putstr(tmp.clear, 1);
-  /* affichage du prompt ici */
-  // show_prompt();
-  my_putstr("prompt test\n", 1);
+  prompt(TRUE);
 }
 
 void	clean_str(char value, int *reverse_case, char **cmd)
