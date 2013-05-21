@@ -5,11 +5,12 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 20 22:23:52 2013 vincent colliot
-** Last update Tue May 21 21:30:52 2013 vincent colliot
+** Last update Wed May 22 01:28:28 2013 vincent colliot
 */
 
 #include "string.h"
 #include "prompt.h"
+#include "env.h"
 
 size_t	prompt(BOOL b)
 {
@@ -17,7 +18,9 @@ size_t	prompt(BOOL b)
   char		*p;
   size_t	i;
 
-  p = "------>Prompt test\n[Sla.sh] ";
+  p = get_env("PS1");
+  if (!p)
+    p = "------>Prompt test\n[Sla.sh] ";
   i = 0;
   if (!b)
     while (IN('\n', p + i))

@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 01:40:28 2013 vincent colliot
-** Last update Sun May 19 05:11:38 2013 vincent colliot
+** Last update Wed May 22 01:22:44 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -55,20 +55,38 @@ static char	**to_tab(t_words *list, BOOL *sys_fail)
   return (tab);
 }
 
-static void	clean_signal(STATUS signal)
+static void	clean_signal(char *prog, STATUS signal)
 {
+  if (signal == SIGILL || signal == SIGABRT || signal == SIGFPE ||
+      signal == SIGSEGV || signal == SIGTERM || signal == SIGINT)
+    my_putstr(prog, 2);
   if (signal == SIGILL)
-    my_putstr("Illegal instruction\n", 2);
+    my_putstr(" : Illegal instruction\n", 2);
   else if (signal == SIGABRT)
-    my_putstr("Aborted\n", 2);
+    my_putstr(" : Aborted\n", 2);
   else if (signal == SIGFPE)
-    my_putstr("Floating exeception\n", 2);
+    my_putstr(" : Floating exeception\n", 2);
   else if (signal == SIGSEGV)
-    my_putstr("Segmentation fault\n", 2);
+    my_putstr(" : Segmentation fault\n", 2);
   else if (signal == SIGTERM)
-    my_putstr("Terminated\n", 2);
+    my_putstr(" : Terminated\n", 2);
   else if (signal == SIGINT)
-    my_putstr("\n", 2);
+    my_putstr(" : Killed\n", 2);
+}
+
+static int	stop(BOOL s)
+{
+  static BOOL k = FALSE;
+
+  if (TRUE == s)
+    k = TRUE;
+  return (k);
+}
+
+void	catch_more(int num)
+{
+  if (num == SIGINT)
+    stop(TRUE);
 }
 
 STATUS		exec_form(t_words *list, BOOL *sys_fail)
@@ -83,11 +101,19 @@ STATUS		exec_form(t_words *list, BOOL *sys_fail)
   if ((pid = fork()) == -1)
     return (EXIT_FAILURE + !((*sys_fail) = TRUE));
   if (pid)
-    waitpid(pid, &st, 0);
+    {
+      signal(SIGINT, catch_more);
+      while (waitpid(pid, &st, WNOHANG) != -1)
+	if (stop(FALSE) == TRUE)
+	  kill(-pid, SIGINT);
+    }
   else
-    if (execve(tab[0], tab, environ) == -1)
-      return (EXIT_FAILURE + !((*sys_fail) = TRUE));
-  clean_signal(st);
+    {
+      setsid();
+      if (execve(tab[0], tab, environ) == -1)
+	return (EXIT_FAILURE + !((*sys_fail) = TRUE));
+    }
+  clean_signal(tab[0], st);
   free(tab);
   return (0 != (WEXITSTATUS(st)));
 }

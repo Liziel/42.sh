@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May  3 17:56:39 2013 thomas lecorre
-** Last update Tue May 21 17:52:31 2013 vincent colliot
+** Last update Tue May 21 23:27:00 2013 vincent colliot
 */
 
 #ifndef	BUILT_H__
@@ -44,7 +44,7 @@ char	**env_copy(void);
 
 	/* setenv */
 int	built_setenv(t_words *, void *);
-int  switch_env(char**, BOOL);
+int	switch_env(char**, BOOL);
 
 	/* unsetenv */
 int	built_unsetenv(t_words *, void *);

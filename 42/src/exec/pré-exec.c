@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:58:16 2013 vincent colliot
-** Last update Sat May 18 18:44:31 2013 vincent colliot
+** Last update Tue May 21 22:59:52 2013 vincent colliot
 */
 
 #include <sys/wait.h>
@@ -22,10 +22,6 @@ static void	init_pipe(FD w[2], FD pi[3], FD h)
   pi[h] = w[h];
   close(w[!h]);
 }
-
-/*
-**bon elle est pas tellement a la norme...mais ce sera vrai sous peu FAUX
-*/
 
 static void	my_wait(pid_t son, STATUS *st)
 {
