@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 18:01:08 2013 pierre-yves thomas
-** Last update Tue May 21 16:22:42 2013 vincent colliot
+** Last update Tue May 21 21:32:59 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -37,7 +37,7 @@ void	catch_signal(int num)
   if (num == SIGINT)
     {
       rev_c = 0;
-      show_cmd(10, 0, save_cmd, rev_c);
+      /* show_cmd(10, 0, save_cmd, rev_c); */
       my_putstr("\n", 1);
       go_down_of_cmd_high(save_cmd, tmp);
       prompt(TRUE);

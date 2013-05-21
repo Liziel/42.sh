@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 20 22:23:52 2013 vincent colliot
-** Last update Tue May 21 17:14:00 2013 vincent colliot
+** Last update Tue May 21 21:30:52 2013 vincent colliot
 */
 
 #include "string.h"
@@ -13,6 +13,7 @@
 
 size_t	prompt(BOOL b)
 {
+  size_t	n;
   char		*p;
   size_t	i;
 
@@ -21,5 +22,9 @@ size_t	prompt(BOOL b)
   if (!b)
     while (IN('\n', p + i))
       i += my_strilen(p + i, '\n') + 1;
-  return (my_putstr(p + i, 1));
+  n = 0;
+  while (p[i + n] && (!b || IN('\n', p + i + n)))
+    n++;
+  write(1, p + i, n);
+  return (n);
 }

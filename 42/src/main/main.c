@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Tue May 21 17:51:27 2013 pierre-yves thomas
+** Last update Tue May 21 21:30:36 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -31,50 +31,4 @@ int main(void)
   read_cmds(&info);
   destroy_env();
   return (info.st);
-  /* char *test; */
-  /* BOOL	null; */
-  /* char  *bad_sintax; */
-  /* t_info	info; */
-  /* t_get *g; */
-  /* t_jobs	*j; */
-  /* t_alias	*a; */
-
-  /* bad_sintax = NULL; */
-  /* my_putstr("Sla.sh -> ", 1); */
-  /* while (test = get_next_line(0)) */
-  /*   { */
-  /*     if (bad_sintax) */
-  /* 	free(bad_sintax); */
-  /*     bad_sintax = NULL; */
-  /*     if ((g = subdivide(test, NULL, &bad_sintax)) == NULL) */
-  /* 	{ */
-  /* 	  if (bad_sintax) */
-  /* 	    { */
-  /* 	      print_err(bad_sintax); */
-  /* 	      print_err("\n"); */
-  /* 	    } */
-  /* 	} */
-  /*     else */
-  /* 	{ */
-  /* 	  if ((g = comment(g, NULL)) == NULL) */
-  /* 	    return (-1); */
-  /* 	  if ((j = orga(g, &bad_sintax, &null)) == NULL) */
-  /* 	    { */
-  /* 	      if (bad_sintax) */
-  /* 		{ */
-  /* 		  print_err(bad_sintax); */
-  /* 		  print_err("\n"); */
-  /* 		} */
-  /* 	    } */
-  /* 	  else */
-  /* 	    { */
-  /* 	      info.st = EXIT_SUCCESS; */
-  /* 	      if (pre_exec(j, &info) == FALSE) */
-  /* 		return (info.st); */
-  /* 	    } */
-  /* 	} */
-  /*     free(test); */
-  /*     my_putstr("Sla.sh -> ", 1); */
-  /*   } */
-  /* return (0); */
 }
