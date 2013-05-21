@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 19 04:50:12 2013 vincent colliot
-** Last update Mon May 20 20:46:35 2013 vincent colliot
+** Last update Tue May 21 16:56:12 2013 vincent colliot
 */
 
 #include "string.h"
@@ -40,9 +40,14 @@ static int print_env()
 {
   size_t	i;
 
+  if (!environ)
+    return (EXIT_FAILURE);
   i = 0;
   while (environ[i])
-    my_putstr(environ[i++], 1);
+    {
+      my_putstr(environ[i++], 1);
+      my_putstr("\n", 1);
+    }
   return (EXIT_SUCCESS);
 }
 
@@ -56,19 +61,23 @@ static int seek_fail(char *r)
   return (EXIT_FAILURE);
 }
 
-int	exec_env(t_words *word)
+int	exec_env(t_words *word, char **save)
 {
   BOOL	ef;
   char	*r;
   char	*f;
+  char **safe;
 
   if (!word)
     return (print_env());
   f = word->word;
   r = NULL;
+  safe = environ;
+  environ = save;
   if (!((word->word)[0] == '.' || IN('/', (word->word))))
     if ((word->word = seek_cmd(word->word, &r)) == NULL)
       return (seek_fail(r));
+  environ = safe;
   if (!MATCH(f, word->word))
     free(f);
   return (exec_form(word, &ef));

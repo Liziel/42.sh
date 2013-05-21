@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 17:59:47 2013 thomas lecorre
-** Last update Sun May 19 05:21:49 2013 vincent colliot
+** Last update Tue May 21 17:37:46 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -38,27 +38,26 @@ static BOOL	env_u(t_words *cmd)
   size_t n;
 
   if (!cmd)
-    return (!(BOOL)print_err("env: option requires an argument -- 'u'"));
-  n = (i = 0);
-  while (environ[i])
-    if (MATCH(environ[i++], cmd->word))
-      n = 1;
-  if (!n)
+    return (!(BOOL)print_err("env: option requires an argument -- 'u'\n"));
+  if (environ == ((void*)(n = (i = 0))))
     return (TRUE);
-  if ((tab = xmalloc(sizeof(char*) * (i))) == NULL)
+  while (environ[i++])
+    if (NMATCH(cmd->word, environ[i - 1])
+	&& environ[i - 1][my_strlen(cmd->word)]	== '"')
+      n = 1;
+  if (i == n)
+    return (!switch_env(NULL, TRUE));
+  if ((tab = xmalloc(sizeof(char*) * (i - n + 1))) == NULL)
     return ((long)(environ = NULL));
   n = (i = 0);
   while (environ[i])
-    {
-      if (!(MATCH(environ[i], cmd->word)))
-	tab[n++] = environ[i];
-      else
-	free(environ[i]);
-      i++;
-    }
-  free(environ);
-  environ = tab;
-  return (TRUE);
+    if (!(NMATCH(cmd->word, environ[i]) && environ[i][my_strlen(cmd->word)]
+	  == '='))
+      tab[n++] = environ[i++];
+    else
+      free(environ[i++]);
+  tab[n] = NULL;
+  return (!switch_env(tab, FALSE));
 }
 
 static BOOL	env_s(t_words *cmd)
@@ -67,7 +66,7 @@ static BOOL	env_s(t_words *cmd)
   int	i;
   char	**tab;
 
-  if (!cmd || !cmd->next)
+  if (!(cmd && cmd->next))
     return (!(BOOL)print_err("env: option requires two argument -- 'u'"));
   line = my_stricat(cmd->word, cmd->next->word, '=');
   if ((i = -(environ != NULL)))
@@ -102,13 +101,13 @@ static BOOL get_opt(t_words *opt, t_words **call)
     }
   if (MATCH(opt->word, "-u"))
     {
-      if (env_u(opt->next))
+      if (env_u(opt->next) == FALSE)
 	return (FALSE);
       return (get_opt(opt->next->next, call));
     }
   if (MATCH(opt->word, "-s"))
     {
-      if (env_s(opt->next))
+      if (env_s(opt->next) == FALSE)
 	return (FALSE);
       return (get_opt(opt->next->next->next, call));
     }
@@ -124,9 +123,11 @@ int	built_env(t_words *cmd, void *bool)
 
   (void)bool;
   save = env_copy();
-  if (get_opt(cmd, &cmd) == FALSE)
+  if (get_opt(cmd->next, &cmd) == FALSE)
     return (EXIT_FAILURE);
-  r = exec_env(cmd);
+  if (cmd)
+    printf(cmd->word);
+  r = exec_env(cmd, save);
   destroy_env();
   environ = save;
   return (r);
