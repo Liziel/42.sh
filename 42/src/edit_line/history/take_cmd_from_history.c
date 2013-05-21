@@ -5,14 +5,14 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Fri May 10 14:24:48 2013 pierre-yves thomas
-** Last update Fri May 17 18:20:46 2013 pierre-yves thomas
+** Last update Tue May 21 12:16:42 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
 #include "string.h"
 #include "edit_line.h"
 
-void	take_cmd_from_history(int history_pl, int *rev_c,
+int	take_cmd_from_history(int history_pl, int *rev_c,
 			      char **cmd, t_history *history)
 {
   int	i;
@@ -25,7 +25,10 @@ void	take_cmd_from_history(int history_pl, int *rev_c,
       while (++i < history_pl)
 	history = history->next;
       free(*cmd);
-      (*cmd) = my_strndup(history->str, my_strlen(history->str) + 1);
+      if (((*cmd) =
+	   my_strndup(history->str, my_strlen(history->str) + 1)) == NULL)
+	return (-1);
     }
   (*rev_c) = my_strlen(*cmd);
+  return (0);
 }

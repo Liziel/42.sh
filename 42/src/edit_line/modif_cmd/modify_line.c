@@ -5,14 +5,14 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May  6 17:44:08 2013 pierre-yves thomas
-** Last update Mon May 20 23:26:33 2013 pierre-yves thomas
+** Last update Tue May 21 12:04:47 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
 #include "string.h"
 #include "edit_line.h"
 
-void    add_letter_in_str(char value, int *reverse_case, char **cmd)
+int    add_letter_in_str(char value, int *reverse_case, char **cmd)
 {
   int   len;
 
@@ -23,8 +23,10 @@ void    add_letter_in_str(char value, int *reverse_case, char **cmd)
     (*cmd)[len + 1] = (*cmd)[len];
   (*cmd)[len] = value;
   (*reverse_case)++;
-  if (((*cmd) = my_realloc(*cmd, my_strlen(*cmd), my_strlen(*cmd) + 2)) != NULL)
-    (*cmd)[my_strlen(*cmd) + 1] = '\0';
+  if (((*cmd) = my_realloc(*cmd, my_strlen(*cmd), my_strlen(*cmd) + 2)) == NULL)
+    return (-1);
+  (*cmd)[my_strlen(*cmd) + 1] = '\0';
+  return (0);
 }
 
 void    del_letter_in_str(char value, int *reverse_case, char **cmd)
@@ -80,7 +82,7 @@ static void fill_tab(char opt[13])
   opt[12] = 8;
 }	
 
-void            modif_cmd(char **cmd, char *str, int *reverse_case)
+int		modif_cmd(char **cmd, char *str, int *reverse_case)
 {
   int		i;
   void		(*options[14])(char, int *, char **);
@@ -101,6 +103,8 @@ void            modif_cmd(char **cmd, char *str, int *reverse_case)
     {
       i = -1;
       while (++i < 4 && str[i] >= ' ')
-	add_letter_in_str(str[i], reverse_case, cmd);
+	if (add_letter_in_str(str[i], reverse_case, cmd) == -1)
+	  return (-1);
     }
+  return (0);
 }

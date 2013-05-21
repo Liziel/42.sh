@@ -5,11 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 14:36:25 2013 pierre-yves thomas
-<<<<<<< HEAD
-** Last update Mon May 20 23:42:42 2013 pierre-yves thomas
-=======
-** Last update Tue May 21 04:01:09 2013 vincent colliot
->>>>>>> 4660ad6dab6a03c09877346c69d76fb6da3573f2
+** Last update Tue May 21 13:47:39 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
@@ -57,7 +53,7 @@ static int     	read_cmd(int fd, char **str, char **cmd, int *reverse_case)
       return (-1);
     }
   retain_reverse_case(2, reverse_case);
-  return (0);
+  return (modif_cmd(cmd, *str, reverse_case));
 }
 
 char	*finish_usr_cmd(char *cmd, char *str, struct termios unset)
@@ -77,21 +73,21 @@ char			*usr_cmd(int fd, t_history *history, t_options options)
   int			reverse_case;
   int			histo_pl;
 
-  prompt(TRUE);
+  //prompt(TRUE);
   if (init_termios(&set, &unset) == -1 ||
       init_values(&histo_pl, &reverse_case, &str, &cmd) == -1)
     return (unset_termios(&unset));
   show_cmd(str[0], fd, cmd, reverse_case);
   while (str[0] != 10 || str[1] != 0 || str[2] != 0)
     {
-      prompt(FALSE);
       if (read_cmd(fd, &str, &cmd, &reverse_case) == -1)
 	return (unset_termios(&unset));
-      modif_cmd(&cmd, str, &reverse_case);
       if (histo_pl < length_of_history(history) && str[0] == 27 && str[2] == 65)
-	take_cmd_from_history(++histo_pl, &reverse_case, &cmd, history);
-      else if (histo_pl > 0 && str[0] == 27 && str[2] == 66)
-	take_cmd_from_history(--histo_pl, &reverse_case, &cmd, history);
+	if (take_cmd_from_history(++histo_pl, &reverse_case, &cmd, history) == -1)
+	  return (unset_termios(&unset));
+      if (histo_pl > 0 && str[0] == 27 && str[2] == 66)
+	if (take_cmd_from_history(--histo_pl, &reverse_case, &cmd, history) == -1)
+	  return (unset_termios(&unset));
       show_cmd(str[0], fd, cmd, reverse_case);
     }
   return (finish_usr_cmd(cmd, str, unset));
