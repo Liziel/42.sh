@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 17 17:17:12 2013 vincent colliot
-** Last update Mon May 20 22:18:47 2013 vincent colliot
+** Last update Tue May 21 16:35:55 2013 vincent colliot
 */
 
 #include "env.h"
@@ -74,6 +74,7 @@ static BOOL	set_new(char *new)
       print_err("\n");
       return (FALSE);
     }
+  free(new);
   return (set_old("PWD"));
 }
 
@@ -92,6 +93,7 @@ int	built_cd(t_words *cmd, void *null)
       print_err("\n");
       return (EXIT_FAILURE);
     }
+  new = my_strdup(new);
   if (set_old("OLD_PWD") == FALSE)
     return (EXIT_FAILURE);
   if (set_new(new) == FALSE)
