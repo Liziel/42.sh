@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 13 00:38:40 2013 vincent colliot
-** Last update Sun May 19 03:49:38 2013 vincent colliot
+** Last update Tue May 21 03:16:56 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -31,12 +31,12 @@ static t_words	*get_alls(FD rw, t_options termcaps, t_words *prev, char *m)
       my_putstr("\n", rw);
       return (prev);
     }
-  my_putstr(line, rw);
   if (MATCH(m, line))
     return (prev);
   if ((link = xmalloc(sizeof(*link))) == NULL)
     return (prev);
   link->word = line;
+  link->next = NULL;
   if (prev)
     prev->next = link;
   get_alls(rw, termcaps, link, m);
@@ -68,9 +68,11 @@ BOOL	rdleft(t_redir *r, FD w[3], t_info *info)
     }
   l = get_alls(p[0], info->termcaps, NULL, r->file);
   close(p[0]);
-  pipe(p);
-  put_lines(l, w[W_OUT]);
+  if (pipe(p) == -1)
+    perror("pipes::");
+  put_lines(l, p[W_OUT]);
+  if (w[r->in] >= 0)
+    close(w[r->in]);
   w[r->in] = p[W_IN];
-  nullify_cmd_words(l);
   return (TRUE);
 }
