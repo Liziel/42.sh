@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
-** Last update Tue May 21 18:25:08 2013 pierre-yves thomas
+** Last update Tue May 21 18:34:55 2013 pierre-yves thomas
 */
 
 #include <signal.h>
@@ -87,7 +87,6 @@ int	read_cmds(t_info *info)
   while (c && (str = usr_cmd(0, history, info->termcaps)))
     {
       my_putstr(info->termcaps.visi_cursor, 1);
-      //go_down_of_cmd_high(str, info->termcaps);
       signal(SIGINT, catch_after);
       my_put_in_history(&history, str);
       history = ctrlcget(&info, history);
