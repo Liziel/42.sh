@@ -5,15 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
-<<<<<<< HEAD
-<<<<<<< HEAD
-** Last update Tue May 21 16:26:23 2013 vincent colliot
-=======
-** Last update Sat May 18 18:43:48 2013 pierre-yves thomas
->>>>>>> 3f022d32e872c96b53fe7128d49e8c677f4d5f0b
-=======
-** Last update Tue May 21 14:34:51 2013 pierre-yves thomas
->>>>>>> 369baec8e332788a20b3031f22041115164a6687
+** Last update Tue May 21 18:34:55 2013 pierre-yves thomas
 */
 
 #include <signal.h>
@@ -95,7 +87,6 @@ int	read_cmds(t_info *info)
   while (c && (str = usr_cmd(0, history, info->termcaps)))
     {
       my_putstr(info->termcaps.visi_cursor, 1);
-      go_down_of_cmd_high(str, info->termcaps);
       signal(SIGINT, catch_after);
       my_put_in_history(&history, str);
       history = ctrlcget(&info, history);
