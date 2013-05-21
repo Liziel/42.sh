@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Mon May 20 22:25:17 2013 vincent colliot
+## Last update Tue May 21 17:20:31 2013 thomas lecorre
 ##
 
 NAME    = Sla.sh
@@ -194,8 +194,15 @@ DOTO    = $(SRC:.c=.o)
 
 all: $(NAME)
 
+.c.o:
+	@ $(CC) $(CFLAGS) -c -o $@ $< \
+	&& echo -e "[\e[35mGCC\e[m]\e[33m" $< "\e[m=>\e[36m" $@ "\e[m" \
+	|| echo -e "[\e[35mGCC\e[m]\e[33m" $< "\e[m=>" "\e[31mERROR\e[m"
+
 $(NAME): $(DOTO)
-	cc -o $(NAME) $(DOTO) $(CFLAGS)
+	@ cc -o $(NAME) $(DOTO) $(CFLAGS)
+	@ echo -e "\e[32m"$(NAME)"\e[m" "is alive !"
+	@ echo -e "\e[37mActivated CFLAGS :\e[m" $(CFLAGS)
 
 debug: fclean
 	cc -o $(NAME) $(SRC) $(INC) -g3
