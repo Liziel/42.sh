@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Tue May 21 17:20:31 2013 thomas lecorre
+## Last update Tue May 21 22:10:57 2013 pierre-yves thomas
 ##
 
 NAME    = Sla.sh
@@ -109,6 +109,7 @@ ED_MOD	=$(FED_MOD)change_reverse_place.c\
 	$(FED_MOD)load_term_settings.c\
 	$(FED_MOD)modify_line.c\
 	$(FED_MOD)move_to_word_fct.c\
+	$(FED_MOD)reverse_to_begin_end.c\
 	$(FED_MOD)save_and_copy_part_str.c\
         $(FED_MOD)swap_chars_on_cmd.c\
         $(FED_MOD)upper_lower_case_letters.c\
