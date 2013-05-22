@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Wed May 22 20:06:46 2013 vincent colliot
+** Last update Wed May 22 20:19:53 2013 pierre-yves thomas
 */
 
 #include <unistd.h>
@@ -19,15 +19,16 @@
 
 int main(void)
 {
-  BOOL		tget_fail;
-  t_info        info;
+  BOOL			tget_fail;
+  t_info		info;
+  struct termios	test;
 
   info.alias = NULL;
   info.st = 0;
   environ = env_copy();
   set_env("PS1", "[you are in Sla.sh] (you can set your prompt with setenv PS1 \"your_prompt\")\n[ --> ] ");
   tget_fail = FALSE;
-  if (load_tgets_funcs() == -1)
+  if (load_tgets_funcs() == -1 || tcgetattr(0, &test) == -1)
     tget_fail = TRUE;
   attribute_options(&(info.termcaps));
   retain_struct_options(1, &(info.termcaps));
