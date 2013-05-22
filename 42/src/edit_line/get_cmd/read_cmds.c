@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
-** Last update Wed May 22 18:06:51 2013 vincent colliot
+** Last update Wed May 22 20:15:00 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -85,7 +85,7 @@ static char	*get_usr_cmd(BOOL tgetfail, t_history *history,
 
   if (tgetfail == FALSE)
     r = usr_cmd(0, history, t);
-  else
+  if (tgetfail == TRUE)
     {
       prompt(TRUE);
       prompt(FALSE);
