@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 18:01:08 2013 pierre-yves thomas
-** Last update Tue May 21 21:40:29 2013 pierre-yves thomas
+** Last update Wed May 22 11:15:45 2013 pierre-yves thomas
 */
 
 #include <signal.h>
@@ -39,7 +39,6 @@ void	catch_signal(int num)
       rev_c = 0;
       show_cmd(10, 0, save_cmd, rev_c);
       my_putstr("\n", 1);
-      go_down_of_cmd_high(save_cmd, tmp);
       prompt(TRUE);
       save_cmd = my_memset(save_cmd, 0, my_strlen(save_cmd));
       retain_reverse_case(1, &rev_c);
