@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:25:20 2013 vincent colliot
-** Last update Wed May 22 08:38:25 2013 vincent colliot
+** Last update Wed May 22 17:45:47 2013 vincent colliot
 */
 
 #include <stdio.h>
@@ -68,7 +68,7 @@ BOOL	grow_var(char *s, char **mod, size_t n, t_info *info)
 		     1 +  my_sstrlen(s + 1, "$!"), info));
   seek = NULL;
   if (s[0] == '$' && s[1] != '?')
-    seek = my_strndup(s + 1, my_sstrlen(s + 1, "$!/!\\ \t(;|&"));
+    seek = my_strndup(s + 1, my_sstrlen(s + 1, "$!/!\\ \"\t(;|&"));
   else if (s[1] == '?' && s[0] == '$')
     seek = my_strdup("?");
   fill = fill_it(s, seek, info);

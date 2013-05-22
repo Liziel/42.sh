@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
-** Last update Wed May 22 09:02:04 2013 vincent colliot
+** Last update Wed May 22 18:06:51 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -56,7 +56,7 @@ static BOOL	built_and_exec(char *str, t_info *info)
 	return (!(info->st = EXIT_FAILURE));
       }
   free(str);
-  return (pre_exec(exec, info));
+  return (pre_exec(exec, info, FALSE));
 }
 
 static t_history *ctrlcget(t_info **info, t_history *history)

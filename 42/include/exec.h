@@ -6,7 +6,7 @@
 **
 ** Started on  Mon May 13 14:54:51 2013 vincent colliot
 <<<<<<< HEAD
-** Last update Wed May 22 17:22:54 2013 vincent colliot
+** Last update Wed May 22 18:07:06 2013 vincent colliot
 =======
 ** Last update Wed May 15 18:32:03 2013 pierre-yves thomas
 >>>>>>> 17eee20bcf22af4a3d760ac1186819eec227d729
@@ -42,6 +42,6 @@ BOOL	rdleft(t_redir*, FD[3]);
 STATUS		exec_form(t_words*, BOOL*, int*);
 
 	/* pré_exec */
-BOOL	pre_exec(t_jobs*, t_info*);
+BOOL	pre_exec(t_jobs*, t_info*, BOOL);
 
 #endif

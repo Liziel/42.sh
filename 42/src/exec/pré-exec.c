@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:58:16 2013 vincent colliot
-** Last update Wed May 22 16:59:19 2013 vincent colliot
+** Last update Wed May 22 18:07:46 2013 vincent colliot
 */
 
 #include <sys/wait.h>
@@ -99,14 +99,15 @@ static t_exec	*two(t_exec *t)
   return (t->next->next);
 }
 
-static BOOL	and_or(t_exec *e, t_info *info)
+static BOOL	and_or(t_exec *e, t_info *info, BOOL in)
 {
   FD	p[3];
   FD	w[3];
 
   if (!e)
     return (TRUE);
-  to_fd(w);
+  if (!in)
+    to_fd(w);
   p[W_IN] = W_IN;
   p[W_OUT] = W_OUT;
   p[W_ERR] = W_ERR;
@@ -115,27 +116,28 @@ static BOOL	and_or(t_exec *e, t_info *info)
       while (waitpid(-1, NULL, WNOHANG) >= 0);
       return (FALSE);
     }
-  fd_to(w);
+  if (!in)
+    fd_to(w);
   if (e->type == OR && info->st == EXIT_FAILURE)
-    return (and_or(e->next, info));
+    return (and_or(e->next, info, in));
   else if (e->type == OR && info->st == EXIT_SUCCESS)
-    return (and_or(two(e), info));
+    return (and_or(two(e), info, in));
   if (e->type == AND && info->st == EXIT_SUCCESS)
-    return (and_or(e->next, info));
+    return (and_or(e->next, info, in));
   else if (e->type == AND && info->st == EXIT_FAILURE)
-    return (and_or(two(e),info));
+    return (and_or(two(e), info, in));
   return (TRUE);
 }
 
-BOOL	pre_exec(t_jobs *j, t_info *info)
+BOOL	pre_exec(t_jobs *j, t_info *info, BOOL in)
 {
   t_jobs *next;
 
   if (!j)
     return (TRUE);
-  if (and_or(j->exec, info) == FALSE)
+  if (and_or(j->exec, info, in) == FALSE)
     return (FALSE);
   next = j->next;
   nullify_jobs(j, 0);
-  return (pre_exec(next, info));
+  return (pre_exec(next, info, in));
 }
