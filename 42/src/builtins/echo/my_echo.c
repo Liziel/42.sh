@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Tue May 14 18:25:48 2013 thomas lecorre
-** Last update Tue May 21 20:56:08 2013 thomas lecorre
+** Last update Wed May 22 22:19:28 2013 vincent colliot
 */
 
 #include "built.h"
@@ -32,20 +32,43 @@ static BOOL print(FLAG echo, t_words *link)
   return (print(echo, link->next));
 }
 
+static BOOL only_option(char *s)
+{
+  size_t	i;
+
+  i = 0;
+  if (!s[i])
+    return (FALSE);
+  while (s[i])
+    {
+      if (!IN(s[i], "Een"))
+	return (FALSE);
+      i++;
+    }
+  return (TRUE);
+}
+
 static void move_flag(t_words *link, t_words **move, FLAG *echo)
 {
+  char	*catch;
+
   *move = link;
   if (!link)
     return ;
-  if (MATCH("-e", link->word))
-    *echo |= ECHO_E;
-  else if (MATCH("-E", link->word))
-    *echo &= ~ECHO_E;
-  else if (MATCH("-n", link->word))
-    *echo |= ECHO_N;
-  else
+  catch = link->word;
+  if (catch[0] != '-')
     return ;
-  move_flag(link->next, move, echo);
+  else if (catch[1] && only_option(catch + 1))
+    {
+      while (catch[1] && (catch += 1))
+	if (catch[0] == 'e')
+	  *echo |= ECHO_E;
+	else if (catch[0] == 'E')
+	  *echo &= ~ECHO_E;
+	else if (catch[0] == 'n')
+	  *echo |= ECHO_N;
+      move_flag(link->next, move, echo);
+    }
 }
 
 int	built_echo(t_words *cmd, void *null)
