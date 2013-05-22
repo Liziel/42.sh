@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:58:16 2013 vincent colliot
-** Last update Wed May 22 09:00:53 2013 vincent colliot
+** Last update Wed May 22 16:59:19 2013 vincent colliot
 */
 
 #include <sys/wait.h>
@@ -90,6 +90,15 @@ static void fd_to(FD w[3])
   close(w[W_ERR]);
 }
 
+static t_exec	*two(t_exec *t)
+{
+  if (!t->next)
+    return (NULL);
+  else if (!t->next->next)
+    return (NULL);
+  return (t->next->next);
+}
+
 static BOOL	and_or(t_exec *e, t_info *info)
 {
   FD	p[3];
@@ -109,8 +118,12 @@ static BOOL	and_or(t_exec *e, t_info *info)
   fd_to(w);
   if (e->type == OR && info->st == EXIT_FAILURE)
     return (and_or(e->next, info));
+  else if (e->type == OR && info->st == EXIT_SUCCESS)
+    return (and_or(two(e), info));
   if (e->type == AND && info->st == EXIT_SUCCESS)
     return (and_or(e->next, info));
+  else if (e->type == AND && info->st == EXIT_FAILURE)
+    return (and_or(two(e),info));
   return (TRUE);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 13 00:38:40 2013 vincent colliot
-** Last update Wed May 22 02:35:39 2013 vincent colliot
+** Last update Wed May 22 17:25:55 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -20,8 +20,9 @@
 #include "xlib.h"
 #include "env.h"
 
-static t_words	*get_alls(FD rw, t_options termcaps, t_words *prev, char *m)
+static t_words	*get_alls(FD rw, t_words *prev, char *m)
 {
+  struct  s_options termcaps;
   char		*line;
   t_words	*link;
 
@@ -40,7 +41,7 @@ static t_words	*get_alls(FD rw, t_options termcaps, t_words *prev, char *m)
   link->next = NULL;
   if (prev)
     prev->next = link;
-  get_alls(rw, termcaps, link, m);
+  get_alls(rw, link, m);
   if (!prev)
     close(rw);
   return (link);
@@ -70,7 +71,7 @@ static void	set_rd_prompt(char **pt, int lap)
   free(*pt);
 }
 
-BOOL	rdleft(t_redir *r, FD w[3], t_info *info)
+BOOL	rdleft(t_redir *r, FD w[3])
 {
   char		*pt;
   t_words	*l;
@@ -82,7 +83,7 @@ BOOL	rdleft(t_redir *r, FD w[3], t_info *info)
       print_err("(sh): can't open tty\n");
       return (TRUE);
     }
-  l = get_alls(p[0], info->termcaps, NULL, r->file);
+  l = get_alls(p[0], NULL, r->file);
   close(p[0]);
   if (pipe(p) == -1)
     perror("pipes::");

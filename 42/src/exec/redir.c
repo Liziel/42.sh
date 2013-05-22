@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 22:15:18 2013 vincent colliot
-** Last update Tue May 21 18:23:31 2013 vincent colliot
+** Last update Wed May 22 17:24:20 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -15,14 +15,23 @@
 #include <sys/stat.h>
 #include "orga.h"
 #include "exec.h"
+#include "string.h"
 
-void	rleft(t_redir *r, FD w[3])
+BOOL	rleft(t_redir *r, FD w[3], char	**bad_syntax)
 {
+  FD	file;
   FD	in;
 
   in = r->in;
-  close(w[in]);
-  w[in] = open(r->file, O_RDONLY);
+  if (w[in] >= 0)
+    close(w[in]);
+  if ((file = open(r->file, O_RDONLY)) == -1)
+    {
+      *bad_syntax = my_strcat("(sh): NO such file or directory: ", r->file);
+      return (FALSE);
+    }
+  w[in] = file;
+  return (TRUE);
 }
 
 void	rright(t_redir *r, FD w[3], FD l[3])
@@ -53,20 +62,23 @@ static void	rdright(t_redir *r, FD w[3])
 		 | S_IRGRP | S_IROTH);
 }
 
-BOOL	calque_redir(t_redir *r, FD w[3], FD l[3], t_info *info)
+BOOL	calque_redir(t_redir *r, FD w[3], FD l[3], char **bad_syntax)
 {
   if (!r)
     return (TRUE);
   if (r->redir == LEFT)
-    rleft(r, w);
+    {
+      if (rleft(r, w, bad_syntax) == FALSE)
+	return (FALSE);
+    }
   else if (r->redir == DLEFT)
     {
-      if (rdleft(r, w, info) == FALSE)
+      if (rdleft(r, w) == FALSE)
 	return (FALSE);
     }
   else if (r->redir == RIGHT)
     rright(r, w, l);
   else if (r->redir == DRIGHT)
     rdright(r, w);
-  return (calque_redir(r->next, w, l, info));
+  return (calque_redir(r->next, w, l, bad_syntax));
 }

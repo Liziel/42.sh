@@ -5,9 +5,10 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 16:04:18 2013 vincent colliot
-** Last update Wed May 22 08:51:14 2013 vincent colliot
+** Last update Wed May 22 17:29:07 2013 vincent colliot
 */
 
+#include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
@@ -19,17 +20,18 @@
 #include "built.h"
 #include "string.h"
 
-static BOOL	set_redir(t_redir *r, FD w[3], t_info *info, FLAG son)
+static BOOL	set_redir(t_redir *r, FD w[3], char **bad_syntax, FLAG son)
 {
+  BOOL		ret;
   FD		pi[3];
   FD		in;
 
   in = 0;
   while (in < 3)
     pi[in++] = -1;
+  ret = TRUE;
   if (r)
-    if (calque_redir(r, pi, w, info) == FALSE)
-      return (FALSE);
+    ret = calque_redir(r, pi, w, bad_syntax);
   in = 2;
   while (in >= 0)
     {
@@ -43,7 +45,7 @@ static BOOL	set_redir(t_redir *r, FD w[3], t_info *info, FLAG son)
 	dup2(w[in], in);
       in--;
     }
-  return (TRUE);
+  return (ret);
 }
 
 static BOOL	exec_built_in(t_cmd *cmd, t_info *info)
@@ -71,14 +73,24 @@ static BOOL	exec_built_in(t_cmd *cmd, t_info *info)
   return (FALSE);
 }
 
+static BOOL	check_bad_sintax(char *s)
+{
+  if (!s)
+    return (FALSE);
+  fprintf(stderr, "%s\n", s);
+  return (TRUE);
+}
+
 BOOL		exec_cmd(t_cmd *cmd, t_info *info, FLAG son, FD w[3])
 {
+  char		*bad_sintax;
   int		r;
   BOOL		sys_fail;
 
-  sys_fail = FALSE + (r = 0);
-  if (set_redir(cmd->redir, w, info, son) == FALSE)
-    return (FALSE);
+  bad_sintax = NULL;
+  sys_fail = FALSE;
+  if (set_redir(cmd->redir, w, &bad_sintax, son) == FALSE)
+    return (check_bad_sintax(bad_sintax));
   if (cmd->type == PARENTS)
     pre_exec(cmd->parents, info);
   if (cmd->type == WORDS)

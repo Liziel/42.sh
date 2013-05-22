@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 12:08:51 2013 vincent colliot
-** Last update Tue May 14 01:03:47 2013 vincent colliot
+** Last update Wed May 22 17:08:05 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -27,17 +27,12 @@ static FLAG redir_type(char *s)
 		 (0));
 }
 
-static BOOL	test_file_redir(char *file, char **bad_sintax, FLAG redir_type)
+static BOOL	test_file_redir(char *file, char **bad_sintax)
 {
   char		*pre;
   struct stat st;
 
-  if (stat(file, &st) == -1)
-    if (redir_type == LEFT)
-      {
-	*bad_sintax = my_strcat(FILE_ERROR, file);
-	return (FALSE);
-      }
+  stat(file, &st);
   if ((st.st_mode & S_IFMT) == S_IFDIR)
       {
 	pre = my_strcat(IS_DIR_ERROR1, file);
@@ -58,10 +53,11 @@ static BOOL	get_file_part(t_get **words, t_get *word, t_redir *link, char **bad_
   link->file = word->word;
   free(word);
   if (link->redir != DLEFT)
-    if (test_file_redir(link->file, bad_sintax, link->redir) == FALSE)
+    if (test_file_redir(link->file, bad_sintax) == FALSE)
       return (FALSE);
   return (TRUE);
 }
+
 static BOOL	link_redir(t_get *word, t_get **words, t_redir *link, char **bad_sintax)
 {
   size_t	i;
