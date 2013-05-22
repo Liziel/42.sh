@@ -1,0 +1,96 @@
+==1197== Memcheck, a memory error detector
+==1197== Copyright (C) 2002-2010, and GNU GPL'd, by Julian Seward et al.
+==1197== Using Valgrind-3.6.1 and LibVEX; rerun with -h for copyright info
+==1197== Command: bash
+==1197== Parent PID: 2340
+==1197== 
+--1197-- 
+--1197-- Valgrind options:
+--1197--    -v
+--1197--    --track-origins=yes
+--1197--    --log-file=../log
+--1197-- Contents of /proc/version:
+--1197--   Linux version 3.1.10-1.9-desktop (geeko@buildhost) (gcc version 4.6.2 (SUSE Linux) ) #1 SMP PREEMPT Thu Apr 5 18:48:38 UTC 2012 (4a97ec8)
+--1197-- Arch and hwcaps: AMD64, amd64-sse3-cx16
+--1197-- Page sizes: currently 4096, max supported 4096
+--1197-- Valgrind library directory: /usr/lib64/valgrind
+--1197-- Reading syms from /bin/bash (0x400000)
+--1197--    object doesn't have a symbol table
+--1197-- Reading syms from /lib64/ld-2.14.1.so (0x4000000)
+--1197-- Reading syms from /usr/lib64/valgrind/memcheck-amd64-linux (0x38000000)
+--1197--    object doesn't have a symbol table
+--1197--    object doesn't have a dynamic symbol table
+--1197-- Reading suppressions file: /usr/lib64/valgrind/default.supp
+--1197-- REDIR: 0x4016dd0 (strlen) redirected to 0x38061857 (???)
+--1197-- Reading syms from /usr/lib64/valgrind/vgpreload_core-amd64-linux.so (0x4a23000)
+--1197--    object doesn't have a symbol table
+--1197-- Reading syms from /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so (0x4c25000)
+--1197--    object doesn't have a symbol table
+==1197== WARNING: new redirection conflicts with existing -- ignoring it
+--1197--     new: 0x04016dd0 (strlen              ) R-> 0x04c2a100 strlen
+--1197-- REDIR: 0x4016c40 (index) redirected to 0x4c29d60 (index)
+--1197-- REDIR: 0x4016cc0 (strcmp) redirected to 0x4c2acc0 (strcmp)
+--1197-- Reading syms from /lib64/libreadline.so.6.2 (0x4e30000)
+--1197--    object doesn't have a symbol table
+--1197-- Reading syms from /lib64/libncurses.so.5.8 (0x5077000)
+--1197--    object doesn't have a symbol table
+--1197-- Reading syms from /lib64/libdl-2.14.1.so (0x52cb000)
+--1197-- Reading syms from /lib64/libc-2.14.1.so (0x54cf000)
+--1197-- REDIR: 0x5552b90 (strcasecmp) redirected to 0x4a23650 (_vgnU_ifunc_wrapper)
+--1197-- REDIR: 0x5554e50 (strncasecmp) redirected to 0x4a23650 (_vgnU_ifunc_wrapper)
+--1197-- REDIR: 0x5550c10 (__GI_strrchr) redirected to 0x4c29b80 (__GI_strrchr)
+--1197-- REDIR: 0x554d600 (__GI_strcmp) redirected to 0x4c2ac60 (__GI_strcmp)
+--1197-- REDIR: 0x554f110 (__GI_strlen) redirected to 0x4c2a0c0 (__GI_strlen)
+--1197-- REDIR: 0x554f360 (__GI_strncmp) redirected to 0x4c2a5c0 (__GI_strncmp)
+--1197-- REDIR: 0x554d540 (__GI_strchr) redirected to 0x4c29c60 (__GI_strchr)
+--1197-- REDIR: 0x55587c0 (strchrnul) redirected to 0x4c2be00 (strchrnul)
+--1197-- REDIR: 0x55497c0 (malloc) redirected to 0x4c29760 (malloc)
+--1197-- REDIR: 0x5549d10 (free) redirected to 0x4c288c0 (free)
+--1197-- REDIR: 0x5551300 (memchr) redirected to 0x4c2ad80 (memchr)
+--1197-- REDIR: 0x5549da0 (realloc) redirected to 0x4c29830 (realloc)
+--1197-- REDIR: 0x55e4ca0 (__strcasecmp_sse42) redirected to 0x4c2a640 (strcasecmp)
+--1197-- REDIR: 0x554f1f0 (strnlen) redirected to 0x4c2a040 (strnlen)
+--1197-- REDIR: 0x5552a40 (__GI_stpcpy) redirected to 0x4c2ba00 (__GI_stpcpy)
+--1197-- REDIR: 0x554ea90 (__GI_strcpy) redirected to 0x4c2a1f0 (__GI_strcpy)
+--1197-- REDIR: 0x5558770 (__GI___rawmemchr) redirected to 0x4c2be50 (__GI___rawmemchr)
+--1197-- REDIR: 0x554ea60 (strcpy) redirected to 0x4a23650 (_vgnU_ifunc_wrapper)
+--1197-- REDIR: 0x55ea000 (???) redirected to 0x4c2a120 (strcpy)
+--1197-- REDIR: 0x554f320 (strncmp) redirected to 0x4a23650 (_vgnU_ifunc_wrapper)
+--1197-- REDIR: 0x55e32b0 (__strncmp_sse42) redirected to 0x4c2a540 (strncmp)
+--1197-- REDIR: 0x5550be0 (rindex) redirected to 0x4a23650 (_vgnU_ifunc_wrapper)
+--1197-- REDIR: 0x55e4470 (__strrchr_sse42) redirected to 0x4c29b50 (rindex)
+--1197-- REDIR: 0xffffffffff600400 (???) redirected to 0x3806184d (???)
+--1197-- REDIR: 0x554d5c0 (strcmp) redirected to 0x4a23650 (_vgnU_ifunc_wrapper)
+--1197-- REDIR: 0x55e2410 (__strcmp_sse42) redirected to 0x4c2ac00 (strcmp)
+--1197-- REDIR: 0x554f0d0 (strlen) redirected to 0x4a23650 (_vgnU_ifunc_wrapper)
+--1197-- REDIR: 0x55e9bd0 (__strlen_sse42) redirected to 0x4c2a0a0 (strlen)
+--1197-- REDIR: 0x554d510 (index) redirected to 0x4a23650 (_vgnU_ifunc_wrapper)
+--1197-- REDIR: 0x55e2360 (__strchr_sse42) redirected to 0x4c29c20 (index)
+--1197-- REDIR: 0x5550bb0 (strncpy) redirected to 0x4a23650 (_vgnU_ifunc_wrapper)
+--1197-- REDIR: 0x55eaa20 (???) redirected to 0x4c2a2c0 (strncpy)
+--1197-- REDIR: 0x55bd3f0 (__strcpy_chk) redirected to 0x4c2be70 (__strcpy_chk)
+--1197-- REDIR: 0xffffffffff600000 (???) redirected to 0x38061843 (???)
+--1197-- REDIR: 0x555c6a0 (strstr) redirected to 0x4a23650 (_vgnU_ifunc_wrapper)
+--1197-- REDIR: 0x55e4610 (__strstr_sse42) redirected to 0x4c2c1f0 (strstr)
+==1197== 
+==1197== HEAP SUMMARY:
+==1197==     in use at exit: 30,609 bytes in 851 blocks
+==1197==   total heap usage: 1,144 allocs, 293 frees, 64,421 bytes allocated
+==1197== 
+==1197== Searching for pointers to 851 not-freed blocks
+==1197== Checked 212,256 bytes
+==1197== 
+==1197== LEAK SUMMARY:
+==1197==    definitely lost: 16 bytes in 1 blocks
+==1197==    indirectly lost: 15 bytes in 1 blocks
+==1197==      possibly lost: 0 bytes in 0 blocks
+==1197==    still reachable: 30,578 bytes in 849 blocks
+==1197==         suppressed: 0 bytes in 0 blocks
+==1197== Rerun with --leak-check=full to see details of leaked memory
+==1197== 
+==1197== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 6 from 6)
+--1197-- 
+--1197-- used_suppression:      4 U1004-ARM-_dl_relocate_object
+--1197-- used_suppression:      2 glibc-2.5.x-on-SUSE-10.2-(PPC)-2a
+==1197== 
+==1197== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 6 from 6)

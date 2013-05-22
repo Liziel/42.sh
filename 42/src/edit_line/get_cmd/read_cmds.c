@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
-** Last update Wed May 22 20:15:00 2013 vincent colliot
+** Last update Wed May 22 21:40:58 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -46,15 +46,16 @@ static BOOL	built_and_exec(char *str, t_info *info)
   bad_sintax = NULL;
   if (!empty(str))
     if ((exec = built(str, &bad_sintax, info, &str)) == NULL)
-      {
-	if (bad_sintax)
-	  fprintf(stderr, "%s\n", bad_sintax);
-	if (bad_sintax)
-	  free(bad_sintax);
-	if (bad_sintax)
-	  return (TRUE);
-	return (!(info->st = EXIT_FAILURE));
-      }
+      if (!empty(str))
+	{
+	  if (bad_sintax)
+	    fprintf(stderr, "%s\n", bad_sintax);
+	  if (bad_sintax)
+	    free(bad_sintax);
+	  if (bad_sintax)
+	    return (TRUE);
+	  return (!(info->st = EXIT_FAILURE));
+	}
   free(str);
   return (pre_exec(exec, info, FALSE));
 }
@@ -73,7 +74,7 @@ static t_history *ctrlcget(t_info **info, t_history *history)
   return (hist_save);
 }
 
-static void	catch_after(int num)
+void	catch_after(int num)
 {
   (void)num;
 }
@@ -112,7 +113,8 @@ int	read_cmds(t_info *info, BOOL tgetfail)
       history = ctrlcget(&info, history);
       info->hist = history;
       c = built_and_exec(str, info);
-      configure_signals();
+      if (!tgetfail)
+	configure_signals();
       my_putstr(info->termcaps.invi_cursor, 1);
     }
   if (c)
