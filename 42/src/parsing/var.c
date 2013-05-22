@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:25:20 2013 vincent colliot
-** Last update Wed May 22 19:54:07 2013 vincent colliot
+** Last update Wed May 22 22:03:05 2013 vincent colliot
 */
 
 #include <stdio.h>
@@ -65,8 +65,8 @@ BOOL	grow_var(char *s, char **mod, size_t n, t_info *info)
   if (!s[0])
     return (TRUE);
   if ((IN(s[1], "/!\\ \t(;|&") || !s[1]) && s[0] != '~')
-    return (grow_var(s + 1 +  my_sstrlen(s + 1, "$!"), mod, n +
-		     1 +  my_sstrlen(s + 1, "$!"), info));
+    return (grow_var(s + 1 +  my_sstrlen(s + 1, "$~"), mod, n +
+		     1 +  my_sstrlen(s + 1, "$~"), info));
   seek = NULL;
   if (s[0] == '$' && s[1] != '?')
     seek = my_strndup(s + 1, my_sstrlen(s + 1, "$!/!\\ \"\t(;|&"));
@@ -79,5 +79,5 @@ BOOL	grow_var(char *s, char **mod, size_t n, t_info *info)
   n += my_strlen(fill);
   free(fill);
   free(seek);
-  return (grow_var(s, mod, n + my_sstrlen(*mod + n, "$~"), info));
+  return (grow_var(s, mod, n, info));
 }
