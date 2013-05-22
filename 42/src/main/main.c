@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Wed May 22 16:06:13 2013 quentin cloarec
+** Last update Wed May 22 20:06:46 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -26,6 +26,7 @@ int main(void)
   info.st = 0;
   environ = env_copy();
   set_env("PS1", "[you are in Sla.sh] (you can set your prompt with setenv PS1 \"your_prompt\")\n[ --> ] ");
+  tget_fail = FALSE;
   if (load_tgets_funcs() == -1)
     tget_fail = TRUE;
   attribute_options(&(info.termcaps));
