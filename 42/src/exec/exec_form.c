@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 01:40:28 2013 vincent colliot
-** Last update Wed May 22 08:44:59 2013 vincent colliot
+** Last update Wed May 22 20:11:30 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -78,6 +78,8 @@ static int	stop(BOOL s)
 {
   static BOOL k = FALSE;
 
+  if (s == INIT)
+    k = FALSE;
   if (TRUE == s)
     k = TRUE;
   return (k);
@@ -95,6 +97,7 @@ STATUS		exec_form(t_words *list, BOOL *sys_fail, int *value)
   pid_t		pid;
   char		**tab;
 
+  stop(INIT);
   pid = 0;
   if ((tab = to_tab(list, sys_fail)) == NULL)
     return (EXIT_FAILURE + !((*sys_fail) = TRUE));
