@@ -5,14 +5,14 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May  4 12:44:30 2013 vincent colliot
-** Last update Sun May 19 07:05:08 2013 vincent colliot
+** Last update Wed May 22 15:47:32 2013 quentin cloarec
 */
 
 #ifndef ERROR_H_
 # define ERROR_H_
 
 # define UNMATCHED_TOKEN "(sh): unexpected EOS while looking for matching `"
-# define ERROR_AFTER_ECHAP_CHAR "(sh): unextpected EOS after echappment character"
+# define ERROR_AFTER_ECHAP_CHAR "(sh): unexpected EOS after echappment character"
 # define UNMATCHED_PARENTS "(sh): unexpected EOS while looking for matching `)'"
 # define UNMATCHED_BACKMACHIN "(sh): syntax error near unexpected token ``'"
 # define ERROR_NEAR_TOKEN "(sh): syntax error near unexpected token: "
