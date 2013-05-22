@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
-** Last update Wed May 22 01:49:35 2013 vincent colliot
+** Last update Wed May 22 06:27:45 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -24,6 +24,8 @@ static void	*built(char *str, char **bad_sintax, t_info *info, char **mod_s)
   t_get	*sub;
 
   if (seed_alias(str, info->alias, &str) == FALSE)
+    return (NULL);
+  if (grow_var(str, &str, 0, info) == FALSE)
     return (NULL);
   *mod_s = str;
   if ((sub = subdivide(str, NULL, bad_sintax)) == NULL)
@@ -90,6 +92,7 @@ int	read_cmds(t_info *info)
       signal(SIGINT, catch_after);
       my_put_in_history(&history, str);
       history = ctrlcget(&info, history);
+      info->hist = history;
       c = built_and_exec(str, info);
       configure_signals();
       my_putstr(info->termcaps.invi_cursor, 1);
