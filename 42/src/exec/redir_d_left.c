@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 13 00:38:40 2013 vincent colliot
-** Last update Tue May 21 20:38:50 2013 vincent colliot
+** Last update Wed May 22 02:35:39 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -18,6 +18,7 @@
 #include "edit_line.h"
 #include "string.h"
 #include "xlib.h"
+#include "env.h"
 
 static t_words	*get_alls(FD rw, t_options termcaps, t_words *prev, char *m)
 {
@@ -57,11 +58,25 @@ static BOOL	put_lines(t_words *l, FD wr)
   return (FALSE);
 }
 
+static void	set_rd_prompt(char **pt, int lap)
+{
+  if (lap == 0)
+    {
+      *pt = my_strdup(get_env("PS1"));
+      set_env("PS1", "> ");
+      return ;
+    }
+  set_env("PS1", *pt);
+  free(*pt);
+}
+
 BOOL	rdleft(t_redir *r, FD w[3], t_info *info)
 {
+  char		*pt;
   t_words	*l;
   FD	p[2];
 
+  set_rd_prompt(&pt, 0);
   if ((p[0] = open("/dev/tty", O_RDWR)) == -1)
     {
       print_err("(sh): can't open tty\n");
@@ -76,5 +91,6 @@ BOOL	rdleft(t_redir *r, FD w[3], t_info *info)
     close(w[r->in]);
   close(p[W_OUT]);
   w[r->in] = p[W_IN];
+  set_rd_prompt(&pt, 1);
   return (TRUE);
 }

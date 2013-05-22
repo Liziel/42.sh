@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May  5 12:30:49 2013 vincent colliot
-** Last update Tue May 21 23:51:09 2013 vincent colliot
+** Last update Wed May 22 02:53:55 2013 vincent colliot
 */
 
 #include "built.h"
@@ -39,14 +39,14 @@ BOOL	set_env(char *s, char *s2)
     while (environ[i])
       if (move_env(s, i++))
 	return (fill_env(s, s2, i - 1));
-  if ((tab = xmalloc(sizeof(*tab) * (i + 2))) == NULL)
+  if ((tab = xmalloc(sizeof(*tab) * (i + 3))) == NULL)
     return (FALSE);
   i = 0;
   if (environ)
     while (environ[i++])
       tab[i - 1] = environ[i - 1];
-  tab[i] = my_strcat(s, s2);
-  tab[i + 1] = NULL;
+  tab[i - 1] = my_stricat(s, s2, '=');
+  tab[i] = NULL;
   return (switch_env(tab, FALSE));
 }
 

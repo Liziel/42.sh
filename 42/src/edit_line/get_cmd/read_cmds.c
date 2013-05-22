@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
-** Last update Tue May 21 18:34:55 2013 pierre-yves thomas
+** Last update Wed May 22 01:49:35 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -94,6 +94,7 @@ int	read_cmds(t_info *info)
       configure_signals();
       my_putstr(info->termcaps.invi_cursor, 1);
     }
+  my_putstr("exit", 1);
   free_history(history);
   my_putstr(info->termcaps.visi_cursor, 1);
   return (0);

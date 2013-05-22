@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May  6 20:09:42 2013 vincent colliot
-** Last update Mon May 20 21:29:14 2013 vincent colliot
+** Last update Wed May 22 03:02:11 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -32,7 +32,7 @@ t_words		*interpret_params(t_get *word, t_get **words,
   no_match = TRUE;
   if (!word->inter && (IN('*', word->word)))
     if (match_them(word->word + last_occur(word->word, '/', '*') + ((word->word)[last_occur(word->word, '/', '*')] == '/'),
-		   my_strndup(word->word, last_occur(word->word, '/', '*') + ((word->word)[0]) == '/'),
+		   my_strndup(word->word, last_occur(word->word, '/', '*') + (((word->word)[0]) == '/')),
 			      last, &no_match) == FALSE)
       if (no_match == FALSE)
 	return (NULL);

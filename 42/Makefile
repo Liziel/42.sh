@@ -4,11 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-<<<<<<< HEAD
-## Last update Tue May 21 23:52:56 2013 vincent colliot
-=======
-## Last update Tue May 21 22:10:57 2013 pierre-yves thomas
->>>>>>> e3b41e8fb7949bcd47afd51e3390f654cca96026
+## Last update Wed May 22 03:08:11 2013 vincent colliot
 ##
 
 NAME    = Sla.sh
@@ -76,7 +72,8 @@ CMD	=$(CMDF)cmd.c\
 JEXEF	=$(ORGAF)jobs_exec/
 JEXE	=$(JEXEF)exec.c\
 	$(JEXEF)jobs.c\
-	$(JEXEF)match_them.c
+	$(JEXEF)match_them.c\
+	$(JEXEF)match_them_help.c
 
 ORJF	=$(ORGAF)orga/
 ORJ	=$(ORJF)orga.c\

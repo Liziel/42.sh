@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Wed May  8 23:28:36 2013 vincent colliot
-** Last update Sat May 18 21:11:23 2013 vincent colliot
+** Last update Wed May 22 03:07:51 2013 vincent colliot
 */
 
 #ifndef ORGA_H_
@@ -38,6 +38,7 @@ t_redir	*redir_part(t_get*, t_get**, char**);
 BOOL    lvl_parents(t_get**, char**);
 BOOL	match_parents(t_get**, char**);
 BOOL	match_them(char*, char*, t_words**, BOOL*);
+BOOL	add_and_last(char*, char*, t_words**, BOOL*);
 
 /* nullify */
 BOOL    nullify_cmd(t_cmd *);

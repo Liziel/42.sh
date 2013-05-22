@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Wed May  8 01:48:11 2013 vincent colliot
-** Last update Mon May 20 21:59:46 2013 vincent colliot
+** Last update Wed May 22 03:10:45 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -18,41 +18,6 @@
 #include "string.h"
 #include "xmalloc.h"
 #include "error.h"
-
-static BOOL	add(char *name, t_words **last, BOOL *no_match)
-{
-  t_words	*link;
-
-  if (!name)
-    return (FALSE);
-  *no_match = FALSE;
-  if ((link = xmalloc(sizeof(*link))) == NULL)
-    return (FALSE);
-  link->word = my_strdup(name);
-  link->next = NULL;
-  (*last)->next = link;
-  *last = link;
-  return (TRUE);
-}
-
-static BOOL  add_and_last(char *m, char *dp, t_words **last, BOOL *no_match)
-{
-  char	*s;
-
-  if (m[0] && (dp) != NULL)
-    s = my_stricat(dp, m, '/');
-  else if (dp != NULL)
-    s = dp;
-  else
-    s = my_strdup(m);
-  if (add(s, last, no_match) == FALSE)
-    return (FALSE);
-  if (dp)
-    free(dp);
-  if (m[0])
-    free(s);
-  return (TRUE);
-}
 
 static BOOL	is_dir(char *dp)
 {
@@ -82,6 +47,14 @@ static BOOL	cond2(char *m, char *f_dp)
   return (FALSE);
 }
 
+static char	*next_m(char *m)
+{
+  m += my_strilen(m, '/') + (IN('/', m));
+  while (m[0] == '/')
+    m += 1;
+  return (m);
+}
+
 BOOL	match_them(char *m, char *dp, t_words **last, BOOL *no_match)
 {
   char		*f_dp;
@@ -102,7 +75,7 @@ BOOL	match_them(char *m, char *dp, t_words **last, BOOL *no_match)
 	  if ((f_dp = my_stricat(dp, fchr->d_name, '/' * (dp != NULL))) == NULL)
 	    return (FALSE);
 	  else if (cond2(m, f_dp))
-	    if (match_them(m + my_strilen(m, '/') + (IN('/', m)), f_dp, last,
+	    if (match_them(next_m(m), f_dp, last,
 			   no_match) == FALSE)
 	      return (FALSE);
 	}

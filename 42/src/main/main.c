@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Tue May 21 21:30:36 2013 vincent colliot
+** Last update Wed May 22 02:56:12 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -24,6 +24,7 @@ int main(void)
   info.alias = NULL;
   info.st = 0;
   environ = env_copy();
+  set_env("PS1", "[you're in Sla.sh] (you can set ypu prompt with setenv PS1 \"your_prompt\")\n[ --> ] ");
   if (load_tgets_funcs() == -1)
     return (EXIT_FAILURE);
   attribute_options(&(info.termcaps));
