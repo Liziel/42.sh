@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 19 04:50:12 2013 vincent colliot
-** Last update Wed May 22 08:47:59 2013 vincent colliot
+** Last update Wed May 22 19:46:00 2013 vincent colliot
 */
 
 #include "string.h"
@@ -21,7 +21,7 @@ BOOL	print_help(void)
   my_putstr("    -i      : unset all\n", 1);
   my_putstr("    -u {p}  : unset {p}\n", 1);
   my_putstr("    -s {v,p}: set {v} with {p}\n", 1);
-  return (TRUE);
+  return (FALSE);
 }
 
 void	destroy_env(void)
@@ -77,7 +77,10 @@ int	exec_env(t_words *word, char **save)
   environ = save;
   if (!((word->word)[0] == '.' || IN('/', (word->word))))
     if ((word->word = seek_cmd(word->word, &r)) == NULL)
-      return (seek_fail(r));
+      {
+	environ = safe;
+	return (seek_fail(r));
+      }
   environ = safe;
   if (!MATCH(f, word->word))
     free(f);

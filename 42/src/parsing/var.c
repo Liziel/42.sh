@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:25:20 2013 vincent colliot
-** Last update Wed May 22 17:45:47 2013 vincent colliot
+** Last update Wed May 22 19:54:07 2013 vincent colliot
 */
 
 #include <stdio.h>
@@ -60,6 +60,7 @@ BOOL	grow_var(char *s, char **mod, size_t n, t_info *info)
   char	*seek;
   char	*fill;
 
+  n += my_sstrlen(s, "~$");
   s += my_sstrlen(s, "~$");
   if (!s[0])
     return (TRUE);
@@ -74,9 +75,9 @@ BOOL	grow_var(char *s, char **mod, size_t n, t_info *info)
   fill = fill_it(s, seek, info);
   if (mod_var(s, fill, mod, seek) == FALSE)
     return (FALSE);
-  free(fill);
   s = *mod + n + my_strlen(fill);
   n += my_strlen(fill);
+  free(fill);
   free(seek);
-  return (grow_var(s, mod, n + my_sstrlen(s + n, "$~"), info));
+  return (grow_var(s, mod, n + my_sstrlen(*mod + n, "$~"), info));
 }

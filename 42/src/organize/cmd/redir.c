@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 12:08:51 2013 vincent colliot
-** Last update Wed May 22 17:08:05 2013 vincent colliot
+** Last update Wed May 22 20:03:12 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -32,7 +32,8 @@ static BOOL	test_file_redir(char *file, char **bad_sintax)
   char		*pre;
   struct stat st;
 
-  stat(file, &st);
+  if (stat(file, &st) == -1)
+    return (TRUE);
   if ((st.st_mode & S_IFMT) == S_IFDIR)
       {
 	pre = my_strcat(IS_DIR_ERROR1, file);

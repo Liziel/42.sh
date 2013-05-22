@@ -5,9 +5,11 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May  4 16:34:47 2013 vincent colliot
-** Last update Wed May 22 17:54:36 2013 vincent colliot
+** Last update Wed May 22 19:59:07 2013 vincent colliot
 */
 
+#include <sys/types.h>
+#include <dirent.h>
 #include "orga.h"
 #include "lexec.h"
 #include "bool.h"
@@ -43,11 +45,20 @@ static char	*seek(char *path, char *cmd, char **bad_sintax)
 
 static char	*verify(char *cmd, char **bad_sintax)
 {
+  DIR  *dir;
   char *r;
 
   if (access(cmd, X_OK))
     {
       *bad_sintax = my_strcat(UNKNOW_CMD, cmd);
+      return (NULL);
+    }
+  if ((dir = opendir(cmd)) != NULL)
+    {
+      r = my_strcat(IS_DIR_ERROR1, cmd);
+      *bad_sintax = my_strcat(r, IS_DIR_ERROR2);
+      free(r);
+      closedir(dir);
       return (NULL);
     }
   r = my_strdup(cmd);
