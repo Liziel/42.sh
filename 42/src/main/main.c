@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Wed May 22 02:56:12 2013 vincent colliot
+** Last update Wed May 22 07:59:26 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -19,6 +19,7 @@
 
 int main(void)
 {
+  BOOL		tget_fail;
   t_info        info;
 
   info.alias = NULL;
@@ -26,10 +27,10 @@ int main(void)
   environ = env_copy();
   set_env("PS1", "[you're in Sla.sh] (you can set ypu prompt with setenv PS1 \"your_prompt\")\n[ --> ] ");
   if (load_tgets_funcs() == -1)
-    return (EXIT_FAILURE);
+    tget_fail = TRUE;
   attribute_options(&(info.termcaps));
   retain_struct_options(1, &(info.termcaps));
-  read_cmds(&info);
+  read_cmds(&info, tget_fail);
   destroy_env();
   return (info.st);
 }

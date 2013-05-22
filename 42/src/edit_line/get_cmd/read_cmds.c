@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
-** Last update Wed May 22 06:27:45 2013 vincent colliot
+** Last update Wed May 22 09:02:04 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -18,6 +18,8 @@
 #include "subdivide.h"
 #include "orga.h"
 #include "lexec.h"
+#include "prompt.h"
+#include "get_next_line.h"
 
 static void	*built(char *str, char **bad_sintax, t_info *info, char **mod_s)
 {
@@ -76,7 +78,23 @@ static void	catch_after(int num)
   (void)num;
 }
 
-int	read_cmds(t_info *info)
+static char	*get_usr_cmd(BOOL tgetfail, t_history *history,
+			    struct s_options t)
+{
+  char	*r;
+
+  if (tgetfail == FALSE)
+    r = usr_cmd(0, history, t);
+  else
+    {
+      prompt(TRUE);
+      prompt(FALSE);
+      r = get_next_line(0);
+    }
+  return (r);
+}
+
+int	read_cmds(t_info *info, BOOL tgetfail)
 {
   BOOL			c;
   char			*str;
@@ -86,7 +104,7 @@ int	read_cmds(t_info *info)
   history = ctrlcget(&info, NULL);
   my_putstr(info->termcaps.invi_cursor, 1);
   configure_signals();
-  while (c && (str = usr_cmd(0, history, info->termcaps)))
+  while (c && (str = get_usr_cmd(tgetfail, history, info->termcaps)))
     {
       my_putstr(info->termcaps.visi_cursor, 1);
       signal(SIGINT, catch_after);
@@ -97,7 +115,8 @@ int	read_cmds(t_info *info)
       configure_signals();
       my_putstr(info->termcaps.invi_cursor, 1);
     }
-  my_putstr("exit", 1);
+  if (c)
+    my_putstr("exit", 1);
   free_history(history);
   my_putstr(info->termcaps.visi_cursor, 1);
   return (0);

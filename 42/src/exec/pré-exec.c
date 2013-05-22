@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:58:16 2013 vincent colliot
-** Last update Tue May 21 22:59:52 2013 vincent colliot
+** Last update Wed May 22 09:00:53 2013 vincent colliot
 */
 
 #include <sys/wait.h>
@@ -35,6 +35,14 @@ static void	my_wait(pid_t son, STATUS *st)
     }
 }
 
+static BOOL	get_status(t_info *info, STATUS st)
+{
+  if (info->st != EXIT_FAILURE)
+    info->st = (0 != (WEXITSTATUS(st)));
+  info->value = WEXITSTATUS(st);
+  return (TRUE);
+}
+
 static BOOL	exec_pipes(t_pipes *p, t_info *info, FLAG son, FD pi[3])
 {
   STATUS	status_quo;
@@ -62,9 +70,7 @@ static BOOL	exec_pipes(t_pipes *p, t_info *info, FLAG son, FD pi[3])
   my_wait(pid, &status_quo);
   if (pid < 0)
     return (TRUE);
-  if ((WEXITSTATUS(status_quo)))
-    info->st = EXIT_FAILURE;
-  return (TRUE);
+  return (get_status(info, status_quo));
 }
 
 static void to_fd(FD w[3])

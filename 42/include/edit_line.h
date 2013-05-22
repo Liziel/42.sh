@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May 13 13:04:25 2013 pierre-yves thomas
-** Last update Tue May 21 17:51:10 2013 vincent colliot
+** Last update Wed May 22 08:16:54 2013 vincent colliot
 */
 
 #ifndef	EDIT_LINE_H
@@ -90,7 +90,7 @@ void	retain_reverse_case(int, int *);
 ** read_cmds.c
 */
 # ifdef T_INFO_DEFINED
-int     read_cmds(t_info *);
+int     read_cmds(t_info *, BOOL);
 # endif
 /*
 ** save_and_copy_part_str.c

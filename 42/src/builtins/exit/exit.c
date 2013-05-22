@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Tue May 14 18:10:48 2013 thomas lecorre
-** Last update Mon May 20 18:00:29 2013 vincent colliot
+** Last update Wed May 22 09:04:39 2013 vincent colliot
 */
 
 #include "bool.h"

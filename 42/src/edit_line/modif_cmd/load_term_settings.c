@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 14:32:24 2013 pierre-yves thomas
-** Last update Tue May 21 03:30:56 2013 vincent colliot
+** Last update Wed May 22 07:58:27 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -59,8 +59,12 @@ int	load_tgets_funcs()
 {
   if (tgetent(get_env("TERM"), NULL) != 1)
     {
-      my_putstr("Fail on tgetent", 2);
-      return (-1);
+      set_env("TERM", "xterm");
+      if (tgetent(get_env("TERM"), NULL) != 1)
+	{
+	  my_putstr("Fail on tgetent", 2);
+	  return (-1);
+	}
     }
   return (0);
 }

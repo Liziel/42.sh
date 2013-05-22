@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 19 04:50:12 2013 vincent colliot
-** Last update Tue May 21 16:56:12 2013 vincent colliot
+** Last update Wed May 22 08:47:59 2013 vincent colliot
 */
 
 #include "string.h"
@@ -63,6 +63,7 @@ static int seek_fail(char *r)
 
 int	exec_env(t_words *word, char **save)
 {
+  STATUS	st;
   BOOL	ef;
   char	*r;
   char	*f;
@@ -80,5 +81,6 @@ int	exec_env(t_words *word, char **save)
   environ = safe;
   if (!MATCH(f, word->word))
     free(f);
-  return (exec_form(word, &ef));
+  exec_form(word, &ef, &st);
+  return (st);
 }

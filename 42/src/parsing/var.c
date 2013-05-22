@@ -5,13 +5,15 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:25:20 2013 vincent colliot
-** Last update Wed May 22 06:33:34 2013 vincent colliot
+** Last update Wed May 22 08:38:25 2013 vincent colliot
 */
 
+#include <stdio.h>
 #include "exec.h"
 #include "bool.h"
 #include "env.h"
 #include "string.h"
+#include "xmalloc.h"
 
 static BOOL mod_var(char *s, char *fill, char **mod, char *seek)
 {
@@ -36,6 +38,23 @@ static BOOL mod_var(char *s, char *fill, char **mod, char *seek)
   return (TRUE);
 }
 
+static char	*fill_it(char *s, char *seek, t_info *info)
+{
+  char	*fill;
+
+  if (s[0] == '$' && !(MATCH("?", seek)))
+    fill = my_strdup(get_env(seek));
+  else if (MATCH("?", seek))
+    {
+      if ((fill = xmalloc(sizeof(char) * 4)) == NULL)
+	return (NULL);
+      snprintf(fill, 4, "%d", info->value);
+    }
+  else
+    fill = my_strdup(get_env("HOME"));
+  return (fill);
+}
+
 BOOL	grow_var(char *s, char **mod, size_t n, t_info *info)
 {
   char	*seek;
@@ -48,14 +67,14 @@ BOOL	grow_var(char *s, char **mod, size_t n, t_info *info)
     return (grow_var(s + 1 +  my_sstrlen(s + 1, "$!"), mod, n +
 		     1 +  my_sstrlen(s + 1, "$!"), info));
   seek = NULL;
-  if (s[0] == '$')
+  if (s[0] == '$' && s[1] != '?')
     seek = my_strndup(s + 1, my_sstrlen(s + 1, "$!/!\\ \t(;|&"));
-  if (s[0] == '$')
-    fill = get_env(seek);
-  else
-    fill = get_env("HOME");
+  else if (s[1] == '?' && s[0] == '$')
+    seek = my_strdup("?");
+  fill = fill_it(s, seek, info);
   if (mod_var(s, fill, mod, seek) == FALSE)
     return (FALSE);
+  free(fill);
   s = *mod + n + my_strlen(fill);
   n += my_strlen(fill);
   free(seek);

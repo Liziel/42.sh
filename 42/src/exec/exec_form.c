@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 01:40:28 2013 vincent colliot
-** Last update Wed May 22 01:22:44 2013 vincent colliot
+** Last update Wed May 22 08:44:59 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -89,7 +89,7 @@ void	catch_more(int num)
     stop(TRUE);
 }
 
-STATUS		exec_form(t_words *list, BOOL *sys_fail)
+STATUS		exec_form(t_words *list, BOOL *sys_fail, int *value)
 {
   STATUS	st;
   pid_t		pid;
@@ -115,5 +115,5 @@ STATUS		exec_form(t_words *list, BOOL *sys_fail)
     }
   clean_signal(tab[0], st);
   free(tab);
-  return (0 != (WEXITSTATUS(st)));
+  return (0 != (*value = WEXITSTATUS(st)));
 }
