@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Thu May  9 11:30:50 2013 pierre-yves thomas
-** Last update Tue May 21 22:10:07 2013 pierre-yves thomas
+** Last update Thu May 23 13:22:43 2013 pierre-yves thomas
 */
 
 #include <string.h>
@@ -77,4 +77,6 @@ void		move_reverse_case(char value, int *rev_c, char **cmd)
     (*rev_c)--;
   else if ((value == 67 || value == 6) && (*rev_c) < len)
     (*rev_c)++;
+  else if (value == 51)
+    del_letter_in_str(value, rev_c, cmd);
 }
