@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 20:01:41 2013 vincent colliot
-** Last update Sat May 18 02:09:16 2013 vincent colliot
+** Last update Wed May 22 22:54:31 2013 vincent colliot
 */
 
 #include "string.h"
@@ -34,4 +34,20 @@ int	my_strncmp(const char *s1, const char *s2, size_t n)
   while (s1[i] == s2[i] && s1[i] && i < n - 1)
     i++;
   return (s1[i] - s2[i]);
+}
+
+size_t	last_soccur(const char *s1, const char *s2)
+{
+  size_t	i;
+  size_t	r;
+
+  i = 0;
+  r = 0;
+  while (s1[i])
+    {
+      if (NMATCH(s2, s1 + i))
+	r = i;
+      i++;
+    }
+  return (r);
 }

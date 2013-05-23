@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May 18 22:56:01 2013 vincent colliot
-** Last update Mon May 20 18:21:53 2013 vincent colliot
+** Last update Wed May 22 23:01:51 2013 vincent colliot
 */
 
 #include "built.h"
@@ -37,15 +37,15 @@ static size_t plus_seq(char *seq, int mult, size_t l)
   return (i);
 }
 
-static size_t print_seq2(char *seq)
+static size_t print_seq2(char *seq, FLAG echo)
 {
   if (NMATCH("\\n", seq))
     return (1 + my_putchar('\n', 1));
-  else if (NMATCH("\\r", seq))
+  else if (NMATCH("\\r", seq) && !(echo & 4))
     return (1 + my_putchar('\r', 1));
-  else if (NMATCH("\\t", seq))
+  else if (NMATCH("\\t", seq) && !(echo & 4))
     return (1 + my_putchar('\t', 1));
-  else if (NMATCH("\\v", seq))
+  else if (NMATCH("\\v", seq) && !(echo & 4))
     return (1 + my_putchar('\v', 1));
   return (my_putchar(*seq, 1));
 }
@@ -60,15 +60,15 @@ size_t print_seq(char *seq, FLAG echo, BOOL *end)
     return (2 + plus_seq(seq + 2, 16, 2));
   if (NMATCH("\\\\", seq))
     return (1 + my_putchar('\\', 1));
-  else if (NMATCH("\\a", seq))
+  else if (NMATCH("\\a", seq) && !(echo & 4))
     return (1 + my_putchar('\a', 1));
-  else if (NMATCH("\\b", seq))
+  else if (NMATCH("\\b", seq) && !(echo & 4))
     return (1 + my_putchar('\b', 1));
-  else if (NMATCH("\\c", seq))
+  else if (NMATCH("\\c", seq) && !(echo & 4))
     return (*end = TRUE);
-  else if (NMATCH("\\e", seq))
+  else if (NMATCH("\\e", seq) && !(echo & 4))
     return (1 + my_putchar('\e', 1));
-  else if (NMATCH("\\f", seq))
+  else if (NMATCH("\\f", seq) && !(echo & 4))
     return (1 + my_putchar('\f', 1));
-  return (print_seq2(seq));
+  return (print_seq2(seq, echo));
 }
