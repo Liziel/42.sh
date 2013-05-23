@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
-** Last update Wed May 22 23:03:52 2013 vincent colliot
+** Last update Thu May 23 14:04:49 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -37,11 +37,13 @@ static void	*built(char *str, char **bad_sintax, t_info *info, char **mod_s)
   return (orga(sub, bad_sintax, NULL));
 }
 
-static BOOL	built_and_exec(char *str, t_info *info)
+static BOOL	built_and_exec(char *str, t_info *info, t_history **history)
 {
+  char		*retain;
   t_jobs	*exec;
   char		*bad_sintax;
 
+  retain = my_strdup(str);
   exec = NULL;
   bad_sintax = NULL;
   if (!empty(str))
@@ -49,13 +51,18 @@ static BOOL	built_and_exec(char *str, t_info *info)
       if (!empty(str))
 	{
 	  if (bad_sintax)
-	    fprintf(stderr, "%s\n", bad_sintax);
-	  if (bad_sintax)
-	    free(bad_sintax);
-	  if (bad_sintax)
-	    return (TRUE);
+	    {
+	      fprintf(stderr, "%s\n", bad_sintax);
+	      free(bad_sintax);
+	      my_put_in_history(history, retain);
+	      free(retain);
+	      return (TRUE);
+	    }
 	  return (!(info->st = EXIT_FAILURE));
 	}
+  if (!empty(retain))
+    my_put_in_history(history, retain);
+  free(retain);
   free(str);
   return (pre_exec(exec, info, FALSE));
 }
@@ -100,15 +107,15 @@ int	read_cmds(t_info *info, BOOL tgetfail)
   c = TRUE;
   history = ctrlcget(&info, NULL);
   my_putstr(info->termcaps.invi_cursor, 1);
-  configure_signals();
+  if (!tgetfail)
+    configure_signals();
   while (c && (str = get_usr_cmd(tgetfail, history, info->termcaps)))
     {
       my_putstr(info->termcaps.visi_cursor, 1);
       signal(SIGINT, catch_after);
-      my_put_in_history(&history, str);
       history = ctrlcget(&info, history);
       info->hist = history;
-      c = built_and_exec(str, info);
+      c = built_and_exec(str, info, &history);
       if (!tgetfail)
 	configure_signals();
       my_putstr(info->termcaps.invi_cursor, 1);

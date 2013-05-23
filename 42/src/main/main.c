@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Wed May 22 20:19:53 2013 pierre-yves thomas
+** Last update Thu May 23 08:56:33 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -26,7 +26,8 @@ int main(void)
   info.alias = NULL;
   info.st = 0;
   environ = env_copy();
-  set_env("PS1", "[you are in Sla.sh] (you can set your prompt with setenv PS1 \"your_prompt\")\n[ --> ] ");
+  if (!get_env("PS1"))
+    set_env("PS1", "[you are in Sla.sh] (you can set your prompt with setenv PS1 \"your_prompt\")\n[ --> ] ");
   tget_fail = FALSE;
   if (load_tgets_funcs() == -1 || tcgetattr(0, &test) == -1)
     tget_fail = TRUE;
