@@ -5,7 +5,11 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 14:36:25 2013 pierre-yves thomas
+<<<<<<< HEAD
 ** Last update Sun May 26 01:31:41 2013 vincent colliot
+=======
+** Last update Sun May 26 01:32:20 2013 thomas lecorre
+>>>>>>> 40282a65d26cf41ee56033bebac17173e54044a9
 */
 
 #include <stdlib.h>
