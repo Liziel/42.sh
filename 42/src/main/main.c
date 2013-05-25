@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Sun May 26 00:17:05 2013 vincent colliot
+** Last update Sun May 26 00:30:15 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -24,6 +24,7 @@ int main(void)
   t_info		info;
   struct termios	test;
 
+  signal(SIGTSTP, SIG_IGN);
   info.alias = NULL;
   info.st = 0;
   info.value = 0;
