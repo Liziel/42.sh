@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 01:40:28 2013 vincent colliot
-** Last update Wed May 22 20:11:30 2013 vincent colliot
+** Last update Thu May 23 14:55:47 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -55,6 +55,17 @@ static char	**to_tab(t_words *list, BOOL *sys_fail)
   return (tab);
 }
 
+static int	stop(BOOL s)
+{
+  static BOOL k = FALSE;
+
+  if (s == INIT)
+    k = FALSE;
+  if (TRUE == s)
+    k = TRUE;
+  return (k);
+}
+
 static void	clean_signal(char *prog, STATUS signal)
 {
   if (signal == SIGILL || signal == SIGABRT || signal == SIGFPE ||
@@ -72,17 +83,6 @@ static void	clean_signal(char *prog, STATUS signal)
     my_putstr(" : Terminated\n", 2);
   else if (signal == SIGINT)
     my_putstr(" : Killed\n", 2);
-}
-
-static int	stop(BOOL s)
-{
-  static BOOL k = FALSE;
-
-  if (s == INIT)
-    k = FALSE;
-  if (TRUE == s)
-    k = TRUE;
-  return (k);
 }
 
 void	catch_more(int num)

@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:25:20 2013 vincent colliot
-** Last update Wed May 22 22:03:05 2013 vincent colliot
+** Last update Sat May 25 14:54:51 2013 vincent colliot
 */
 
 #include <stdio.h>
@@ -48,7 +48,7 @@ static char	*fill_it(char *s, char *seek, t_info *info)
     {
       if ((fill = xmalloc(sizeof(char) * 4)) == NULL)
 	return (NULL);
-      snprintf(fill, 4, "%d", info->value);
+      asprintf(&fill, "%d", info->value);
     }
   else
     fill = my_strdup(get_env("HOME"));

@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
-** Last update Thu May 23 14:04:49 2013 vincent colliot
+** Last update Fri May 24 00:19:00 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -67,32 +67,23 @@ static BOOL	built_and_exec(char *str, t_info *info, t_history **history)
   return (pre_exec(exec, info, FALSE));
 }
 
-static t_history *ctrlcget(t_info **info, t_history *history)
-{
-  static t_info *inf_save = NULL;
-  static t_history *hist_save = NULL;
-
-  if (*info)
-   inf_save = *info;
-  else
-    *info = inf_save;
-  if (history)
-    hist_save = history;
-  return (hist_save);
-}
-
 void	catch_after(int num)
 {
   (void)num;
 }
 
 static char	*get_usr_cmd(BOOL tgetfail, t_history *history,
-			    struct s_options t)
+			     struct s_options t, t_info *info)
 {
   char	*r;
 
   if (tgetfail == FALSE)
-    r = usr_cmd(0, history, t);
+    {
+      my_putstr(info->termcaps.invi_cursor, 1);
+      r = usr_cmd(0, history, t);
+      my_putstr(info->termcaps.visi_cursor, 1);
+    }
+
   if (tgetfail == TRUE)
     r = get_next_line(0);
   return (r);
@@ -105,20 +96,16 @@ int	read_cmds(t_info *info, BOOL tgetfail)
   t_history		*history;
 
   c = TRUE;
-  history = ctrlcget(&info, NULL);
-  my_putstr(info->termcaps.invi_cursor, 1);
+  history = NULL;
   if (!tgetfail)
     configure_signals();
-  while (c && (str = get_usr_cmd(tgetfail, history, info->termcaps)))
+  while (c && (str = get_usr_cmd(tgetfail, history, info->termcaps, info)))
     {
-      my_putstr(info->termcaps.visi_cursor, 1);
       signal(SIGINT, catch_after);
-      history = ctrlcget(&info, history);
       info->hist = history;
       c = built_and_exec(str, info, &history);
       if (!tgetfail)
 	configure_signals();
-      my_putstr(info->termcaps.invi_cursor, 1);
     }
   if (c)
     my_putstr("exit", 1);

@@ -1,11 +1,11 @@
 /*
 ** change_reverse_place.c for 42 in /home/thomas_1//Projets/42sh
-** 
+**
 ** Made by pierre-yves thomas
 ** Login   <thomas_1@epitech.net>
-** 
+**
 ** Started on  Thu May  9 11:30:50 2013 pierre-yves thomas
-** Last update Thu May 23 13:22:43 2013 pierre-yves thomas
+** Last update Thu May 23 14:17:28 2013 vincent colliot
 */
 
 #include <string.h>

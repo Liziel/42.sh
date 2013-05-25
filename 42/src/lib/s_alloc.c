@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 19:47:25 2013 vincent colliot
-** Last update Wed May 22 02:54:49 2013 vincent colliot
+** Last update Sat May 25 14:37:51 2013 vincent colliot
 */
 
 #include "string.h"
@@ -67,7 +67,7 @@ char	*my_strcat(const char *s, const char *c)
     return (my_strdup(c));
   si = my_strlen(s);
   ci = my_strlen(c);
-  if ((r = xmalloc(sizeof(char) * (si + ci + 1))) == NULL)
+  if ((r = xmalloc(sizeof(char) * (si + ci + 2))) == NULL)
     return (NULL);
   r[si + ci] = 0;
   i = 0;
@@ -82,7 +82,7 @@ char	*my_strcat(const char *s, const char *c)
       r[i] = c[i - si];
       i++;
     }
-  r[i] = 0;
+  r[i+1] = 0;
   return (r);
 }
 

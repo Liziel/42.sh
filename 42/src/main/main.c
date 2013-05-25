@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Thu May 23 08:56:33 2013 vincent colliot
+** Last update Sat May 25 14:54:59 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -25,6 +25,7 @@ int main(void)
 
   info.alias = NULL;
   info.st = 0;
+  info.value = 0;
   environ = env_copy();
   if (!get_env("PS1"))
     set_env("PS1", "[you are in Sla.sh] (you can set your prompt with setenv PS1 \"your_prompt\")\n[ --> ] ");

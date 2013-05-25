@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May  4 12:44:30 2013 vincent colliot
-** Last update Wed May 22 15:47:32 2013 quentin cloarec
+** Last update Thu May 23 14:52:51 2013 vincent colliot
 */
 
 #ifndef ERROR_H_
@@ -22,7 +22,7 @@
 # define WRONG_REDIR "(sh): wrong redirection"
 # define ERROR_IN_REDIR "(sh): unexpected EOS after redirection"
 # define FILE_ERROR "(sh): no such file: "
-# define DIR_ERROR "(sh): no such direcotry: "
+# define DIR_ERROR "(sh): no such directory: "
 # define IS_DIR_ERROR1 "(sh):error : "
 # define IS_DIR_ERROR2 " : is a directory"
 # define INVALID_ALIAS "(sh): alias error: invalid character in sentence: "

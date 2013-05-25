@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 22:15:18 2013 vincent colliot
-** Last update Wed May 22 17:24:20 2013 vincent colliot
+** Last update Thu May 23 14:35:02 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -46,8 +46,8 @@ void	rright(t_redir *r, FD w[3], FD l[3])
 		| S_IRGRP | S_IROTH);
   if (r->type == ON_CANAL)
     {
-      close(l[in]);
       w[in] = dup(l[r->out]);
+      close(l[in]);
     }
 }
 
