@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 14:36:25 2013 pierre-yves thomas
-** Last update Sat May 25 18:13:26 2013 pierre-yves thomas
+** Last update Sun May 26 01:31:41 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -81,6 +81,7 @@ char			*usr_cmd(int fd, t_history *histo, t_options options)
   int			histo_pl;
 
   (void)options;
+  cmd = NULL;
   if (init_termios(&set, &unset) == -1 ||
       init_values(&histo_pl, &rev_c, &str, &cmd) == -1)
     return (unset_termios(&unset));

@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Sun May 26 00:30:15 2013 vincent colliot
+** Last update Sun May 26 01:00:56 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -38,5 +38,5 @@ int main(void)
   retain_struct_options(1, &(info.termcaps));
   read_cmds(&info, tget_fail);
   destroy_env();
-  return (info.st);
+  return (info.value);
 }

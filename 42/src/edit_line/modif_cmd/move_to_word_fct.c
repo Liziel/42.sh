@@ -1,11 +1,11 @@
 /*
 ** move_to_word_fct.c for 42 in /home/thomas_1//Projets/42sh/src
-** 
+**
 ** Made by pierre-yves thomas
 ** Login   <thomas_1@epitech.net>
-** 
+**
 ** Started on  Fri May 10 13:07:12 2013 pierre-yves thomas
-** Last update Fri May 17 17:47:51 2013 pierre-yves thomas
+** Last update Sun May 26 01:45:40 2013 vincent colliot
 */
 
 #include "string.h"
