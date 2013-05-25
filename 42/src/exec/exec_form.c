@@ -5,9 +5,13 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 01:40:28 2013 vincent colliot
-** Last update Sat May 25 20:23:06 2013 vincent colliot
+** Last update Sat May 25 23:28:48 2013 vincent colliot
 */
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/ioctl.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -59,15 +63,11 @@ static int	stop(BOOL s)
 {
   static BOOL k = FALSE;
 
+  usleep(5);
   if (s == INIT)
     k = FALSE;
   if (TRUE == s)
     k = TRUE;
-  if (s == END)
-    {
-      signal(SIGTTIN, SIG_DFL);
-      signal(SIGTTOU, SIG_DFL);
-    }
   return (k);
 }
 
@@ -112,13 +112,11 @@ STATUS		exec_form(t_words *list, BOOL *sys_fail, int *value)
       signal(SIGINT, catch_more);
       while (waitpid(pid, &st, WNOHANG) != -1)
 	if (stop(FALSE) == TRUE)
-	  kill(-pid, SIGINT);
+	  kill(pid, SIGINT);
     }
   else
     {
       setsid();
-      signal(SIGTTIN, SIG_IGN);
-      signal(SIGTTOU, SIG_IGN);
       if (execve(tab[0], tab, environ) == -1)
 	return (EXIT_FAILURE + !((*sys_fail) = TRUE));
     }
