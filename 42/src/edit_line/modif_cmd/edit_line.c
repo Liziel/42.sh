@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 14:36:25 2013 pierre-yves thomas
-** Last update Tue May 21 22:13:38 2013 pierre-yves thomas
+** Last update Sat May 25 18:13:26 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
@@ -14,6 +14,7 @@
 #include "string.h"
 #include "prompt.h"
 
+/*
 static char	*free_str_edit_lines(char *s1, char *s2)
 {
   if (s1 != NULL)
@@ -24,6 +25,7 @@ static char	*free_str_edit_lines(char *s1, char *s2)
   remind_save_str(1, &s1);
   return (NULL);
 }
+*/
 
 int		init_values(int *history_pl, int *reverse_case,
 			    char **str, char **cmd)
@@ -57,12 +59,16 @@ static int     	read_cmd(int fd, char **str, char **cmd, int *reverse_case)
   return (modif_cmd(cmd, *str, reverse_case));
 }
 
-char	*finish_usr_cmd(char *cmd, char *str, struct termios unset)
+static int	chk_str(char *str, int nb1, int nb2, int nb3)
 {
-  my_putstr("\n", 1);
-  unset_termios(&unset);
-  free_str_edit_lines(str, NULL);
-  return (cmd);
+  if (str && my_strlen(str) > 2)
+    {
+      if (str[0] == nb1 && (str[2] == nb2 || str[2] == nb3))
+	return (0);
+      return (-1);
+    }
+  else
+    return (-1);
 }
 
 char			*usr_cmd(int fd, t_history *histo, t_options options)
@@ -83,10 +89,10 @@ char			*usr_cmd(int fd, t_history *histo, t_options options)
     {
       if (read_cmd(fd, &str, &cmd, &rev_c) == -1)
 	return (unset_termios(&unset));
-      if (histo_pl < length_of_history(histo) && str[0] == 27 && str[2] == 65)
+      if (histo_pl < length_of_history(histo) && chk_str(str, 27, 91, 65) == 0)
 	if (take_cmd_from_history(++histo_pl, &rev_c, &cmd, histo) == -1)
 	  return (unset_termios(&unset));
-      if (histo_pl > 0 && str[0] == 27 && str[2] == 66)
+      if (histo_pl > 0 && chk_str(str, 27, 91, 66) == 0)
 	if (take_cmd_from_history(--histo_pl, &rev_c, &cmd, histo) == -1)
 	  return (unset_termios(&unset));
       show_cmd(str[0], fd, cmd, rev_c);

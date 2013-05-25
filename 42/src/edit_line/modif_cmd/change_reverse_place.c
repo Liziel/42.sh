@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Thu May  9 11:30:50 2013 pierre-yves thomas
-** Last update Thu May 23 14:17:28 2013 vincent colliot
+** Last update Sat May 25 17:34:44 2013 pierre-yves thomas
 */
 
 #include <string.h>
@@ -13,13 +13,14 @@
 #include "string.h"
 #include "edit_line.h"
 
-void	delete_first_word_met(int *rev_c, char **cmd)
+void	delete_first_word_met(char value, int *rev_c, char **cmd)
 {
   char	*save;
   int	i;
   int	save_rev_c;
   int	len;
 
+  (void)value;
   len = my_strlen(*cmd) - 1;
   i = (*rev_c);
   while (i < len && ((*cmd)[i] == ' ' || (*cmd)[i] == '\t'))
@@ -40,29 +41,35 @@ void	delete_first_word_met(int *rev_c, char **cmd)
     }
 }
 
-static void	fill_fct_ptr(void (*options[6])(int *, char **))
+static void	fill_fct_ptr(void (*options[9])(char, int *, char **))
 {
   options[0] = move_to_prev_word;
   options[1] = delete_first_word_met;
   options[2] = move_to_next_word;
   options[3] = uppercase_first_letter_found;
   options[4] = lowercase_letters_found;
-  options[5] = NULL;
+  options[5] = reverse_to_begin;
+  options[6] = reverse_to_end;
+  options[7] = del_letter_in_str;
+  options[8] = NULL;
 }
 
-static void	fill_tab(char opt[5])
+static void	fill_tab(char opt[8])
 {
   opt[0] = 98;
   opt[1] = 100;
   opt[2] = 102;
   opt[3] = 99;
   opt[4] = 108;
+  opt[5] = 72;
+  opt[6] = 70;
+  opt[7] = 51;
 }
 
 void		move_reverse_case(char value, int *rev_c, char **cmd)
 {
-  void		(*options[6])(int *, char **);
-  char		opt[5];
+  void		(*options[9])(char, int *, char **);
+  char		opt[8];
   int		len;
   int		i;
 
@@ -70,13 +77,19 @@ void		move_reverse_case(char value, int *rev_c, char **cmd)
   fill_tab(opt);
   len = my_strlen(*cmd);
   fill_fct_ptr(options);
-  while (++i < 5 && opt[i] != value);
-  if (i != 5)
-    options[i](rev_c, cmd);
+  while (++i < 8 && opt[i] != value);
+  if (i != 8)
+    {
+      if (value == 51)
+	{
+	  (*rev_c)++;
+	  options[i](value, rev_c, cmd);
+	}
+      else
+	options[i](value, rev_c, cmd);
+    }
   else if ((value == 68 || value == 2) && (*rev_c) > 0)
     (*rev_c)--;
   else if ((value == 67 || value == 6) && (*rev_c) < len)
     (*rev_c)++;
-  else if (value == 51)
-    del_letter_in_str(value, rev_c, cmd);
 }
