@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 22:15:18 2013 vincent colliot
-** Last update Sat May 25 16:14:01 2013 vincent colliot
+** Last update Sat May 25 17:04:24 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -39,7 +39,7 @@ void	rright(t_redir *r, FD w[3], FD l[3])
   FD	in;
 
   in = 1;
-  if (in < 3 && in > 0)
+  if (r->in < 3 && r->in > 0)
     in = r->in;
   if (w[in] != -1 && (r->type == ON_CANAL))
     close(w[in]);

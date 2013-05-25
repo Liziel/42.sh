@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 21:20:47 2013 vincent colliot
-** Last update Tue May 14 21:24:58 2013 vincent colliot
+** Last update Sat May 25 17:34:39 2013 vincent colliot
 */
 
 #include "string.h"
@@ -36,9 +36,13 @@ static size_t redir_lenth(char *s)
     return (n + IN(s[n], "<>"));
   n += 1;
   if (IN(s[n], "012"))
-    if (IN(s[n + 1], " \t\"'|&;()`") || !s[n + 1])
-      return (n + 1);
-  return (n - IN(s[n], "012"));
+    {
+      if (IN(s[n + 1], " \t\"'|&;()`") || !s[n + 1])
+	return (n + 1);
+      else
+	return (n - 1);
+    }
+  return (n - 1);
 }
 
 static size_t subdiv(char *s, char **bad_sintax)
