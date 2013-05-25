@@ -5,11 +5,12 @@
 ** Login   <thomas_1@epitech.net>
 ** 
 ** Started on  Mon May 13 10:46:31 2013 pierre-yves thomas
-** Last update Mon May 13 10:46:36 2013 pierre-yves thomas
+** Last update Sat May 25 17:22:20 2013 pierre-yves thomas
 */
 
-void    lowercase_letters_found(int *rev_c, char **cmd)
+void    lowercase_letters_found(char value, int *rev_c, char **cmd)
 {
+  (void)value;
   while ((*cmd)[*rev_c] != '\0' &&
          (*cmd)[*rev_c] != ' ' && (*cmd)[*rev_c] != '\t')
     {
@@ -19,13 +20,13 @@ void    lowercase_letters_found(int *rev_c, char **cmd)
     }
 }
 
-void    uppercase_first_letter_found(int *rev_c, char **cmd)
+void    uppercase_first_letter_found(char value, int *rev_c, char **cmd)
 {
   if ((*cmd)[*rev_c] != '\0')
     {
       if ((*cmd)[*rev_c] >= 'a' && (*cmd)[*rev_c] <= 'z')
         ((*cmd)[*rev_c]) -= 32;
       (*rev_c)++;
-      lowercase_letters_found(rev_c, cmd);
+      lowercase_letters_found(value, rev_c, cmd);
     }
 }

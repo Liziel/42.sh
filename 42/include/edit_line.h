@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May 13 13:04:25 2013 pierre-yves thomas
-** Last update Wed May 22 08:16:54 2013 vincent colliot
+** Last update Sat May 25 18:28:20 2013 pierre-yves thomas
 */
 
 #ifndef	EDIT_LINE_H
@@ -57,6 +57,12 @@ char	*usr_cmd(int, t_history *, t_options);
 int	init_values(int *, int *, char **, char **);
 
 /*
+** finish_usr_cmd.c
+*/
+char	*free_str_edit_lines(char *s1, char *s2);
+char    *finish_usr_cmd(char *, char *, struct termios);
+
+/*
 ** load_term_settings.c
 */
 void    attribute_options(t_options *);
@@ -76,8 +82,8 @@ int	modif_cmd(char **, char *, int *);
 /*
 ** move_to_word_fct.
 */
-void    move_to_prev_word(int *, char **);
-void    move_to_next_word(int *, char **);
+void    move_to_prev_word(char, int *, char **);
+void    move_to_next_word(char, int *, char **);
 
 /*
 ** remain_datas.c
@@ -118,7 +124,7 @@ int	take_cmd_from_history(int, int *, char **, t_history *);
 /*
 ** upper_lower_case_letter.c
 */
-void    lowercase_letters_found(int *, char **);
-void    uppercase_first_letter_found(int *, char **);
+void    lowercase_letters_found(char, int *, char **);
+void    uppercase_first_letter_found(char, int *, char **);
 
 #endif

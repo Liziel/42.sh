@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Wed May 22 06:01:05 2013 vincent colliot
+## Last update Sat May 25 18:11:45 2013 pierre-yves thomas
 ##
 
 NAME    = Sla.sh
@@ -108,6 +108,7 @@ FED_MOD	=$(EDITF)modif_cmd/
 ED_MOD	=$(FED_MOD)change_reverse_place.c\
 	$(FED_MOD)clean_screen.c\
 	$(FED_MOD)edit_line.c\
+	$(FED_MOD)finish_usr_cmd.c\
 	$(FED_MOD)load_term_settings.c\
 	$(FED_MOD)modify_line.c\
 	$(FED_MOD)move_to_word_fct.c\
