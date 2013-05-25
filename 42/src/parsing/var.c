@@ -5,9 +5,10 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:25:20 2013 vincent colliot
-** Last update Sat May 25 14:54:51 2013 vincent colliot
+** Last update Sat May 25 15:12:14 2013 vincent colliot
 */
 
+#define _GNU_SOURCE
 #include <stdio.h>
 #include "exec.h"
 #include "bool.h"

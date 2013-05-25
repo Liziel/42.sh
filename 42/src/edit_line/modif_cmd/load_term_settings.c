@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 14:32:24 2013 pierre-yves thomas
-** Last update Wed May 22 18:04:26 2013 pierre-yves thomas
+** Last update Sat May 25 16:27:29 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -57,14 +57,14 @@ char	*unset_termios(struct termios *unset)
 
 int	load_tgets_funcs()
 {
-  if (tgetent(get_env("TERM"), NULL) != 1)
+  if (tgetent(NULL, "xterm") != 1)
     {
-      set_env("TERM", "xterm");
-      if (tgetent(get_env("TERM"), NULL) != 1)
+      if (tgetent(NULL, get_env("TERM")) != 1)
 	{
 	  my_putstr("Fail on tgetent", 2);
 	  return (-1);
 	}
     }
+  set_env("TERM", "xterm");
   return (0);
 }

@@ -1,69 +1,87 @@
-==5593== Memcheck, a memory error detector
-==5593== Copyright (C) 2002-2010, and GNU GPL'd, by Julian Seward et al.
-==5593== Using Valgrind-3.6.1 and LibVEX; rerun with -h for copyright info
-==5593== Command: ../Sla.sh
-==5593== Parent PID: 1734
-==5593== 
-==5593== Conditional jump or move depends on uninitialised value(s)
-==5593==    at 0x50C8B06: vfprintf (in /lib64/libc-2.14.1.so)
-==5593==    by 0x50F3A21: vsnprintf (in /lib64/libc-2.14.1.so)
-==5593==    by 0x50D3421: snprintf (in /lib64/libc-2.14.1.so)
-==5593==    by 0x4039CE: fill_it (var.c:51)
-==5593==    by 0x403B67: grow_var (var.c:75)
-==5593==    by 0x403BEC: grow_var (var.c:82)
-==5593==    by 0x403BEC: grow_var (var.c:82)
-==5593==    by 0x403BEC: grow_var (var.c:82)
-==5593==    by 0x403BEC: grow_var (var.c:82)
-==5593==    by 0x407024: built (read_cmds.c:30)
-==5593==    by 0x4070FE: built_and_exec (read_cmds.c:50)
-==5593==    by 0x407315: read_cmds (read_cmds.c:106)
-==5593==  Uninitialised value was created by a stack allocation
-==5593==    at 0x4011F4: main (main.c:21)
-==5593== 
-==5593== Use of uninitialised value of size 8
-==5593==    at 0x50C868B: _itoa_word (in /lib64/libc-2.14.1.so)
-==5593==    by 0x50CAC66: vfprintf (in /lib64/libc-2.14.1.so)
-==5593==    by 0x50F3A21: vsnprintf (in /lib64/libc-2.14.1.so)
-==5593==    by 0x50D3421: snprintf (in /lib64/libc-2.14.1.so)
-==5593==    by 0x4039CE: fill_it (var.c:51)
-==5593==    by 0x403B67: grow_var (var.c:75)
-==5593==    by 0x403BEC: grow_var (var.c:82)
-==5593==    by 0x403BEC: grow_var (var.c:82)
-==5593==    by 0x403BEC: grow_var (var.c:82)
-==5593==    by 0x403BEC: grow_var (var.c:82)
-==5593==    by 0x407024: built (read_cmds.c:30)
-==5593==    by 0x4070FE: built_and_exec (read_cmds.c:50)
-==5593==  Uninitialised value was created by a stack allocation
-==5593==    at 0x4011F4: main (main.c:21)
-==5593== 
-==5593== Conditional jump or move depends on uninitialised value(s)
-==5593==    at 0x50C8695: _itoa_word (in /lib64/libc-2.14.1.so)
-==5593==    by 0x50CAC66: vfprintf (in /lib64/libc-2.14.1.so)
-==5593==    by 0x50F3A21: vsnprintf (in /lib64/libc-2.14.1.so)
-==5593==    by 0x50D3421: snprintf (in /lib64/libc-2.14.1.so)
-==5593==    by 0x4039CE: fill_it (var.c:51)
-==5593==    by 0x403B67: grow_var (var.c:75)
-==5593==    by 0x403BEC: grow_var (var.c:82)
-==5593==    by 0x403BEC: grow_var (var.c:82)
-==5593==    by 0x403BEC: grow_var (var.c:82)
-==5593==    by 0x403BEC: grow_var (var.c:82)
-==5593==    by 0x407024: built (read_cmds.c:30)
-==5593==    by 0x4070FE: built_and_exec (read_cmds.c:50)
-==5593==  Uninitialised value was created by a stack allocation
-==5593==    at 0x4011F4: main (main.c:21)
-==5593== 
-==5593== 
-==5593== HEAP SUMMARY:
-==5593==     in use at exit: 352,674 bytes in 3,366 blocks
-==5593==   total heap usage: 340,580 allocs, 337,214 frees, 222,573,758 bytes allocated
-==5593== 
-==5593== LEAK SUMMARY:
-==5593==    definitely lost: 291,120 bytes in 1,571 blocks
-==5593==    indirectly lost: 46,654 bytes in 1,782 blocks
-==5593==      possibly lost: 0 bytes in 0 blocks
-==5593==    still reachable: 14,900 bytes in 13 blocks
-==5593==         suppressed: 0 bytes in 0 blocks
-==5593== Rerun with --leak-check=full to see details of leaked memory
-==5593== 
-==5593== For counts of detected and suppressed errors, rerun with: -v
-==5593== ERROR SUMMARY: 6 errors from 3 contexts (suppressed: 6 from 6)
+==15832== Memcheck, a memory error detector
+==15832== Copyright (C) 2002-2010, and GNU GPL'd, by Julian Seward et al.
+==15832== Using Valgrind-3.6.1 and LibVEX; rerun with -h for copyright info
+==15832== Command: ../Sla.sh
+==15832== Parent PID: 15504
+==15832== 
+==15832== Conditional jump or move depends on uninitialised value(s)
+==15832==    at 0x409BDA: rright (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x409DCF: calque_redir (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x408EC9: set_redir (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x409122: exec_cmd (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x409799: exec_pipes (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x40994C: and_or (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x409AAC: pre_exec (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x4071E1: built_and_exec (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x40731D: read_cmds (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x4012AA: main (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==  Uninitialised value was created by a stack allocation
+==15832==    at 0x409B96: rright (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832== 
+==15832== Conditional jump or move depends on uninitialised value(s)
+==15832==    at 0x40979C: exec_pipes (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x40994C: and_or (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x409AAC: pre_exec (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x4071E1: built_and_exec (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x40731D: read_cmds (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x4012AA: main (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==  Uninitialised value was created by a stack allocation
+==15832==    at 0x4090E6: exec_cmd (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832== 
+==15832== Conditional jump or move depends on uninitialised value(s)
+==15832==    at 0x40979C: exec_pipes (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x7FEFFFA5F: ???
+==15832==    by 0x409818: to_fd (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x7FEFFFBEF: ???
+==15832==    by 0x5639DCF: ???
+==15832==    by 0x1101: ???
+==15832==    by 0xFFFFFFFEFFFFFFFF: ???
+==15832==    by 0x7FEFFFA7F: ???
+==15832==    by 0x40994C: and_or (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==  Uninitialised value was created by a stack allocation
+==15832==    at 0x4090E6: exec_cmd (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832== 
+==15832== Invalid read of size 4
+==15832==    at 0x4097A9: exec_pipes (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x7FEFFFA5F: ???
+==15832==    by 0x409818: to_fd (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x7FEFFFBEF: ???
+==15832==    by 0x5639DCF: ???
+==15832==    by 0x1101: ???
+==15832==    by 0xFFFFFFFEFFFFFFFF: ???
+==15832==    by 0x7FEFFFA7F: ???
+==15832==    by 0x40994C: and_or (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==  Address 0x8fefffa1c is not stack'd, malloc'd or (recently) free'd
+==15832== 
+==15832== 
+==15832== Process terminating with default action of signal 11 (SIGSEGV)
+==15832==  Access not within mapped region at address 0x8FEFFFA1C
+==15832==    at 0x4097A9: exec_pipes (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x7FEFFFA5F: ???
+==15832==    by 0x409818: to_fd (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==    by 0x7FEFFFBEF: ???
+==15832==    by 0x5639DCF: ???
+==15832==    by 0x1101: ???
+==15832==    by 0xFFFFFFFEFFFFFFFF: ???
+==15832==    by 0x7FEFFFA7F: ???
+==15832==    by 0x40994C: and_or (in /home/collio_v/rendu_svn/42.sh/42/Sla.sh)
+==15832==  If you believe this happened as a result of a stack
+==15832==  overflow in your program's main thread (unlikely but
+==15832==  possible), you can try to increase the size of the
+==15832==  main thread stack using the --main-stacksize= flag.
+==15832==  The main thread stack size used in this run was 8388608.
+==15832== 
+==15832== HEAP SUMMARY:
+==15832==     in use at exit: 961,940 bytes in 8,530 blocks
+==15832==   total heap usage: 487,807 allocs, 479,277 frees, 307,015,076 bytes allocated
+==15832== 
+==15832== LEAK SUMMARY:
+==15832==    definitely lost: 419,996 bytes in 2,327 blocks
+==15832==    indirectly lost: 79,149 bytes in 2,978 blocks
+==15832==      possibly lost: 0 bytes in 0 blocks
+==15832==    still reachable: 462,795 bytes in 3,225 blocks
+==15832==         suppressed: 0 bytes in 0 blocks
+==15832== Rerun with --leak-check=full to see details of leaked memory
+==15832== 
+==15832== For counts of detected and suppressed errors, rerun with: -v
+==15832== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 6 from 6)

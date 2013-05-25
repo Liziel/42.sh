@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 13 00:38:40 2013 vincent colliot
-** Last update Wed May 22 17:25:55 2013 vincent colliot
+** Last update Sat May 25 15:18:00 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -86,7 +86,7 @@ BOOL	rdleft(t_redir *r, FD w[3])
   l = get_alls(p[0], NULL, r->file);
   close(p[0]);
   if (pipe(p) == -1)
-    perror("pipes::");
+    fprintf(stderr, "pipes error\n");
   put_lines(l, p[W_OUT]);
   if (w[r->in] >= 0)
     close(w[r->in]);

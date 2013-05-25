@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 16:04:18 2013 vincent colliot
-** Last update Wed May 22 18:06:38 2013 vincent colliot
+** Last update Sat May 25 16:15:19 2013 vincent colliot
 */
 
 #include <stdio.h>
@@ -64,7 +64,6 @@ static BOOL	exec_built_in(t_cmd *cmd, t_info *info)
 		       ((call[i]).ptr)(cmd->params, (void*)&(info->alias))));
 	  if (MATCH(cmd->params->word, "exit"))
 	    return (2);
-	  free(call);
 	  return (TRUE);
 	}
       i++;
@@ -83,9 +82,9 @@ static BOOL	check_bad_sintax(char *s)
 
 BOOL		exec_cmd(t_cmd *cmd, t_info *info, FLAG son, FD w[3])
 {
-  char		*bad_sintax;
   int		r;
   BOOL		sys_fail;
+  char		*bad_sintax;
 
   bad_sintax = NULL;
   sys_fail = FALSE;
