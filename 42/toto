@@ -1,0 +1,263 @@
+==7471== Memcheck, a memory error detector
+==7471== Copyright (C) 2002-2010, and GNU GPL'd, by Julian Seward et al.
+==7471== Using Valgrind-3.6.1 and LibVEX; rerun with -h for copyright info
+==7471== Command: ./Sla.sh
+==7471== Parent PID: 1640
+==7471== 
+==7471== Invalid read of size 1
+==7471==    at 0x402AF5: echappment (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402BF0: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x40704F: built (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4070FE: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==  Address 0x5a15344 is 0 bytes after a block of size 36 alloc'd
+==7471==    at 0x4C297CD: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7471==    by 0x403C0B: xmalloc (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x401455: my_strcat (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4038C1: mod_var (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x403B83: grow_var (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407024: built (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4070FE: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471== 
+==7471== Invalid read of size 1
+==7471==    at 0x402AF5: echappment (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402BF0: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x40704F: built (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4070FE: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==  Address 0x6b80b34 is 0 bytes after a block of size 84 alloc'd
+==7471==    at 0x4C297CD: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7471==    by 0x403C0B: xmalloc (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x401455: my_strcat (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4038C1: mod_var (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x403B83: grow_var (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407024: built (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4070FE: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471== 
+==7471== Conditional jump or move depends on uninitialised value(s)
+==7471==    at 0x50C8B06: vfprintf (in /lib64/libc-2.14.1.so)
+==7471==    by 0x50F3A21: vsnprintf (in /lib64/libc-2.14.1.so)
+==7471==    by 0x50D3421: snprintf (in /lib64/libc-2.14.1.so)
+==7471==    by 0x4039CE: fill_it (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x403B67: grow_var (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407024: built (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4070FE: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471== 
+==7471== Use of uninitialised value of size 8
+==7471==    at 0x50C868B: _itoa_word (in /lib64/libc-2.14.1.so)
+==7471==    by 0x50CAC66: vfprintf (in /lib64/libc-2.14.1.so)
+==7471==    by 0x50F3A21: vsnprintf (in /lib64/libc-2.14.1.so)
+==7471==    by 0x50D3421: snprintf (in /lib64/libc-2.14.1.so)
+==7471==    by 0x4039CE: fill_it (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x403B67: grow_var (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407024: built (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4070FE: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471== 
+==7471== Conditional jump or move depends on uninitialised value(s)
+==7471==    at 0x50C8695: _itoa_word (in /lib64/libc-2.14.1.so)
+==7471==    by 0x50CAC66: vfprintf (in /lib64/libc-2.14.1.so)
+==7471==    by 0x50F3A21: vsnprintf (in /lib64/libc-2.14.1.so)
+==7471==    by 0x50D3421: snprintf (in /lib64/libc-2.14.1.so)
+==7471==    by 0x4039CE: fill_it (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x403B67: grow_var (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407024: built (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4070FE: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471== 
+==7471== Invalid read of size 1
+==7471==    at 0x402AF5: echappment (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402C86: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==  Address 0x6b7e9ca is 0 bytes after a block of size 698 alloc'd
+==7471==    at 0x4C297CD: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7471==    by 0x403C0B: xmalloc (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x401455: my_strcat (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4038C1: mod_var (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x403B83: grow_var (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x403BEC: grow_var (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407024: built (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4070FE: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471== 
+==7471== Conditional jump or move depends on uninitialised value(s)
+==7471==    at 0x409848: exec_pipes (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4099F8: and_or (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x409B58: pre_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4071D9: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471== 
+==7471== Invalid read of size 1
+==7471==    at 0x402AF5: echappment (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402C86: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x40704F: built (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4070FE: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==  Address 0x580d99a is 0 bytes after a block of size 26 alloc'd
+==7471==    at 0x4C297CD: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7471==    by 0x403C0B: xmalloc (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x401455: my_strcat (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4038C1: mod_var (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x403B83: grow_var (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407024: built (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4070FE: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471== 
+==7471== Invalid read of size 1
+==7471==    at 0x402AF5: echappment (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402C86: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402B52: echappment (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402BF0: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==  Address 0x5db5f91 is 0 bytes after a block of size 81 alloc'd
+==7471==    at 0x4C297CD: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7471==    by 0x403C0B: xmalloc (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x401455: my_strcat (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4038C1: mod_var (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x403B83: grow_var (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407024: built (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4070FE: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471== 
+==7471== Invalid read of size 1
+==7471==    at 0x402AF5: echappment (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402BF0: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402B52: echappment (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402BF0: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x402D2D: subdivide (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x40704F: built (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4070FE: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==  Address 0x5e837eb is 0 bytes after a block of size 75 alloc'd
+==7471==    at 0x4C297CD: malloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7471==    by 0x403C0B: xmalloc (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x401455: my_strcat (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4038C1: mod_var (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x403B83: grow_var (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407024: built (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4070FE: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471== 
+==7471== Invalid read of size 4
+==7471==    at 0x409C6E: rright (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x409E68: calque_redir (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x408F65: set_redir (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4091CE: exec_cmd (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x409845: exec_pipes (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4099F8: and_or (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x409B58: pre_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4071D9: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==  Address 0x7fefff824 is just below the stack ptr.  To suppress, use: --workaround-gcc296-bugs=yes
+==7471== 
+==7471== Invalid write of size 4
+==7471==    at 0x409CD2: rright (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x409E68: calque_redir (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x408F65: set_redir (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4091CE: exec_cmd (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x409845: exec_pipes (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4099F8: and_or (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x409B58: pre_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4071D9: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==  Address 0x7fefff824 is just below the stack ptr.  To suppress, use: --workaround-gcc296-bugs=yes
+==7471== 
+==7471== Invalid read of size 4
+==7471==    at 0x409BC7: rleft (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x409E0F: calque_redir (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x408F65: set_redir (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4091CE: exec_cmd (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x409845: exec_pipes (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4099F8: and_or (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x409B58: pre_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4071D9: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==  Address 0x7fefff818 is just below the stack ptr.  To suppress, use: --workaround-gcc296-bugs=yes
+==7471== 
+==7471== Invalid read of size 4
+==7471==    at 0x409BDA: rleft (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x409E0F: calque_redir (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x408F65: set_redir (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4091CE: exec_cmd (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x409845: exec_pipes (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4099F8: and_or (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x409B58: pre_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4071D9: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==  Address 0x7fefff818 is just below the stack ptr.  To suppress, use: --workaround-gcc296-bugs=yes
+==7471== 
+==7471== Warning: invalid file descriptor 90560208 in syscall close()
+==7471== Conditional jump or move depends on uninitialised value(s)
+==7471==    at 0x409C73: rright (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x409E68: calque_redir (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x408F65: set_redir (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4091CE: exec_cmd (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x409845: exec_pipes (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4099F8: and_or (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x409B58: pre_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4071D9: built_and_exec (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x407389: read_cmds (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471==    by 0x4012A3: main (in /home/lecorr_b/projets/42sh/42.sh/42/Sla.sh)
+==7471== 
+==7471== 
+==7471== HEAP SUMMARY:
+==7471==     in use at exit: 2,498,357 bytes in 25,146 blocks
+==7471==   total heap usage: 2,451,383 allocs, 2,426,237 frees, 1,074,481,238 bytes allocated
+==7471== 
+==7471== LEAK SUMMARY:
+==7471==    definitely lost: 2,118,842 bytes in 11,601 blocks
+==7471==    indirectly lost: 365,417 bytes in 13,532 blocks
+==7471==      possibly lost: 295 bytes in 1 blocks
+==7471==    still reachable: 13,803 bytes in 12 blocks
+==7471==         suppressed: 0 bytes in 0 blocks
+==7471== Rerun with --leak-check=full to see details of leaked memory
+==7471== 
+==7471== For counts of detected and suppressed errors, rerun with: -v
+==7471== Use --track-origins=yes to see where uninitialised values come from
+==7471== ERROR SUMMARY: 209 errors from 15 contexts (suppressed: 6 from 6)
