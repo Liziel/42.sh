@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 16:04:18 2013 vincent colliot
-** Last update Sat May 25 16:15:19 2013 vincent colliot
+** Last update Sat May 25 18:57:39 2013 vincent colliot
 */
 
 #include <stdio.h>
@@ -32,8 +32,8 @@ static BOOL	set_redir(t_redir *r, FD w[3], char **bad_syntax, FLAG son)
   ret = TRUE;
   if (r)
     ret = calque_redir(r, pi, w, bad_syntax);
-  in = 2;
-  while (in >= 0)
+  in = 2 * ((son & SON) > 0);
+  while (in >= 0 && in <= 2)
     {
       if (pi[in] >= 0)
 	{
@@ -43,7 +43,7 @@ static BOOL	set_redir(t_redir *r, FD w[3], char **bad_syntax, FLAG son)
 	}
       else if ((in == W_IN && (son & SON)) || (in == W_OUT && (son & FATHER)))
 	dup2(w[in], in);
-      in--;
+      in += 1 - 2 * ((son & SON) > 0);
     }
   return (ret);
 }
@@ -80,6 +80,24 @@ static BOOL	check_bad_sintax(char *s)
   return (TRUE);
 }
 
+static BOOL	call_parents(t_cmd *cmd, t_info *info)
+{
+  pid_t		pid;
+  STATUS	chien;
+
+  if ((pid = fork()) < 0)
+    return (TRUE);
+  if (!pid)
+    {
+      pre_exec(cmd->parents, info, TRUE);
+      return (TRUE);
+    }
+  else
+    waitpid(pid, &chien, 0);
+  info->st = (0 != (info->value = WEXITSTATUS(chien)));
+  return (FALSE);
+}
+
 BOOL		exec_cmd(t_cmd *cmd, t_info *info, FLAG son, FD w[3])
 {
   int		r;
@@ -91,7 +109,7 @@ BOOL		exec_cmd(t_cmd *cmd, t_info *info, FLAG son, FD w[3])
   if (set_redir(cmd->redir, w, &bad_sintax, son) == FALSE)
     return (check_bad_sintax(bad_sintax));
   if (cmd->type == PARENTS)
-    pre_exec(cmd->parents, info, TRUE);
+    sys_fail = call_parents(cmd, info);
   if (cmd->type == WORDS)
     if (!(r = exec_built_in(cmd, info)))
       info->st = exec_form(cmd->params, &sys_fail, &(info->value));
@@ -106,5 +124,5 @@ BOOL		exec_cmd(t_cmd *cmd, t_info *info, FLAG son, FD w[3])
     close(W_ERR);
   if (sys_fail == TRUE)
     return (FALSE);
-  return (((son & SON) == FALSE) * (r != 2));
+  return (((son & SON) == FALSE) * (r != 2) * (sys_fail != TRUE));
 }

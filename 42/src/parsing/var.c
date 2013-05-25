@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:25:20 2013 vincent colliot
-** Last update Sat May 25 15:12:14 2013 vincent colliot
+** Last update Sat May 25 18:17:49 2013 vincent colliot
 */
 
 #define _GNU_SOURCE
@@ -46,11 +46,7 @@ static char	*fill_it(char *s, char *seek, t_info *info)
   if (s[0] == '$' && !(MATCH("?", seek)))
     fill = my_strdup(get_env(seek));
   else if (MATCH("?", seek))
-    {
-      if ((fill = xmalloc(sizeof(char) * 4)) == NULL)
-	return (NULL);
-      asprintf(&fill, "%d", info->value);
-    }
+    asprintf(&fill, "%d", info->value);
   else
     fill = my_strdup(get_env("HOME"));
   return (fill);
