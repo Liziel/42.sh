@@ -5,9 +5,10 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Sat May 25 14:54:59 2013 vincent colliot
+** Last update Sun May 26 00:17:05 2013 vincent colliot
 */
 
+#include <signal.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include "get.h"

@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
-** Last update Fri May 24 00:19:00 2013 vincent colliot
+** Last update Sat May 25 23:57:51 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -60,7 +60,7 @@ static BOOL	built_and_exec(char *str, t_info *info, t_history **history)
 	    }
 	  return (!(info->st = EXIT_FAILURE));
 	}
-  if (!empty(retain))
+  if (!empty(retain) && (!(*history) || !MATCH((*history)->str, retain)))
     my_put_in_history(history, retain);
   free(retain);
   free(str);
