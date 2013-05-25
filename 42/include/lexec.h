@@ -6,7 +6,7 @@
 **
 ** Started on  Thu May  2 19:45:44 2013 vincent colliot
 <<<<<<< HEAD
-** Last update Wed May 15 02:01:47 2013 vincent colliot
+** Last update Sat May 25 20:01:16 2013 vincent colliot
 =======
 ** Last update Thu May  9 14:50:49 2013 thomas lecorre
 >>>>>>> dcf51d0022527e0cb17c3773071553b5b76de7e7
@@ -20,6 +20,10 @@
 # include "get.h"
 
 struct s_exec;
+
+	/* sigandler */
+void    catch_after(int);
+# define END 5
 
 # define REF 0b01
 # define WORD 0b10

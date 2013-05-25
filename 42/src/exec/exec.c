@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 16:04:18 2013 vincent colliot
-** Last update Sat May 25 18:57:39 2013 vincent colliot
+** Last update Sat May 25 20:45:20 2013 vincent colliot
 */
 
 #include <stdio.h>
@@ -105,12 +105,13 @@ BOOL		exec_cmd(t_cmd *cmd, t_info *info, FLAG son, FD w[3])
   char		*bad_sintax;
 
   bad_sintax = NULL;
-  sys_fail = FALSE;
+  r = (sys_fail = FALSE);
   if (set_redir(cmd->redir, w, &bad_sintax, son) == FALSE)
-    return (check_bad_sintax(bad_sintax));
-  if (cmd->type == PARENTS)
+    if ((r = check_bad_sintax(bad_sintax)) == FALSE)
+      return (FALSE);
+  if (cmd->type == PARENTS && !r)
     sys_fail = call_parents(cmd, info);
-  if (cmd->type == WORDS)
+  if (cmd->type == WORDS && !r)
     if (!(r = exec_built_in(cmd, info)))
       info->st = exec_form(cmd->params, &sys_fail, &(info->value));
   cmd->parents = NULL;

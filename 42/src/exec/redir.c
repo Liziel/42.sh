@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 22:15:18 2013 vincent colliot
-** Last update Sat May 25 17:04:24 2013 vincent colliot
+** Last update Sat May 25 20:40:00 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -22,7 +22,9 @@ BOOL	rleft(t_redir *r, FD w[3], char	**bad_syntax)
   FD	file;
   FD	in;
 
-  in = r->in;
+  in = 0;
+  if (r->in < 3 && r->in >= 0)
+    in = r->in;
   if (w[in] >= 0)
     close(w[in]);
   if ((file = open(r->file, O_RDONLY)) == -1)
@@ -39,7 +41,7 @@ void	rright(t_redir *r, FD w[3], FD l[3])
   FD	in;
 
   in = 1;
-  if (r->in < 3 && r->in > 0)
+  if (r->in < 3 && r->in >= 0)
     in = r->in;
   if (w[in] != -1 && (r->type == ON_CANAL))
     close(w[in]);
@@ -57,8 +59,11 @@ static void	rdright(t_redir *r, FD w[3])
 {
   FD	in;
 
-  in = r->in;
-  close(w[in]);
+  in = 1;
+  if (r->in < 3 && r->in >= 0)
+    in = r->in;
+  if (w[in] >= 0)
+    close(w[in]);
   if ((w[in] = open(r->file, O_WRONLY)) == -1)
     w[in] = open(r->file, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR
 		 | S_IRGRP | S_IROTH);
