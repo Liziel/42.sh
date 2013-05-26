@@ -1,0 +1,55 @@
+Erreur dans directory/directory_in.c a la ligne 11 : double retour a la ligne
+Erreur dans exec/exec.c a la ligne 79 : Fonction de la lib C
+Erreur dans exec/exec.c a la ligne 128 : fonction de plus de 25 lignes
+Erreur dans exec/exec_form.c a la ligne 100 : plus de 5 fonctions dans le fichier
+Erreur dans exec/pré-exec.c a la ligne 73 : fonction de plus de 25 lignes
+Erreur dans exec/pré-exec.c a la ligne 84 : plus de 5 fonctions dans le fichier
+Erreur dans exec/pré-exec.c a la ligne 129 : fonction de plus de 25 lignes
+Erreur dans exec/redir_d_left.c a la ligne 89 : Fonction de la lib C
+Erreur dans lib/s_alloc.c a la ligne 85 : Operateur + mal place
+Erreur dans lib/s_alloc.c a la ligne 86 : fonction de plus de 25 lignes
+Erreur dans lib/s_history.c a la ligne 48 : Fonction de la lib C
+Erreur dans lib/s_history.c a la ligne 50 : Fonction de la lib C
+Erreur dans lib/s_history.c a la ligne 53 : Fonction de la lib C
+Erreur dans lib/s_lenth.c a la ligne 45 : Fonction de la lib C
+Erreur dans main/main.c a la ligne 33 : chaine de plus de 80 caracteres
+Erreur dans parsing/alias.c a la ligne 33 : point-virgule ou virgule mal place
+Erreur dans parsing/alias.c a la ligne 33 : Fonction de la lib C
+Erreur dans parsing/alias.c a la ligne 33 : Operateur | mal place
+Erreur dans parsing/alias.c a la ligne 63 : Fonction de la lib C
+Erreur dans parsing/alias.c a la ligne 64 : Fonction de la lib C
+Erreur dans parsing/alias.c a la ligne 65 : Fonction de la lib C
+Erreur dans parsing/alias.c a la ligne 66 : Fonction de la lib C
+Erreur dans parsing/alias.c a la ligne 68 : Fonction de la lib C
+Erreur dans parsing/alias.c a la ligne 69 : Fonction de la lib C
+Erreur dans parsing/alias.c a la ligne 70 : Fonction de la lib C
+Erreur dans parsing/alias.c a la ligne 71 : Fonction de la lib C
+Erreur dans parsing/comment.c a la ligne 46 : chaine de plus de 80 caracteres
+Erreur dans parsing/get_next_line.c a la ligne 100 : fonction de plus de 25 lignes
+Erreur dans parsing/hist.c a la ligne 11 : double retour a la ligne
+Erreur dans parsing/subdiv.c a la ligne 40 : point-virgule ou virgule mal place
+Erreur dans parsing/subdiv.c a la ligne 40 : Operateur | mal place
+Erreur dans parsing/subdiv.c a la ligne 52 : point-virgule ou virgule mal place
+Erreur dans parsing/subdiv.c a la ligne 52 : Fonction de la lib C
+Erreur dans parsing/subdiv.c a la ligne 52 : Operateur | mal place
+Erreur dans parsing/subdiv.c a la ligne 53 : Fonction de la lib C
+Erreur dans parsing/subdiv.c a la ligne 60 : point-virgule ou virgule mal place
+Erreur dans parsing/subdiv.c a la ligne 60 : Fonction de la lib C
+Erreur dans parsing/subdiv.c a la ligne 62 : point-virgule ou virgule mal place
+Erreur dans parsing/subdiv.c a la ligne 62 : Fonction de la lib C
+Erreur dans parsing/subdiv.c a la ligne 62 : Operateur | mal place
+Erreur dans parsing/subdiv.c a la ligne 85 : point-virgule ou virgule mal place
+Erreur dans parsing/subdiv.c a la ligne 88 : point-virgule ou virgule mal place
+Erreur dans parsing/subdiv.c a la ligne 92 : point-virgule ou virgule mal place
+Erreur dans parsing/subdiv.c a la ligne 105 : plus de 5 fonctions dans le fichier
+Erreur dans parsing/subdiv.c a la ligne 112 : point-virgule ou virgule mal place
+Erreur dans parsing/subdiv.c a la ligne 131 : fonction de plus de 25 lignes
+Erreur dans parsing/var.c a la ligne 49 : Fonction de la lib C
+Erreur dans parsing/var.c a la ligne 60 : Fonction de la lib C
+Erreur dans parsing/var.c a la ligne 61 : Fonction de la lib C
+Erreur dans parsing/var.c a la ligne 65 : Fonction de la lib C
+Erreur dans parsing/var.c a la ligne 65 : Operateur + mal place
+Erreur dans parsing/var.c a la ligne 66 : Fonction de la lib C
+Erreur dans parsing/var.c a la ligne 69 : Fonction de la lib C
+Erreur dans prompt/prompt.c a la ligne 81 : chaine de plus de 80 caracteres
+Note: -54
