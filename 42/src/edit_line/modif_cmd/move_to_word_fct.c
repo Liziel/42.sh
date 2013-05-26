@@ -5,9 +5,10 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri May 10 13:07:12 2013 pierre-yves thomas
-** Last update Sun May 26 02:50:43 2013 vincent colliot
+** Last update Sun May 26 11:01:47 2013 vincent colliot
 */
 
+#include "edit_line.h"
 #include "string.h"
 
 void	move_to_prev_word(char c, int *rev_c, char **cmd)

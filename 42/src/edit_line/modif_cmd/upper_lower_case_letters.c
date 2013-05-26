@@ -1,12 +1,14 @@
 /*
 ** upper_lower_case_letters.c for 42 in /home/thomas_1//Projets/42sh
-** 
+**
 ** Made by pierre-yves thomas
 ** Login   <thomas_1@epitech.net>
-** 
+**
 ** Started on  Mon May 13 10:46:31 2013 pierre-yves thomas
-** Last update Sat May 25 17:22:20 2013 pierre-yves thomas
+** Last update Sun May 26 11:02:17 2013 vincent colliot
 */
+
+#include "edit_line.h"
 
 void    lowercase_letters_found(char value, int *rev_c, char **cmd)
 {
