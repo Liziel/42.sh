@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 20:15:24 2013 vincent colliot
-** Last update Mon May  6 21:14:57 2013 vincent colliot
+** Last update Sun May 26 11:13:34 2013 vincent colliot
 */
 
 #include "string.h"
@@ -40,4 +40,20 @@ size_t	hempty(const char *s)
   while (s[i] == ' ' || s[i] == 9)
     i++;
   return (i);
+}
+
+size_t lastoccur_bf(const char *s, char c, size_t e)
+{
+  size_t	cseek;
+  size_t	i;
+
+  i = 0;
+  cseek = 0;
+  while (s[i] && i < e)
+    {
+      if (s[i] == c)
+	cseek = i;
+      i++;
+    }
+  return (cseek);
 }

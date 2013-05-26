@@ -1,6 +1,0 @@
-[ --> ] ls /root && echo yes || echo no && echo coucou && echo salut 
-/bin/ls: cannot open directory /root: Permission denied
-
---> ca devrait afficher : 
-no coucou salut
-->parce qu il ne peut pas faire le ls /root && echo yes il devrait faire le rest quand memem :)
