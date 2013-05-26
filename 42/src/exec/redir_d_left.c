@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 13 00:38:40 2013 vincent colliot
-** Last update Sun May 26 04:42:13 2013 vincent colliot
+** Last update Sun May 26 05:59:58 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -75,6 +75,7 @@ BOOL	rdleft(t_redir *r, FD w[3], FD pi[3])
   t_words	*l;
   FD		p[2];
 
+  (void)pi;
   set_rd_prompt(&pt, 0);
   p[0] = open("/dev/tty", O_RDWR);
   l = get_alls(p[W_IN], NULL, r->file);

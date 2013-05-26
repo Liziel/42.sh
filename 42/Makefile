@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Sat May 25 18:11:45 2013 pierre-yves thomas
+## Last update Sun May 26 05:54:38 2013 vincent colliot
 ##
 
 NAME    = Sla.sh
@@ -54,7 +54,8 @@ PARS	=$(PARSF)subdiv.c\
 	$(PARSF)comment.c\
 	$(PARSF)get_next_line.c\
 	$(PARSF)alias.c\
-	$(PARSF)var.c
+	$(PARSF)var.c\
+	$(PARSF)hist.c
 
 PROMPTF	=$(SRCF)prompt/
 PROMPT	=$(PROMPTF)prompt.c\

@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:25:20 2013 vincent colliot
-** Last update Sat May 25 18:17:49 2013 vincent colliot
+** Last update Sun May 26 06:03:57 2013 vincent colliot
 */
 
 #define _GNU_SOURCE
@@ -61,7 +61,8 @@ BOOL	grow_var(char *s, char **mod, size_t n, t_info *info)
   s += my_sstrlen(s, "~$");
   if (!s[0])
     return (TRUE);
-  if ((IN(s[1], "/!\\ \t(;|&") || !s[1]) && s[0] != '~')
+  if ((n && s[-1] == '\\')
+      || ((IN(s[1], "/!\\ \t(;|&") || !s[1]) && s[0] != '~'))
     return (grow_var(s + 1 +  my_sstrlen(s + 1, "$~"), mod, n +
 		     1 +  my_sstrlen(s + 1, "$~"), info));
   seek = NULL;

@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
-** Last update Sun May 26 04:52:01 2013 vincent colliot
+** Last update Sun May 26 06:25:47 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -102,7 +102,10 @@ int	read_cmds(t_info *info, BOOL tgetfail)
     {
       signal(SIGINT, catch_after);
       info->hist = history;
-      c = built_and_exec(str, info, &history);
+      if (str && grow_hist(str, &str, 0, info) > 1)
+	printf("%s\n", str);
+      if (str)
+	c = built_and_exec(str, info, &history);
       if (!tgetfail)
 	configure_signals();
     }
