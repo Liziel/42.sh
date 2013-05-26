@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 01:40:28 2013 vincent colliot
-** Last update Sun May 26 10:23:12 2013 vincent colliot
+** Last update Sun May 26 14:26:25 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -25,6 +25,11 @@ static int	stop(BOOL s)
   static BOOL k = FALSE;
 
   usleep(5);
+  if (s == FALSE && k == TRUE)
+    {
+      k = FALSE;
+      return (TRUE);
+    }
   if (s == INIT)
     k = FALSE;
   if (TRUE == s)
