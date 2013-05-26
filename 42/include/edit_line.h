@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May 13 13:04:25 2013 pierre-yves thomas
-** Last update Sun May 26 11:12:50 2013 pierre-yves thomas
+** Last update Sun May 26 11:39:40 2013 pierre-yves thomas
 */
 
 #ifndef	EDIT_LINE_H
@@ -53,7 +53,7 @@ void    clean_str(char, int *, char **);
 ** configure_signals.c
 */
 void    configure_signals();
-void	go_down_of_cmd_high(char *, t_options);
+void	go_down_of_cmd_high(char *);
 
 /*
 ** edit_line.c

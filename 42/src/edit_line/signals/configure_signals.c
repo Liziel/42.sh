@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 18:01:08 2013 pierre-yves thomas
-** Last update Wed May 22 11:15:45 2013 pierre-yves thomas
+** Last update Sun May 26 11:39:01 2013 pierre-yves thomas
 */
 
 #include <signal.h>
@@ -15,7 +15,7 @@
 #include "string.h"
 #include "prompt.h"
 
-void			go_down_of_cmd_high(char *cmd, t_options opt)
+void			go_down_of_cmd_high(char *cmd)
 {
   int			high;
   struct winsize	ws;
@@ -23,7 +23,7 @@ void			go_down_of_cmd_high(char *cmd, t_options opt)
   ioctl(0, TIOCGWINSZ, &ws);
   high = (my_strlen(cmd)) / ws.ws_col;
   while (--high >= 0)
-    my_putstr(opt.down_cursor, 1);
+    my_putstr("\n", 1);
 }
 
 void	catch_signal(int num)
