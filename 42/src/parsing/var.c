@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:25:20 2013 vincent colliot
-** Last update Sun May 26 06:03:57 2013 vincent colliot
+** Last update Sun May 26 07:23:13 2013 vincent colliot
 */
 
 #define _GNU_SOURCE
@@ -15,6 +15,7 @@
 #include "env.h"
 #include "string.h"
 #include "xmalloc.h"
+#include "subdivide.h"
 
 static BOOL mod_var(char *s, char *fill, char **mod, char *seek)
 {
@@ -52,6 +53,23 @@ static char	*fill_it(char *s, char *seek, t_info *info)
   return (fill);
 }
 
+static BOOL	short_it(char **mod, char **s, size_t n, t_info *info)
+{
+  char  *tmp2;
+  char	*tmp1;
+
+  tmp1 = my_strndup(*mod, n - 1);
+  tmp2 = my_strcat(tmp1, *s);
+  if (*mod)
+    free(*mod);
+  *mod = tmp2;
+  if (tmp1)
+    free(tmp1);
+  if (*mod)
+    *s = *mod + ((n) += my_sstrlen(*mod + n, "~$"));
+  return (grow_var(*s, mod, n, info));
+}
+
 BOOL	grow_var(char *s, char **mod, size_t n, t_info *info)
 {
   char	*seek;
@@ -61,6 +79,8 @@ BOOL	grow_var(char *s, char **mod, size_t n, t_info *info)
   s += my_sstrlen(s, "~$");
   if (!s[0])
     return (TRUE);
+  if ((n && s[-1] == '\\'))
+    return (short_it(mod, &s, n, info));
   if ((n && s[-1] == '\\')
       || ((IN(s[1], "/!\\ \t(;|&") || !s[1]) && s[0] != '~'))
     return (grow_var(s + 1 +  my_sstrlen(s + 1, "$~"), mod, n +
@@ -73,8 +93,7 @@ BOOL	grow_var(char *s, char **mod, size_t n, t_info *info)
   fill = fill_it(s, seek, info);
   if (mod_var(s, fill, mod, seek) == FALSE)
     return (FALSE);
-  s = *mod + n + my_strlen(fill);
-  n += my_strlen(fill);
+  s = *mod + (n += my_strlen(fill));
   free(fill);
   free(seek);
   return (grow_var(s, mod, n, info));
