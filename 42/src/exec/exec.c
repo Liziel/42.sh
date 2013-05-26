@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 16:04:18 2013 vincent colliot
-** Last update Sun May 26 02:13:33 2013 vincent colliot
+** Last update Sun May 26 14:04:42 2013 vincent colliot
 */
 
 #include <stdio.h>
@@ -20,7 +20,7 @@
 #include "built.h"
 #include "string.h"
 
-static BOOL	set_redir(t_redir *r, FD w[3], char **bad_syntax, FLAG son)
+static BOOL	set_redir(t_redir *r, FD w[3], char **bad_syntax, t_info *i)
 {
   BOOL		ret;
   FD		pi[3];
@@ -31,8 +31,8 @@ static BOOL	set_redir(t_redir *r, FD w[3], char **bad_syntax, FLAG son)
     pi[in++] = -1;
   ret = TRUE;
   if (r)
-    ret = calque_redir(r, pi, w, bad_syntax);
-  in = 2 * ((son & SON) > 0);
+    ret = calque_redir(r, pi, i, bad_syntax);
+  in = 2 * ((i->son & SON) > 0);
   while (in >= 0 && in <= 2)
     {
       if (pi[in] >= 0)
@@ -41,9 +41,9 @@ static BOOL	set_redir(t_redir *r, FD w[3], char **bad_syntax, FLAG son)
 	  w[in] = pi[in];
 	  dup2(pi[in], in);
 	}
-      else if ((in == W_IN && (son & SON)) || (in == W_OUT && (son & FATHER)))
+      else if ((in == W_IN && (i->son & SON)) || (in == W_OUT && (i->son & 2)))
 	dup2(w[in], in);
-      in += 1 - 2 * ((son & SON) > 0);
+      in += 1 - 2 * ((i->son & SON) > 0);
     }
   return (ret);
 }
@@ -105,7 +105,7 @@ BOOL		exec_cmd(t_cmd *cmd, t_info *info, FLAG son, FD w[3])
   char		*bad_sintax;
 
   bad_sintax = (void*)((unsigned long)(r = (sys_fail = FALSE)));
-  if (set_redir(cmd->redir, w, &bad_sintax, son) == FALSE)
+  if (set_redir(cmd->redir, w, &bad_sintax, info) == FALSE)
     if ((r = check_bad_sintax(bad_sintax)) == FALSE)
       return (FALSE);
   if (cmd->type == PARENTS && !r)

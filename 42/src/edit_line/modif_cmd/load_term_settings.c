@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 14:32:24 2013 pierre-yves thomas
-** Last update Sat May 25 16:27:29 2013 vincent colliot
+** Last update Sun May 26 13:38:15 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -40,10 +40,7 @@ int	init_termios(struct termios *set, struct termios *unset)
 {
   if (tcgetattr(0, set) == -1 ||
       tcgetattr(0, unset) == -1)
-    {
-      my_putstr("Fail on tcgetattr\n", 2);
-      return (-1);
-    }
+    return (-1);
   if (modify_terminal(set) == -1)
     return (-1);
   return (0);

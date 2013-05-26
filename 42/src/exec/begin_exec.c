@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 26 10:26:26 2013 vincent colliot
-** Last update Sun May 26 10:26:40 2013 vincent colliot
+** Last update Sun May 26 14:00:39 2013 vincent colliot
 */
 
 #include <sys/wait.h>
@@ -57,7 +57,7 @@ static BOOL	and_or(t_exec *e, t_info *info, BOOL in)
   p[W_IN] = W_IN;
   p[W_OUT] = W_OUT;
   p[W_ERR] = W_ERR;
-  if (exec_pipes(e->pipes, info, 0, p) == FALSE)
+  if (exec_pipes(e->pipes, info, 0, (info->wr = p)) == FALSE)
     {
       while (waitpid(-1, NULL, WNOHANG) >= 0);
       return (FALSE);

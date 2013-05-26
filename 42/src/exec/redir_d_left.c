@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 13 00:38:40 2013 vincent colliot
-** Last update Sun May 26 05:59:58 2013 vincent colliot
+** Last update Sun May 26 14:09:01 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -19,14 +19,26 @@
 #include "string.h"
 #include "xlib.h"
 #include "env.h"
+#include "get_next_line.h"
 
-static t_words	*get_alls(FD rw, t_words *prev, char *m)
+static char	*get(BOOL tgetfail, int rw)
 {
   struct  s_options termcaps;
+  char	*r;
+
+  if (tgetfail == FALSE)
+    r = usr_cmd(rw, NULL, termcaps);
+  else
+    r = get_next_line(0);
+  return (r);
+}
+
+static t_words	*get_alls(FD rw, t_words *prev, char *m, t_info *info)
+{
   char		*line;
   t_words	*link;
 
-  if ((line = usr_cmd(rw, NULL, termcaps)) == NULL)
+  if ((line = get(info->term_caps, rw)) == NULL)
     {
       my_putstr("(sh):error while matching for ", rw);
       my_putstr(m, rw);
@@ -41,7 +53,7 @@ static t_words	*get_alls(FD rw, t_words *prev, char *m)
   link->next = NULL;
   if (prev)
     prev->next = link;
-  get_alls(rw, link, m);
+  get_alls(rw, link, m, info);
   return (link);
 }
 
@@ -69,16 +81,15 @@ static void	set_rd_prompt(char **pt, int lap)
   free(*pt);
 }
 
-BOOL	rdleft(t_redir *r, FD w[3], FD pi[3])
+ BOOL	rdleft(t_redir *r, FD w[3], t_info *info)
 {
   char		*pt;
   t_words	*l;
   FD		p[2];
 
-  (void)pi;
   set_rd_prompt(&pt, 0);
   p[0] = open("/dev/tty", O_RDWR);
-  l = get_alls(p[W_IN], NULL, r->file);
+  l = get_alls(p[W_IN], NULL, r->file, info);
   close(p[0]);
   set_rd_prompt(&pt, 1);
   if (pipe(p) == -1)

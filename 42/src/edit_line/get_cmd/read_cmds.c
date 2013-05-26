@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
-** Last update Sun May 26 06:25:47 2013 vincent colliot
+** Last update Sun May 26 13:47:38 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -94,6 +94,7 @@ int	read_cmds(t_info *info, BOOL tgetfail)
   char			*str;
   t_history		*history;
 
+  info->term_caps = tgetfail;
   c = TRUE;
   history = NULL;
   if (!tgetfail)

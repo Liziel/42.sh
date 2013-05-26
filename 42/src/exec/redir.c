@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 22:15:18 2013 vincent colliot
-** Last update Sun May 26 03:45:52 2013 vincent colliot
+** Last update Sun May 26 14:06:14 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -69,7 +69,7 @@ static void	rdright(t_redir *r, FD w[3])
 		 | S_IRGRP | S_IROTH);
 }
 
-BOOL	calque_redir(t_redir *r, FD w[3], FD l[3], char **bad_syntax)
+BOOL	calque_redir(t_redir *r, FD w[3], t_info *i, char **bad_syntax)
 {
   if (!r)
     return (TRUE);
@@ -80,12 +80,12 @@ BOOL	calque_redir(t_redir *r, FD w[3], FD l[3], char **bad_syntax)
     }
   else if (r->redir == DLEFT)
     {
-      if (rdleft(r, w, l) == FALSE)
+      if (rdleft(r, w, i) == FALSE)
 	return (FALSE);
     }
   else if (r->redir == RIGHT)
-    rright(r, w, l);
+    rright(r, w, i->wr);
   else if (r->redir == DRIGHT)
     rdright(r, w);
-  return (calque_redir(r->next, w, l, bad_syntax));
+  return (calque_redir(r->next, w, i, bad_syntax));
 }

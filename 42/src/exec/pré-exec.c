@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:58:16 2013 vincent colliot
-** Last update Sun May 26 10:26:46 2013 vincent colliot
+** Last update Sun May 26 13:58:49 2013 vincent colliot
 */
 
 #include <sys/wait.h>
@@ -64,7 +64,7 @@ BOOL	exec_pipes(t_pipes *p, t_info *info, FLAG son, FD pi[3])
     }
   if (p->next)
     init_pipe(w, pi, W_OUT);
-  if (exec_cmd(p->cmd, info, son | (FATHER * (pid > 0)), pi) == FALSE)
+  if (exec_cmd(p->cmd, info, info->son = (son | (2 * (pid > 0))), pi) == FALSE)
     return (FALSE);
   my_wait(pid, &status_quo);
   if (pid < 0)
