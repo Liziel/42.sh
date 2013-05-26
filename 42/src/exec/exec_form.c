@@ -5,12 +5,9 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 01:40:28 2013 vincent colliot
-** Last update Sun May 26 16:08:05 2013 vincent colliot
+** Last update Sun May 26 16:47:08 2013 vincent colliot
 */
 
-       #include <sys/types.h>
-       #include <sys/stat.h>
-       #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
