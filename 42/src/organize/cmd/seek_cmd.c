@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 26 10:39:14 2013 vincent colliot
-** Last update Sun May 26 10:42:50 2013 vincent colliot
+** Last update Sun May 26 15:28:12 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -49,10 +49,11 @@ char	*seek_cmd(char *cmd, char **bad_sintax)
   char *wh;
   char *path;
 
+  (void)bad_sintax;
   if ((path = get_env("PATH")) == NULL)
     *bad_sintax = my_strcat(UNKNOW_CMD, cmd);
   if ((wh = seek(path, cmd, bad_sintax)) == NULL)
-    return (NULL);
+    return (my_strdup(cmd));
   r = my_stricat(wh, cmd, '/');
   free(wh);
   return (r);

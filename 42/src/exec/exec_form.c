@@ -5,9 +5,13 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 01:40:28 2013 vincent colliot
-** Last update Sun May 26 14:26:25 2013 vincent colliot
+** Last update Sun May 26 16:08:05 2013 vincent colliot
 */
 
+       #include <sys/types.h>
+       #include <sys/stat.h>
+       #include <fcntl.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -37,7 +41,7 @@ static int	stop(BOOL s)
   return (k);
 }
 
-static void	clean_signal(char *prog, STATUS signal)
+static STATUS	clean_signal(char *prog, STATUS signal, char **tab)
 {
   if (signal == SIGILL || signal == SIGABRT || signal == SIGFPE ||
       signal == SIGSEGV || signal == SIGTERM || signal == SIGINT)
@@ -54,6 +58,8 @@ static void	clean_signal(char *prog, STATUS signal)
     my_putstr(" : Terminated\n", 2);
   else if (signal == SIGINT)
     my_putstr(" : Killed\n", 2);
+  free(tab);
+  return (signal);
 }
 
 void	catch_more(int num)
@@ -62,13 +68,20 @@ void	catch_more(int num)
     stop(TRUE);
 }
 
+void	init(void)
+{
+  signal(SIGTTIN, SIG_IGN);
+  signal(SIGTTOU, SIG_IGN);
+  stop(INIT);
+}
+
 STATUS		exec_form(t_words *list, BOOL *sys_fail, int *value)
 {
   STATUS	st;
   pid_t		pid;
   char		**tab;
 
-  stop((pid = 0) + INIT);
+  init();
   if ((tab = to_tab(list, sys_fail)) == NULL)
     return (EXIT_FAILURE + !((*sys_fail) = TRUE));
   if ((pid = fork()) == -1)
@@ -79,14 +92,15 @@ STATUS		exec_form(t_words *list, BOOL *sys_fail, int *value)
       while (waitpid(pid, &st, WNOHANG) != -1)
 	if (stop(FALSE) == TRUE)
 	  kill(pid, SIGINT);
+      tcsetpgrp(0, getpgrp());
     }
   else
     {
-      setsid();
+      setpgrp();
+      tcsetpgrp(0, getpgrp());
       if (execve(tab[0], tab, environ) == -1)
-	return (EXIT_FAILURE + !((*sys_fail) = TRUE));
+	return ((*value = EXIT_FAILURE) + !((*sys_fail) = TRUE) +
+		!fprintf(stderr, "%s: Command not found\n", tab[0]));
     }
-  clean_signal(tab[0], st);
-  free(tab);
-  return (0 != (*value = WEXITSTATUS(st)));
+  return (0 != (*value = WEXITSTATUS(clean_signal(tab[0], st, tab))));
 }

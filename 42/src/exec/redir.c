@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 22:15:18 2013 vincent colliot
-** Last update Sun May 26 14:06:14 2013 vincent colliot
+** Last update Sun May 26 15:20:14 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -64,7 +64,7 @@ static void	rdright(t_redir *r, FD w[3])
     in = r->in;
   if (w[in] >= 0)
     close(w[in]);
-  if ((w[in] = open(r->file, O_WRONLY)) == -1)
+  if ((w[in] = open(r->file, O_WRONLY | O_APPEND)) == -1)
     w[in] = open(r->file, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR
 		 | S_IRGRP | S_IROTH);
 }
