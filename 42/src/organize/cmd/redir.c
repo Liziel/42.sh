@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 12:08:51 2013 vincent colliot
-** Last update Sun May 26 03:14:44 2013 vincent colliot
+** Last update Sun May 26 10:44:58 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -87,14 +87,6 @@ static BOOL	link_redir(t_get *word, t_get **words,
   return (TRUE);
 }
 
-static void *nullify(t_redir *r)
-{
-  if (r->file)
-    free(r->file);
-  free(r);
-  return (NULL);
-}
-
 t_redir	*redir_part(t_get *words, t_get **word, char **bad_sintax)
 {
   t_redir	*link;
@@ -108,7 +100,10 @@ t_redir	*redir_part(t_get *words, t_get **word, char **bad_sintax)
   if (link_redir(words, &words, link, bad_sintax) == FALSE)
     {
       nullify_words(words);
-      return (nullify(link));
+      if (link->file)
+	free(link->file);
+      free(link);
+      return (NULL);
     }
   if (link->type != ON_CANAL)
     link->type = ON_FILE;

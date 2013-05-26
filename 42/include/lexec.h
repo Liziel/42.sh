@@ -6,7 +6,7 @@
 **
 ** Started on  Thu May  2 19:45:44 2013 vincent colliot
 <<<<<<< HEAD
-** Last update Sat May 25 20:01:16 2013 vincent colliot
+** Last update Sun May 26 10:25:12 2013 vincent colliot
 =======
 ** Last update Thu May  9 14:50:49 2013 thomas lecorre
 >>>>>>> dcf51d0022527e0cb17c3773071553b5b76de7e7
@@ -33,6 +33,7 @@ typedef struct s_words
   struct s_words *next;
 }		t_words;
 
+char	**to_tab(t_words*, BOOL*);
 /* redir_type */
 # define LEFT	0b0001
 # define RIGHT	0b0010

@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May  4 16:34:47 2013 vincent colliot
-** Last update Sun May 26 04:52:22 2013 vincent colliot
+** Last update Sun May 26 10:40:58 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -18,30 +18,6 @@
 #include "error.h"
 #include "env.h"
 #include "built.h"
-
-static char	*seek(char *path, char *cmd, char **bad_sintax)
-{
-  char		*dir;
-
-  if (!path)
-    return (NULL);
-  if (!path[0])
-    {
-      *bad_sintax = my_strcat(UNKNOW_CMD, cmd);
-      return (NULL);
-    }
-  if ((dir = my_strndup(path, my_strilen(path, ':'))) == NULL)
-    return (NULL);
-  if (in_directory(dir, cmd))
-    return (dir);
-  free(dir);
-  if (!IN(':', path))
-    {
-      *bad_sintax = my_strcat(UNKNOW_CMD, cmd);
-      return (NULL);
-    }
-  return (seek(path + my_strilen(path, ':') + IN(':', path), cmd, bad_sintax));
-}
 
 static char	*verify(char *cmd, char **bad_sintax)
 {
@@ -62,21 +38,6 @@ static char	*verify(char *cmd, char **bad_sintax)
       return (NULL);
     }
   r = my_strdup(cmd);
-  return (r);
-}
-
-char	*seek_cmd(char *cmd, char **bad_sintax)
-{
-  char *r;
-  char *wh;
-  char *path;
-
-  if ((path = get_env("PATH")) == NULL)
-    *bad_sintax = my_strcat(UNKNOW_CMD, cmd);
-  if ((wh = seek(path, cmd, bad_sintax)) == NULL)
-    return (NULL);
-  r = my_stricat(wh, cmd, '/');
-  free(wh);
   return (r);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 21:20:47 2013 vincent colliot
-** Last update Sun May 26 03:34:18 2013 vincent colliot
+** Last update Sun May 26 10:51:55 2013 vincent colliot
 */
 
 #include "string.h"
@@ -45,7 +45,7 @@ static size_t redir_lenth(char *s)
   return (n - 1);
 }
 
-static size_t subdiv(char *s, char **bad_sintax)
+size_t subdiv(char *s, char **bad_sintax)
 {
   if (NMATCH("||", s) || NMATCH("&&", s) || NMATCH("<<", s) || NMATCH(">>", s))
     return (2);
@@ -70,35 +70,6 @@ static void	*nullify_link(t_get *link, BOOL l, BOOL f)
     free(link->word);
   free(link);
   return (NULL);
-}
-
-static t_get *echappment(char *s, t_get *link, char **bad_sintax, BOOL freud)
-{
-  char	*word;
-
-  link->inter = 1;
-  while (s[0] == '\\' && s[1])
-    {
-      word = link->word;
-      s += 1;
-      if ((link->word = my_strncat(word, s, subdiv(s + 1, bad_sintax)
-				   * (!IN(s[1], " \\\t\"'|;<>()`")) + 1))
-	  == NULL)
-	return (nullify_link(link, (link->word) != NULL, freud));
-      if (!IN(s[1], " \\\t\"'|;<>()`"))
-	  *bad_sintax = NULL;
-      if (word)
-	free(word);
-      s += 1 + subdiv(s + 1, bad_sintax) * (!IN(s[1], " \\\t\"'|;<>()`"));
-    }
-  if (!s[1] && s[0] == '\\')
-    {
-      *bad_sintax = my_strdup(ERROR_AFTER_ECHAP_CHAR);
-      return (nullify_link(link, (link->word) != NULL, freud));
-    }
-  if (subdivide(s, link, bad_sintax) == NULL)
-    return (nullify_link(link, 1, freud));
-  return (link);
 }
 
 t_get	*subdivide(char *s, t_get *prev, char **bad_sintax)
@@ -129,4 +100,3 @@ t_get	*subdivide(char *s, t_get *prev, char **bad_sintax)
     return (nullify_link(link, 1, 1));
   return (link);
 }
-

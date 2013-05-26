@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  9 21:48:50 2013 vincent colliot
-** Last update Thu May  9 23:16:49 2013 vincent colliot
+** Last update Sun May 26 10:45:59 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -69,21 +69,5 @@ BOOL	nullify_all_in_pipes(t_pipes *pipes)
   else
     nullify_words(pipes->tmp);
   free(pipes);
-  return (FALSE);
-}
-
-BOOL	nullify_all_exec(t_exec *exec)
-{
-  t_exec	*next;
-
-  if (!exec)
-    return (FALSE);
-  next = exec->next;
-  if (exec->pipes)
-    nullify_all_pipes(exec->pipes);
-  else
-    nullify_words(exec->tmp);
-  free(exec);
-  nullify_all_exec(next);
   return (FALSE);
 }

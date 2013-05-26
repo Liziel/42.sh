@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Wed May  8 23:28:36 2013 vincent colliot
-** Last update Sun May 26 04:55:38 2013 vincent colliot
+** Last update Sun May 26 10:42:13 2013 vincent colliot
 */
 
 #ifndef ORGA_H_
@@ -30,6 +30,8 @@ BOOL	get_cmd(t_pipes*, char**, t_pipes*, BOOL);
 BOOL	cmd_part(t_get*, t_get**, t_cmd*, char**);
 t_words	*interpret_cmd(t_get*, t_get**, char**, t_words**);
 t_words	*interpret_params(t_get*, t_get**, t_words**, char**);
+t_words	*list_cmd(t_get *, t_cmd *, t_words *, char **);
+BOOL	add_redir(t_get *, t_get **, char **, t_cmd *);
 
 /* redir */
 t_redir	*redir_part(t_get*, t_get**, char**);

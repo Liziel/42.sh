@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Sun May 26 09:16:24 2013 vincent colliot
+## Last update Sun May 26 10:55:33 2013 vincent colliot
 ##
 
 NAME    = Sla.sh
@@ -22,6 +22,8 @@ DIR	=$(DIRF)directory_in.c
 
 EXECF	=$(SRCF)exec/
 EXEC	=$(EXECF)exec.c\
+	$(EXECF)begin_exec.c\
+	$(EXECF)to_tab.c\
 	$(EXECF)exec_form.c\
 	$(EXECF)pré-exec.c\
 	$(EXECF)redir.c\
@@ -51,6 +53,7 @@ MAIN	=$(MAINF)main.c\
 
 PARSF	=$(SRCF)parsing/
 PARS	=$(PARSF)subdiv.c\
+	$(PARSF)echappment.c\
 	$(PARSF)comment.c\
 	$(PARSF)get_next_line.c\
 	$(PARSF)alias.c\
@@ -69,6 +72,8 @@ ORGAF	=$(SRCF)organize/
 
 CMDF	=$(ORGAF)cmd/
 CMD	=$(CMDF)cmd.c\
+	$(CMDF)seek_cmd.c\
+	$(CMDF)list_cmd.c\
 	$(CMDF)cmd_part.c\
 	$(CMDF)interpret_cmd.c\
 	$(CMDF)interpret_params.c\
@@ -87,6 +92,7 @@ ORJ	=$(ORJF)orga.c\
 NULLF	=$(ORGAF)nullify/
 NULL	=$(NULLF)null1.c\
 	$(NULLF)null2.c\
+	$(NULLF)null3.c\
 
 PIPEF	=$(ORGAF)pipe/
 PIPE	=$(PIPEF)pipes.c\

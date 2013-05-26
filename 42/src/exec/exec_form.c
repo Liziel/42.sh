@@ -5,13 +5,9 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 01:40:28 2013 vincent colliot
-** Last update Sun May 26 00:15:52 2013 vincent colliot
+** Last update Sun May 26 10:23:12 2013 vincent colliot
 */
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <sys/ioctl.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -23,41 +19,6 @@
 #include "string.h"
 #include "env.h"
 #include "father.h"
-
-static size_t	size_list(t_words *list)
-{
-  size_t	i;
-
-  i = 0;
-  while (list)
-    {
-      i++;
-      list = list->next;
-    }
-  return (i);
-}
-
-static char	**to_tab(t_words *list, BOOL *sys_fail)
-{
-  char		**tab;
-  size_t	i;
-
-  i = size_list(list);
-  if ((tab = xmalloc(sizeof(*tab) * (i + 1))) == NULL)
-    {
-      (*sys_fail) = TRUE;
-      return (NULL);
-    }
-  i = 0;
-  while (list)
-    {
-      tab[i] = list->word;
-      list = list->next;
-      i++;
-    }
-  tab[i] = NULL;
-  return (tab);
-}
 
 static int	stop(BOOL s)
 {

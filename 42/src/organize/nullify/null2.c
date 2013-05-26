@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu May  9 21:50:54 2013 vincent colliot
-** Last update Sun May 19 05:06:02 2013 vincent colliot
+** Last update Sun May 26 10:46:21 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -82,8 +82,3 @@ BOOL nullify_cmd(t_cmd *cmd)
   return (FALSE);
 }
 
-void	rm_words(t_get *w)
-{
-  free(w->word);
-  free(w);
-}
