@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Sun May 26 10:55:33 2013 vincent colliot
+## Last update Sun May 26 11:11:48 2013 pierre-yves thomas
 ##
 
 NAME    = Sla.sh
@@ -115,7 +115,8 @@ FED_HIST=$(EDITF)history/
 ED_HIST	=$(FED_HIST)take_cmd_from_history.c\
 
 FED_MOD	=$(EDITF)modif_cmd/
-ED_MOD	=$(FED_MOD)change_reverse_place.c\
+ED_MOD	=$(FED_MOD)auto_completion.c\
+	$(FED_MOD)change_reverse_place.c\
 	$(FED_MOD)clean_screen.c\
 	$(FED_MOD)edit_line.c\
 	$(FED_MOD)finish_usr_cmd.c\

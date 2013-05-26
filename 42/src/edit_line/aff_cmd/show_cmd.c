@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May  6 17:57:14 2013 pierre-yves thomas
-** Last update Wed May 22 07:53:02 2013 vincent colliot
+** Last update Sat May 25 16:51:26 2013 pierre-yves thomas
 */
 
 #include <sys/ioctl.h>
@@ -54,7 +54,7 @@ void			show_cmd(char key, int fd, char *cmd, int reverse_case)
       if (key != 10 && i == reverse_case && cmd[i] != '\t')
 	aff_str_cmd(fd, options.reverse);
       aff_char_cmd(fd, cmd[i]);
-      aff_str_cmd(fd, options.forward);
+	aff_str_cmd(fd, options.forward);
     }
   if (key != 10 && i == reverse_case)
     aff_str_cmd(fd, options.reverse);

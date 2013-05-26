@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May  6 17:44:08 2013 pierre-yves thomas
-** Last update Sun May 26 02:50:29 2013 vincent colliot
+** Last update Sun May 26 11:14:23 2013 pierre-yves thomas
 */
 
 #include <stdlib.h>
@@ -49,7 +49,7 @@ void    del_letter_in_str(char value, int *reverse_case, char **cmd)
     }
 }
 
-static void	fill_fct_ptr(void (*options[13])(char, int *, char **))
+static void	fill_fct_ptr(void (*options[15])(char, int *, char **))
 {
   (options)[0] = move_reverse_case;
   (options)[1] = del_letter_in_str;
@@ -64,10 +64,11 @@ static void	fill_fct_ptr(void (*options[13])(char, int *, char **))
   (options)[10] = del_before_cursor;
   (options)[11] = swap_chars_on_cmd;
   (options)[12] = del_letter_in_str;
-  (options)[13] = NULL;
+  (options)[13] = auto_completion;
+  (options)[14] = NULL;
 }
 
-static void fill_tab(char opt[13])
+static void fill_tab(char opt[14])
 {
   opt[0] = 27;
   opt[1] = 127;
@@ -82,22 +83,23 @@ static void fill_tab(char opt[13])
   opt[10] = 23;
   opt[11] = 20;
   opt[12] = 8;
+  opt[13] = 9;
 }
 
 int		modif_cmd(char **cmd, char *str, int *reverse_case)
 {
   int		i;
-  void		(*options[14])(char, int *, char **);
-  char		opt[13];
+  void		(*options[15])(char, int *, char **);
+  char		opt[14];
 
   i = -1;
   fill_tab(opt);
   fill_fct_ptr(options);
-  while (++i < 13 && opt[i] != str[0]);
-  if (i != 13)
+  while (++i < 14 && opt[i] != str[0]);
+  if (i != 14)
     if (i == 0 && str[2] == 0)
       (options[i])(str[1], reverse_case, cmd);
-    else if (i == 8 || i == 9)
+    else if (i == 8 || i == 9 || i == 13)
       (options[i])(str[0], reverse_case, cmd);
     else
       (options[i])(str[2], reverse_case, cmd);

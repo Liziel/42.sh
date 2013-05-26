@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May 13 13:04:25 2013 pierre-yves thomas
-** Last update Sat May 25 18:28:20 2013 pierre-yves thomas
+** Last update Sun May 26 11:12:50 2013 pierre-yves thomas
 */
 
 #ifndef	EDIT_LINE_H
@@ -31,6 +31,11 @@ typedef struct	s_options
 
 # include "lexec.h"
 # include "exec.h"
+
+/*
+** auto_completion.c
+*/
+void		auto_completion(char, int *, char **);
 
 /*
 ** change_reverse_place.c
