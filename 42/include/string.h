@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 20:25:19 2013 vincent colliot
-** Last update Wed May 22 22:45:33 2013 vincent colliot
+** Last update Sun May 26 11:22:48 2013 vincent colliot
 */
 
 #ifndef STRING_H_
@@ -43,6 +43,7 @@ char	*my_stricat(const char*, const char*, char);
 BOOL	empty(const char*);
 BOOL	nempty(const char*, size_t);
 size_t	hempty(const char*);
+size_t lastoccur_bf(const char*, char, size_t);
 
 	/* s_alloc */
 int	my_strcmp(const char*, const char*);
