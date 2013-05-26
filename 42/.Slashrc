@@ -1,0 +1,12 @@
+## .Slashrc for  in /home/collio_v/
+##
+## Made by vincent colliot
+## Login   <collio_v@epitech.net>
+##
+## Started on  Thu May 23 15:04:28 2013 vincent colliot
+## Last update Sun May 26 10:59:26 2013 vincent colliot
+##
+
+export super_sans_plomb="ls"
+alias ls="ls --color"
+alias ls=ls --color
