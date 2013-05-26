@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Sun May 26 03:08:53 2013 vincent colliot
+** Last update Sun May 26 09:35:24 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -26,9 +26,10 @@ int main(void)
 
   signal(SIGTSTP, SIG_IGN);
   info.alias = NULL;
+  environ = env_copy();
+  scan_export(&(info.alias));
   info.st = 0;
   info.value = 0;
-  environ = env_copy();
   if (!get_env("PS1"))
     set_env("PS1", "[you are in Sla.sh] (you can set your \
 prompt with setenv PS1 \"your_prompt\")\n[ --> ] ");

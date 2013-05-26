@@ -4,7 +4,7 @@
 ## Login   <collio_v@epitech.net>
 ##
 ## Started on Thu Oct 25 22:06:03 2012 vincent colliot
-## Last update Sun May 26 05:54:38 2013 vincent colliot
+## Last update Sun May 26 09:16:24 2013 vincent colliot
 ##
 
 NAME    = Sla.sh
@@ -59,6 +59,9 @@ PARS	=$(PARSF)subdiv.c\
 
 PROMPTF	=$(SRCF)prompt/
 PROMPT	=$(PROMPTF)prompt.c\
+
+SCANF	=$(SRCF)scan_file/
+SCAN	=$(SCANF)scan.c
 
 ###### Parsing #########
 
@@ -188,6 +191,7 @@ SRC     =$(MAIN)\
 	$(EXEC)\
 	$(BUILT_IN)\
 	$(PROMPT)\
+	$(SCAN)\
 
 ########################
 

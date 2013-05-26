@@ -5,13 +5,14 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Wed May  8 23:54:49 2013 vincent colliot
-** Last update Tue May 21 23:51:18 2013 vincent colliot
+** Last update Sun May 26 09:22:30 2013 vincent colliot
 */
 
 #ifndef ENV_H_
 # define ENV_H_
 
 # include <unistd.h>
+#include "alias.h"
 # include "bool.h"
 
 extern char **environ;
@@ -24,5 +25,7 @@ BOOL	set_env(char*, char*);
 
 /* folder env' */
 BOOL	in_directory(char*, char*);
+
+void scan_export(t_alias **);
 
 #endif
