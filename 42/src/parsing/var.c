@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:25:20 2013 vincent colliot
-** Last update Sun May 26 07:23:13 2013 vincent colliot
+** Last update Sun May 26 14:56:47 2013 vincent colliot
 */
 
 #define _GNU_SOURCE
@@ -82,12 +82,12 @@ BOOL	grow_var(char *s, char **mod, size_t n, t_info *info)
   if ((n && s[-1] == '\\'))
     return (short_it(mod, &s, n, info));
   if ((n && s[-1] == '\\')
-      || ((IN(s[1], "/!\\ \t(;|&") || !s[1]) && s[0] != '~'))
+      || ((IN(s[1], "/!\\ \t(;|&[]") || !s[1]) && s[0] != '~'))
     return (grow_var(s + 1 +  my_sstrlen(s + 1, "$~"), mod, n +
 		     1 +  my_sstrlen(s + 1, "$~"), info));
   seek = NULL;
   if (s[0] == '$' && s[1] != '?')
-    seek = my_strndup(s + 1, my_sstrlen(s + 1, "$!/!\\ \"\t(;|&"));
+    seek = my_strndup(s + 1, my_sstrlen(s + 1, "$!/!\\ \"\t(;|&[]"));
   else if (s[1] == '?' && s[0] == '$')
     seek = my_strdup("?");
   fill = fill_it(s, seek, info);
