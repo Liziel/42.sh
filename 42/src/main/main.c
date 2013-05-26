@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Sun May 26 09:35:24 2013 vincent colliot
+** Last update Sun May 26 14:36:11 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -31,8 +31,10 @@ int main(void)
   info.st = 0;
   info.value = 0;
   if (!get_env("PS1"))
-    set_env("PS1", "[you are in Sla.sh] (you can set your \
-prompt with setenv PS1 \"your_prompt\")\n[ --> ] ");
+    set_env("PS1", "\033[0;34m█\033[1;31m\033[0m[\033[1;31m\
+%u\033[0m]-[\033[1;34m%d\033[0m]-[\033[1;34m%h\033[0m] ╼ [\
+ \033[1;34m%/\033[0m ] (\033[1;31mPrompt (setenv ps1 <prompt>)\033[0m)\n\
+\033[1;30m>\033[0m ");
   tget_fail = FALSE;
   if (load_tgets_funcs() == -1 || tcgetattr(0, &test) == -1)
     tget_fail = TRUE;
