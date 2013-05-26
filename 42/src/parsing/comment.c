@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:50:23 2013 vincent colliot
-** Last update Wed May 22 17:39:58 2013 vincent colliot
+** Last update Sun May 26 03:31:00 2013 vincent colliot
 */
 
 #include "get.h"
@@ -34,6 +34,12 @@ static void fill(char **word, char *s)
     *word = s;
 }
 
+static void rm_word(t_get *w)
+{
+  free(w->word);
+  free(w);
+}
+
 t_get	*comment(t_get *w, t_get *prev)
 {
   char  quote;
@@ -43,7 +49,8 @@ t_get	*comment(t_get *w, t_get *prev)
     return (prev);
   if ((((quote = (w->word)[0]) == '"' || (w->word)[0] == '\'') && !w->inter))
     {
-      if ((s = my_strndup(w->word + 1, my_strilen(w->word + 1, quote))) == NULL)
+      if ((s = my_strndup(w->word + 1,
+			  my_strilen(w->word + 1, quote))) == NULL)
 	if (my_strilen(w->word + 1, quote))
 	  {
 	    nullify_next(w->next);
@@ -56,8 +63,7 @@ t_get	*comment(t_get *w, t_get *prev)
     }
   if (comment(w->next, w) == NULL)
     {
-      free(w->word);
-      free(w);
+      rm_word(w);
       return (NULL);
     }
   return (w);

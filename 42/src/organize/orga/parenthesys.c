@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May  3 01:01:26 2013 vincent colliot
-** Last update Sun May 19 07:18:46 2013 vincent colliot
+** Last update Sun May 26 03:26:15 2013 vincent colliot
 */
 
 #include "get.h"
@@ -33,9 +33,9 @@ BOOL	lvl_parents(t_get **words, char **bad_sintax)
       *words = link;
       link = link->next;
     }
-  if (plevel)
-    *bad_sintax = my_strdup(UNMATCHED_PARENTS);
   if (blevel)
+    *bad_sintax = my_strdup(UNMATCHED_PARENTS);
+  if (plevel)
     *bad_sintax = my_strdup(UNMATCHED_BACKMACHIN);
   if (plevel || blevel)
     return (FALSE);
@@ -48,9 +48,8 @@ BOOL	match_parents(t_get **words, char **bad_sintax)
   int	plevel;
   int   blevel;
 
-  plevel = 0;
-  if (!(blevel = MATCH("(", (*words)->word))
-      && !(plevel = MATCH("`", (*words)->word)))
+  if ((!(blevel = MATCH("(", (*words)->word))
+       + !(plevel = MATCH("`", (*words)->word)) == 2) || (*words)->inter)
     return (TRUE);
   link = (*words)->next;
   while (link && (plevel || blevel))
@@ -61,9 +60,9 @@ BOOL	match_parents(t_get **words, char **bad_sintax)
       *words = link;
       link = link->next;
     }
-  if (plevel)
-    *bad_sintax = my_strdup(UNMATCHED_PARENTS);
   if (blevel)
+    *bad_sintax = my_strdup(UNMATCHED_PARENTS);
+  if (plevel)
     *bad_sintax = my_strdup(UNMATCHED_BACKMACHIN);
   if (plevel || blevel)
     return (FALSE);

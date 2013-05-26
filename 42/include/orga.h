@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Wed May  8 23:28:36 2013 vincent colliot
-** Last update Wed May 22 03:07:51 2013 vincent colliot
+** Last update Sun May 26 04:55:38 2013 vincent colliot
 */
 
 #ifndef ORGA_H_
@@ -14,7 +14,7 @@
 # include "lexec.h"
 
 /* prim'orga */
-t_jobs  *orga(t_get*, char**, BOOL*);
+t_jobs  *orga(t_get*, char**, BOOL*, BOOL);
 
 /* jobs */
 t_jobs *get_jobs(t_get*, t_jobs*, char**);
@@ -26,7 +26,7 @@ t_exec *get_exec(t_get*, t_exec*, char**);
 BOOL	get_pipe(t_exec*, char**);
 
 /* cmd */
-BOOL	get_cmd(t_pipes*, char**);
+BOOL	get_cmd(t_pipes*, char**, t_pipes*, BOOL);
 BOOL	cmd_part(t_get*, t_get**, t_cmd*, char**);
 t_words	*interpret_cmd(t_get*, t_get**, char**, t_words**);
 t_words	*interpret_params(t_get*, t_get**, t_words**, char**);

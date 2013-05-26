@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 16:04:18 2013 vincent colliot
-** Last update Sat May 25 20:45:20 2013 vincent colliot
+** Last update Sun May 26 02:13:33 2013 vincent colliot
 */
 
 #include <stdio.h>
@@ -104,8 +104,7 @@ BOOL		exec_cmd(t_cmd *cmd, t_info *info, FLAG son, FD w[3])
   BOOL		sys_fail;
   char		*bad_sintax;
 
-  bad_sintax = NULL;
-  r = (sys_fail = FALSE);
+  bad_sintax = (void*)((unsigned long)(r = (sys_fail = FALSE)));
   if (set_redir(cmd->redir, w, &bad_sintax, son) == FALSE)
     if ((r = check_bad_sintax(bad_sintax)) == FALSE)
       return (FALSE);

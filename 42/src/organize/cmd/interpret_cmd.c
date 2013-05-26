@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May  4 16:34:47 2013 vincent colliot
-** Last update Wed May 22 19:59:07 2013 vincent colliot
+** Last update Sun May 26 04:52:22 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -106,9 +106,6 @@ static BOOL	not_a_built_in(char *word)
   return (TRUE);
 }
 
-/*
-** ce qu'il y a a intérpréter.... :: . || !. || builts-in and that's all...and `` later
-*/
 t_words		*interpret_cmd(t_get *word, t_get **words, char **bad_sintax,
 			      t_words **last)
 {

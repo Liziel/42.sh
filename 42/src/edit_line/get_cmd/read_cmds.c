@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Wed May 15 17:14:07 2013 pierre-yves thomas
-** Last update Sat May 25 23:57:51 2013 vincent colliot
+** Last update Sun May 26 04:52:01 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -34,7 +34,7 @@ static void	*built(char *str, char **bad_sintax, t_info *info, char **mod_s)
     return (NULL);
   if ((sub = comment(sub, NULL)) == NULL)
     return (NULL);
-  return (orga(sub, bad_sintax, NULL));
+  return (orga(sub, bad_sintax, NULL, FALSE));
 }
 
 static BOOL	built_and_exec(char *str, t_info *info, t_history **history)
@@ -44,8 +44,7 @@ static BOOL	built_and_exec(char *str, t_info *info, t_history **history)
   char		*bad_sintax;
 
   retain = my_strdup(str);
-  exec = NULL;
-  bad_sintax = NULL;
+  exec = (void*)(bad_sintax = NULL);
   if (!empty(str))
     if ((exec = built(str, &bad_sintax, info, &str)) == NULL)
       if (!empty(str))

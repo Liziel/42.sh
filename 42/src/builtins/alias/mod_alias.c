@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat May 18 02:19:51 2013 vincent colliot
-** Last update Thu May 23 15:21:48 2013 vincent colliot
+** Last update Sun May 26 02:18:54 2013 vincent colliot
 */
 
 #include "alias.h"
@@ -62,5 +62,3 @@ int mod_alias(char *a, char *f, t_alias **alias)
   *alias = link;
   return (EXIT_SUCCESS);
 }
-
-

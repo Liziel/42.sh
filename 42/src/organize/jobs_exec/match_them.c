@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Wed May  8 01:48:11 2013 vincent colliot
-** Last update Wed May 22 03:10:45 2013 vincent colliot
+** Last update Sun May 26 03:17:15 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -75,8 +75,7 @@ BOOL	match_them(char *m, char *dp, t_words **last, BOOL *no_match)
 	  if ((f_dp = my_stricat(dp, fchr->d_name, '/' * (dp != NULL))) == NULL)
 	    return (FALSE);
 	  else if (cond2(m, f_dp))
-	    if (match_them(next_m(m), f_dp, last,
-			   no_match) == FALSE)
+	    if (match_them(next_m(m), f_dp, last, no_match) == FALSE)
 	      return (FALSE);
 	}
   closedir(dir);

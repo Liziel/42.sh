@@ -5,9 +5,8 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May  5 13:18:32 2013 vincent colliot
-** Last update Thu May  9 01:03:18 2013 vincent colliot
+** Last update Sun May 26 02:24:02 2013 vincent colliot
 */
-
 
 #include <sys/types.h>
 #include <sys/stat.h>

@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sun May 12 22:15:18 2013 vincent colliot
-** Last update Sat May 25 20:40:00 2013 vincent colliot
+** Last update Sun May 26 03:45:52 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -80,7 +80,7 @@ BOOL	calque_redir(t_redir *r, FD w[3], FD l[3], char **bad_syntax)
     }
   else if (r->redir == DLEFT)
     {
-      if (rdleft(r, w) == FALSE)
+      if (rdleft(r, w, l) == FALSE)
 	return (FALSE);
     }
   else if (r->redir == RIGHT)

@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 12:08:51 2013 vincent colliot
-** Last update Wed May 22 20:03:12 2013 vincent colliot
+** Last update Sun May 26 03:14:44 2013 vincent colliot
 */
 
 #include <sys/types.h>
@@ -44,7 +44,8 @@ static BOOL	test_file_redir(char *file, char **bad_sintax)
   return (TRUE);
 }
 
-static BOOL	get_file_part(t_get **words, t_get *word, t_redir *link, char **bad_sintax)
+static BOOL	get_file_part(t_get **words, t_get *word,
+			      t_redir *link, char **bad_sintax)
 {
   if (!word)
     *bad_sintax = my_strdup(ERROR_IN_REDIR);
@@ -59,7 +60,8 @@ static BOOL	get_file_part(t_get **words, t_get *word, t_redir *link, char **bad_
   return (TRUE);
 }
 
-static BOOL	link_redir(t_get *word, t_get **words, t_redir *link, char **bad_sintax)
+static BOOL	link_redir(t_get *word, t_get **words,
+			   t_redir *link, char **bad_sintax)
 {
   size_t	i;
 

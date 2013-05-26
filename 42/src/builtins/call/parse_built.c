@@ -5,8 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May  3 17:56:18 2013 thomas lecorre
-** Last update Mon May 20 17:46:33 2013 vincent colliot
-** Last update Mon May 20 16:41:16 2013 thomas lecorre
+** Last update Sun May 26 02:23:20 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -35,15 +34,6 @@ void	init_built(t_call built[9])
   (built[8]).ptr = NULL;
 }
 
-void	*stock_tab(t_call *built)
-{
-  static t_call	*tab;
-
-  if (built)
-    tab = built;
-  return (tab);
-}
-
 t_call	*builtins(void)
 {
   t_call	*built;
@@ -51,6 +41,5 @@ t_call	*builtins(void)
   if ((built = xmalloc(sizeof(t_call) * 9)) == NULL)
     return (NULL);
   init_built(built);
-  stock_tab(built);
   return (built);
 }

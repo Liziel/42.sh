@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 13 00:38:40 2013 vincent colliot
-** Last update Sat May 25 15:18:00 2013 vincent colliot
+** Last update Sun May 26 04:42:13 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -42,8 +42,6 @@ static t_words	*get_alls(FD rw, t_words *prev, char *m)
   if (prev)
     prev->next = link;
   get_alls(rw, link, m);
-  if (!prev)
-    close(rw);
   return (link);
 }
 
@@ -71,20 +69,17 @@ static void	set_rd_prompt(char **pt, int lap)
   free(*pt);
 }
 
-BOOL	rdleft(t_redir *r, FD w[3])
+BOOL	rdleft(t_redir *r, FD w[3], FD pi[3])
 {
   char		*pt;
   t_words	*l;
-  FD	p[2];
+  FD		p[2];
 
   set_rd_prompt(&pt, 0);
-  if ((p[0] = open("/dev/tty", O_RDWR)) == -1)
-    {
-      print_err("(sh): can't open tty\n");
-      return (TRUE);
-    }
-  l = get_alls(p[0], NULL, r->file);
+  p[0] = open("/dev/tty", O_RDWR);
+  l = get_alls(p[W_IN], NULL, r->file);
   close(p[0]);
+  set_rd_prompt(&pt, 1);
   if (pipe(p) == -1)
     fprintf(stderr, "pipes error\n");
   put_lines(l, p[W_OUT]);
@@ -92,6 +87,5 @@ BOOL	rdleft(t_redir *r, FD w[3])
     close(w[r->in]);
   close(p[W_OUT]);
   w[r->in] = p[W_IN];
-  set_rd_prompt(&pt, 1);
   return (TRUE);
 }

@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Sat Apr 27 09:09:51 2013 vincent colliot
-** Last update Sun May 26 01:00:56 2013 vincent colliot
+** Last update Sun May 26 03:08:53 2013 vincent colliot
 */
 
 #include <signal.h>
@@ -30,7 +30,8 @@ int main(void)
   info.value = 0;
   environ = env_copy();
   if (!get_env("PS1"))
-    set_env("PS1", "[you are in Sla.sh] (you can set your prompt with setenv PS1 \"your_prompt\")\n[ --> ] ");
+    set_env("PS1", "[you are in Sla.sh] (you can set your \
+prompt with setenv PS1 \"your_prompt\")\n[ --> ] ");
   tget_fail = FALSE;
   if (load_tgets_funcs() == -1 || tcgetattr(0, &test) == -1)
     tget_fail = TRUE;

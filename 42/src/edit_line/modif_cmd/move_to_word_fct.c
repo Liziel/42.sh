@@ -5,8 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri May 10 13:07:12 2013 pierre-yves thomas
-** Last update Sun May 26 01:55:55 2013 vincent colliot
-** Last update Sun May 26 01:47:26 2013 thomas lecorre
+** Last update Sun May 26 02:50:43 2013 vincent colliot
 */
 
 #include "string.h"

@@ -5,11 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Fri Apr 26 14:36:25 2013 pierre-yves thomas
-<<<<<<< HEAD
-** Last update Sun May 26 01:31:41 2013 vincent colliot
-=======
-** Last update Sun May 26 01:32:20 2013 thomas lecorre
->>>>>>> 40282a65d26cf41ee56033bebac17173e54044a9
+** Last update Sun May 26 04:33:16 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -17,19 +13,6 @@
 #include "edit_line.h"
 #include "string.h"
 #include "prompt.h"
-
-/*
-static char	*free_str_edit_lines(char *s1, char *s2)
-{
-  if (s1 != NULL)
-    free(s1);
-  if (s2 != NULL)
-    free(s2);
-  s1 = NULL;
-  remind_save_str(1, &s1);
-  return (NULL);
-}
-*/
 
 int		init_values(int *history_pl, int *reverse_case,
 			    char **str, char **cmd)
@@ -85,7 +68,6 @@ char			*usr_cmd(int fd, t_history *histo, t_options options)
   int			histo_pl;
 
   (void)options;
-  cmd = NULL;
   if (init_termios(&set, &unset) == -1 ||
       init_values(&histo_pl, &rev_c, &str, &cmd) == -1)
     return (unset_termios(&unset));

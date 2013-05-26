@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon Apr 29 21:20:47 2013 vincent colliot
-** Last update Sat May 25 17:34:39 2013 vincent colliot
+** Last update Sun May 26 03:34:18 2013 vincent colliot
 */
 
 #include "string.h"
@@ -113,11 +113,10 @@ t_get	*subdivide(char *s, t_get *prev, char **bad_sintax)
       return (echappment(s, prev, bad_sintax, 0));
   if ((link = xmalloc(sizeof(*prev))) == NULL)
     return (NULL);
-  link->next = NULL;
+  link->word = (void*)(link->next = NULL);
   link->prev = prev;
   if (prev)
     prev->next = link;
-  link->word = NULL;
   s += hempty(s);
   if (s[(link->inter = 0)] == '\\')
     return (echappment(s, link, bad_sintax, 1));

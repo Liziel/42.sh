@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May 10 14:58:16 2013 vincent colliot
-** Last update Wed May 22 18:07:46 2013 vincent colliot
+** Last update Sun May 26 04:00:48 2013 vincent colliot
 */
 
 #include <sys/wait.h>
@@ -49,8 +49,7 @@ static BOOL	exec_pipes(t_pipes *p, t_info *info, FLAG son, FD pi[3])
   pid_t		pid;
   FD		w[2];
 
-  pid = -1;
-  if (p->next)
+  if (!(pid = -(!((unsigned long)(p->next != NULL)))))
     {
       if (pipe(w) == -1)
 	return (FALSE);
@@ -73,15 +72,19 @@ static BOOL	exec_pipes(t_pipes *p, t_info *info, FLAG son, FD pi[3])
   return (get_status(info, status_quo));
 }
 
-static void to_fd(FD w[3])
+static void to_fd(FD w[3], BOOL in)
 {
+  if (in)
+    return ;
   w[W_IN] = dup(W_IN);
   w[W_OUT] = dup(W_OUT);
   w[W_ERR] = dup(W_ERR);
 }
 
-static void fd_to(FD w[3])
+static void fd_to(FD w[3], BOOL in)
 {
+  if (in)
+    return ;
   dup2(w[W_OUT], W_OUT);
   close(w[W_OUT]);
   dup2(w[W_IN], W_IN);
@@ -106,8 +109,7 @@ static BOOL	and_or(t_exec *e, t_info *info, BOOL in)
 
   if (!e)
     return (TRUE);
-  if (!in)
-    to_fd(w);
+  to_fd(w, in);
   p[W_IN] = W_IN;
   p[W_OUT] = W_OUT;
   p[W_ERR] = W_ERR;
@@ -116,8 +118,7 @@ static BOOL	and_or(t_exec *e, t_info *info, BOOL in)
       while (waitpid(-1, NULL, WNOHANG) >= 0);
       return (FALSE);
     }
-  if (!in)
-    fd_to(w);
+  fd_to(w, in);
   if (e->type == OR && info->st == EXIT_FAILURE)
     return (and_or(e->next, info, in));
   else if (e->type == OR && info->st == EXIT_SUCCESS)

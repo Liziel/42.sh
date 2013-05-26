@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Fri May  3 18:33:37 2013 vincent colliot
-** Last update Tue May 21 17:55:27 2013 vincent colliot
+** Last update Sun May 26 04:53:06 2013 vincent colliot
 */
 
 #include "orga.h"
@@ -26,7 +26,8 @@ static t_words	*nullify_link(t_words *link, BOOL f, void *last)
   return (nullify_link(next, f, last));
 }
 
-static BOOL	add_redir(t_get *word, t_get **words, char **bad_sintax, t_cmd *link)
+static BOOL	add_redir(t_get *word, t_get **words,
+			  char **bad_sintax, t_cmd *link)
 {
   t_redir *prev;
 
@@ -43,7 +44,8 @@ static BOOL	add_redir(t_get *word, t_get **words, char **bad_sintax, t_cmd *link
   return (TRUE);
 }
 
-static t_words	*list_cmd(t_get *word, t_cmd *clink, t_words *prev, char **bad_sintax)
+static t_words	*list_cmd(t_get *word, t_cmd *clink,
+			  t_words *prev, char **bad_sintax)
 {
   BOOL		f;
   t_words	*link;
@@ -74,12 +76,13 @@ static t_words	*list_cmd(t_get *word, t_cmd *clink, t_words *prev, char **bad_si
 
 static BOOL	check_sintax(char **bad_sintax, BOOL null, char *s)
 {
-  if (null)
+  if (null && !*bad_sintax)
     *bad_sintax = my_strdup(s);
   return (FALSE);
 }
 
-static BOOL	parents(t_get *word, t_get **words, t_cmd *link, char **bad_sintax)
+static BOOL	parents(t_get *word, t_get **words,
+			t_cmd *link, char **bad_sintax)
 {
   BOOL		no_word;
   t_get	*organize;
@@ -96,7 +99,7 @@ static BOOL	parents(t_get *word, t_get **words, t_cmd *link, char **bad_sintax)
   word->next = NULL;
   word = (*words)->next;
   rm_words(*words);
-  if ((link->parents = orga(organize, bad_sintax, &no_word)) == NULL)
+  if ((link->parents = orga(organize, bad_sintax, &no_word, TRUE)) == NULL)
     return (check_sintax(bad_sintax, no_word, UNMATCHED_PARENTS));
   while (word)
     if (!add_redir(word, &word, bad_sintax, link))

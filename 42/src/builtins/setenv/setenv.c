@@ -5,7 +5,7 @@
 ** Login   <lecorr_b@epitech.net>
 **
 ** Started on  Fri May 10 15:05:03 2013 thomas lecorre
-** Last update Sun May 26 01:16:19 2013 vincent colliot
+** Last update Sun May 26 02:21:41 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -51,10 +51,9 @@ int	built_setenv(t_words *cmd, void *bool)
   (void)bool;
   if (cmd->next == ((void*)(n = (i = 0))))
     return (built_env(cmd, bool));
-  cmd = cmd->next;
   if (IN('=', cmd->word))
     return (FALSE);
-  if (cmd->next)
+  if ((cmd = cmd->next) && cmd->next)
     if (cmd->next->next)
       return (my_putstr("(sh): setenv : Too many arguments.\n", 2) != 0);
   if (environ)

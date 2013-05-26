@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Mon May 20 22:23:52 2013 vincent colliot
-** Last update Thu May 23 08:53:21 2013 vincent colliot
+** Last update Sun May 26 03:36:50 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -78,8 +78,8 @@ static size_t inter_prompt(char *s, size_t h, size_t n, int is_color)
 
   if ((h && n >= h) || !s[0])
     return (0);
-  if ((NMATCH("\\0", s) || s[0] == 27) && my_strilen(s, '[') < my_strilen(s, 'm')
-      && my_strilen(s, 'm') < 1 + my_strslen(s + 1, "\\0"))
+  if ((NMATCH("\\0", s) || s[0] == 27) && my_strilen(s, '[') <
+      my_strilen(s, 'm') && my_strilen(s, 'm') < 1 + my_strslen(s + 1, "\\0"))
     is_color = 1;
   if (s[0] == 'm')
     is_color = 0;

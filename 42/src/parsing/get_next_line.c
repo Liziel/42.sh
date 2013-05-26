@@ -5,7 +5,7 @@
 ** Login   <collio_v@epitech.net>
 **
 ** Started on  Thu Nov 22 14:12:07 2012 vincent colliot
-** Last update Sat Mar 30 16:53:34 2013 alexandre paillier
+** Last update Sun May 26 03:31:50 2013 vincent colliot
 */
 
 #include <unistd.h>
@@ -79,8 +79,6 @@ char	*get_next_line(const int fd)
 
   w = 0;
   lr = SIZE_READ;
-  if (SIZE_READ <= 0)
-    return (NULL);
   buffer = NULL;
   while ((!test_nl(memory) || !w) && lr == SIZE_READ)
     {

@@ -5,7 +5,7 @@
 ** Login   <thomas_1@epitech.net>
 **
 ** Started on  Mon May  6 17:44:08 2013 pierre-yves thomas
-** Last update Sat May 25 15:07:27 2013 vincent colliot
+** Last update Sun May 26 02:50:29 2013 vincent colliot
 */
 
 #include <stdlib.h>
@@ -18,15 +18,14 @@ int    add_letter_in_str(char value, int *reverse_case, char **cmd)
   int   len;
 
   len = my_strlen(*cmd) + 1;
-  /* if (len > 2048) */
-  /*   return (0); */
   while (--len > (*reverse_case))
     (*cmd)[len + 1] = (*cmd)[len];
   if (my_strlen(*cmd) + 1 > 1)
     (*cmd)[len + 1] = (*cmd)[len];
   (*cmd)[len] = value;
   (*reverse_case)++;
-  if (((*cmd) = my_realloc(*cmd, my_strlen(*cmd), my_strlen(*cmd) + 2)) == NULL)
+  if (((*cmd) = my_realloc(*cmd,
+			   my_strlen(*cmd), my_strlen(*cmd) + 2)) == NULL)
     return (-1);
   (*cmd)[my_strlen(*cmd) + 1] = '\0';
   return (0);
